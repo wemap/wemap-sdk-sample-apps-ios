@@ -1,0 +1,20 @@
+[
+    {
+        "level": 0.0,
+        "externalID": "POICOMM6085",
+        "coordinate": {
+            "latitude": 48.58487696954851,
+            "longitude": 7.734283133670688
+        },
+        "name": "Découvrir l'Alsace"
+    },
+    {
+        "level": -1.0,
+        "externalID": "POITIND6090",
+        "coordinate": {
+            "latitude": 48.5845337,
+            "longitude": 7.7344313
+        },
+        "name": "Location de vélos - VEL'HOP"
+    }
+]

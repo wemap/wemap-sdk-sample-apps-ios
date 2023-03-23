@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Uhx-JT-qcB">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Samples Table View Controller-->
+        <scene sceneID="e63-FA-F0U">
+            <objects>
+                <tableViewController id="Uhx-JT-qcB" customClass="SamplesTableViewController" customModule="MapExamples" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="lEF-el-aYs">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Wemap Map SDK Samples" id="Xnr-5z-b9j">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="xhZ-Zt-bfj" detailTextLabel="btn-Q6-yrJ" style="IBUITableViewCellStyleSubtitle" id="UUJ-c7-bcl">
+                                        <rect key="frame" x="0.0" y="50" width="390" height="76.666664123535156"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UUJ-c7-bcl" id="s2c-v2-5Eh">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="76.666664123535156"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Levels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xhZ-Zt-bfj">
+                                                    <rect key="frame" x="20" y="7.9999999999999982" width="48" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to set custom indoor location provider and switch between levels" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="btn-Q6-yrJ">
+                                                    <rect key="frame" x="20" y="31.333333333333329" width="345.66666666666669" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="MHc-v7-Rj3" kind="show" id="ULj-hb-vVd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="yPw-2Z-EY4" detailTextLabel="lEa-pq-d0Q" style="IBUITableViewCellStyleSubtitle" id="boe-ix-gXY">
+                                        <rect key="frame" x="0.0" y="126.66666412353516" width="390" height="76.666664123535156"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="boe-ix-gXY" id="oML-Jh-bql">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="76.666664123535156"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Points of interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yPw-2Z-EY4">
+                                                    <rect key="frame" x="20" y="7.9999999999999982" width="137" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to perform selection of POIs on the map" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lEa-pq-d0Q">
+                                                    <rect key="frame" x="20" y="31.333333333333329" width="299.33333333333331" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Sfl-EI-cW0" kind="show" id="M6C-aS-7RE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="mRH-zZ-urD" detailTextLabel="Qmn-0B-NXK" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="nMR-0a-We4">
+                                        <rect key="frame" x="0.0" y="203.33332824707031" width="390" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nMR-0a-We4" id="vwT-FT-ZID">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Navigation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRH-zZ-urD">
+                                                    <rect key="frame" x="20" y="-1" width="81" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to start navigation to user-created annotation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qmn-0B-NXK">
+                                                    <rect key="frame" x="20" y="22.333333333333329" width="263" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="heL-yC-gP8"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Uhx-JT-qcB" id="Kbs-ea-U6g"/>
+                            <outlet property="delegate" destination="Uhx-JT-qcB" id="fFf-Pt-xyu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3VV-gh-MCq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361.53846153846155" y="192.65402843601896"/>
+        </scene>
+        <!--Levels View Controller-->
+        <scene sceneID="EHU-6d-pBQ">
+            <objects>
+                <viewController id="MHc-v7-Rj3" customClass="LevelsViewController" customModule="MapExamples" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aZO-Df-odO" customClass="MapView" customModule="WemapMapSDK">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="TWf-nb-fXA" userLabel="Level control">
+                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
+                                <segments>
+                                    <segment title="0" enabled="NO"/>
+                                    <segment title="1"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="levelChanged:" destination="MHc-v7-Rj3" eventType="valueChanged" id="V5C-cH-CZa"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VK4-OL-DSb">
+                                <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <connections>
+                                    <action selector="closeTouched" destination="MHc-v7-Rj3" eventType="touchUpInside" id="B0J-kV-FMw"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VxT-d4-YgX">
+                                <rect key="frame" x="32" y="716.66666666666663" width="326" height="54.333333333333371"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxj-3a-cLA">
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="54.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Découvrir l'Alsace"/>
+                                        <connections>
+                                            <action selector="firstTouched" destination="MHc-v7-Rj3" eventType="touchUpInside" id="sHZ-3V-Oa1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7e-hf-63e">
+                                        <rect key="frame" x="167" y="0.0" width="159" height="54.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Location de vélos - VEL'HOP"/>
+                                        <connections>
+                                            <action selector="secondTouched" destination="MHc-v7-Rj3" eventType="touchUpInside" id="VSa-oB-O6w"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vFs-Hc-OoU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vFs-Hc-OoU" firstAttribute="trailing" secondItem="TWf-nb-fXA" secondAttribute="trailing" constant="16" id="3Ln-WH-wpC"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="VxT-d4-YgX" secondAttribute="trailing" constant="16" id="6Rn-m4-pc0"/>
+                            <constraint firstItem="VK4-OL-DSb" firstAttribute="top" secondItem="aZO-Df-odO" secondAttribute="top" constant="20" symbolic="YES" id="A7Q-NM-aS7"/>
+                            <constraint firstItem="vFs-Hc-OoU" firstAttribute="bottom" secondItem="VxT-d4-YgX" secondAttribute="bottom" constant="16" id="Cat-fy-9Xh"/>
+                            <constraint firstItem="VK4-OL-DSb" firstAttribute="leading" secondItem="vFs-Hc-OoU" secondAttribute="leading" constant="16" id="JJy-pr-Nfj"/>
+                            <constraint firstItem="TWf-nb-fXA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vFs-Hc-OoU" secondAttribute="leading" constant="16" id="Npv-dv-VYk"/>
+                            <constraint firstItem="vFs-Hc-OoU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VK4-OL-DSb" secondAttribute="trailing" constant="16" id="XtL-22-8fE"/>
+                            <constraint firstItem="VxT-d4-YgX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aZO-Df-odO" secondAttribute="leadingMargin" constant="16" id="ehz-xH-Frd"/>
+                            <constraint firstItem="VxT-d4-YgX" firstAttribute="centerX" secondItem="aZO-Df-odO" secondAttribute="centerX" id="oom-LN-kcU"/>
+                            <constraint firstItem="TWf-nb-fXA" firstAttribute="top" secondItem="VK4-OL-DSb" secondAttribute="bottom" constant="8" id="v7o-dm-RNF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="levelControl" destination="TWf-nb-fXA" id="w8T-tx-WQA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hTa-sX-jqn" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1122" y="-102"/>
+        </scene>
+        <!--Is View Controller-->
+        <scene sceneID="F1v-SV-LAC">
+            <objects>
+                <viewController id="Sfl-EI-cW0" customClass="POIsViewController" customModule="MapExamples" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yKc-G9-57c" customClass="MapView" customModule="WemapMapSDK">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-vx-vfw">
+                                <rect key="frame" x="16" y="20" width="67" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <connections>
+                                    <action selector="closeTouched" destination="Sfl-EI-cW0" eventType="touchUpInside" id="uaE-Nj-tbw"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="EJX-xn-X8d" userLabel="Level control">
+                                <rect key="frame" x="319" y="63" width="55" height="32"/>
+                                <segments>
+                                    <segment title="0" enabled="NO"/>
+                                    <segment title="1"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="levelChanged:" destination="MHc-v7-Rj3" eventType="valueChanged" id="QVD-YB-FRC"/>
+                                    <action selector="levelChanged:" destination="Sfl-EI-cW0" eventType="valueChanged" id="bEi-oc-FB7"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8HW-lc-Da7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pTc-vx-vfw" firstAttribute="top" secondItem="yKc-G9-57c" secondAttribute="top" constant="20" symbolic="YES" id="NqN-X0-xmf"/>
+                            <constraint firstItem="8HW-lc-Da7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pTc-vx-vfw" secondAttribute="trailing" constant="16" id="ZnJ-rT-90C"/>
+                            <constraint firstItem="EJX-xn-X8d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8HW-lc-Da7" secondAttribute="leading" constant="16" id="bBq-v8-Fwg"/>
+                            <constraint firstItem="EJX-xn-X8d" firstAttribute="top" secondItem="pTc-vx-vfw" secondAttribute="bottom" constant="8" id="fU7-9g-uoN"/>
+                            <constraint firstItem="8HW-lc-Da7" firstAttribute="trailing" secondItem="EJX-xn-X8d" secondAttribute="trailing" constant="16" id="p4R-tp-oKo"/>
+                            <constraint firstItem="pTc-vx-vfw" firstAttribute="leading" secondItem="8HW-lc-Da7" secondAttribute="leading" constant="16" id="xiC-UJ-9fQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="levelControl" destination="EJX-xn-X8d" id="8JE-dc-sYk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P7m-eY-zvL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1122" y="551"/>
+        </scene>
+        <!--Navigation View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="NavigationViewController" customModule="MapExamples" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="MapView" customModule="WemapMapSDK">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8n-PR-gFl">
+                                <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <connections>
+                                    <action selector="closeTouched" destination="BYZ-38-t0r" eventType="touchUpInside" id="1zC-dC-mzC"/>
+                                    <action selector="closeTouched" destination="Sfl-EI-cW0" eventType="touchUpInside" id="6E9-r6-sir"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="zjf-D6-mNc" userLabel="Level control">
+                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
+                                <segments>
+                                    <segment title="0" enabled="NO"/>
+                                    <segment title="1"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="levelChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="UDC-XB-tEJ"/>
+                                </connections>
+                            </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="B2E-u1-t4S">
+                                <rect key="frame" x="19" y="646.33333333333337" width="352" height="132.66666666666663"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXd-yQ-HLi" userLabel="Navigation Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="352" height="74.333333333333329"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-Dg-OzT">
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="74.333333333333329"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start navigation from user-created annotations"/>
+                                                <connections>
+                                                    <action selector="startNavigationFromUserCreatedAnnotations" destination="BYZ-38-t0r" eventType="touchUpInside" id="qbF-dg-d5K"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ctc-pE-jFq">
+                                                <rect key="frame" x="176" y="0.0" width="176" height="74.333333333333329"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Remove user-created annotations"/>
+                                                <connections>
+                                                    <action selector="removeUserCreatedAnnotations" destination="BYZ-38-t0r" eventType="touchUpInside" id="bcM-xa-omA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V73-N1-lN8" userLabel="Navigation Stack">
+                                        <rect key="frame" x="0.0" y="78.333333333333258" width="352" height="54.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZfH-Qe-fOl">
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="54.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation from user location"/>
+                                                <connections>
+                                                    <action selector="startNavigationFromUserLocation" destination="BYZ-38-t0r" eventType="touchUpInside" id="rLV-uP-BFC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tkw-c3-PRN">
+                                                <rect key="frame" x="176" y="0.0" width="176" height="54.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Stop Navigation"/>
+                                                <connections>
+                                                    <action selector="stopNavigation" destination="BYZ-38-t0r" eventType="touchUpInside" id="L4m-No-aOM"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="B2E-u1-t4S" secondAttribute="bottom" constant="8" id="4UI-8m-SRG"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="B2E-u1-t4S" secondAttribute="trailing" constant="16" id="FUy-vQ-m7Y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zjf-D6-mNc" secondAttribute="trailing" constant="16" id="ISQ-aB-kC5"/>
+                            <constraint firstItem="Q8n-PR-gFl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="XMj-QU-vMk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q8n-PR-gFl" secondAttribute="trailing" constant="16" id="fXY-t3-vMm"/>
+                            <constraint firstItem="Q8n-PR-gFl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="gb8-Zf-CkS"/>
+                            <constraint firstItem="B2E-u1-t4S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="o5m-6E-1VX"/>
+                            <constraint firstItem="zjf-D6-mNc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wQq-BU-fHw"/>
+                            <constraint firstItem="zjf-D6-mNc" firstAttribute="top" secondItem="Q8n-PR-gFl" secondAttribute="bottom" constant="8" id="xKN-4q-jrF"/>
+                            <constraint firstItem="B2E-u1-t4S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yMz-t9-yYM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="levelControl" destination="zjf-D6-mNc" id="guP-1R-7jT"/>
+                        <outlet property="removeUserCreatedAnnotationsButton" destination="Ctc-pE-jFq" id="KuZ-sI-n4S"/>
+                        <outlet property="startNavigationButton" destination="ZfH-Qe-fOl" id="Abk-OH-lKH"/>
+                        <outlet property="startNavigationFromUserCreatedAnnotationsButton" destination="rMt-Dg-OzT" id="cPk-5Y-bmb"/>
+                        <outlet property="stopNavigationButton" destination="Tkw-c3-PRN" id="en1-ST-vEI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1802" y="551"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.19200000166893005" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
