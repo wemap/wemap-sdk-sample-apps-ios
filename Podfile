@@ -1,5 +1,5 @@
 source 'https://cdn.cocoapods.org/'
-source 'git@github.com:wemap/cocoapods-specs.git' 
+source 'https://github.com/wemap/cocoapods-specs.git' 
 
 workspace 'WemapExamples.xcworkspace'
 

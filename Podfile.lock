@@ -25,7 +25,7 @@ DEPENDENCIES:
   - WemapMapSDK (~> 0.1.0)
 
 SPEC REPOS:
-  "git@github.com:wemap/cocoapods-specs.git":
+  https://github.com/wemap/cocoapods-specs.git:
     - MapLibre
     - WemapCoreSDK
     - WemapMapSDK
@@ -59,6 +59,6 @@ SPEC CHECKSUMS:
   WemapCoreSDK: 9acbf0db7775f0c0727f8531f8b402c1b6d806d2
   WemapMapSDK: 225930e8513938cb152691c7430bb3e3d7094845
 
-PODFILE CHECKSUM: 412beb1c34825eabc99891910f617d9567527b63
+PODFILE CHECKSUM: d134a56454c1a0f6e4caf6b14cdf2c6723d55a1e
 
 COCOAPODS: 1.12.0
