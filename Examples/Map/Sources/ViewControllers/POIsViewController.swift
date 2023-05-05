@@ -1,13 +1,14 @@
 //
 //  POIsViewController.swift
-//  MapExamples
+//  MapExample
 //
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
+// swiftlint:disable force_try force_cast
 
-import UIKit
 import Mapbox
+import UIKit
 import WemapCoreSDK
 import WemapMapSDK
 
@@ -59,11 +60,11 @@ final class POIsViewController: UIViewController {
 
 extension POIsViewController: WemapMapViewDelegate {
     
-    func map(_ map: MapView, didTouchPointOfInterest poi: PointOfInterest) {
+    func map(_: MapView, didTouchPointOfInterest _: PointOfInterest) {
         debugPrint(#function)
     }
     
-    func map(_ map: MapView, didTouchItinerary itinerary: Itinerary) {
+    func map(_: MapView, didTouchItinerary _: Itinerary) {
         debugPrint(#function)
     }
     
@@ -79,9 +80,10 @@ extension POIsViewController: WemapMapViewDelegate {
             let toast = ToastHelper.showToast(
                 message: "Touched consumer feature with name - \(consumerValue.name). Feature - \(feature)",
                 onView: view,
-                hideDelay: 5) {
-                    map.removeAnnotation(annotation)
-                }
+                hideDelay: 5
+            ) {
+                map.removeAnnotation(annotation)
+            }
             
             let padding = UIEdgeInsets(top: 0, left: 0, bottom: toast.frame.height, right: 0)
             
@@ -126,3 +128,5 @@ extension POIsViewController: BuildingManagerDelegate {
         levelControl.isHidden = false
     }
 }
+
+// swiftlint:enable force_try force_cast

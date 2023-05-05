@@ -5,9 +5,10 @@
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
+// swiftlint:disable force_try force_cast
 
-import UIKit
 import Mapbox
+import UIKit
 import WemapCoreSDK
 import WemapMapSDK
 
@@ -123,9 +124,10 @@ final class LevelsViewController: UIViewController {
         let toast = ToastHelper.showToast(
             message: "Add annnotation for consumer data - \(data)",
             onView: view,
-            hideDelay: 5) { [self] in
-                map.removeAnnotation(annotation)
-            }
+            hideDelay: 5
+        ) { [self] in
+            map.removeAnnotation(annotation)
+        }
         
         let padding = UIEdgeInsets(top: 0, left: 0, bottom: toast.frame.height, right: 0)
         
@@ -160,3 +162,5 @@ extension LevelsViewController: BuildingManagerDelegate {
         levelControl.isHidden = false
     }
 }
+
+// swiftlint:enable force_try force_cast

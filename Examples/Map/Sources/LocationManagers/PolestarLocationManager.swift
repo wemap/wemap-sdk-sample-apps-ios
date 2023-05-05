@@ -1,6 +1,6 @@
 //
 //  PolestarLocationManager.swift
-//  MapExamples
+//  MapExample
 //
 //  Created by Evgenii Khrushchev on 10/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
@@ -12,6 +12,8 @@ import WemapCoreSDK
 import WemapMapSDK
 
 class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider, MGLLocationManager {
+    
+    var lastCoordinate: Coordinate?
     
     weak var indoorDelegate: IndoorLocationProviderDelegate?
     weak var delegate: MGLLocationManagerDelegate?
@@ -83,57 +85,58 @@ extension PolestarIndoorLocationProvider: LocationProviderDelegate {
         let levelByAltitude = location.altitude / 5
         let coordinate = Coordinate(location: location, levels: [Float(levelByAltitude)])
         
+        lastCoordinate = coordinate
         indoorDelegate?.locationProvider(self, didUpdateLocation: coordinate)
         delegate?.locationManager(self, didUpdate: [location])
         
-        print("didLocationChange with location - \(location!), altitude - \(location!.altitude), level - \(levelByAltitude)")
+        debugPrint("didLocationChange with location - \(location!), altitude - \(location!.altitude), level - \(levelByAltitude)")
     }
     
     func didLocationStatusChanged(_ status: String!) {
-        print("didLocationStatusChanged with status - \(status!)")
+        debugPrint("didLocationStatusChanged with status - \(status!)")
     }
     
     func didEnterSite(_ name: String!) {
-        print("didEnterSite with name - \(name!)")
+        debugPrint("didEnterSite with name - \(name!)")
     }
     
     func didExitSite(_ name: String!) {
-        print("didExitSite with status - \(name!)")
+        debugPrint("didExitSite with status - \(name!)")
     }
     
     func didApikeyReceived(_ apikey: String!) {
-        print("didApikeyReceived with status - \(apikey!)")
+        debugPrint("didApikeyReceived with status - \(apikey!)")
     }
     
     func didLocationFailWithErrorCode(_ message: String!) {
         let error = NSError(domain: message, code: -1)
         indoorDelegate?.locationProvider(self, didFailWithError: error)
         delegate?.locationManager(self, didFailWithError: error)
-        print("didLocationFailWithErrorCode with errorCode - \(message!)")
+        debugPrint("didLocationFailWithErrorCode with errorCode - \(message!)")
     }
     
     func requiresWifiOn() {
-        print("requiresWifiOn")
+        debugPrint("requiresWifiOn")
     }
     
     func requiresBLEOn() {
-        print("requiresBLEOn")
+        debugPrint("requiresBLEOn")
     }
     
     func requiresLocationOn() {
-        print("requiresLocationOn")
+        debugPrint("requiresLocationOn")
     }
     
     func requiresCompassCalibration() {
-        print("requiresCompassCalibration")
+        debugPrint("requiresCompassCalibration")
     }
     
     func didSynchronizationSuccess() {
-        print("didSynchronizationSuccess")
+        debugPrint("didSynchronizationSuccess")
     }
     
     func didSynchronizationFailure(_ message: String!) {
-        print("didSynchronizationFailure with message - \(message!)")
+        debugPrint("didSynchronizationFailure with message - \(message!)")
     }
 }
 

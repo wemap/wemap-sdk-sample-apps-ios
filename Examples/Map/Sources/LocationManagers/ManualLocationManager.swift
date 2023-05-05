@@ -1,6 +1,6 @@
 //
 //  ManualLocationManager.swift
-//  MapExamples
+//  MapExample
 //
 //  Created by Evgenii Khrushchev on 13/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.

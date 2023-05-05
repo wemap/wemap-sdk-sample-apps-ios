@@ -1,10 +1,11 @@
 //
 //  NavigationViewController.swift
-//  MapExamples
+//  MapExample
 //
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
+// swiftlint:disable force_cast
 
 import Mapbox
 import RxSwift
@@ -20,14 +21,11 @@ final class NavigationViewController: UIViewController {
     @IBOutlet var stopNavigationButton: UIButton!
     @IBOutlet var startNavigationFromUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var removeUserCreatedAnnotationsButton: UIButton!
+    @IBOutlet var navigationInfo: UILabel!
     
     private let disposeBag = DisposeBag()
-    
-    private lazy var consumerData: [ConsumerData] = {
-        let dataURL = Bundle.main.url(forResource: "consumer_data", withExtension: "json")!
-        let data = try! Data(contentsOf: dataURL)
-        return try! JSONDecoder().decode([ConsumerData].self, from: data)
-    }()
+    // you can use simulator to generate locations along the itinerary
+    private let simulator = IndoorLocationProviderSimulator(options: SimulationOptions(inLoop: true))
     
     private var map: MapView {
         view as! MapView
@@ -44,6 +42,10 @@ final class NavigationViewController: UIViewController {
         map.buildingManager.delegate = self
         map.mapDelegate = self
         
+        map.locationManager = simulator
+        map.indoorLocationProvider = simulator
+        map.navigationManager.delegate = self
+        
         levelControl.isHidden = true
         
         createLongPressGestureRecognizer()
@@ -53,7 +55,7 @@ final class NavigationViewController: UIViewController {
         super.viewDidAppear(animated)
         
         ToastHelper.showToast(message: "Create 1 or 2 annotations by long press on the map to be able to start navigation. " +
-                              "1 annotation to start from user location. 2 annotations to start from custom location", onView: view, hideDelay: 5)
+            "1 annotation to start from user location. 2 annotations to start from custom location", onView: view, hideDelay: 5)
         
         if let initialBounds = map.initialBounds {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
@@ -100,7 +102,7 @@ final class NavigationViewController: UIViewController {
         
         let to = userCreatedAnnotations.first!
         
-        let destination = Coordinate(coordinate: to.coordinate, levels: [0])
+        let destination = Coordinate(coordinate2D: to.coordinate, levels: [0])
         
         map.navigationManager
             .startNavigation(to: destination, options: options)
@@ -117,7 +119,8 @@ final class NavigationViewController: UIViewController {
                         onView: view,
                         hideDelay: 10
                     )
-                }).disposed(by: disposeBag)
+                }
+            ).disposed(by: disposeBag)
     }
     
     @IBAction func stopNavigation() {
@@ -126,6 +129,9 @@ final class NavigationViewController: UIViewController {
         case let .success(itinerary):
             updateStartNavigationButtons()
             stopNavigationButton.isEnabled = false
+            simulator.reset()
+            navigationInfo.isHidden = true
+            navigationInfo.text = nil
             debugPrint("Navigation stopped successfully. Itinerary - \(itinerary)")
         case let .failure(error):
             debugPrint("Failed to stop navigation with error - \(error)")
@@ -141,20 +147,29 @@ final class NavigationViewController: UIViewController {
         startNavigationButton.isEnabled = false
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
-        let options = NavigationOptions(itineraryOptions: ItineraryOptions(color: .cyan))
+        let options = NavigationOptions(
+            itineraryOptions: ItineraryOptions(color: .cyan),
+            userTrackingMode: .follow
+        )
         
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
+
+        let origin = Coordinate(coordinate2D: from.coordinate, level: 0)
+        let destination = Coordinate(coordinate2D: to.coordinate, level: 1)
         
-        let origin = Coordinate(coordinate: from.coordinate, levels: [0])
-        let destination = Coordinate(coordinate: to.coordinate, levels: [0])
+        // for debugging
+//        let origin = Coordinate(coordinate2D: .init(latitude: 48.844548658057306, longitude: 2.3732023740778025), level: 0)
+//        let destination = Coordinate(coordinate2D: .init(latitude: 48.84442126724909, longitude: 2.373656619804761), level: 1)
         
         map.navigationManager
             .startNavigation(from: origin, to: destination, options: options)
             .subscribe(
-                onSuccess: { [unowned self] _ in
+                onSuccess: { [unowned self] itinerary in
                     debugPrint("Navigation started successfully")
                     stopNavigationButton.isEnabled = true
+                    map.setCenter(itinerary.from.coordinate2D, zoomLevel: 18, animated: true)
+                    simulator.setItinerary(itinerary)
                 },
                 onFailure: { [unowned self] error in
                     debugPrint("Failed to start navigation with error - \(error)")
@@ -164,7 +179,8 @@ final class NavigationViewController: UIViewController {
                         onView: view,
                         hideDelay: 10
                     )
-                }).disposed(by: disposeBag)
+                }
+            ).disposed(by: disposeBag)
     }
     
     @IBAction func removeUserCreatedAnnotations() {
@@ -210,15 +226,15 @@ extension NavigationViewController: BuildingManagerDelegate {
 
 extension NavigationViewController: WemapMapViewDelegate {
     
-    func map(_ map: MapView, didTouchPointOfInterest poi: PointOfInterest) {
+    func map(_: MapView, didTouchPointOfInterest _: PointOfInterest) {
         debugPrint(#function)
     }
     
-    func map(_ map: MapView, didTouchItinerary itinerary: Itinerary) {
+    func map(_: MapView, didTouchItinerary _: Itinerary) {
         debugPrint(#function)
     }
     
-    func map(_ map: MapView, didTouchFeature feature: MGLFeature) {
+    func map(_: MapView, didTouchFeature feature: MGLFeature) {
         ToastHelper.showToast(
             message: "Touched feature - \(feature)",
             onView: view,
@@ -226,3 +242,13 @@ extension NavigationViewController: WemapMapViewDelegate {
         )
     }
 }
+
+extension NavigationViewController: NavigationDelegate {
+    
+    func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
+        navigationInfo.isHidden = false
+        navigationInfo.text = info.shortDescription
+    }
+}
+
+// swiftlint:enable force_cast

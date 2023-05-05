@@ -3,6 +3,7 @@
 //  Examples
 //
 //  Created by Evgenii Khrushchev on 15/09/2022.
+//  Copyright © 2022 Wemap SAS. All rights reserved.
 //
 
 import UIKit
