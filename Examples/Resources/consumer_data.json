@@ -1,20 +1,20 @@
 [
     {
         "level": 0.0,
-        "externalID": "POICOMM6085",
+        "externalID": "POICOMM6311",
         "coordinate": {
-            "latitude": 48.58487696954851,
-            "longitude": 7.734283133670688
+            "latitude": 48.845184475854865,
+            "longitude": 2.3738030903041363
         },
-        "name": "Découvrir l'Alsace"
+        "name": "Relay (shop)"
     },
     {
         "level": -1.0,
-        "externalID": "POITIND6090",
+        "externalID": "POICOMM22003",
         "coordinate": {
-            "latitude": 48.5845337,
-            "longitude": 7.7344313
+            "latitude": 48.844908394488726,
+            "longitude": 2.3735506273806095
         },
-        "name": "Location de vélos - VEL'HOP"
+        "name": "Etam lingerie"
     }
 ]

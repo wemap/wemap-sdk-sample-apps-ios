@@ -53,12 +53,14 @@ final class LevelsViewController: UIViewController {
         buildingManager.delegate = self
         
         levelControl.isHidden = true
+        
+        map.userTrackingMode = .followWithHeading
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let initialBounds = map.initialBounds {
+        if let initialBounds = map.mapData?.bounds {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
             map.setCamera(camera, animated: true)
         }

@@ -5,7 +5,7 @@
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
-// swiftlint:disable force_try force_cast
+// swiftlint:disable force_cast
 
 import Mapbox
 import UIKit
@@ -15,12 +15,6 @@ import WemapMapSDK
 final class POIsViewController: UIViewController {
     
     @IBOutlet var levelControl: UISegmentedControl!
-    
-    private lazy var consumerData: [ConsumerData] = {
-        let dataURL = Bundle.main.url(forResource: "consumer_data", withExtension: "json")!
-        let data = try! Data(contentsOf: dataURL)
-        return try! JSONDecoder().decode([ConsumerData].self, from: data)
-    }()
     
     private var map: MapView {
         view as! MapView
@@ -42,7 +36,7 @@ final class POIsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let initialBounds = map.initialBounds {
+        if let initialBounds = map.mapData?.bounds {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
             map.setCamera(camera, animated: true)
         }
@@ -56,6 +50,64 @@ final class POIsViewController: UIViewController {
         debugPrint("level changed - \(sender.selectedSegmentIndex)")
         buildingManager.focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
     }
+    
+    private func selectFeatureByWemapID(_ feature: MGLFeature) {
+        
+        guard let wemapId = feature.attribute(forKey: "wemapId") as? Int else {
+            return debugPrint("Failed to selectFeatureByWemapID because wemapId attribute not found")
+        }
+            
+        let centered = map.pointOfInterestManager.centerToPOI(id: wemapId, animated: true)
+        
+        debugPrint("\(centered ? "successfully centered" : "failed to center") to poi with id \(wemapId)")
+        
+        if centered {
+            ToastHelper.showToast(
+                message: "Touched consumer feature with id - \(wemapId). Feature - \(feature)",
+                onView: view,
+                hideDelay: 5
+            ) { [self] in
+                map.pointOfInterestManager.showAllPOIs()
+            }
+            
+            map.pointOfInterestManager.hideAllPOIs()
+        }
+    }
+    
+    private func selectFeatureByPOI(_ feature: MGLFeature) {
+        guard let wemapId = feature.attribute(forKey: "wemapId") as? Int else {
+            return debugPrint("Failed to selectFeatureByWemapID because wemapId attribute not found")
+        }
+            
+        guard let clickedPOI = map.pointOfInterestManager.getPOIs().first(where: { $0.id == wemapId }) else {
+            return debugPrint("failed to find cached POI for feature - \(feature)")
+        }
+        
+        let centered = map.pointOfInterestManager.centerToPOI(clickedPOI, animated: true)
+        
+        debugPrint("\(centered ? "successfully centered" : "failed to center") to poi with id \(wemapId)")
+        
+        if centered {
+            let annotation = MGLPointAnnotation()
+            annotation.coordinate = clickedPOI.coordinate2D
+            annotation.title = clickedPOI.name
+            
+            let toast = ToastHelper.showToast(
+                message: "Touched consumer feature with name - \(clickedPOI.name). Feature - \(feature)",
+                onView: view,
+                hideDelay: 5
+            ) { [self] in
+                map.pointOfInterestManager.showAllPOIs()
+                map.removeAnnotation(annotation)
+            }
+            
+            let padding = UIEdgeInsets(top: 0, left: 0, bottom: toast.frame.height, right: 0)
+            
+            map.addAnnotation(annotation)
+            map.showAnnotations([annotation], edgePadding: padding, animated: true, completionHandler: nil)
+            map.pointOfInterestManager.hideAllPOIs()
+        }
+    }
 }
 
 extension POIsViewController: WemapMapViewDelegate {
@@ -68,37 +120,10 @@ extension POIsViewController: WemapMapViewDelegate {
         debugPrint(#function)
     }
     
-    func map(_ map: MapView, didTouchFeature feature: MGLFeature) {
+    func map(_: MapView, didTouchFeature feature: MGLFeature) {
         
-        if let externalId = feature.attribute(forKey: "externalId") as? String,
-           let consumerValue = consumerData.first(where: { $0.externalID == externalId }) {
-            
-            let annotation = MGLPointAnnotation()
-            annotation.coordinate = consumerValue.coordinate
-            annotation.title = consumerValue.name
-            
-            let toast = ToastHelper.showToast(
-                message: "Touched consumer feature with name - \(consumerValue.name). Feature - \(feature)",
-                onView: view,
-                hideDelay: 5
-            ) {
-                map.removeAnnotation(annotation)
-            }
-            
-            let padding = UIEdgeInsets(top: 0, left: 0, bottom: toast.frame.height, right: 0)
-            
-            map.addAnnotation(annotation)
-            map.showAnnotations([annotation], edgePadding: padding, animated: true, completionHandler: nil)
-            
-            debugPrint("toast frame - \(toast.frame)")
-            return
-        }
-        
-        ToastHelper.showToast(
-            message: "Touched feature - \(feature)",
-            onView: view,
-            hideDelay: 5
-        )
+//        selectFeatureByWemapID(feature)
+        selectFeatureByPOI(feature)
     }
 }
 
@@ -129,4 +154,4 @@ extension POIsViewController: BuildingManagerDelegate {
     }
 }
 
-// swiftlint:enable force_try force_cast
+// swiftlint:enable force_cast

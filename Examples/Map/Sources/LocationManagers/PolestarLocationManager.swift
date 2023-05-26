@@ -40,15 +40,16 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider, MGLLocat
 
     override init() {
         super.init()
+        locationManager.delegate = self
         locationProvider.delegate = self
     }
 
     func requestAlwaysAuthorization() {
-        // no-op
+        locationManager.requestAlwaysAuthorization()
     }
 
     func requestWhenInUseAuthorization() {
-        // no-op
+        locationManager.requestWhenInUseAuthorization()
     }
 
     func startUpdatingLocation() {
@@ -60,20 +61,21 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider, MGLLocat
     }
 
     func startUpdatingHeading() {
-        // no-op
+        locationManager.startUpdatingHeading()
     }
 
     func stopUpdatingHeading() {
-        // no-op
+        locationManager.stopUpdatingHeading()
     }
 
     func dismissHeadingCalibrationDisplay() {
-        // no-op
+        locationManager.dismissHeadingCalibrationDisplay()
     }
     
     deinit {
         stopUpdatingLocation()
         locationProvider.delegate = nil
+        locationManager.delegate = nil
         delegate = nil
     }
 }

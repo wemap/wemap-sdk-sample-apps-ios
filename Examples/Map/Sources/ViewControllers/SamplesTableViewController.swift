@@ -18,12 +18,11 @@ class SamplesTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
 
-        guard let mapData, let styleURL = URL(string: mapData.style) else {
+        guard let mapData else {
             fatalError("You have to successfully retrieve style URL first")
         }
         
         let map = segue.destination.view as! MapView // swiftlint:disable:this force_cast
-        map.styleURL = styleURL
-        map.initialBounds = mapData.bounds
+        map.mapData = mapData
     }
 }

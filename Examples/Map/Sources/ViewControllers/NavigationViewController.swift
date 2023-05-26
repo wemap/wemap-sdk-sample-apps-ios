@@ -49,6 +49,8 @@ final class NavigationViewController: UIViewController {
         levelControl.isHidden = true
         
         createLongPressGestureRecognizer()
+        
+        map.userTrackingMode = .followWithHeading
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +59,7 @@ final class NavigationViewController: UIViewController {
         ToastHelper.showToast(message: "Create 1 or 2 annotations by long press on the map to be able to start navigation. " +
             "1 annotation to start from user location. 2 annotations to start from custom location", onView: view, hideDelay: 5)
         
-        if let initialBounds = map.initialBounds {
+        if let initialBounds = map.mapData?.bounds {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
             map.setCamera(camera, animated: true)
         }
@@ -149,12 +151,12 @@ final class NavigationViewController: UIViewController {
         
         let options = NavigationOptions(
             itineraryOptions: ItineraryOptions(color: .cyan),
-            userTrackingMode: .follow
+            userTrackingMode: .followWithHeading
         )
         
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
-
+        
         let origin = Coordinate(coordinate2D: from.coordinate, level: 0)
         let destination = Coordinate(coordinate2D: to.coordinate, level: 1)
         
@@ -168,7 +170,6 @@ final class NavigationViewController: UIViewController {
                 onSuccess: { [unowned self] itinerary in
                     debugPrint("Navigation started successfully")
                     stopNavigationButton.isEnabled = true
-                    map.setCenter(itinerary.from.coordinate2D, zoomLevel: 18, animated: true)
                     simulator.setItinerary(itinerary)
                 },
                 onFailure: { [unowned self] error in

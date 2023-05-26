@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  MapExamples
+//  MapExample
 //
 //  Created by Evgenii Khrushchev on 16/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
@@ -21,6 +21,6 @@ enum Constants {
     static var locationProvider = LocationProvider.systemDefault
     
     enum LocationProvider: String {
-        case systemDefault, customCLLocationManager, polestar, manual
+        case systemDefault, customCLLocationManager, manual, polestar
     }
 }
