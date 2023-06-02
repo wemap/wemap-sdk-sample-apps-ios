@@ -14,6 +14,11 @@ import WemapMapSDK
 
 final class POIsViewController: UIViewController {
     
+    private let maxBounds = MGLCoordinateBounds(
+        sw: CLLocationCoordinate2D(latitude: 48.84045277048898, longitude: 2.371600716985739),
+        ne: CLLocationCoordinate2D(latitude: 48.84811619854466, longitude: 2.377353558713054)
+    )
+    
     @IBOutlet var levelControl: UISegmentedControl!
     
     private var map: MapView {
@@ -27,6 +32,8 @@ final class POIsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // camera bounds can be specified even if they don't exist in MapData
+//        map.cameraBounds = maxBounds
         map.mapDelegate = self
         buildingManager.delegate = self
         
@@ -67,10 +74,10 @@ final class POIsViewController: UIViewController {
                 onView: view,
                 hideDelay: 5
             ) { [self] in
-                map.pointOfInterestManager.showAllPOIs()
+                map.pointOfInterestManager.showPOI(id: wemapId)
             }
             
-            map.pointOfInterestManager.hideAllPOIs()
+            map.pointOfInterestManager.hidePOI(id: wemapId)
         }
     }
     
@@ -97,7 +104,7 @@ final class POIsViewController: UIViewController {
                 onView: view,
                 hideDelay: 5
             ) { [self] in
-                map.pointOfInterestManager.showAllPOIs()
+                map.pointOfInterestManager.showPOI(poi: clickedPOI)
                 map.removeAnnotation(annotation)
             }
             
@@ -105,7 +112,7 @@ final class POIsViewController: UIViewController {
             
             map.addAnnotation(annotation)
             map.showAnnotations([annotation], edgePadding: padding, animated: true, completionHandler: nil)
-            map.pointOfInterestManager.hideAllPOIs()
+            map.pointOfInterestManager.hidePOI(poi: clickedPOI)
         }
     }
 }
@@ -122,8 +129,8 @@ extension POIsViewController: WemapMapViewDelegate {
     
     func map(_: MapView, didTouchFeature feature: MGLFeature) {
         
-//        selectFeatureByWemapID(feature)
-        selectFeatureByPOI(feature)
+        selectFeatureByWemapID(feature)
+//        selectFeatureByPOI(feature)
     }
 }
 

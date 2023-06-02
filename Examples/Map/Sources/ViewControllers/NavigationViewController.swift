@@ -86,6 +86,7 @@ final class NavigationViewController: UIViewController {
         let point = MGLPointAnnotation()
         point.coordinate = coord
         point.title = "user-created"
+        point.subtitle = "\(map.buildingManager.focusedBuilding?.activeLevel.id ?? 0.0)"
         map.addAnnotation(point)
         updateStartNavigationButtons()
         removeUserCreatedAnnotationsButton.isEnabled = true
@@ -150,15 +151,15 @@ final class NavigationViewController: UIViewController {
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
         let options = NavigationOptions(
-            itineraryOptions: ItineraryOptions(color: .cyan),
+            itineraryOptions: ItineraryOptions(width: 8, color: .cyan),
             userTrackingMode: .followWithHeading
         )
         
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
-        
-        let origin = Coordinate(coordinate2D: from.coordinate, level: 0)
-        let destination = Coordinate(coordinate2D: to.coordinate, level: 1)
+
+        let origin = Coordinate(coordinate2D: from.coordinate, level: Float(from.subtitle!!)!)
+        let destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
         
         // for debugging
 //        let origin = Coordinate(coordinate2D: .init(latitude: 48.844548658057306, longitude: 2.3732023740778025), level: 0)
