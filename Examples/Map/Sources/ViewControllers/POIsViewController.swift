@@ -14,10 +14,10 @@ import WemapMapSDK
 
 final class POIsViewController: UIViewController {
     
-    private let maxBounds = MGLCoordinateBounds(
-        sw: CLLocationCoordinate2D(latitude: 48.84045277048898, longitude: 2.371600716985739),
-        ne: CLLocationCoordinate2D(latitude: 48.84811619854466, longitude: 2.377353558713054)
-    )
+//    private let maxBounds = MGLCoordinateBounds(
+//        sw: CLLocationCoordinate2D(latitude: 48.84045277048898, longitude: 2.371600716985739),
+//        ne: CLLocationCoordinate2D(latitude: 48.84811619854466, longitude: 2.377353558713054)
+//    )
     
     @IBOutlet var levelControl: UISegmentedControl!
     
@@ -60,60 +60,40 @@ final class POIsViewController: UIViewController {
     
     private func selectFeatureByWemapID(_ feature: MGLFeature) {
         
-        guard let wemapId = feature.attribute(forKey: "wemapId") as? Int else {
+        guard let wemapID = feature.attribute(forKey: "wemapId") as? Int else {
             return debugPrint("Failed to selectFeatureByWemapID because wemapId attribute not found")
         }
-            
-        let centered = map.pointOfInterestManager.centerToPOI(id: wemapId, animated: true)
         
-        debugPrint("\(centered ? "successfully centered" : "failed to center") to poi with id \(wemapId)")
-        
-        if centered {
-            ToastHelper.showToast(
-                message: "Touched consumer feature with id - \(wemapId). Feature - \(feature)",
-                onView: view,
-                hideDelay: 5
-            ) { [self] in
-                map.pointOfInterestManager.showPOI(id: wemapId)
-            }
+        map.pointOfInterestManager.selectPOI(id: wemapID)
             
-            map.pointOfInterestManager.hidePOI(id: wemapId)
+        showToast(wemapID: wemapID) { [self] in
+            map.pointOfInterestManager.unselectPOI(id: wemapID)
         }
     }
     
     private func selectFeatureByPOI(_ feature: MGLFeature) {
-        guard let wemapId = feature.attribute(forKey: "wemapId") as? Int else {
+        guard let wemapID = feature.attribute(forKey: "wemapId") as? Int else {
             return debugPrint("Failed to selectFeatureByWemapID because wemapId attribute not found")
         }
             
-        guard let clickedPOI = map.pointOfInterestManager.getPOIs().first(where: { $0.id == wemapId }) else {
+        guard let clickedPOI = map.pointOfInterestManager.getPOIs().first(where: { $0.id == wemapID }) else {
             return debugPrint("failed to find cached POI for feature - \(feature)")
         }
         
-        let centered = map.pointOfInterestManager.centerToPOI(clickedPOI, animated: true)
-        
-        debugPrint("\(centered ? "successfully centered" : "failed to center") to poi with id \(wemapId)")
-        
-        if centered {
-            let annotation = MGLPointAnnotation()
-            annotation.coordinate = clickedPOI.coordinate2D
-            annotation.title = clickedPOI.name
+        map.pointOfInterestManager.selectPOI(clickedPOI)
             
-            let toast = ToastHelper.showToast(
-                message: "Touched consumer feature with name - \(clickedPOI.name). Feature - \(feature)",
-                onView: view,
-                hideDelay: 5
-            ) { [self] in
-                map.pointOfInterestManager.showPOI(poi: clickedPOI)
-                map.removeAnnotation(annotation)
-            }
-            
-            let padding = UIEdgeInsets(top: 0, left: 0, bottom: toast.frame.height, right: 0)
-            
-            map.addAnnotation(annotation)
-            map.showAnnotations([annotation], edgePadding: padding, animated: true, completionHandler: nil)
-            map.pointOfInterestManager.hidePOI(poi: clickedPOI)
+        showToast(wemapID: wemapID) { [self] in
+            map.pointOfInterestManager.unselectPOI(clickedPOI)
         }
+    }
+    
+    private func showToast(wemapID: Int, onDismiss: (() -> Void)? = nil) {
+        ToastHelper.showToast(
+            message: "Map feature clicked with id - \(wemapID)",
+            onView: view,
+            hideDelay: 5,
+            onDismiss: onDismiss
+        )
     }
 }
 

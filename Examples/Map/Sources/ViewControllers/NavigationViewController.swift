@@ -51,6 +51,14 @@ final class NavigationViewController: UIViewController {
         createLongPressGestureRecognizer()
         
         map.userTrackingMode = .followWithHeading
+        
+        // this way you can specify user location indicator appearance
+//        map.userLocationAnnotationViewManager.style = .init(
+//            puckFillColor: .systemPink,
+//            puckBorderColor: .black,
+//            puckArrowFillColor: .green,
+//            outOfActiveLevelStyle: .init(puckFillColor: .darkGray, alpha: 0.3)
+//        )
     }
     
     override func viewDidAppear(_ animated: Bool) {

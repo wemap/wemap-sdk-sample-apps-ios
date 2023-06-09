@@ -11,7 +11,7 @@ import UIKit
 class ToastHelper {
     
     @discardableResult
-    static func showToast(message: String, onView view: UIView, hideDelay: TimeInterval = 2, completion: (() -> Void)? = nil) -> UILabel {
+    static func showToast(message: String, onView view: UIView, hideDelay: TimeInterval = 2, onDismiss: (() -> Void)? = nil) -> UILabel {
         
         let toastLabel = UILabel(frame: .zero)
         
@@ -38,7 +38,7 @@ class ToastHelper {
             toastLabel.alpha = 0.0
         }, completion: { _ in
             toastLabel.removeFromSuperview()
-            completion?()
+            onDismiss?()
         })
         
         toastLabel.layoutIfNeeded()

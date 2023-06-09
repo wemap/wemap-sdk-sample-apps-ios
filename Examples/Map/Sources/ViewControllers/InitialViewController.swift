@@ -9,6 +9,7 @@
 import CoreLocation
 import RxSwift
 import UIKit
+import WemapCoreSDK
 import WemapMapSDK
 
 class InitialViewController: UIViewController {
@@ -20,6 +21,18 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapIDTextField.text = "\(Constants.mapID)"
+        
+        // if you need to retrieve all points of interest for some map in advance
+//        let service = PointOfInterestService()
+//
+//        service
+//            .pointsOfInterestList(mapID: 23254)
+//            .subscribe(onSuccess: {
+//                debugPrint("received pois - \($0)")
+//            }, onFailure: {
+//                debugPrint("failed to receive pois with error - \($0)")
+//            })
+//            .disposed(by: disposeBag)
     }
     
     @IBAction func showMap() {
