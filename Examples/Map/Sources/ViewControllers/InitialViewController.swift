@@ -26,7 +26,7 @@ class InitialViewController: UIViewController {
 //        let service = PointOfInterestService()
 //
 //        service
-//            .pointsOfInterestList(mapID: 23254)
+//            .pointsOfInterestList(mapID: Constants.mapID)
 //            .subscribe(onSuccess: {
 //                debugPrint("received pois - \($0)")
 //            }, onFailure: {

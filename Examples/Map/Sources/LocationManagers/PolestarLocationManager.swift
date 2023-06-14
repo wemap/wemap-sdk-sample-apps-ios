@@ -61,11 +61,11 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider, MGLLocat
     }
 
     func startUpdatingHeading() {
-        locationManager.startUpdatingHeading()
+        // no-op
     }
 
     func stopUpdatingHeading() {
-        locationManager.stopUpdatingHeading()
+        // no-op
     }
 
     func dismissHeadingCalibrationDisplay() {

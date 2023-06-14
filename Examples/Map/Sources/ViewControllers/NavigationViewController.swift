@@ -24,8 +24,17 @@ final class NavigationViewController: UIViewController {
     @IBOutlet var navigationInfo: UILabel!
     
     private let disposeBag = DisposeBag()
+    
     // you can use simulator to generate locations along the itinerary
     private let simulator = IndoorLocationProviderSimulator(options: SimulationOptions(inLoop: true))
+    
+    private lazy var locationProvider: IndoorLocationProvider & MGLLocationManager = {
+        if Constants.locationProvider == .polestar {
+            return PolestarIndoorLocationProvider()
+        } else {
+            return simulator
+        }
+    }()
     
     private var map: MapView {
         view as! MapView
@@ -42,8 +51,9 @@ final class NavigationViewController: UIViewController {
         map.buildingManager.delegate = self
         map.mapDelegate = self
         
-        map.locationManager = simulator
-        map.indoorLocationProvider = simulator
+        map.locationManager = locationProvider
+        map.indoorLocationProvider = locationProvider
+        
         map.navigationManager.delegate = self
         
         levelControl.isHidden = true
@@ -140,7 +150,9 @@ final class NavigationViewController: UIViewController {
         case let .success(itinerary):
             updateStartNavigationButtons()
             stopNavigationButton.isEnabled = false
-            simulator.reset()
+            if Constants.locationProvider != .polestar {
+                simulator.reset()
+            }
             navigationInfo.isHidden = true
             navigationInfo.text = nil
             debugPrint("Navigation stopped successfully. Itinerary - \(itinerary)")
@@ -166,20 +178,24 @@ final class NavigationViewController: UIViewController {
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
 
-        let origin = Coordinate(coordinate2D: from.coordinate, level: Float(from.subtitle!!)!)
-        let destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
-        
-        // for debugging
-//        let origin = Coordinate(coordinate2D: .init(latitude: 48.844548658057306, longitude: 2.3732023740778025), level: 0)
-//        let destination = Coordinate(coordinate2D: .init(latitude: 48.84442126724909, longitude: 2.373656619804761), level: 1)
-        
+        let origin, destination: Coordinate
+        if Constants.locationProvider != .polestar {
+            origin = Coordinate(coordinate2D: from.coordinate, level: Float(from.subtitle!!)!)
+            destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
+        } else {
+            origin = Coordinate(coordinate2D: .init(latitude: 48.844330, longitude: 2.373846), level: 0)
+            destination = Coordinate(coordinate2D: .init(latitude: 48.845029, longitude: 2.373849), level: 0)
+        }
+       
         map.navigationManager
             .startNavigation(from: origin, to: destination, options: options)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     debugPrint("Navigation started successfully")
                     stopNavigationButton.isEnabled = true
-                    simulator.setItinerary(itinerary)
+                    if Constants.locationProvider != .polestar {
+                        simulator.setItinerary(itinerary)
+                    }
                 },
                 onFailure: { [unowned self] error in
                     debugPrint("Failed to start navigation with error - \(error)")
