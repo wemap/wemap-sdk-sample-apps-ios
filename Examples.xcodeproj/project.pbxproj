@@ -467,6 +467,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = PoleStar;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -499,6 +500,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = PoleStar;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
