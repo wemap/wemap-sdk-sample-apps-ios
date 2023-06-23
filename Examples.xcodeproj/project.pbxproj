@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		41C17AAA0EC7A03E52B58DB0 /* Pods_MapExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */; };
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
-		D209119829BB686F007D79BE /* CustomLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D209119729BB686F007D79BE /* CustomLocationManager.swift */; };
 		D20AB5C729CC9F9F00168FCE /* consumer_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D20AB5C629CC9F9F00168FCE /* consumer_data.json */; };
 		D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
@@ -24,8 +23,8 @@
 		D2A6254B28F6AB2000274721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254828F6AB2000274721 /* Main.storyboard */; };
 		D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6254D28F6AEB900274721 /* AppDelegate.swift */; };
 		D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
-		D2A7120E29BF72D4001596C7 /* ManualLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7120D29BF72D4001596C7 /* ManualLocationManager.swift */; };
-		D2B1DFCD29BB8C5A00F17769 /* PolestarLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DFCC29BB8C5A00F17769 /* PolestarLocationManager.swift */; };
+		D2D3260B2A45C9FE00FAF8D3 /* ManualIndoorLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D326092A45C9FE00FAF8D3 /* ManualIndoorLocationProvider.swift */; };
+		D2D3260C2A45C9FE00FAF8D3 /* PolestarIndoorLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3260A2A45C9FE00FAF8D3 /* PolestarIndoorLocationProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExamples.release.xcconfig"; path = "Target Support Files/Pods-MapExamples/Pods-MapExamples.release.xcconfig"; sourceTree = "<group>"; };
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D209119729BB686F007D79BE /* CustomLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLocationManager.swift; sourceTree = "<group>"; };
 		D20AB5C629CC9F9F00168FCE /* consumer_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = consumer_data.json; sourceTree = "<group>"; };
 		D250C9D728D3176F00DBFF5D /* MapExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA2528D31E4D00DBFF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,8 +48,8 @@
 		D2A6254D28F6AEB900274721 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A6255328F6C08400274721 /* ToastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		D2A7120829BB98A5001596C7 /* nao.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nao.kml; sourceTree = "<group>"; };
-		D2A7120D29BF72D4001596C7 /* ManualLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualLocationManager.swift; sourceTree = "<group>"; };
-		D2B1DFCC29BB8C5A00F17769 /* PolestarLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolestarLocationManager.swift; sourceTree = "<group>"; };
+		D2D326092A45C9FE00FAF8D3 /* ManualIndoorLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualIndoorLocationProvider.swift; sourceTree = "<group>"; };
+		D2D3260A2A45C9FE00FAF8D3 /* PolestarIndoorLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarIndoorLocationProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +144,8 @@
 		D273CEC229C3761700F90C61 /* LocationManagers */ = {
 			isa = PBXGroup;
 			children = (
-				D209119729BB686F007D79BE /* CustomLocationManager.swift */,
-				D2A7120D29BF72D4001596C7 /* ManualLocationManager.swift */,
-				D2B1DFCC29BB8C5A00F17769 /* PolestarLocationManager.swift */,
+				D2D326092A45C9FE00FAF8D3 /* ManualIndoorLocationProvider.swift */,
+				D2D3260A2A45C9FE00FAF8D3 /* PolestarIndoorLocationProvider.swift */,
 			);
 			path = LocationManagers;
 			sourceTree = "<group>";
@@ -302,17 +299,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2A7120E29BF72D4001596C7 /* ManualLocationManager.swift in Sources */,
 				D25B9A9229CB1134000F084A /* NavigationViewController.swift in Sources */,
 				D25B9A9529CB4405000F084A /* ConsumerData.swift in Sources */,
 				D29592772A05638100C3340A /* InitialViewController.swift in Sources */,
+				D2D3260C2A45C9FE00FAF8D3 /* PolestarIndoorLocationProvider.swift in Sources */,
 				D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */,
+				D2D3260B2A45C9FE00FAF8D3 /* ManualIndoorLocationProvider.swift in Sources */,
 				D25B9A9929CC5A67000F084A /* SamplesTableViewController.swift in Sources */,
 				D25B9A9029CB1125000F084A /* POIsViewController.swift in Sources */,
-				D209119829BB686F007D79BE /* CustomLocationManager.swift in Sources */,
 				D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */,
 				D25B9A8E29CB1119000F084A /* LevelsViewController.swift in Sources */,
-				D2B1DFCD29BB8C5A00F17769 /* PolestarLocationManager.swift in Sources */,
 				D208E10729C312C0007CCC8A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

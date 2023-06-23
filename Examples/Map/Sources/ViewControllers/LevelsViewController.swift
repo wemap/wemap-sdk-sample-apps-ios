@@ -39,13 +39,10 @@ final class LevelsViewController: UIViewController {
         switch Constants.locationProvider {
         case .systemDefault:
             break
-        case .customCLLocationManager:
-            map.locationManager = CustomLocationManager()
         case .polestar:
-            map.locationManager = indoorProvider
             map.indoorLocationProvider = indoorProvider
         case .manual:
-            map.locationManager = ManualLocationManager(map: map)
+            map.indoorLocationProvider = ManualIndoorLocationProvider(map: map)
         }
         
         debugPrint("using \(Constants.locationProvider.rawValue) location provider")

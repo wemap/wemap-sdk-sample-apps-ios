@@ -28,7 +28,7 @@ final class NavigationViewController: UIViewController {
     // you can use simulator to generate locations along the itinerary
     private let simulator = IndoorLocationProviderSimulator(options: SimulationOptions(inLoop: true))
     
-    private lazy var locationProvider: IndoorLocationProvider & MGLLocationManager = {
+    private lazy var locationProvider: IndoorLocationProvider = {
         if Constants.locationProvider == .polestar {
             return PolestarIndoorLocationProvider()
         } else {
@@ -51,7 +51,6 @@ final class NavigationViewController: UIViewController {
         map.buildingManager.delegate = self
         map.mapDelegate = self
         
-        map.locationManager = locationProvider
         map.indoorLocationProvider = locationProvider
         
         map.navigationManager.delegate = self
@@ -147,15 +146,8 @@ final class NavigationViewController: UIViewController {
     @IBAction func stopNavigation() {
         let result = map.navigationManager.stopNavigation()
         switch result {
-        case let .success(itinerary):
-            updateStartNavigationButtons()
-            stopNavigationButton.isEnabled = false
-            if Constants.locationProvider != .polestar {
-                simulator.reset()
-            }
-            navigationInfo.isHidden = true
-            navigationInfo.text = nil
-            debugPrint("Navigation stopped successfully. Itinerary - \(itinerary)")
+        case .success:
+            updateUIForNavigationStop()
         case let .failure(error):
             debugPrint("Failed to stop navigation with error - \(error)")
             ToastHelper.showToast(
@@ -166,13 +158,23 @@ final class NavigationViewController: UIViewController {
         }
     }
     
+    private func updateUIForNavigationStop() {
+        updateStartNavigationButtons()
+        if Constants.locationProvider != .polestar {
+            simulator.reset()
+        }
+        navigationInfo.isHidden = true
+        navigationInfo.text = nil
+    }
+    
     @IBAction func startNavigationFromUserCreatedAnnotations() {
         startNavigationButton.isEnabled = false
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
         let options = NavigationOptions(
             itineraryOptions: ItineraryOptions(width: 8, color: .cyan),
-            userTrackingMode: .followWithHeading
+            userTrackingMode: .followWithHeading,
+            stopNavigationOptions: .init(stopDistanceThreshold: 2)
         )
         
         let from = userCreatedAnnotations[0]
@@ -183,8 +185,18 @@ final class NavigationViewController: UIViewController {
             origin = Coordinate(coordinate2D: from.coordinate, level: Float(from.subtitle!!)!)
             destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
         } else {
-            origin = Coordinate(coordinate2D: .init(latitude: 48.844330, longitude: 2.373846), level: 0)
-            destination = Coordinate(coordinate2D: .init(latitude: 48.845029, longitude: 2.373849), level: 0)
+            // for testing you can comment out and uncomment placemarks in nao.kml file and corresponding origin/destination below
+            // Default path
+//            origin = Coordinate(coordinate2D: .init(latitude: 48.84487592, longitude: 2.37362684), level: -1)
+//            destination = Coordinate(coordinate2D: .init(latitude: 48.84428454, longitude: 2.37390447), level: 0)
+            
+            // Path at less than 3 meters from network
+            origin = Coordinate(coordinate2D: .init(latitude: 48.84458308799957, longitude: 2.3731548097070134), level: 0)
+            destination = Coordinate(coordinate2D: .init(latitude: 48.84511200990592, longitude: 2.3738383127780676), level: 0)
+            
+            // Path at less than 3 meters from network and route recalculation
+//            origin = Coordinate(coordinate2D: .init(latitude: 48.84458308799957, longitude: 2.3731548097070134), level: 0)
+//            destination = Coordinate(coordinate2D: .init(latitude: 48.84511200990592, longitude: 2.3738383127780676), level: 0)
         }
        
         map.navigationManager
@@ -218,8 +230,8 @@ final class NavigationViewController: UIViewController {
     }
     
     private func updateStartNavigationButtons() {
-        startNavigationButton.isEnabled = userCreatedAnnotations.count == 1
-        startNavigationFromUserCreatedAnnotationsButton.isEnabled = userCreatedAnnotations.count == 2
+        startNavigationButton.isEnabled = userCreatedAnnotations.count == 1 && !stopNavigationButton.isEnabled
+        startNavigationFromUserCreatedAnnotationsButton.isEnabled = userCreatedAnnotations.count == 2 && !stopNavigationButton.isEnabled
     }
 }
 
@@ -252,14 +264,6 @@ extension NavigationViewController: BuildingManagerDelegate {
 
 extension NavigationViewController: WemapMapViewDelegate {
     
-    func map(_: MapView, didTouchPointOfInterest _: PointOfInterest) {
-        debugPrint(#function)
-    }
-    
-    func map(_: MapView, didTouchItinerary _: Itinerary) {
-        debugPrint(#function)
-    }
-    
     func map(_: MapView, didTouchFeature feature: MGLFeature) {
         ToastHelper.showToast(
             message: "Touched feature - \(feature)",
@@ -274,6 +278,36 @@ extension NavigationViewController: NavigationDelegate {
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false
         navigationInfo.text = info.shortDescription
+    }
+    
+    func navigationManager(_: NavigationManager, didStartNavigation itinerary: Itinerary) {
+        stopNavigationButton.isEnabled = true
+        updateStartNavigationButtons()
+        ToastHelper.showToast(
+            message: "Navigation manager started navigation - \(itinerary)",
+            onView: view
+        )
+    }
+    
+    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
+        stopNavigationButton.isEnabled = false
+        updateUIForNavigationStop()
+    }
+    
+    func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {
+        ToastHelper.showToast(
+            message: "Navigation manager failed with error - \(error)",
+            onView: view,
+            hideDelay: 5
+        )
+    }
+    
+    func navigationManager(_: NavigationManager, didRecalculateItinerary itinerary: Itinerary) {
+        ToastHelper.showToast(
+            message: "Navigation manager recalculated itinerary - \(itinerary)",
+            onView: view,
+            hideDelay: 5
+        )
     }
 }
 

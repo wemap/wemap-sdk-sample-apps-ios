@@ -21,6 +21,6 @@ enum Constants {
     static var locationProvider = LocationProvider.systemDefault
     
     enum LocationProvider: String {
-        case systemDefault, customCLLocationManager, manual, polestar
+        case systemDefault, manual, polestar
     }
 }
