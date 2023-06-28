@@ -15,7 +15,7 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider {
     
     var lastCoordinate: Coordinate?
     
-    weak var indoorDelegate: IndoorLocationProviderDelegate?
+    weak var delegate: IndoorLocationProviderDelegate?
 
     private let locationProvider = LocationProvider(apikey: "emulator")
 
@@ -24,16 +24,16 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider {
         locationProvider.delegate = self
     }
 
-    func startUpdatingLocation() {
+    func start() {
         locationProvider.start()
     }
 
-    func stopUpdatingLocation() {
+    func stop() {
         locationProvider.stop()
     }
     
     deinit {
-        stopUpdatingLocation()
+        stop()
         locationProvider.delegate = nil
     }
 }
@@ -42,11 +42,15 @@ extension PolestarIndoorLocationProvider: LocationProviderDelegate {
     
     func didLocationChange(_ location: CLLocation!) {
         
-        let levelByAltitude = location.altitude / 5
-        let coordinate = Coordinate(location: location, levels: [Float(levelByAltitude)])
+        let coordinate: Coordinate
+        if location.altitude == 1000.0 { // workaround for outdoor location
+            coordinate = Coordinate(location: location)
+        } else {
+            coordinate = Coordinate(location: location, levels: [Float(location.altitude / 5)])
+        }
         
         lastCoordinate = coordinate
-        indoorDelegate?.locationProvider(self, didUpdateLocation: coordinate)
+        delegate?.locationProvider(self, didUpdateLocation: coordinate)
         
 //        debugPrint("didLocationChange with location - \(location!), altitude - \(location!.altitude), level - \(levelByAltitude)")
     }
@@ -69,7 +73,7 @@ extension PolestarIndoorLocationProvider: LocationProviderDelegate {
     
     func didLocationFailWithErrorCode(_ message: String!) {
         let error = NSError(domain: message, code: -1)
-        indoorDelegate?.locationProvider(self, didFailWithError: error)
+        delegate?.locationProvider(self, didFailWithError: error)
         debugPrint("didLocationFailWithErrorCode with errorCode - \(message!)")
     }
     

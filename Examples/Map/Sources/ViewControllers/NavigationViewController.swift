@@ -174,7 +174,7 @@ final class NavigationViewController: UIViewController {
         let options = NavigationOptions(
             itineraryOptions: ItineraryOptions(width: 8, color: .cyan),
             userTrackingMode: .followWithHeading,
-            stopNavigationOptions: .init(stopDistanceThreshold: 2)
+            stopNavigationOptions: .init(stopDistanceThreshold: 3)
         )
         
         let from = userCreatedAnnotations[0]
@@ -197,6 +197,14 @@ final class NavigationViewController: UIViewController {
             // Path at less than 3 meters from network and route recalculation
 //            origin = Coordinate(coordinate2D: .init(latitude: 48.84458308799957, longitude: 2.3731548097070134), level: 0)
 //            destination = Coordinate(coordinate2D: .init(latitude: 48.84511200990592, longitude: 2.3738383127780676), level: 0)
+            
+            // Path from level -1 to 0 and route recalculation
+//            origin = Coordinate(coordinate2D: .init(latitude: 48.84445563, longitude: 2.37319782), level: -1)
+//            destination = Coordinate(coordinate2D: .init(latitude: 48.84502948, longitude: 2.37451864), level: 0)
+
+             // Path indoor to outdoor
+//            origin = Coordinate(coordinate2D: .init(latitude: 48.84482873, longitude: 2.37378956), level: 0)
+//            destination = Coordinate(coordinate2D: .init(latitude: 48.8455159, longitude: 2.37305333))
         }
        
         map.navigationManager
@@ -289,9 +297,14 @@ extension NavigationViewController: NavigationDelegate {
         )
     }
     
-    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didFinishNavigation _: Itinerary) {
         stopNavigationButton.isEnabled = false
         updateUIForNavigationStop()
+        ToastHelper.showToast(
+            message: "Navigation manager finished",
+            onView: view,
+            hideDelay: 5
+        )
     }
     
     func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {

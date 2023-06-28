@@ -12,7 +12,7 @@ import WemapMapSDK
 
 class ManualIndoorLocationProvider: RxObject, IndoorLocationProvider {
     
-    weak var indoorDelegate: IndoorLocationProviderDelegate?
+    weak var delegate: IndoorLocationProviderDelegate?
     
     var lastCoordinate: Coordinate?
     
@@ -29,17 +29,17 @@ class ManualIndoorLocationProvider: RxObject, IndoorLocationProvider {
                 let location = CLLocation(coordinate: coord, altitude: 8, horizontalAccuracy: .infinity, verticalAccuracy: .infinity, timestamp: .init())
                 let coordinate = Coordinate(location: location, levels: [0])
                 lastCoordinate = coordinate
-                indoorDelegate?.locationProvider(self, didUpdateLocation: coordinate)
+                delegate?.locationProvider(self, didUpdateLocation: coordinate)
             }).disposed(by: disposeBag)
         
         map.addGestureRecognizer(longPress)
     }
     
-    func startUpdatingLocation() {
+    func start() {
         // no-op
     }
     
-    func stopUpdatingLocation() {
+    func stop() {
         // no-op
     }
 }
