@@ -292,16 +292,24 @@ extension NavigationViewController: NavigationDelegate {
         stopNavigationButton.isEnabled = true
         updateStartNavigationButtons()
         ToastHelper.showToast(
-            message: "Navigation manager started navigation - \(itinerary)",
+            message: "Navigation started - \(itinerary)",
             onView: view
         )
     }
     
-    func navigationManager(_: NavigationManager, didFinishNavigation _: Itinerary) {
+    func navigationManager(_ manager: NavigationManager, didStopNavigation itinerary: Itinerary) {
         stopNavigationButton.isEnabled = false
         updateUIForNavigationStop()
         ToastHelper.showToast(
-            message: "Navigation manager finished",
+            message: "Navigation stopped",
+            onView: view,
+            hideDelay: 5
+        )
+    }
+    
+    func navigationManager(_: NavigationManager, didArriveAtDestination _: Itinerary) {
+        ToastHelper.showToast(
+            message: "Navigation manager didArriveAtDestination",
             onView: view,
             hideDelay: 5
         )
@@ -309,7 +317,7 @@ extension NavigationViewController: NavigationDelegate {
     
     func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {
         ToastHelper.showToast(
-            message: "Navigation manager failed with error - \(error)",
+            message: "Navigation failed with error - \(error)",
             onView: view,
             hideDelay: 5
         )
@@ -317,7 +325,7 @@ extension NavigationViewController: NavigationDelegate {
     
     func navigationManager(_: NavigationManager, didRecalculateItinerary itinerary: Itinerary) {
         ToastHelper.showToast(
-            message: "Navigation manager recalculated itinerary - \(itinerary)",
+            message: "Navigation itinerary recalculated - \(itinerary)",
             onView: view,
             hideDelay: 5
         )

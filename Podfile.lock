@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.7.1)
   - MapLibre (5.13.0)
-  - NAOSDK (4.11.11)
+  - NAOSDK (4.11.12)
   - NAOSwiftProvider (1.2.2):
     - NAOSDK
   - RxCocoa (6.5.0):
@@ -11,18 +11,18 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - Turf (2.6.1)
-  - WemapCoreSDK (0.6.1):
+  - WemapCoreSDK (0.6.3):
     - Alamofire (~> 5.7.0)
     - RxCocoa (~> 6.5.0)
     - RxSwift (~> 6.5.0)
     - Turf (~> 2.6)
-  - WemapMapSDK (0.6.1):
+  - WemapMapSDK (0.6.3):
     - MapLibre (~> 5.13.0)
-    - WemapCoreSDK (~> 0.6.1)
+    - WemapCoreSDK (~> 0.6.3)
 
 DEPENDENCIES:
   - "NAOSwiftProvider (from `git@github.com:wemap/NAOSwiftProvider.git`, tag `1.2.2`)"
-  - WemapMapSDK (~> 0.6.1)
+  - WemapMapSDK (~> 0.6.3)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -50,15 +50,15 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   MapLibre: 3c7d5d097c9aeb93449fc08a0dc5d2ed7c63aa0b
-  NAOSDK: 3220ef746741f931ad0986307b849404c449c9af
+  NAOSDK: 2668b52df4cf78384c43bc7e0118c13951b3ab2b
   NAOSwiftProvider: 4349aabdf1b40b327de73243f33b7e0c0b990306
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   Turf: 469ce2c3d22e5e8e4818d5a3b254699a5c89efa4
-  WemapCoreSDK: 1decf54aed71ff54d16b7c49aff5b377535a6464
-  WemapMapSDK: 3ca78d9a062f1d93f813c1b4974fea40cf366996
+  WemapCoreSDK: 8692564bf14b35ef7f4a7ea3423b05727193bf1d
+  WemapMapSDK: 66b10f9bfc0fb0f917d1d4920bcdff096140573d
 
-PODFILE CHECKSUM: e62bda70e4afc8950e90313eb0586cc0f3e39493
+PODFILE CHECKSUM: 89252176542feb9c5b9b8343b592924c4ec8d21e
 
 COCOAPODS: 1.12.1
