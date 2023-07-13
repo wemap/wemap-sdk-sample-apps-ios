@@ -52,7 +52,7 @@ extension PolestarIndoorLocationProvider: LocationProviderDelegate {
         lastCoordinate = coordinate
         delegate?.locationProvider(self, didUpdateLocation: coordinate)
         
-//        debugPrint("didLocationChange with location - \(location!), altitude - \(location!.altitude), level - \(levelByAltitude)")
+//        debugPrint("didLocationChange with location - \(location!)")
     }
     
     func didLocationStatusChanged(_ status: String!) {

@@ -172,7 +172,7 @@ final class NavigationViewController: UIViewController {
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
         let options = NavigationOptions(
-            itineraryOptions: ItineraryOptions(width: 8, color: .cyan),
+            itineraryOptions: .init(width: 8, color: .cyan, projectionOptions: .init(width: 5, color: .lightGray)),
             userTrackingMode: .followWithHeading,
             stopNavigationOptions: .init(stopDistanceThreshold: 3)
         )
@@ -202,7 +202,7 @@ final class NavigationViewController: UIViewController {
 //            origin = Coordinate(coordinate2D: .init(latitude: 48.84445563, longitude: 2.37319782), level: -1)
 //            destination = Coordinate(coordinate2D: .init(latitude: 48.84502948, longitude: 2.37451864), level: 0)
 
-             // Path indoor to outdoor
+            // Path indoor to outdoor
 //            origin = Coordinate(coordinate2D: .init(latitude: 48.84482873, longitude: 2.37378956), level: 0)
 //            destination = Coordinate(coordinate2D: .init(latitude: 48.8455159, longitude: 2.37305333))
         }
@@ -297,7 +297,7 @@ extension NavigationViewController: NavigationDelegate {
         )
     }
     
-    func navigationManager(_ manager: NavigationManager, didStopNavigation itinerary: Itinerary) {
+    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
         stopNavigationButton.isEnabled = false
         updateUIForNavigationStop()
         ToastHelper.showToast(
