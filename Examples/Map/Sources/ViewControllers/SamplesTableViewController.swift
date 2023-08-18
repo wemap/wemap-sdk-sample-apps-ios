@@ -8,11 +8,13 @@
 
 import RxSwift
 import UIKit
+import WemapCoreSDK
 import WemapMapSDK
 
 class SamplesTableViewController: UITableViewController {
 
-    var mapData: MapData?
+    var mapData: MapData!
+    var locationSourceType: LocationSourceType!
     
     // MARK: - Navigation
 
@@ -22,7 +24,8 @@ class SamplesTableViewController: UITableViewController {
             fatalError("You have to successfully retrieve style URL first")
         }
         
-        let map = segue.destination.view as! MapView // swiftlint:disable:this force_cast
+        let map = segue.destination as! MapViewController // swiftlint:disable:this force_cast
         map.mapData = mapData
+        map.locationSourceType = locationSourceType
     }
 }

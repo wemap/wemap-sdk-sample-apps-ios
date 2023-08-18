@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import RxCocoa
 import RxSwift
 import UIKit
 import WemapCoreSDK
@@ -15,12 +16,27 @@ import WemapMapSDK
 class InitialViewController: UIViewController {
 
     @IBOutlet var mapIDTextField: UITextField!
+    @IBOutlet var sourcePicker: UIPickerView!
     
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // uncomment if you want to use dev environment
+//        WemapMap.setEnvironment(.dev)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         mapIDTextField.text = "\(Constants.mapID)"
+        
+        let locationSourceTitles = LocationSourceType.allCases.map(\.name)
+        
+        Driver
+            .of(locationSourceTitles)
+            .drive(sourcePicker.rx.itemTitles) { _, element in element }
+            .disposed(by: disposeBag)
         
         // if you need to retrieve all points of interest for some map in advance
 //        let service = PointOfInterestService()
@@ -35,14 +51,15 @@ class InitialViewController: UIViewController {
 //            .disposed(by: disposeBag)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func showMap() {
         
         guard let text = mapIDTextField.text, let id = Int(text) else {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
-        
-        // uncomment if you want to use dev environment
-//        WemapMap.setEnvironment(.dev)
         
         WemapMap.shared
             .getStyleURL(withMapID: id, token: Constants.token)
@@ -59,6 +76,7 @@ class InitialViewController: UIViewController {
         // swiftlint:disable:next force_cast
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController
         vc.mapData = mapData
+        vc.locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
         
         show(vc, sender: nil)
     }

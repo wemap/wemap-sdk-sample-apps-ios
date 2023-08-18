@@ -10,7 +10,7 @@ platform :ios, '11.0'
 #################################################################################
 
 target 'MapExamples' do
-  pod 'WemapMapSDK', '~>0.7.0'
+  pod 'WemapMapSDK', '~>0.8.0'
   pod 'NAOSwiftProvider', :git => 'git@github.com:wemap/NAOSwiftProvider.git', :tag => '1.2.2'
 end
 

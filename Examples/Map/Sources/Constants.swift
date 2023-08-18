@@ -6,7 +6,10 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
+import WemapCoreSDK
+import WemapMapSDK
 
 enum Constants {
     
@@ -18,9 +21,14 @@ enum Constants {
         fatalError("Specify token and remove fatalError")
     }
     
-    static var locationProvider = LocationProvider.systemDefault
+    static var polestarApiKey: String {
+        fatalError("Specify polestarApiKey and remove fatalError")
+    }
     
-    enum LocationProvider: String {
-        case systemDefault, manual, polestar
+    static var globalNavigationOptions: NavigationOptions {
+        NavigationOptions(
+            itineraryOptions: .init(color: .cyan, projectionOptions: .init(width: 5, color: .lightGray)),
+            userTrackingMode: .followWithHeading
+        )
     }
 }

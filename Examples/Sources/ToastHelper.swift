@@ -11,7 +11,13 @@ import UIKit
 class ToastHelper {
     
     @discardableResult
-    static func showToast(message: String, onView view: UIView, hideDelay: TimeInterval = 2, onDismiss: (() -> Void)? = nil) -> UILabel {
+    static func showToast(
+        message: String,
+        onView view: UIView,
+        hideDelay: TimeInterval = 2,
+        bottomInset: CGFloat = -100,
+        onDismiss: (() -> Void)? = nil
+    ) -> UILabel {
         
         let toastLabel = UILabel(frame: .zero)
         
@@ -30,7 +36,7 @@ class ToastHelper {
         
         NSLayoutConstraint.activate([
             toastLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toastLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            toastLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomInset),
             toastLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -(view.safeAreaInsets.left + view.safeAreaInsets.right + 60))
         ])
         

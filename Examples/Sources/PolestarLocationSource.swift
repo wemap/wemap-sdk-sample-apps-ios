@@ -1,25 +1,25 @@
 //
-//  PolestarIndoorLocationProvider.swift
+//  PolestarLocationSource.swift
 //  MapExample
 //
 //  Created by Evgenii Khrushchev on 10/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Mapbox
+import CoreLocation
 import NAOSwiftProvider
 import WemapCoreSDK
-import WemapMapSDK
 
-class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider {
+class PolestarLocationSource: NSObject, LocationSource {
     
     var lastCoordinate: Coordinate?
     
-    weak var delegate: IndoorLocationProviderDelegate?
+    weak var delegate: LocationSourceDelegate?
 
-    private let locationProvider = LocationProvider(apikey: "emulator")
+    private let locationProvider: LocationProvider
 
-    override init() {
+    init(apiKey: String) {
+        locationProvider = LocationProvider(apikey: apiKey)
         super.init()
         locationProvider.delegate = self
     }
@@ -38,19 +38,19 @@ class PolestarIndoorLocationProvider: NSObject, IndoorLocationProvider {
     }
 }
 
-extension PolestarIndoorLocationProvider: LocationProviderDelegate {
+extension PolestarLocationSource: LocationProviderDelegate {
     
     func didLocationChange(_ location: CLLocation!) {
         
         let coordinate: Coordinate
-        if location.altitude == 1000.0 { // workaround for outdoor location
+        if location.altitude == 1000.0 || location.verticalAccuracy < 0 { // workaround for outdoor location
             coordinate = Coordinate(location: location)
         } else {
             coordinate = Coordinate(location: location, levels: [Float(location.altitude / 5)])
         }
         
         lastCoordinate = coordinate
-        delegate?.locationProvider(self, didUpdateLocation: coordinate)
+        delegate?.locationSource(self, didUpdateLocation: coordinate)
         
 //        debugPrint("didLocationChange with location - \(location!)")
     }
@@ -73,7 +73,7 @@ extension PolestarIndoorLocationProvider: LocationProviderDelegate {
     
     func didLocationFailWithErrorCode(_ message: String!) {
         let error = NSError(domain: message, code: -1)
-        delegate?.locationProvider(self, didFailWithError: error)
+        delegate?.locationSource(self, didFailWithError: error)
         debugPrint("didLocationFailWithErrorCode with errorCode - \(message!)")
     }
     

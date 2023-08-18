@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,36 +18,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CmS-84-TAR">
-                                <rect key="frame" x="145.33333333333334" y="384" width="99.333333333333343" height="76.333333333333314"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="23254" borderStyle="roundedRect" placeholder="Map ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
-                                        <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfC-aW-f5l">
-                                        <rect key="frame" x="0.0" y="42" width="99.333333333333329" height="34.333333333333343"/>
-                                        <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Load Map"/>
-                                        <connections>
-                                            <action selector="showMap" destination="9Br-Si-CgX" eventType="touchUpInside" id="IV1-Bo-3Sm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="tintColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="23254" borderStyle="roundedRect" placeholder="Map ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
+                                <rect key="frame" x="158.33333333333334" y="223" width="73.666666666666657" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfC-aW-f5l">
+                                <rect key="frame" x="145.33333333333334" y="775.66666666666663" width="99.333333333333343" height="34.333333333333371"/>
+                                <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Load Map"/>
+                                <connections>
+                                    <action selector="showMap" destination="9Br-Si-CgX" eventType="touchUpInside" id="IV1-Bo-3Sm"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfH-mK-K5J">
+                                <rect key="frame" x="35" y="433" width="320" height="216"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zce-M4-BEm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="CmS-84-TAR" firstAttribute="centerY" secondItem="N3a-rT-LhF" secondAttribute="centerY" id="gnJ-P7-nUf"/>
-                            <constraint firstItem="CmS-84-TAR" firstAttribute="centerX" secondItem="N3a-rT-LhF" secondAttribute="centerX" id="kS0-6E-U5k"/>
+                            <constraint firstItem="GdK-E3-PaG" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="176" id="3my-Tb-FlD"/>
+                            <constraint firstItem="RfC-aW-f5l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bfH-mK-K5J" secondAttribute="bottom" constant="20" id="G1j-72-ixr"/>
+                            <constraint firstItem="bfH-mK-K5J" firstAttribute="top" secondItem="GdK-E3-PaG" secondAttribute="bottom" constant="176" id="LPY-6Y-a8b"/>
+                            <constraint firstItem="bfH-mK-K5J" firstAttribute="centerX" secondItem="N3a-rT-LhF" secondAttribute="centerX" id="Oxy-bh-PG4"/>
+                            <constraint firstItem="RfC-aW-f5l" firstAttribute="centerX" secondItem="N3a-rT-LhF" secondAttribute="centerX" id="ed5-3h-mhG"/>
+                            <constraint firstItem="GdK-E3-PaG" firstAttribute="centerX" secondItem="N3a-rT-LhF" secondAttribute="centerX" id="iO2-dn-5lv"/>
+                            <constraint firstItem="zce-M4-BEm" firstAttribute="bottom" secondItem="RfC-aW-f5l" secondAttribute="bottom" id="rbo-rz-hhj"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapIDTextField" destination="GdK-E3-PaG" id="LLR-B9-sMl"/>
+                        <outlet property="sourcePicker" destination="bfH-mK-K5J" id="TMS-gW-S8x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYL-eZ-7B0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -63,7 +66,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTR-zN-tqg">
-                                <rect key="frame" x="16" y="20" width="67" height="35"/>
+                                <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Close"/>
                                 <connections>
@@ -71,7 +74,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="beM-pR-pdz" userLabel="Level control">
-                                <rect key="frame" x="319" y="63" width="55" height="32"/>
+                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
                                 <segments>
                                     <segment title="0" enabled="NO"/>
                                     <segment title="1"/>
@@ -82,21 +85,91 @@
                                     <action selector="levelChanged:" destination="3S0-Vr-XtB" eventType="valueChanged" id="czL-mx-Wpm"/>
                                 </connections>
                             </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qSE-4D-Cgk" userLabel="Buttons Stack View">
+                                <rect key="frame" x="13.333333333333343" y="715.33333333333337" width="363.33333333333326" height="110.66666666666663"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bBV-hW-ztP">
+                                        <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="74.333333333333329"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2g-xX-YbX">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="74.333333333333329"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation from simulated user position"/>
+                                                <connections>
+                                                    <action selector="startNavigationFromSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="XsW-pO-rVh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVB-gb-ZbE">
+                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="74.333333333333329"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Remove simulated user position"/>
+                                                <connections>
+                                                    <action selector="removeSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="JSc-0p-v5h"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-Js-R9U">
+                                        <rect key="frame" x="0.0" y="76.333333333333258" width="363.33333333333331" height="34.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fy2-Pw-56X">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation"/>
+                                                <connections>
+                                                    <action selector="startNavigation" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Csx-Jr-lXI"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foH-2j-5JC">
+                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Stop Navigation"/>
+                                                <connections>
+                                                    <action selector="stopNavigation" destination="3S0-Vr-XtB" eventType="touchUpInside" id="QeB-ef-hU3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigation info will be here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfI-hD-86U">
+                                <rect key="frame" x="103.00000000000001" y="101.33333333333333" width="184.33333333333337" height="18"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59991629459999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="0K8-XS-BrM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d3b-ax-gvx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qSE-4D-Cgk" secondAttribute="trailing" constant="8" id="0LW-Ps-D2B"/>
+                            <constraint firstItem="cfI-hD-86U" firstAttribute="centerX" secondItem="ygm-k9-QXt" secondAttribute="centerX" id="30Z-Py-Q9v"/>
                             <constraint firstItem="pTR-zN-tqg" firstAttribute="leading" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="BVa-pj-BpX"/>
+                            <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cfI-hD-86U" secondAttribute="trailing" constant="8" id="BgA-q5-DqP"/>
+                            <constraint firstItem="cfI-hD-86U" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Eq2-yh-Up8"/>
                             <constraint firstItem="beM-pR-pdz" firstAttribute="top" secondItem="pTR-zN-tqg" secondAttribute="bottom" constant="8" id="FCJ-AR-iQh"/>
+                            <constraint firstItem="cfI-hD-86U" firstAttribute="top" secondItem="beM-pR-pdz" secondAttribute="bottom" constant="8" symbolic="YES" id="QfW-xm-Z1h"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" secondItem="beM-pR-pdz" secondAttribute="trailing" constant="16" id="TNW-BH-hEs"/>
                             <constraint firstItem="pTR-zN-tqg" firstAttribute="top" secondItem="ygm-k9-QXt" secondAttribute="top" constant="20" symbolic="YES" id="W9M-6h-f5O"/>
                             <constraint firstItem="beM-pR-pdz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="Wlu-di-euD"/>
+                            <constraint firstItem="qSE-4D-Cgk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Wwz-Sf-aKU"/>
+                            <constraint firstItem="qSE-4D-Cgk" firstAttribute="centerX" secondItem="d3b-ax-gvx" secondAttribute="centerX" id="f7q-xp-Aum"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pTR-zN-tqg" secondAttribute="trailing" constant="16" id="ppZ-M7-mhw"/>
+                            <constraint firstItem="d3b-ax-gvx" firstAttribute="bottom" secondItem="qSE-4D-Cgk" secondAttribute="bottom" constant="8" id="w6N-5j-aUE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjR-zi-AQu"/>
                     <connections>
                         <outlet property="levelControl" destination="beM-pR-pdz" id="rF5-28-kcd"/>
+                        <outlet property="navigationInfo" destination="cfI-hD-86U" id="GYB-cr-bzP"/>
+                        <outlet property="removeSimulatedUserPositionButton" destination="oVB-gb-ZbE" id="nYk-JI-Wc2"/>
+                        <outlet property="startNavigationButton" destination="Fy2-Pw-56X" id="jAD-oq-V50"/>
+                        <outlet property="startNavigationFromSimulatedUserPositionButton" destination="R2g-xX-YbX" id="mSX-tH-4Rs"/>
+                        <outlet property="stopNavigationButton" destination="foH-2j-5JC" id="Fea-b0-kfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhR-C8-j8m" sceneMemberID="firstResponder"/>
@@ -236,20 +309,20 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VcO-oS-YBy">
-                                <rect key="frame" x="32" y="763.66666666666663" width="326" height="54.333333333333371"/>
+                                <rect key="frame" x="68.333333333333329" y="783.66666666666663" width="253.33333333333337" height="34.333333333333371"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqA-TL-il6">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="54.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="122.66666666666667" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Découvrir l'Alsace"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Relay (shop)"/>
                                         <connections>
                                             <action selector="firstTouched" destination="e5r-Qo-bVo" eventType="touchUpInside" id="q2L-qL-6hu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyS-qT-XJN">
-                                        <rect key="frame" x="167" y="0.0" width="159" height="54.333333333333336"/>
+                                        <rect key="frame" x="130.66666666666669" y="0.0" width="122.66666666666669" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted" title="Location de vélos - VEL'HOP"/>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Etam lingerie"/>
                                         <connections>
                                             <action selector="secondTouched" destination="e5r-Qo-bVo" eventType="touchUpInside" id="xvU-W2-BsO"/>
                                         </connections>
@@ -310,10 +383,10 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="UCc-r8-KjV">
-                                <rect key="frame" x="19" y="693.33333333333337" width="352" height="132.66666666666663"/>
+                                <rect key="frame" x="17" y="713.33333333333337" width="356" height="112.66666666666663"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mte-5V-VGH" userLabel="Navigation Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="352" height="74.333333333333329"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mte-5V-VGH" userLabel="Navigation Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="356" height="74.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="064-LV-oDD">
                                                 <rect key="frame" x="0.0" y="0.0" width="176" height="74.333333333333329"/>
@@ -324,7 +397,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c02-nc-Ixf">
-                                                <rect key="frame" x="176" y="0.0" width="176" height="74.333333333333329"/>
+                                                <rect key="frame" x="180" y="0.0" width="176" height="74.333333333333329"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Remove user-created annotations"/>
                                                 <connections>
@@ -334,18 +407,18 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jde-93-e2T" userLabel="Navigation Stack">
-                                        <rect key="frame" x="0.0" y="78.333333333333258" width="352" height="54.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="78.333333333333258" width="356" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YXv-ra-19v">
-                                                <rect key="frame" x="0.0" y="0.0" width="176" height="54.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="178" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation from user location"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation"/>
                                                 <connections>
                                                     <action selector="startNavigationFromUserLocation" destination="nxR-az-56C" eventType="touchUpInside" id="sFT-un-bzJ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqj-uc-lln">
-                                                <rect key="frame" x="176" y="0.0" width="176" height="54.333333333333336"/>
+                                                <rect key="frame" x="178" y="0.0" width="178" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Stop Navigation"/>
                                                 <connections>

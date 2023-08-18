@@ -5,7 +5,6 @@
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
-// swiftlint:disable force_cast
 
 import Mapbox
 import RxSwift
@@ -13,9 +12,7 @@ import UIKit
 import WemapCoreSDK
 import WemapMapSDK
 
-final class NavigationViewController: UIViewController {
-    
-    @IBOutlet var levelControl: UISegmentedControl!
+final class NavigationViewController: MapViewController {
     
     @IBOutlet var startNavigationButton: UIButton!
     @IBOutlet var stopNavigationButton: UIButton!
@@ -25,44 +22,36 @@ final class NavigationViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    // you can use simulator to generate locations along the itinerary
-    private let simulator = IndoorLocationProviderSimulator(options: SimulationOptions(inLoop: true))
-    
-    private lazy var locationProvider: IndoorLocationProvider = {
-        if Constants.locationProvider == .polestar {
-            return PolestarIndoorLocationProvider()
-        } else {
-            return simulator
-        }
-    }()
-    
-    private var map: MapView {
-        view as! MapView
-    }
-    
     private var userCreatedAnnotations: [MGLAnnotation] {
         map.annotations?
             .filter { $0.title == "user-created" } ?? []
     }
     
+    private var simulator: LocationSourceSimulator? {
+        map.userLocationManager.locationSource as? LocationSourceSimulator
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        map.buildingManager.delegate = self
-        map.mapDelegate = self
-        
-        map.indoorLocationProvider = locationProvider
-        
         map.navigationManager.delegate = self
-        
-        levelControl.isHidden = true
         
         createLongPressGestureRecognizer()
         
         map.userTrackingMode = .followWithHeading
         
+        // to see coordinate returned by location source
+        weak var previous: UIView?
+        map.userLocationManager
+            .coordinateUpdated
+            .subscribe(onNext: { [unowned self] in
+                previous?.removeFromSuperview()
+                previous = ToastHelper.showToast(message: "Location: \($0)", onView: view, bottomInset: -200)
+            })
+            .disposed(by: disposeBag)
+        
         // this way you can specify user location indicator appearance
-//        map.userLocationAnnotationViewManager.style = .init(
+//        map.userLocationManager.userLocationAnnotationViewStyle = .init(
 //            puckFillColor: .systemPink,
 //            puckBorderColor: .black,
 //            puckArrowFillColor: .green,
@@ -75,11 +64,6 @@ final class NavigationViewController: UIViewController {
         
         ToastHelper.showToast(message: "Create 1 or 2 annotations by long press on the map to be able to start navigation. " +
             "1 annotation to start from user location. 2 annotations to start from custom location", onView: view, hideDelay: 5)
-        
-        if let initialBounds = map.mapData?.bounds {
-            let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
-            map.setCamera(camera, animated: true)
-        }
     }
     
     @IBAction func closeTouched() {
@@ -109,27 +93,21 @@ final class NavigationViewController: UIViewController {
         removeUserCreatedAnnotationsButton.isEnabled = true
     }
     
-    @IBAction func levelChanged(_ sender: UISegmentedControl) {
-        debugPrint("level changed - \(sender.selectedSegmentIndex)")
-        map.buildingManager.focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
-    }
-    
     @IBAction func startNavigationFromUserLocation() {
         startNavigationButton.isEnabled = false
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
-        let options = NavigationOptions(itineraryOptions: ItineraryOptions(color: .magenta))
-        
         let to = userCreatedAnnotations.first!
         
-        let destination = Coordinate(coordinate2D: to.coordinate, levels: [0])
+        let destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
         
         map.navigationManager
-            .startNavigation(to: destination, options: options)
+            .startNavigation(to: destination, options: Constants.globalNavigationOptions)
             .subscribe(
-                onSuccess: { [unowned self] _ in
+                onSuccess: { [unowned self] itinerary in
                     debugPrint("Navigation started successfully")
                     stopNavigationButton.isEnabled = true
+                    simulator?.setItinerary(itinerary)
                 },
                 onFailure: { [unowned self] error in
                     debugPrint("Failed to start navigation with error - \(error)")
@@ -160,30 +138,34 @@ final class NavigationViewController: UIViewController {
     
     private func updateUIForNavigationStop() {
         updateStartNavigationButtons()
-        if Constants.locationProvider != .polestar {
-            simulator.reset()
-        }
+        simulator?.reset()
         navigationInfo.isHidden = true
         navigationInfo.text = nil
+    }
+    
+    private func getLevelFromAnnotation(_ annotation: MGLAnnotation) -> [Float] {
+        guard let building = map.buildingManager.focusedBuilding else {
+            debugPrint("Failed to retrieve focused building. Can't check if annotation is indoor or outdoor")
+            return []
+        }
+                
+        return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
     }
     
     @IBAction func startNavigationFromUserCreatedAnnotations() {
         startNavigationButton.isEnabled = false
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
         
-        let options = NavigationOptions(
-            itineraryOptions: .init(width: 8, color: .cyan, projectionOptions: .init(width: 5, color: .lightGray)),
-            userTrackingMode: .followWithHeading,
-            stopNavigationOptions: .init(stopDistanceThreshold: 3)
-        )
-        
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
+        
+        let fromLevels = getLevelFromAnnotation(from)
+        let toLevels = getLevelFromAnnotation(to)
 
         let origin, destination: Coordinate
-        if Constants.locationProvider != .polestar {
-            origin = Coordinate(coordinate2D: from.coordinate, level: Float(from.subtitle!!)!)
-            destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
+        if locationSourceType != .polestarEmulator {
+            origin = Coordinate(coordinate2D: from.coordinate, levels: fromLevels)
+            destination = Coordinate(coordinate2D: to.coordinate, levels: toLevels)
         } else {
             // for testing you can comment out and uncomment placemarks in nao.kml file and corresponding origin/destination below
             // Default path
@@ -208,14 +190,12 @@ final class NavigationViewController: UIViewController {
         }
        
         map.navigationManager
-            .startNavigation(from: origin, to: destination, options: options)
+            .startNavigation(from: origin, to: destination, options: Constants.globalNavigationOptions)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     debugPrint("Navigation started successfully")
                     stopNavigationButton.isEnabled = true
-                    if Constants.locationProvider != .polestar {
-                        simulator.setItinerary(itinerary)
-                    }
+                    simulator?.setItinerary(itinerary)
                 },
                 onFailure: { [unowned self] error in
                     debugPrint("Failed to start navigation with error - \(error)")
@@ -243,44 +223,6 @@ final class NavigationViewController: UIViewController {
     }
 }
 
-extension NavigationViewController: BuildingManagerDelegate {
-    
-    func map(_: MapView, didChangeLevel level: Level, ofBuilding building: Building) {
-        debugPrint("\(#function) with \(level.id), of building \(building.name)")
-        levelControl.selectedSegmentIndex = building.activeLevelIndex
-    }
-    
-    func map(_: MapView, didFocusBuilding building: Building?) {
-        
-        debugPrint("\(#function) with building \(building?.name ?? "nil")")
-        
-        guard let building else {
-            levelControl.isHidden = true
-            return
-        }
-        
-        levelControl.removeAllSegments()
-        let enumeratedLevels = building.levels.enumerated()
-        for (index, level) in enumeratedLevels {
-            levelControl.insertSegment(withTitle: level.shortName, at: index, animated: true)
-        }
-        levelControl.selectedSegmentIndex = building.activeLevelIndex
-        levelControl.isEnabled = true
-        levelControl.isHidden = false
-    }
-}
-
-extension NavigationViewController: WemapMapViewDelegate {
-    
-    func map(_: MapView, didTouchFeature feature: MGLFeature) {
-        ToastHelper.showToast(
-            message: "Touched feature - \(feature)",
-            onView: view,
-            hideDelay: 5
-        )
-    }
-}
-
 extension NavigationViewController: NavigationDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
@@ -288,11 +230,11 @@ extension NavigationViewController: NavigationDelegate {
         navigationInfo.text = info.shortDescription
     }
     
-    func navigationManager(_: NavigationManager, didStartNavigation itinerary: Itinerary) {
+    func navigationManager(_: NavigationManager, didStartNavigation _: Itinerary) {
         stopNavigationButton.isEnabled = true
         updateStartNavigationButtons()
         ToastHelper.showToast(
-            message: "Navigation started - \(itinerary)",
+            message: "Navigation started",
             onView: view
         )
     }
@@ -311,7 +253,8 @@ extension NavigationViewController: NavigationDelegate {
         ToastHelper.showToast(
             message: "Navigation manager didArriveAtDestination",
             onView: view,
-            hideDelay: 5
+            hideDelay: 5,
+            bottomInset: -150
         )
     }
     
@@ -331,5 +274,3 @@ extension NavigationViewController: NavigationDelegate {
         )
     }
 }
-
-// swiftlint:enable force_cast
