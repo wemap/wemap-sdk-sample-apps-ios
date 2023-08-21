@@ -25,6 +25,9 @@
     }
     ```
 
+* `map(_: MapView, didTouchFeature feature: MGLFeature)` is removed in favor of `pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest)`.
+  To receive events from `PointOfInterestManager` you have to implement protocol `PointOfInterestManagerDelegate` and assign it to `map.pointOfInterestManager.delegate = self`
+
 ### Added
 
 * MapSDK: switch level automatically on selectPOI if shouldCenter is true
