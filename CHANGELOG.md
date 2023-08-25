@@ -39,6 +39,12 @@
 * MapSDK: Navigation info is wrong when itinerary contains indoor and outdoor parts
 * MapSDK: click on the PoI symbol (shape) does not select the PoI
 
+## [0.7.2]
+
+### Fixed
+
+* CoreSDK: fix pointOfInterestManager.getPOIs()
+
 ## [0.7.1]
 
 ### Fixed
