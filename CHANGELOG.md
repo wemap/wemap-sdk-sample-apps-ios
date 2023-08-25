@@ -2,6 +2,12 @@
 
 ---
 
+## [0.7.2]
+
+### Fixed
+
+* CoreSDK: fix pointOfInterestManager.getPOIs()
+
 ## [0.7.1]
 
 ### Fixed
