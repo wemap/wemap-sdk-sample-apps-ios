@@ -43,7 +43,7 @@ extension PolestarLocationSource: LocationProviderDelegate {
     func didLocationChange(_ location: CLLocation!) {
         
         let coordinate: Coordinate
-        if location.altitude == 1000.0 || location.verticalAccuracy < 0 { // workaround for outdoor location
+        if location.verticalAccuracy < 0 { // outdoor location
             coordinate = Coordinate(location: location)
         } else {
             coordinate = Coordinate(location: location, levels: [Float(location.altitude / 5)])

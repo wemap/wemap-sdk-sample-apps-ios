@@ -183,10 +183,6 @@ final class NavigationViewController: MapViewController {
             // Path from level -1 to 0 and route recalculation
 //            origin = Coordinate(coordinate2D: .init(latitude: 48.84445563, longitude: 2.37319782), level: -1)
 //            destination = Coordinate(coordinate2D: .init(latitude: 48.84502948, longitude: 2.37451864), level: 0)
-
-            // Path indoor to outdoor
-//            origin = Coordinate(coordinate2D: .init(latitude: 48.84482873, longitude: 2.37378956), level: 0)
-//            destination = Coordinate(coordinate2D: .init(latitude: 48.8455159, longitude: 2.37305333))
         }
        
         map.navigationManager
