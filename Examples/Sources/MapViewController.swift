@@ -6,9 +6,9 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
+import RxSwift
 import WemapCoreSDK
 import WemapMapSDK
-import UIKit
 
 class MapViewController: UIViewController, BuildingManagerDelegate {
     
@@ -26,24 +26,32 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         view as! MapView // swiftlint:disable:this force_cast
     }
     
+    var pointOfInterestManager: PointOfInterestManager { map.pointOfInterestManager }
+    var buildingManager: BuildingManager { map.buildingManager }
+    var focusedBuilding: Building? { buildingManager.focusedBuilding }
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        map.mapData = mapData
         
-        let source: LocationSource
-        switch locationSourceType {
-        case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
-        case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
-        case .simulator: source = LocationSourceSimulator()
-        default: fatalError("Unexpected Location Source Type")
-        }
-        map.userLocationManager.locationSource = source
+        map.mapData = mapData
+        map.userLocationManager.locationSource = locationSourceType.source
         
         // camera bounds can be specified even if they don't exist in MapData
 //        map.cameraBounds = maxBounds
-        map.buildingManager.delegate = self
+        buildingManager.delegate = self
         
         levelControl.isHidden = true
+        
+        // to see coordinate returned by location source
+        weak var previous: UIView?
+        map.userLocationManager
+            .coordinateUpdated
+            .subscribe(onNext: { [unowned self] in
+                previous?.removeFromSuperview()
+                previous = ToastHelper.showToast(message: "Location: \($0)", onView: view, hideDelay: 60, bottomInset: UIConstants.Inset.top)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +65,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
     
     @IBAction func levelChanged(_ sender: UISegmentedControl) {
         debugPrint("level changed - \(sender.selectedSegmentIndex)")
-        map.buildingManager.focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
+        focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
     }
 
     // MARK: BuildingManagerDelegate

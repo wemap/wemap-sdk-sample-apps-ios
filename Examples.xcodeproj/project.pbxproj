@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		41C17AAA0EC7A03E52B58DB0 /* Pods_MapExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */; };
+		BBC336812AD58F9000C9CFB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336802AD58F8F00C9CFB9 /* Config.swift */; };
+		BBC336832AD58F9D00C9CFB9 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */; };
+		BBC336852AD5918E00C9CFB9 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */; };
+		BBC3368B2AD5938D00C9CFB9 /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */; };
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D2224FB92A8F5C4A00E0982E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2224FB62A8F5C4A00E0982E /* MapViewController.swift */; };
-		D2224FBA2A8F5C4A00E0982E /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2224FB72A8F5C4A00E0982E /* PolestarLocationSource.swift */; };
-		D2224FBB2A8F5C4A00E0982E /* LocationSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2224FB82A8F5C4A00E0982E /* LocationSources.swift */; };
 		D2224FBD2A8F5D0300E0982E /* consumer_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D2224FBC2A8F5D0300E0982E /* consumer_data.json */; };
 		D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
@@ -32,10 +34,12 @@
 		1EC7D609D684FC24A57CFD40 /* Pods-MapExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExamples.debug.xcconfig"; path = "Target Support Files/Pods-MapExamples/Pods-MapExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExamples.release.xcconfig"; path = "Target Support Files/Pods-MapExamples/Pods-MapExamples.release.xcconfig"; sourceTree = "<group>"; };
+		BBC336802AD58F8F00C9CFB9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
+		BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarLocationSource.swift; sourceTree = "<group>"; };
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D2224FB62A8F5C4A00E0982E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D2224FB72A8F5C4A00E0982E /* PolestarLocationSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarLocationSource.swift; sourceTree = "<group>"; };
-		D2224FB82A8F5C4A00E0982E /* LocationSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSources.swift; sourceTree = "<group>"; };
 		D2224FBC2A8F5D0300E0982E /* consumer_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = consumer_data.json; sourceTree = "<group>"; };
 		D250C9D728D3176F00DBFF5D /* MapExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA2528D31E4D00DBFF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +77,14 @@
 				5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BBC336892AD5936F00C9CFB9 /* LocationSources */ = {
+			isa = PBXGroup;
+			children = (
+				BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */,
+			);
+			path = LocationSources;
 			sourceTree = "<group>";
 		};
 		D250C9CE28D3176F00DBFF5D = {
@@ -145,8 +157,10 @@
 		D2A55FDD297FE2F100402286 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BBC336802AD58F8F00C9CFB9 /* Config.swift */,
 				D208E10629C312C0007CCC8A /* Constants.swift */,
 				D25B9A9429CB4405000F084A /* ConsumerData.swift */,
+				BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */,
 				D25B9A8A29CB10C4000F084A /* ViewControllers */,
 			);
 			path = Sources;
@@ -166,10 +180,10 @@
 		D2A6254C28F6AEB900274721 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BBC336892AD5936F00C9CFB9 /* LocationSources */,
 				D2A6254D28F6AEB900274721 /* AppDelegate.swift */,
-				D2224FB82A8F5C4A00E0982E /* LocationSources.swift */,
 				D2224FB62A8F5C4A00E0982E /* MapViewController.swift */,
-				D2224FB72A8F5C4A00E0982E /* PolestarLocationSource.swift */,
+				BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */,
 				D2A6255328F6C08400274721 /* ToastHelper.swift */,
 			);
 			path = Sources;
@@ -299,12 +313,14 @@
 				D29592772A05638100C3340A /* InitialViewController.swift in Sources */,
 				D2224FB92A8F5C4A00E0982E /* MapViewController.swift in Sources */,
 				D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */,
-				D2224FBB2A8F5C4A00E0982E /* LocationSources.swift in Sources */,
+				BBC336852AD5918E00C9CFB9 /* SettingsBundleHelper.swift in Sources */,
+				BBC336832AD58F9D00C9CFB9 /* LocationSourceType.swift in Sources */,
+				BBC336812AD58F9000C9CFB9 /* Config.swift in Sources */,
 				D25B9A9929CC5A67000F084A /* SamplesTableViewController.swift in Sources */,
 				D25B9A9029CB1125000F084A /* POIsViewController.swift in Sources */,
 				D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */,
+				BBC3368B2AD5938D00C9CFB9 /* PolestarLocationSource.swift in Sources */,
 				D25B9A8E29CB1119000F084A /* LevelsViewController.swift in Sources */,
-				D2224FBA2A8F5C4A00E0982E /* PolestarLocationSource.swift in Sources */,
 				D208E10729C312C0007CCC8A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

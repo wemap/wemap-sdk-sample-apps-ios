@@ -12,9 +12,9 @@ import WemapCoreSDK
 
 class PolestarLocationSource: NSObject, LocationSource {
     
-    var lastCoordinate: Coordinate?
-    
     weak var delegate: LocationSourceDelegate?
+    
+    var supportsHeading = false
 
     private let locationProvider: LocationProvider
 
@@ -49,7 +49,6 @@ extension PolestarLocationSource: LocationProviderDelegate {
             coordinate = Coordinate(location: location, levels: [Float(location.altitude / 5)])
         }
         
-        lastCoordinate = coordinate
         delegate?.locationSource(self, didUpdateLocation: coordinate)
         
 //        debugPrint("didLocationChange with location - \(location!)")

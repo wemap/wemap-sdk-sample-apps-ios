@@ -2,6 +2,36 @@
 
 ---
 
+## [0.9.0]
+
+### Added
+
+* MapSDK: add helper method to translate step data into textual instructions
+* CoreSDK: add itinerary search options for backend
+* MapSDK: add onMapClick event
+* MapSDK: create a default GPS (fused) LocationSource
+
+### Changed
+
+* MapSDK: revert back didTouchFeature delegate method
+
+### Fixed
+
+* CoreSDK: fix Coordinate decoding/encoding
+* MapSDK: onMapClick called twice
+* MapSDK: outdoors, the user's location annotation is displayed in gray
+* MapSDK: user position is not projected on stairs
+
+### Deprecated
+
+* MapSDK: `map(_: MapView, didTouchFeature feature: MGLFeature)` delegate method has been deprecated and will be removed soon. Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest)` instead.
+
+### Dependencies
+
+* Turf 2.6.1 -> 2.7.0
+* Alamofire 5.7.1 -> 5.8.0
+* RxSwift 6.5.0 -> 6.6.0
+
 ## [0.8.0]
 
 ### Breaking changes

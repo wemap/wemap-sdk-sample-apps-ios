@@ -20,10 +20,6 @@ final class LevelsViewController: MapViewController {
         return try! JSONDecoder().decode([ConsumerData].self, from: data)
     }()
     
-    private var pointOfInterestManager: PointOfInterestManager {
-        map.pointOfInterestManager
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

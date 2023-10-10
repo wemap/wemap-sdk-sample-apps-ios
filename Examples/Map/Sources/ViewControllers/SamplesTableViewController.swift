@@ -6,9 +6,7 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import RxSwift
 import UIKit
-import WemapCoreSDK
 import WemapMapSDK
 
 class SamplesTableViewController: UITableViewController {

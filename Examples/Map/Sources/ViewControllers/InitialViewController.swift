@@ -6,11 +6,9 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import CoreLocation
 import RxCocoa
 import RxSwift
 import UIKit
-import WemapCoreSDK
 import WemapMapSDK
 
 class InitialViewController: UIViewController {
