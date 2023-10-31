@@ -2,6 +2,23 @@
 
 ---
 
+## [0.10.0]
+
+### Added
+
+* Map+PositioningExample: add an example app to demonstrate VPS functionality
+* MapSDK: Create filter by tags
+* MapSDK: Extend MapData with Extras
+
+### Fixed
+
+* MapSDK: fix automatic level change when CameraMode is not tracking
+* MapSDK: automatic level switch on user movements freezes/lags the app
+
+### Dependencies
+
+* Alamofire 5.8.0 -> 5.8.1
+
 ## [0.9.0]
 
 ### Added

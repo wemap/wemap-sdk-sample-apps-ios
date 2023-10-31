@@ -9,6 +9,9 @@
 import RxSwift
 import WemapCoreSDK
 import WemapMapSDK
+#if canImport(WemapPositioningSDK)
+import WemapPositioningSDK
+#endif
 
 class MapViewController: UIViewController, BuildingManagerDelegate {
     
@@ -35,9 +38,21 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         super.viewDidLoad()
         
         map.mapData = mapData
-        map.userLocationManager.locationSource = locationSourceType.source
         
-        // camera bounds can be specified even if they don't exist in MapData
+        let source: LocationSource?
+        switch locationSourceType {
+        case .simulator: source = LocationSourceSimulator()
+        case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
+        case .systemDefault, .none: source = nil
+        case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
+#if canImport(WemapPositioningSDK)
+        case .vps: source = VPSARKitLocationSource(serviceURL: URL(string: mapData.extras!.vpsEndpoint!)!)
+#endif
+        }
+        
+        map.userLocationManager.locationSource = source
+        
+// camera bounds can be specified even if they don't exist in MapData
 //        map.cameraBounds = maxBounds
         buildingManager.delegate = self
         
@@ -67,7 +82,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         debugPrint("level changed - \(sender.selectedSegmentIndex)")
         focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
     }
-
+    
     // MARK: BuildingManagerDelegate
     
     @objc func map(_: MapView, didChangeLevel level: Level, ofBuilding building: Building) {

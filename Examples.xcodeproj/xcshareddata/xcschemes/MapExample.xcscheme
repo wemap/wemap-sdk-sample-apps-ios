@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1400"
+   LastUpgradeVersion = "1430"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D250C9D628D3176F00DBFF5D"
-               BuildableName = "MapExamples.app"
-               BlueprintName = "MapExamples"
+               BuildableName = "MapExample.app"
+               BlueprintName = "MapExample"
                ReferencedContainer = "container:Examples.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250C9D628D3176F00DBFF5D"
-            BuildableName = "MapExamples.app"
-            BlueprintName = "MapExamples"
+            BuildableName = "MapExample.app"
+            BlueprintName = "MapExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250C9D628D3176F00DBFF5D"
-            BuildableName = "MapExamples.app"
-            BlueprintName = "MapExamples"
+            BuildableName = "MapExample.app"
+            BlueprintName = "MapExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250C9D628D3176F00DBFF5D"
-            BuildableName = "MapExamples.app"
-            BlueprintName = "MapExamples"
+            BuildableName = "MapExample.app"
+            BlueprintName = "MapExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

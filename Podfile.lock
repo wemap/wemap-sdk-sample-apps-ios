@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (5.8.0)
+  - Alamofire (5.8.1)
   - MapLibre (5.13.0)
-  - NAOSDK (4.11.12)
+  - NAOSDK (4.11.13.1)
   - NAOSwiftProvider (1.2.2):
     - NAOSDK
   - RxCocoa (6.6.0):
@@ -11,24 +11,28 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - Turf (2.7.0)
-  - WemapCoreSDK (0.9.0):
+  - WemapCoreSDK (0.10.0):
     - Alamofire (~> 5.8.0)
     - RxCocoa (~> 6.6.0)
     - RxSwift (~> 6.6.0)
     - Turf (~> 2.7.0)
-  - WemapMapSDK (0.9.0):
+  - WemapMapSDK (0.10.0):
     - MapLibre (~> 5.13.0)
-    - WemapCoreSDK (~> 0.9.0)
+    - WemapCoreSDK (~> 0.10.0)
+  - WemapPositioningSDK (0.10.0):
+    - WemapCoreSDK (~> 0.10.0)
 
 DEPENDENCIES:
   - "NAOSwiftProvider (from `git@github.com:wemap/NAOSwiftProvider.git`, tag `1.2.2`)"
-  - WemapMapSDK (~> 0.9.0)
+  - WemapMapSDK (~> 0.10.0)
+  - WemapPositioningSDK (~> 0.10.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
     - MapLibre
     - WemapCoreSDK
     - WemapMapSDK
+    - WemapPositioningSDK
   trunk:
     - Alamofire
     - NAOSDK
@@ -48,17 +52,18 @@ CHECKOUT OPTIONS:
     :tag: 1.2.2
 
 SPEC CHECKSUMS:
-  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+  Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   MapLibre: 3c7d5d097c9aeb93449fc08a0dc5d2ed7c63aa0b
-  NAOSDK: 2668b52df4cf78384c43bc7e0118c13951b3ab2b
+  NAOSDK: d6766ad54e6f2973e3fb7fde10e4a3822bde3f91
   NAOSwiftProvider: 4349aabdf1b40b327de73243f33b7e0c0b990306
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   Turf: 13d1a92d969ca0311bbc26e8356cca178ce95da2
-  WemapCoreSDK: 52fb26b010e8995c8059e02bdef9b324adbe9d39
-  WemapMapSDK: 96f6184ed5d6f1faa1a1b2a8ef0b9371320ed003
+  WemapCoreSDK: 7de307d46f40bfc4970ff7fbaebd921e6653e281
+  WemapMapSDK: 721240db8b76e849dccbc00d5c24c064ca038d54
+  WemapPositioningSDK: bdf9f671237722e96b5558c7123b2425df480354
 
-PODFILE CHECKSUM: 76d6b14bfcb3df7fc8affc617aa3607fff196e8a
+PODFILE CHECKSUM: d220fb3c67ec6e4eb8134e38ae12d080ba18ab2b
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.2

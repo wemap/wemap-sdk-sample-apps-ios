@@ -9,12 +9,27 @@ platform :ios, '11.0'
 
 #################################################################################
 
-target 'MapExamples' do
-  pod 'WemapMapSDK', '~>0.9.0'
+abstract_target 'Map' do
+
+  pod 'WemapMapSDK', '~>0.10.0'
+
   pod 'NAOSwiftProvider', :git => 'git@github.com:wemap/NAOSwiftProvider.git', :tag => '1.2.2'
+
+  target 'MapExample'
+
+  target 'Map+PositioningExample' do
+    pod 'WemapPositioningSDK', '~>0.10.0'
+  end
 end
 
 post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
+  end
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'

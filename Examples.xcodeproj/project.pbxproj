@@ -7,55 +7,87 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41C17AAA0EC7A03E52B58DB0 /* Pods_MapExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */; };
-		BBC336812AD58F9000C9CFB9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336802AD58F8F00C9CFB9 /* Config.swift */; };
-		BBC336832AD58F9D00C9CFB9 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */; };
-		BBC336852AD5918E00C9CFB9 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */; };
-		BBC3368B2AD5938D00C9CFB9 /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */; };
+		6E2CAF20ECE8E3A758E0B2BF /* Pods_Map_Map_PositioningExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */; };
+		CE0EB40981D8ED019241348D /* Pods_Map_MapExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */; };
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
-		D2224FB92A8F5C4A00E0982E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2224FB62A8F5C4A00E0982E /* MapViewController.swift */; };
-		D2224FBD2A8F5D0300E0982E /* consumer_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D2224FBC2A8F5D0300E0982E /* consumer_data.json */; };
+		D22EC7482A79017A007BC4DE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
 		D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
-		D25B9A8E29CB1119000F084A /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B9A8D29CB1119000F084A /* LevelsViewController.swift */; };
-		D25B9A9029CB1125000F084A /* POIsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B9A8F29CB1125000F084A /* POIsViewController.swift */; };
-		D25B9A9229CB1134000F084A /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B9A9129CB1134000F084A /* NavigationViewController.swift */; };
-		D25B9A9329CB23C1000F084A /* nao.kml in Resources */ = {isa = PBXBuildFile; fileRef = D2A7120829BB98A5001596C7 /* nao.kml */; };
-		D25B9A9529CB4405000F084A /* ConsumerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B9A9429CB4405000F084A /* ConsumerData.swift */; };
-		D25B9A9929CC5A67000F084A /* SamplesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B9A9829CC5A67000F084A /* SamplesTableViewController.swift */; };
-		D29592772A05638100C3340A /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29592762A05638100C3340A /* InitialViewController.swift */; };
+		D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
+		D250CA4028D31EF100DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
+		D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3152AA0DE5E00114854 /* InitialViewController.swift */; };
+		D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3162AA0DE5E00114854 /* NavigationViewController.swift */; };
+		D273E31F2AA0DEEC00114854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E31E2AA0DEEC00114854 /* Constants.swift */; };
+		D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
+		D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
+		D273E3222AA0E41000114854 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7412A78166E007BC4DE /* LocationSourceType.swift */; };
+		D273E3242AA0E45F00114854 /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */; };
+		D273E3262AA0EDDC00114854 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3252AA0EDDC00114854 /* LocationSourceType.swift */; };
+		D286990F2A7CFD200026A53B /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */; };
+		D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
+		D2A55FE629801A3700402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
+		D2A6254428F6AB0000274721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254128F6AB0000274721 /* Assets.xcassets */; };
+		D2A6254528F6AB0000274721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254228F6AB0000274721 /* Main.storyboard */; };
 		D2A6254A28F6AB2000274721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254728F6AB2000274721 /* Assets.xcassets */; };
 		D2A6254B28F6AB2000274721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254828F6AB2000274721 /* Main.storyboard */; };
 		D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6254D28F6AEB900274721 /* AppDelegate.swift */; };
+		D2A6254F28F6AEB900274721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6254D28F6AEB900274721 /* AppDelegate.swift */; };
 		D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
+		D2CF427D2AA5DFCD004EB2C1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF427C2AA5DFCD004EB2C1 /* CameraViewController.swift */; };
+		D2D14A482A375E24000772E8 /* nao.kml in Resources */ = {isa = PBXBuildFile; fileRef = D2A7120829BB98A5001596C7 /* nao.kml */; };
+		D2D62C4F29E6F7450000463E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4B29E6F7450000463E /* NavigationViewController.swift */; };
+		D2D62C5029E6F7450000463E /* SamplesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */; };
+		D2D62C5129E6F7450000463E /* POIsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4D29E6F7450000463E /* POIsViewController.swift */; };
+		D2D62C5229E6F7450000463E /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4E29E6F7450000463E /* LevelsViewController.swift */; };
+		D2D62C5429E6F75C0000463E /* ConsumerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C5329E6F75C0000463E /* ConsumerData.swift */; };
+		D2D62C5629E6F7900000463E /* consumer_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D2D62C5529E6F7900000463E /* consumer_data.json */; };
+		D2FD569A29801EBB003F508D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2FD569929801EBB003F508D /* Settings.bundle */; };
+		D2FD569C29801ECE003F508D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2FD569B29801ECE003F508D /* Settings.bundle */; };
+		D2FD56B429802C6C003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56B329802C6C003F508D /* Config.swift */; };
+		D2FD56B62980341A003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56B52980341A003F508D /* Config.swift */; };
+		D2FECD5429D32EA80071F999 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECD5329D32EA80071F999 /* InitialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1EC7D609D684FC24A57CFD40 /* Pods-MapExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExamples.debug.xcconfig"; path = "Target Support Files/Pods-MapExamples/Pods-MapExamples.debug.xcconfig"; sourceTree = "<group>"; };
-		3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExamples.release.xcconfig"; path = "Target Support Files/Pods-MapExamples/Pods-MapExamples.release.xcconfig"; sourceTree = "<group>"; };
-		BBC336802AD58F8F00C9CFB9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
-		BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
-		BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarLocationSource.swift; sourceTree = "<group>"; };
+		06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-Map+PositioningExample.debug.xcconfig"; path = "Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample.debug.xcconfig"; sourceTree = "<group>"; };
+		108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-Map+PositioningExample.release.xcconfig"; path = "Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample.release.xcconfig"; sourceTree = "<group>"; };
+		3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-MapExample.release.xcconfig"; path = "Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample.release.xcconfig"; sourceTree = "<group>"; };
+		72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-MapExample.debug.xcconfig"; path = "Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample.debug.xcconfig"; sourceTree = "<group>"; };
+		A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_Map_PositioningExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D2224FB62A8F5C4A00E0982E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D2224FBC2A8F5D0300E0982E /* consumer_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = consumer_data.json; sourceTree = "<group>"; };
-		D250C9D728D3176F00DBFF5D /* MapExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22EC7412A78166E007BC4DE /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
+		D22EC7472A79017A007BC4DE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D250C9D728D3176F00DBFF5D /* MapExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA2528D31E4D00DBFF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D250CA2728D31E4D00DBFF5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D250CA2A28D31E4D00DBFF5D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D25B9A8D29CB1119000F084A /* LevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
-		D25B9A8F29CB1125000F084A /* POIsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIsViewController.swift; sourceTree = "<group>"; };
-		D25B9A9129CB1134000F084A /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		D25B9A9429CB4405000F084A /* ConsumerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerData.swift; sourceTree = "<group>"; };
-		D25B9A9829CC5A67000F084A /* SamplesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplesTableViewController.swift; sourceTree = "<group>"; };
-		D29592762A05638100C3340A /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map+PositioningExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D273E3152AA0DE5E00114854 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D273E3162AA0DE5E00114854 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		D273E31E2AA0DEEC00114854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D273E3252AA0EDDC00114854 /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
+		D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarLocationSource.swift; sourceTree = "<group>"; };
+		D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		D2A6254128F6AB0000274721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D2A6254328F6AB0000274721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2A6254728F6AB2000274721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A6254928F6AB2000274721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2A6254D28F6AEB900274721 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A6255328F6C08400274721 /* ToastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		D2A7120829BB98A5001596C7 /* nao.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nao.kml; sourceTree = "<group>"; };
+		D2CF427C2AA5DFCD004EB2C1 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D2D62C4B29E6F7450000463E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesTableViewController.swift; sourceTree = "<group>"; };
+		D2D62C4D29E6F7450000463E /* POIsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsViewController.swift; sourceTree = "<group>"; };
+		D2D62C4E29E6F7450000463E /* LevelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
+		D2D62C5329E6F75C0000463E /* ConsumerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerData.swift; sourceTree = "<group>"; };
+		D2D62C5529E6F7900000463E /* consumer_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = consumer_data.json; sourceTree = "<group>"; };
+		D2FD569929801EBB003F508D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D2FD569B29801ECE003F508D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D2FD56B329802C6C003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D2FD56B52980341A003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D2FECD5329D32EA80071F999 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_MapExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,28 +95,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C17AAA0EC7A03E52B58DB0 /* Pods_MapExamples.framework in Frameworks */,
+				CE0EB40981D8ED019241348D /* Pods_Map_MapExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D250CA3B28D31EF100DBFF5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E2CAF20ECE8E3A758E0B2BF /* Pods_Map_Map_PositioningExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0566744F7D1AB6A05E340294 /* Pods */ = {
+		AD5C7306C3547FF2CBF11694 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1EC7D609D684FC24A57CFD40 /* Pods-MapExamples.debug.xcconfig */,
-				5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */,
+				06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */,
+				108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */,
+				72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */,
+				3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		BBC336892AD5936F00C9CFB9 /* LocationSources */ = {
-			isa = PBXGroup;
-			children = (
-				BBC3368A2AD5938D00C9CFB9 /* PolestarLocationSource.swift */,
-			);
-			path = LocationSources;
 			sourceTree = "<group>";
 		};
 		D250C9CE28D3176F00DBFF5D = {
@@ -93,14 +127,15 @@
 				D250C9D928D3176F00DBFF5D /* Examples */,
 				D250CA8F28D35BDB00DBFF5D /* Frameworks */,
 				D250C9D828D3176F00DBFF5D /* Products */,
-				0566744F7D1AB6A05E340294 /* Pods */,
+				AD5C7306C3547FF2CBF11694 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		D250C9D828D3176F00DBFF5D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D250C9D728D3176F00DBFF5D /* MapExamples.app */,
+				D250C9D728D3176F00DBFF5D /* MapExample.app */,
+				D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D250CA0B28D31E4500DBFF5D /* Map */,
+				D250CA1428D31E4500DBFF5D /* Map+Positioning */,
 				D250CA2428D31E4D00DBFF5D /* Resources */,
 				D2A6254C28F6AEB900274721 /* Sources */,
 			);
@@ -124,6 +160,15 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		D250CA1428D31E4500DBFF5D /* Map+Positioning */ = {
+			isa = PBXGroup;
+			children = (
+				D2A6254028F6AB0000274721 /* Resources */,
+				D2FD569D29801EDA003F508D /* Sources */,
+			);
+			path = "Map+Positioning";
+			sourceTree = "<group>";
+		};
 		D250CA2428D31E4D00DBFF5D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,19 +182,26 @@
 		D250CA8F28D35BDB00DBFF5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3D19C44384A8C95BB304500A /* Pods_MapExamples.framework */,
+				A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */,
+				D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D25B9A8A29CB10C4000F084A /* ViewControllers */ = {
+		D2651FB52A95F60000F698E5 /* LocationSources */ = {
 			isa = PBXGroup;
 			children = (
-				D29592762A05638100C3340A /* InitialViewController.swift */,
-				D25B9A8D29CB1119000F084A /* LevelsViewController.swift */,
-				D25B9A9129CB1134000F084A /* NavigationViewController.swift */,
-				D25B9A8F29CB1125000F084A /* POIsViewController.swift */,
-				D25B9A9829CC5A67000F084A /* SamplesTableViewController.swift */,
+				D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */,
+			);
+			path = LocationSources;
+			sourceTree = "<group>";
+		};
+		D273E3132AA0DE5E00114854 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D273E3152AA0DE5E00114854 /* InitialViewController.swift */,
+				D273E3162AA0DE5E00114854 /* NavigationViewController.swift */,
+				D2CF427C2AA5DFCD004EB2C1 /* CameraViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -157,19 +209,30 @@
 		D2A55FDD297FE2F100402286 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BBC336802AD58F8F00C9CFB9 /* Config.swift */,
+				D2FD56B329802C6C003F508D /* Config.swift */,
 				D208E10629C312C0007CCC8A /* Constants.swift */,
-				D25B9A9429CB4405000F084A /* ConsumerData.swift */,
-				BBC336822AD58F9D00C9CFB9 /* LocationSourceType.swift */,
-				D25B9A8A29CB10C4000F084A /* ViewControllers */,
+				D2D62C5329E6F75C0000463E /* ConsumerData.swift */,
+				D273E3252AA0EDDC00114854 /* LocationSourceType.swift */,
+				D2D62C4A29E6F68D0000463E /* ViewControllers */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		D2A6254028F6AB0000274721 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2FD569B29801ECE003F508D /* Settings.bundle */,
+				D2A6254128F6AB0000274721 /* Assets.xcassets */,
+				D2A6254228F6AB0000274721 /* Main.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D2A6254628F6AB2000274721 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2224FBC2A8F5D0300E0982E /* consumer_data.json */,
+				D2FD569929801EBB003F508D /* Settings.bundle */,
+				D2D62C5529E6F7900000463E /* consumer_data.json */,
 				D2A7120829BB98A5001596C7 /* nao.kml */,
 				D2A6254728F6AB2000274721 /* Assets.xcassets */,
 				D2A6254828F6AB2000274721 /* Main.storyboard */,
@@ -180,11 +243,34 @@
 		D2A6254C28F6AEB900274721 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BBC336892AD5936F00C9CFB9 /* LocationSources */,
 				D2A6254D28F6AEB900274721 /* AppDelegate.swift */,
-				D2224FB62A8F5C4A00E0982E /* MapViewController.swift */,
-				BBC336842AD5918E00C9CFB9 /* SettingsBundleHelper.swift */,
+				D22EC7472A79017A007BC4DE /* MapViewController.swift */,
+				D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */,
 				D2A6255328F6C08400274721 /* ToastHelper.swift */,
+				D2651FB52A95F60000F698E5 /* LocationSources */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D2D62C4A29E6F68D0000463E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D2FECD5329D32EA80071F999 /* InitialViewController.swift */,
+				D2D62C4E29E6F7450000463E /* LevelsViewController.swift */,
+				D2D62C4B29E6F7450000463E /* NavigationViewController.swift */,
+				D2D62C4D29E6F7450000463E /* POIsViewController.swift */,
+				D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D2FD569D29801EDA003F508D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D2FD56B52980341A003F508D /* Config.swift */,
+				D273E31E2AA0DEEC00114854 /* Constants.swift */,
+				D22EC7412A78166E007BC4DE /* LocationSourceType.swift */,
+				D273E3132AA0DE5E00114854 /* ViewControllers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -192,9 +278,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D250C9D628D3176F00DBFF5D /* MapExamples */ = {
+		D250C9D628D3176F00DBFF5D /* MapExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D250CA0128D3177000DBFF5D /* Build configuration list for PBXNativeTarget "MapExamples" */;
+			buildConfigurationList = D250CA0128D3177000DBFF5D /* Build configuration list for PBXNativeTarget "MapExample" */;
 			buildPhases = (
 				CF08D79DDD138043AEBCFCF2 /* [CP] Check Pods Manifest.lock */,
 				D250C9D328D3176F00DBFF5D /* Sources */,
@@ -206,9 +292,28 @@
 			);
 			dependencies = (
 			);
-			name = MapExamples;
+			name = MapExample;
 			productName = Examples;
-			productReference = D250C9D728D3176F00DBFF5D /* MapExamples.app */;
+			productReference = D250C9D728D3176F00DBFF5D /* MapExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D250CA2F28D31EF100DBFF5D /* Map+PositioningExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D250CA4128D31EF100DBFF5D /* Build configuration list for PBXNativeTarget "Map+PositioningExample" */;
+			buildPhases = (
+				11FCBBC86D4E690426B92417 /* [CP] Check Pods Manifest.lock */,
+				D250CA3028D31EF100DBFF5D /* Sources */,
+				D250CA3B28D31EF100DBFF5D /* Frameworks */,
+				D250CA3C28D31EF100DBFF5D /* Resources */,
+				D24DC534A2C2FDFFEE1A885A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Map+PositioningExample";
+			productName = Examples;
+			productReference = D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -219,7 +324,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Wemap SAS";
 				TargetAttributes = {
 					D250C9D628D3176F00DBFF5D = {
@@ -240,7 +345,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D250C9D628D3176F00DBFF5D /* MapExamples */,
+				D250C9D628D3176F00DBFF5D /* MapExample */,
+				D250CA2F28D31EF100DBFF5D /* Map+PositioningExample */,
 			);
 		};
 /* End PBXProject section */
@@ -250,18 +356,53 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D14A482A375E24000772E8 /* nao.kml in Resources */,
 				D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */,
 				D2A6254A28F6AB2000274721 /* Assets.xcassets in Resources */,
-				D25B9A9329CB23C1000F084A /* nao.kml in Resources */,
-				D2224FBD2A8F5D0300E0982E /* consumer_data.json in Resources */,
+				D2D62C5629E6F7900000463E /* consumer_data.json in Resources */,
+				D2FD569A29801EBB003F508D /* Settings.bundle in Resources */,
 				D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */,
 				D2A6254B28F6AB2000274721 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D250CA3C28D31EF100DBFF5D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */,
+				D2A6254428F6AB0000274721 /* Assets.xcassets in Resources */,
+				D2FD569C29801ECE003F508D /* Settings.bundle in Resources */,
+				D250CA4028D31EF100DBFF5D /* LaunchScreen.storyboard in Resources */,
+				D2A6254528F6AB0000274721 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		11FCBBC86D4E690426B92417 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Map-Map+PositioningExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CF08D79DDD138043AEBCFCF2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,11 +418,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MapExamples-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Map-MapExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D24DC534A2C2FDFFEE1A885A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F208A40B331C486E97836D23 /* [CP] Embed Pods Frameworks */ = {
@@ -290,15 +448,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapExamples/Pods-MapExamples-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapExamples/Pods-MapExamples-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapExamples/Pods-MapExamples-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -308,20 +466,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B9A9229CB1134000F084A /* NavigationViewController.swift in Sources */,
-				D25B9A9529CB4405000F084A /* ConsumerData.swift in Sources */,
-				D29592772A05638100C3340A /* InitialViewController.swift in Sources */,
-				D2224FB92A8F5C4A00E0982E /* MapViewController.swift in Sources */,
+				D2D62C5429E6F75C0000463E /* ConsumerData.swift in Sources */,
+				D2D62C4F29E6F7450000463E /* NavigationViewController.swift in Sources */,
+				D273E3262AA0EDDC00114854 /* LocationSourceType.swift in Sources */,
+				D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */,
-				BBC336852AD5918E00C9CFB9 /* SettingsBundleHelper.swift in Sources */,
-				BBC336832AD58F9D00C9CFB9 /* LocationSourceType.swift in Sources */,
-				BBC336812AD58F9000C9CFB9 /* Config.swift in Sources */,
-				D25B9A9929CC5A67000F084A /* SamplesTableViewController.swift in Sources */,
-				D25B9A9029CB1125000F084A /* POIsViewController.swift in Sources */,
+				D2FD56B429802C6C003F508D /* Config.swift in Sources */,
+				D2FECD5429D32EA80071F999 /* InitialViewController.swift in Sources */,
 				D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */,
-				BBC3368B2AD5938D00C9CFB9 /* PolestarLocationSource.swift in Sources */,
-				D25B9A8E29CB1119000F084A /* LevelsViewController.swift in Sources */,
+				D2D62C5129E6F7450000463E /* POIsViewController.swift in Sources */,
+				D2D62C5229E6F7450000463E /* LevelsViewController.swift in Sources */,
+				D2D62C5029E6F7450000463E /* SamplesTableViewController.swift in Sources */,
+				D286990F2A7CFD200026A53B /* PolestarLocationSource.swift in Sources */,
+				D22EC7482A79017A007BC4DE /* MapViewController.swift in Sources */,
 				D208E10729C312C0007CCC8A /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D250CA3028D31EF100DBFF5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2CF427D2AA5DFCD004EB2C1 /* CameraViewController.swift in Sources */,
+				D2A55FE629801A3700402286 /* SettingsBundleHelper.swift in Sources */,
+				D2A6254F28F6AEB900274721 /* AppDelegate.swift in Sources */,
+				D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */,
+				D2FD56B62980341A003F508D /* Config.swift in Sources */,
+				D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */,
+				D273E3242AA0E45F00114854 /* PolestarLocationSource.swift in Sources */,
+				D273E3222AA0E41000114854 /* LocationSourceType.swift in Sources */,
+				D273E31F2AA0DEEC00114854 /* Constants.swift in Sources */,
+				D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */,
+				D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +510,14 @@
 				D250CA2728D31E4D00DBFF5D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D2A6254228F6AB0000274721 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2A6254328F6AB0000274721 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		D2A6254828F6AB2000274721 /* Main.storyboard */ = {
@@ -383,6 +567,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -444,6 +629,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -465,7 +651,7 @@
 		};
 		D250CA0228D3177000DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EC7D609D684FC24A57CFD40 /* Pods-MapExamples.debug.xcconfig */;
+			baseConfigurationReference = 72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,7 +661,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = PoleStar;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -486,7 +671,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -497,7 +682,7 @@
 		};
 		D250CA0328D3177000DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A102B57F41605E92501ED77 /* Pods-MapExamples.release.xcconfig */;
+			baseConfigurationReference = 3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -508,7 +693,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = PoleStar;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -519,10 +703,74 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.getwemap.example.map";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D250CA4228D31EF100DBFF5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = 64DXV5M5R8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Examples/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used for VPS";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning.debug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D250CA4328D31EF100DBFF5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = 64DXV5M5R8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Examples/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used for VPS";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.getwemap.example.map.positioning";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -541,11 +789,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D250CA0128D3177000DBFF5D /* Build configuration list for PBXNativeTarget "MapExamples" */ = {
+		D250CA0128D3177000DBFF5D /* Build configuration list for PBXNativeTarget "MapExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D250CA0228D3177000DBFF5D /* Debug */,
 				D250CA0328D3177000DBFF5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D250CA4128D31EF100DBFF5D /* Build configuration list for PBXNativeTarget "Map+PositioningExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D250CA4228D31EF100DBFF5D /* Debug */,
+				D250CA4328D31EF100DBFF5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

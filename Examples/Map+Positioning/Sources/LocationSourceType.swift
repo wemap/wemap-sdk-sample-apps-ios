@@ -1,17 +1,19 @@
 //
 //  LocationSourceType.swift
-//  MapExample
+//  Examples
 //
-//  Created by Evgenii Khrushchev on 31/08/2023.
+//  Created by Evgenii Khrushchev on 31/07/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
 import WemapCoreSDK
 import WemapMapSDK
+import WemapPositioningSDK
 
 enum LocationSourceType: Int, CaseIterable {
     
-    case simulator,
+    case vps,
+         simulator,
          polestar,
          systemDefault,
          polestarEmulator
@@ -22,6 +24,7 @@ enum LocationSourceType: Int, CaseIterable {
         case .polestar: return "Polestar"
         case .systemDefault: return "System Default"
         case .polestarEmulator: return "Polestar Emulator"
+        case .vps: return "VPS"
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -108,31 +108,52 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qSE-4D-Cgk" userLabel="Buttons Stack View">
-                                <rect key="frame" x="13.333333333333343" y="715.33333333333337" width="363.33333333333326" height="110.66666666666663"/>
+                                <rect key="frame" x="13.333333333333343" y="679" width="363.33333333333326" height="147"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bBV-hW-ztP">
-                                        <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="74.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="34.333333333333336"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2g-xX-YbX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2g-xX-YbX">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Apply filter"/>
+                                                <connections>
+                                                    <action selector="applyFilter" destination="3S0-Vr-XtB" eventType="touchUpInside" id="q28-N9-f49"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVB-gb-ZbE">
+                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Remove filters"/>
+                                                <connections>
+                                                    <action selector="removeFilters" destination="3S0-Vr-XtB" eventType="touchUpInside" id="f1y-cG-YM7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5sV-cu-Trd">
+                                        <rect key="frame" x="0.0" y="36.333333333333364" width="363.33333333333331" height="74.333333333333314"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bv-La-GGd">
                                                 <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="74.333333333333329"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Start Navigation from simulated user position"/>
                                                 <connections>
-                                                    <action selector="startNavigationFromSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="XsW-pO-rVh"/>
+                                                    <action selector="startNavigationFromSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="yWt-e3-QQl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVB-gb-ZbE">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy3-fr-L4t">
                                                 <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="74.333333333333329"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Remove simulated user position"/>
                                                 <connections>
-                                                    <action selector="removeSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="JSc-0p-v5h"/>
+                                                    <action selector="removeSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="kg8-zg-SWx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-Js-R9U">
-                                        <rect key="frame" x="0.0" y="76.333333333333258" width="363.33333333333331" height="34.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="112.66666666666661" width="363.33333333333331" height="34.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fy2-Pw-56X">
                                                 <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
@@ -186,11 +207,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="vjR-zi-AQu"/>
                     <connections>
+                        <outlet property="applyFilterButton" destination="R2g-xX-YbX" id="eqp-9H-XSU"/>
                         <outlet property="levelControl" destination="beM-pR-pdz" id="rF5-28-kcd"/>
                         <outlet property="navigationInfo" destination="cfI-hD-86U" id="GYB-cr-bzP"/>
-                        <outlet property="removeSimulatedUserPositionButton" destination="oVB-gb-ZbE" id="nYk-JI-Wc2"/>
+                        <outlet property="removeFiltersButton" destination="oVB-gb-ZbE" id="6z8-Yb-21D"/>
+                        <outlet property="removeSimulatedUserPositionButton" destination="vy3-fr-L4t" id="kea-Lw-Q9I"/>
                         <outlet property="startNavigationButton" destination="Fy2-Pw-56X" id="jAD-oq-V50"/>
-                        <outlet property="startNavigationFromSimulatedUserPositionButton" destination="R2g-xX-YbX" id="mSX-tH-4Rs"/>
+                        <outlet property="startNavigationFromSimulatedUserPositionButton" destination="9Bv-La-GGd" id="RO3-Pv-eqB"/>
                         <outlet property="stopNavigationButton" destination="foH-2j-5JC" id="Fea-b0-kfh"/>
                     </connections>
                 </viewController>

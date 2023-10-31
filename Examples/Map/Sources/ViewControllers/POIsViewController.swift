@@ -17,6 +17,8 @@ final class POIsViewController: MapViewController {
     typealias Delay = UIConstants.Delay
     typealias Inset = UIConstants.Inset
     
+    @IBOutlet var applyFilterButton: UIButton!
+    @IBOutlet var removeFiltersButton: UIButton!
     @IBOutlet var startNavigationButton: UIButton!
     @IBOutlet var stopNavigationButton: UIButton!
     @IBOutlet var startNavigationFromSimulatedUserPositionButton: UIButton!
@@ -80,6 +82,25 @@ final class POIsViewController: MapViewController {
         startNavigationToSelectedPOI(origin: origin)
     }
     
+    @IBAction func removeSimulatedUserPosition() {
+        map.removeAnnotation(simulatedUserPosition!)
+        simulatedUserPosition = nil
+        updateUI()
+    }
+    
+    @IBAction func applyFilter() {
+        if pointOfInterestManager.filterByTag("52970") {
+            applyFilterButton.isEnabled = false
+            removeFiltersButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func removeFilters() {
+        pointOfInterestManager.removeFilters()
+        applyFilterButton.isEnabled = true
+        removeFiltersButton.isEnabled = false
+    }
+    
     private func startNavigationToSelectedPOI(origin: Coordinate? = nil) {
         disableStartButtons()
         
@@ -99,12 +120,6 @@ final class POIsViewController: MapViewController {
                     updateUI()
                 }
             ).disposed(by: disposeBag)
-    }
-    
-    @IBAction func removeSimulatedUserPosition() {
-        map.removeAnnotation(simulatedUserPosition!)
-        simulatedUserPosition = nil
-        updateUI()
     }
     
     private func createLongPressGestureRecognizer() {
