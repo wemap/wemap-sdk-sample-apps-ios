@@ -94,13 +94,29 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
+			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Turf</string>
+			<string>Camera image side</string>
+			<key>FooterText</key>
+			<string>The maximum size of the smaller side of the camera image sent to the server</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Camera image side</string>
 			<key>Key</key>
-			<string>turfVersion</string>
+			<string>cameraImageMaxSizeSmallerSide</string>
 			<key>DefaultValue</key>
-			<string>Unknown</string>
+			<string>720</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
 		</dict>
 	</array>
 </dict>

@@ -84,16 +84,6 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>Turf</string>
-			<key>Key</key>
-			<string>turfVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Preferences</string>
@@ -162,7 +152,7 @@
 			<key>Title</key>
 			<string>Stop distance threshold</string>
 			<key>FooterText</key>
-			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 5 meters</string>
+			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 15 meters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -172,7 +162,7 @@
 			<key>Key</key>
 			<string>stopDistanceThreshold</string>
 			<key>DefaultValue</key>
-			<string>5</string>
+			<string>15</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -188,7 +178,7 @@
 			<key>Title</key>
 			<string>User position threshold</string>
 			<key>FooterText</key>
-			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 5 meters</string>
+			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 25 meters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -198,7 +188,7 @@
 			<key>Key</key>
 			<string>userPositionThreshold</string>
 			<key>DefaultValue</key>
-			<string>5</string>
+			<string>25</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

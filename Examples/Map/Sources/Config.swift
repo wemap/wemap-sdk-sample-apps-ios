@@ -52,13 +52,9 @@ func customKeysAndValues() -> [String: Any] {
     return dict
 }
 
-extension UserDefaults {
-    
-    static func bool(forKey key: PreferencesKey) -> Bool {
-        standard.bool(forKey: key.rawValue)
-    }
-    
-    static func value(forKey key: PreferencesKey) -> Any? {
-        standard.value(forKey: key.rawValue)
-    }
+var globalNavigationOptions: NavigationOptions {
+    NavigationOptions(
+        itineraryOptions: .init(color: .cyan, projectionOptions: .init(width: 5, color: .lightGray)),
+        userTrackingMode: .followWithHeading
+    )
 }

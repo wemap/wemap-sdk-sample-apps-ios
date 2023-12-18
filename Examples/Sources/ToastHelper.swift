@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToastHelper {
+enum ToastHelper {
     
     @discardableResult
     static func showToast(

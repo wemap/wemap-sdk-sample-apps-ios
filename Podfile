@@ -1,5 +1,5 @@
 source 'https://cdn.cocoapods.org/'
-source 'https://github.com/wemap/cocoapods-specs.git' 
+source 'https://github.com/wemap/cocoapods-specs.git'
 
 workspace 'WemapExamples.xcworkspace'
 
@@ -11,14 +11,15 @@ platform :ios, '11.0'
 
 abstract_target 'Map' do
 
-  pod 'WemapMapSDK', '~>0.10.0'
+  pod 'WemapMapSDK', '~>0.11.0'
 
   pod 'NAOSwiftProvider', :git => 'git@github.com:wemap/NAOSwiftProvider.git', :tag => '1.2.2'
+  pod 'WemapPositioningSDKPolestar', '~>0.11.0'
 
   target 'MapExample'
 
   target 'Map+PositioningExample' do
-    pod 'WemapPositioningSDK', '~>0.10.0'
+    pod 'WemapPositioningSDK/VPSARKit', '~>0.11.0'
   end
 end
 

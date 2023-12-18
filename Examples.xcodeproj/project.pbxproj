@@ -15,15 +15,17 @@
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
 		D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA4028D31EF100DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
+		D26AB6362B304C3100408BF8 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB6352B304C3000408BF8 /* UserDefaults+Additions.swift */; };
+		D26AB6372B304C3100408BF8 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB6352B304C3000408BF8 /* UserDefaults+Additions.swift */; };
+		D26AB6392B3050B100408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB6382B3050B100408BF8 /* UIConstants.swift */; };
+		D26AB63A2B3050B100408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB6382B3050B100408BF8 /* UIConstants.swift */; };
+		D26AB63C2B30515400408BF8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3152AA0DE5E00114854 /* InitialViewController.swift */; };
 		D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3162AA0DE5E00114854 /* NavigationViewController.swift */; };
-		D273E31F2AA0DEEC00114854 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E31E2AA0DEEC00114854 /* Constants.swift */; };
 		D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
 		D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
 		D273E3222AA0E41000114854 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7412A78166E007BC4DE /* LocationSourceType.swift */; };
-		D273E3242AA0E45F00114854 /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */; };
 		D273E3262AA0EDDC00114854 /* LocationSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3252AA0EDDC00114854 /* LocationSourceType.swift */; };
-		D286990F2A7CFD200026A53B /* PolestarLocationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */; };
 		D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
 		D2A55FE629801A3700402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
 		D2A6254428F6AB0000274721 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A6254128F6AB0000274721 /* Assets.xcassets */; };
@@ -57,16 +59,16 @@
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D22EC7412A78166E007BC4DE /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
 		D22EC7472A79017A007BC4DE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D250C9D728D3176F00DBFF5D /* MapExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D250C9D728D3176F00DBFF5D /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA2528D31E4D00DBFF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D250CA2728D31E4D00DBFF5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D250CA2A28D31E4D00DBFF5D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map+PositioningExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D250CA4428D31EF100DBFF5D /* Map+Pos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map+Pos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D26AB6352B304C3000408BF8 /* UserDefaults+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Additions.swift"; sourceTree = "<group>"; };
+		D26AB6382B3050B100408BF8 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		D273E3152AA0DE5E00114854 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D273E3162AA0DE5E00114854 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		D273E31E2AA0DEEC00114854 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D273E3252AA0EDDC00114854 /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
-		D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolestarLocationSource.swift; sourceTree = "<group>"; };
 		D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		D2A6254128F6AB0000274721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A6254328F6AB0000274721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,8 +136,8 @@
 		D250C9D828D3176F00DBFF5D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D250C9D728D3176F00DBFF5D /* MapExample.app */,
-				D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */,
+				D250C9D728D3176F00DBFF5D /* Map.app */,
+				D250CA4428D31EF100DBFF5D /* Map+Pos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,14 +190,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D2651FB52A95F60000F698E5 /* LocationSources */ = {
-			isa = PBXGroup;
-			children = (
-				D286990E2A7CFD200026A53B /* PolestarLocationSource.swift */,
-			);
-			path = LocationSources;
-			sourceTree = "<group>";
-		};
 		D273E3132AA0DE5E00114854 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				D2FD56B329802C6C003F508D /* Config.swift */,
-				D208E10629C312C0007CCC8A /* Constants.swift */,
 				D2D62C5329E6F75C0000463E /* ConsumerData.swift */,
 				D273E3252AA0EDDC00114854 /* LocationSourceType.swift */,
 				D2D62C4A29E6F68D0000463E /* ViewControllers */,
@@ -244,10 +237,12 @@
 			isa = PBXGroup;
 			children = (
 				D2A6254D28F6AEB900274721 /* AppDelegate.swift */,
+				D208E10629C312C0007CCC8A /* Constants.swift */,
 				D22EC7472A79017A007BC4DE /* MapViewController.swift */,
 				D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */,
 				D2A6255328F6C08400274721 /* ToastHelper.swift */,
-				D2651FB52A95F60000F698E5 /* LocationSources */,
+				D26AB6382B3050B100408BF8 /* UIConstants.swift */,
+				D26AB6352B304C3000408BF8 /* UserDefaults+Additions.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -268,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				D2FD56B52980341A003F508D /* Config.swift */,
-				D273E31E2AA0DEEC00114854 /* Constants.swift */,
 				D22EC7412A78166E007BC4DE /* LocationSourceType.swift */,
 				D273E3132AA0DE5E00114854 /* ViewControllers */,
 			);
@@ -294,7 +288,7 @@
 			);
 			name = MapExample;
 			productName = Examples;
-			productReference = D250C9D728D3176F00DBFF5D /* MapExample.app */;
+			productReference = D250C9D728D3176F00DBFF5D /* Map.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D250CA2F28D31EF100DBFF5D /* Map+PositioningExample */ = {
@@ -313,7 +307,7 @@
 			);
 			name = "Map+PositioningExample";
 			productName = Examples;
-			productReference = D250CA4428D31EF100DBFF5D /* Map+PositioningExample.app */;
+			productReference = D250CA4428D31EF100DBFF5D /* Map+Pos.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -468,6 +462,8 @@
 			files = (
 				D2D62C5429E6F75C0000463E /* ConsumerData.swift in Sources */,
 				D2D62C4F29E6F7450000463E /* NavigationViewController.swift in Sources */,
+				D26AB6392B3050B100408BF8 /* UIConstants.swift in Sources */,
+				D26AB6362B304C3100408BF8 /* UserDefaults+Additions.swift in Sources */,
 				D273E3262AA0EDDC00114854 /* LocationSourceType.swift in Sources */,
 				D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */,
@@ -477,7 +473,6 @@
 				D2D62C5129E6F7450000463E /* POIsViewController.swift in Sources */,
 				D2D62C5229E6F7450000463E /* LevelsViewController.swift in Sources */,
 				D2D62C5029E6F7450000463E /* SamplesTableViewController.swift in Sources */,
-				D286990F2A7CFD200026A53B /* PolestarLocationSource.swift in Sources */,
 				D22EC7482A79017A007BC4DE /* MapViewController.swift in Sources */,
 				D208E10729C312C0007CCC8A /* Constants.swift in Sources */,
 			);
@@ -493,11 +488,12 @@
 				D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */,
 				D2FD56B62980341A003F508D /* Config.swift in Sources */,
 				D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */,
-				D273E3242AA0E45F00114854 /* PolestarLocationSource.swift in Sources */,
 				D273E3222AA0E41000114854 /* LocationSourceType.swift in Sources */,
-				D273E31F2AA0DEEC00114854 /* Constants.swift in Sources */,
+				D26AB6372B304C3100408BF8 /* UserDefaults+Additions.swift in Sources */,
 				D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */,
 				D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */,
+				D26AB63A2B3050B100408BF8 /* UIConstants.swift in Sources */,
+				D26AB63C2B30515400408BF8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +656,7 @@
 				DEVELOPMENT_TEAM = 64DXV5M5R8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used for Polestar";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -671,9 +667,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.0;
+				MARKETING_VERSION = 0.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.debug;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Map;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -692,7 +688,7 @@
 				DEVELOPMENT_TEAM = 64DXV5M5R8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "For Polestar";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used for Polestar";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -703,9 +699,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.10.0;
+				MARKETING_VERSION = 0.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Map;
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.getwemap.example.map";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -724,6 +720,7 @@
 				DEVELOPMENT_TEAM = 64DXV5M5R8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used for Polestar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used for VPS";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -737,7 +734,7 @@
 				);
 				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning.debug;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Map+Pos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -756,6 +753,7 @@
 				DEVELOPMENT_TEAM = 64DXV5M5R8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Examples/Resources/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used for Polestar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used for VPS";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -769,7 +767,7 @@
 				);
 				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Map+Pos";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.getwemap.example.map.positioning";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

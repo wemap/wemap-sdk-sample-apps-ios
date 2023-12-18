@@ -2,6 +2,32 @@
 
 ---
 
+## [0.11.0]
+
+### Breaking changes
+
+* `LocationSourceSimulator` has been renamed to `SimulatorLocationSource`
+* `NavigationDelegate` has been renamed to `NavigationManagerDelegate`
+* `WemapMap.getStyleURL(withMapID:token:)` has been renamed to `WemapMap.getMapData(mapID:token:)`
+* `PolestarLocationSource` has been moved to `WemapPositioningSDKPolestar` framework
+* `VPSARKit*` classes have been moved from `WemapPositioningSDK` to `WemapPositioningSDKVPSARKit` framework
+
+### Added
+
+* MapSDK: Add NavigationManager.hasActiveNavigation
+* MapSDK: have a method to startNavigation with itineraries as parameter
+* PosSDK: Add "isAvailable" method to LocationSource
+* MapSDK: add possibility to center a POI with optional padding
+
+### Changed
+
+* MapSDK: Refactor (i) button popup
+
+### Fixed
+
+* PosSDK: "Scan Required" state of VPSARKit location source is never reached
+* PosSDK: VPS orientation is wrong
+
 ## [0.10.0]
 
 ### Added

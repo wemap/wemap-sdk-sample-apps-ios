@@ -12,7 +12,7 @@ import RxSwift
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
-import WemapPositioningSDK
+import WemapPositioningSDKVPSARKit
 
 @available(iOS 13.0, *)
 final class NavigationViewController: MapViewController {
@@ -33,8 +33,8 @@ final class NavigationViewController: MapViewController {
             .filter { $0.title == "user-created" } ?? []
     }
     
-    private var simulator: LocationSourceSimulator? {
-        map.userLocationManager.locationSource as? LocationSourceSimulator
+    private var simulator: SimulatorLocationSource? {
+        map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
     private var vpsLocationSource: VPSARKitLocationSource? {
@@ -196,7 +196,7 @@ extension NavigationViewController: PointOfInterestManagerDelegate {
 }
 
 @available(iOS 13.0, *)
-extension NavigationViewController: NavigationDelegate {
+extension NavigationViewController: NavigationManagerDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false
@@ -232,6 +232,8 @@ extension NavigationViewController: NavigationDelegate {
 extension NavigationViewController: VPSARKitLocationSourceDelegate {
     
     func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+        
+        debugPrint("state - \(state)")
         
         guard state == .scanRequired, cameraVC == nil else { return }
         

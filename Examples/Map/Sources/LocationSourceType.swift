@@ -6,9 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import WemapCoreSDK
-import WemapMapSDK
-
 enum LocationSourceType: Int, CaseIterable {
     
     case simulator,
@@ -18,10 +15,10 @@ enum LocationSourceType: Int, CaseIterable {
          
     var name: String {
         switch self {
-        case .simulator: return "Simulator"
-        case .polestar: return "Polestar"
-        case .systemDefault: return "System Default"
-        case .polestarEmulator: return "Polestar Emulator"
+        case .simulator: "Simulator"
+        case .polestar: "Polestar"
+        case .systemDefault: "System Default"
+        case .polestarEmulator: "Polestar Emulator"
         }
     }
 }

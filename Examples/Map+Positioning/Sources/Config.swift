@@ -8,14 +8,19 @@
 
 import WemapMapSDK
 import WemapPositioningSDK
+import WemapPositioningSDKVPSARKit
 
-private enum PreferencesKey: String {
+enum PreferencesKey: String {
     case mapVersion,
          positioningVersion,
-         mapLibreVersion
+         mapLibreVersion,
+         cameraImageMaxSizeSmallerSide
 }
 
 func customKeysAndValues() -> [String: Any] {
+    
+    VPSARKitConstants.cameraImageMaxSizeSmallerSide = UserDefaults
+        .double(forKey: .cameraImageMaxSizeSmallerSide, defaultValue: VPSARKitConstants.cameraImageMaxSizeSmallerSide)
     
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,

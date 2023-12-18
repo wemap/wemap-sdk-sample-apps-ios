@@ -48,7 +48,7 @@ class InitialViewController: UIViewController {
         }
         
         WemapMap.shared
-            .getStyleURL(withMapID: id, token: Constants.token)
+            .getMapData(mapID: id, token: Constants.token)
             .subscribe(onSuccess: {
                 self.showMap($0)
             }, onFailure: {

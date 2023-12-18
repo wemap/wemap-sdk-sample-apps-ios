@@ -28,8 +28,8 @@ final class NavigationViewController: MapViewController {
             .filter { $0.title == "user-created" } ?? []
     }
     
-    private var simulator: LocationSourceSimulator? {
-        map.userLocationManager.locationSource as? LocationSourceSimulator
+    private var simulator: SimulatorLocationSource? {
+        map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
     private var navigationManager: NavigationManager { map.navigationManager }
@@ -86,6 +86,9 @@ final class NavigationViewController: MapViewController {
         point.title = "user-created"
         point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
         map.addAnnotation(point)
+        
+        map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0))
+        
         updateUI()
     }
     
@@ -155,8 +158,8 @@ final class NavigationViewController: MapViewController {
         disableStartButtons()
         
         navigationManager
-//            .startNavigation(from: origin, to: destination, options: Constants.globalNavigationOptions, itinerarySearchOptions: .init(useStairs: false))
-            .startNavigation(from: origin, to: destination, options: Constants.globalNavigationOptions)
+//            .startNavigation(from: origin, to: destination, options: globalNavigationOptions, itinerarySearchOptions: .init(useStairs: false))
+            .startNavigation(from: origin, to: destination, options: globalNavigationOptions)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)
@@ -201,7 +204,7 @@ extension NavigationViewController: PointOfInterestManagerDelegate {
     }
 }
 
-extension NavigationViewController: NavigationDelegate {
+extension NavigationViewController: NavigationManagerDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false

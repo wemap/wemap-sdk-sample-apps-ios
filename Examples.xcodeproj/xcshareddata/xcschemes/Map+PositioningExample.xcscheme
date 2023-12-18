@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-               BuildableName = "Map+PositioningExample.app"
+               BuildableName = "Map+Pos.app"
                BlueprintName = "Map+PositioningExample"
                ReferencedContainer = "container:Examples.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+PositioningExample.app"
+            BuildableName = "Map+Pos.app"
             BlueprintName = "Map+PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+PositioningExample.app"
+            BuildableName = "Map+Pos.app"
             BlueprintName = "Map+PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
@@ -73,7 +73,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+PositioningExample.app"
+            BuildableName = "Map+Pos.app"
             BlueprintName = "Map+PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>

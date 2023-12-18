@@ -10,7 +10,7 @@ import ARKit
 import RealityKit
 import RxSwift
 import UIKit
-import WemapPositioningSDK
+import WemapPositioningSDKVPSARKit
 
 @available(iOS 13.0, *)
 class CameraViewController: UIViewController {

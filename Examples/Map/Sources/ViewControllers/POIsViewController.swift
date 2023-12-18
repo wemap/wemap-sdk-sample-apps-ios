@@ -25,8 +25,8 @@ final class POIsViewController: MapViewController {
     @IBOutlet var removeSimulatedUserPositionButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
     
-    private var simulator: LocationSourceSimulator? {
-        map.userLocationManager.locationSource as? LocationSourceSimulator
+    private var simulator: SimulatorLocationSource? {
+        map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
     private var navigationManager: NavigationManager { map.navigationManager }
@@ -109,7 +109,7 @@ final class POIsViewController: MapViewController {
         let destination = Coordinate(coordinate2D: poi.coordinate2D, levels: levels)
         
         navigationManager
-            .startNavigation(from: origin, to: destination, options: Constants.globalNavigationOptions)
+            .startNavigation(from: origin, to: destination, options: globalNavigationOptions)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)
@@ -187,7 +187,7 @@ extension POIsViewController: PointOfInterestManagerDelegate {
     }
 }
 
-extension POIsViewController: NavigationDelegate {
+extension POIsViewController: NavigationManagerDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false

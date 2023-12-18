@@ -11,21 +11,28 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - Turf (2.7.0)
-  - WemapCoreSDK (0.10.0):
+  - WemapCoreSDK (0.11.0):
     - Alamofire (~> 5.8.0)
     - RxCocoa (~> 6.6.0)
     - RxSwift (~> 6.6.0)
     - Turf (~> 2.7.0)
-  - WemapMapSDK (0.10.0):
+  - WemapMapSDK (0.11.0):
     - MapLibre (~> 5.13.0)
-    - WemapCoreSDK (~> 0.10.0)
-  - WemapPositioningSDK (0.10.0):
-    - WemapCoreSDK (~> 0.10.0)
+    - WemapCoreSDK (~> 0.11.0)
+  - WemapPositioningSDK/Core (0.11.0):
+    - RxSwift (~> 6.6.0)
+    - WemapCoreSDK (~> 0.11.0)
+  - WemapPositioningSDK/VPSARKit (0.11.0):
+    - WemapPositioningSDK/Core
+  - WemapPositioningSDKPolestar (0.11.0):
+    - NAOSwiftProvider (~> 1.2.2)
+    - WemapCoreSDK (~> 0.11.0)
 
 DEPENDENCIES:
   - "NAOSwiftProvider (from `git@github.com:wemap/NAOSwiftProvider.git`, tag `1.2.2`)"
-  - WemapMapSDK (~> 0.10.0)
-  - WemapPositioningSDK (~> 0.10.0)
+  - WemapMapSDK (~> 0.11.0)
+  - WemapPositioningSDK/VPSARKit (~> 0.11.0)
+  - WemapPositioningSDKPolestar (~> 0.11.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -33,6 +40,7 @@ SPEC REPOS:
     - WemapCoreSDK
     - WemapMapSDK
     - WemapPositioningSDK
+    - WemapPositioningSDKPolestar
   trunk:
     - Alamofire
     - NAOSDK
@@ -60,10 +68,11 @@ SPEC CHECKSUMS:
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   Turf: 13d1a92d969ca0311bbc26e8356cca178ce95da2
-  WemapCoreSDK: 7de307d46f40bfc4970ff7fbaebd921e6653e281
-  WemapMapSDK: 721240db8b76e849dccbc00d5c24c064ca038d54
-  WemapPositioningSDK: bdf9f671237722e96b5558c7123b2425df480354
+  WemapCoreSDK: 04be24b576924dffcc2e00dde0fe2e00a1d7193a
+  WemapMapSDK: bfab10c5c28605adaefa5d98209186587cc3bbd6
+  WemapPositioningSDK: 6391e0f4eb5309e3cdbae6cf3200413f79a683ad
+  WemapPositioningSDKPolestar: ab0e460eaaf540cb6f31a57c3a4b46add243a356
 
-PODFILE CHECKSUM: d220fb3c67ec6e4eb8134e38ae12d080ba18ab2b
+PODFILE CHECKSUM: d07a2e3e87669559c27d1c7e13edf72b9d8e2720
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.14.3

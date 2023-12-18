@@ -9,8 +9,9 @@
 import RxSwift
 import WemapCoreSDK
 import WemapMapSDK
-#if canImport(WemapPositioningSDK)
-import WemapPositioningSDK
+import WemapPositioningSDKPolestar
+#if canImport(WemapPositioningSDKVPSARKit)
+import WemapPositioningSDKVPSARKit
 #endif
 
 class MapViewController: UIViewController, BuildingManagerDelegate {
@@ -41,18 +42,18 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         
         let source: LocationSource?
         switch locationSourceType {
-        case .simulator: source = LocationSourceSimulator()
+        case .simulator: source = SimulatorLocationSource()
         case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
         case .systemDefault, .none: source = nil
         case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
-#if canImport(WemapPositioningSDK)
-        case .vps: source = VPSARKitLocationSource(serviceURL: URL(string: mapData.extras!.vpsEndpoint!)!)
+#if canImport(WemapPositioningSDKVPSARKit)
+        case .vps: source = VPSARKitLocationSource(serviceURL: URL(string: Constants.vpsEndpoint)!)
 #endif
         }
         
         map.userLocationManager.locationSource = source
         
-// camera bounds can be specified even if they don't exist in MapData
+        // camera bounds can be specified even if they don't exist in MapData
 //        map.cameraBounds = maxBounds
         buildingManager.delegate = self
         
@@ -75,6 +76,12 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         if let initialBounds = map.mapData?.bounds {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
             map.setCamera(camera, animated: true)
+        }
+        
+        if !(map.userLocationManager.locationSource?.isAvailable ?? true) {
+            let vc = UIAlertController(title: nil, message: "Desired location source is unavailable", preferredStyle: .alert)
+            vc.addAction(.init(title: "Cancel", style: .cancel))
+            present(vc, animated: true)
         }
     }
     
