@@ -17,6 +17,8 @@ class CameraViewController: UIViewController {
 
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var previewImageView: UIImageView!
+    @IBOutlet var startScanButton: UIButton!
+    @IBOutlet var stopScanButton: UIButton!
     
     var session: ARSession!
     var vpsLocationSource: VPSARKitLocationSource!
@@ -44,7 +46,15 @@ class CameraViewController: UIViewController {
         vpsLocationSource
             .rx.didChangeScanStatus
             .emit(onNext: { [unowned self] in
-                infoLabel.text = $0 == .started ? "VPS scanning started" : "VPS scanning stopped"
+                if $0 == .started {
+                    infoLabel.text = "VPS scanning started"
+                    startScanButton.isEnabled = false
+                    stopScanButton.isEnabled = true
+                } else {
+                    infoLabel.text = "VPS scanning stopped"
+                    startScanButton.isEnabled = true
+                    stopScanButton.isEnabled = false
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -62,6 +72,10 @@ class CameraViewController: UIViewController {
     
     @IBAction func stopScan() {
         vpsLocationSource.stopScan()
+    }
+    
+    deinit {
+        stateListener.dispose()
     }
 }
 

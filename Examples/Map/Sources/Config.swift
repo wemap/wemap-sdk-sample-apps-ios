@@ -54,7 +54,11 @@ func customKeysAndValues() -> [String: Any] {
 
 var globalNavigationOptions: NavigationOptions {
     NavigationOptions(
-        itineraryOptions: .init(color: .cyan, projectionOptions: .init(width: 5, color: .lightGray)),
+        itineraryOptions: .init(
+            indoorLine: .init(color: .systemBlue),
+            projectionLine: .init(width: 5, color: .lightGray, dashPattern: .init(forConstantValue: [0.5, 2])),
+            outdoorLine: .init(width: 10, color: .darkGray)
+        ),
         userTrackingMode: .followWithHeading
     )
 }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "custom_user_puck_icon.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

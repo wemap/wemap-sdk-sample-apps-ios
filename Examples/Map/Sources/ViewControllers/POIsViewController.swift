@@ -24,6 +24,9 @@ final class POIsViewController: MapViewController {
     @IBOutlet var startNavigationFromSimulatedUserPositionButton: UIButton!
     @IBOutlet var removeSimulatedUserPositionButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
+    @IBOutlet var toggleSelectionButton: UIButton!
+    @IBOutlet var poisByDistanceButton: UIButton!
+    @IBOutlet var poisByTimeButton: UIButton!
     
     private var simulator: SimulatorLocationSource? {
         map.userLocationManager.locationSource as? SimulatorLocationSource
@@ -44,6 +47,7 @@ final class POIsViewController: MapViewController {
         map.userTrackingMode = .followWithHeading
         
         createLongPressGestureRecognizer()
+        toggleSelectionButton.setTitle("Enable selection", for: .selected)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,9 +80,7 @@ final class POIsViewController: MapViewController {
     }
     
     @IBAction func startNavigationFromSimulatedUserPosition() {
-        let from = simulatedUserPosition!
-        let origin = Coordinate(coordinate2D: from.coordinate, levels: getLevelFromAnnotation(from))
-        
+        let origin = getCoordinateFromSimulatedUserPosition()
         startNavigationToSelectedPOI(origin: origin)
     }
     
@@ -101,12 +103,15 @@ final class POIsViewController: MapViewController {
         removeFiltersButton.isEnabled = false
     }
     
+    @IBAction func toggleSelection() {
+        toggleSelectionButton.isSelected.toggle()
+        pointOfInterestManager.isSelectionEnabled.toggle()
+    }
+    
     private func startNavigationToSelectedPOI(origin: Coordinate? = nil) {
         disableStartButtons()
         
-        let poi = selectedPOI!
-        let levels = poi.levelID != nil ? [poi.levelID!] : []
-        let destination = Coordinate(coordinate2D: poi.coordinate2D, levels: levels)
+        let destination = selectedPOI!.coordinate
         
         navigationManager
             .startNavigation(from: origin, to: destination, options: globalNavigationOptions)
@@ -149,6 +154,8 @@ final class POIsViewController: MapViewController {
         startNavigationButton.isEnabled = selectedPOI != nil && !stopNavigationButton.isEnabled
         startNavigationFromSimulatedUserPositionButton.isEnabled = selectedPOI != nil && simulatedUserPosition != nil && !stopNavigationButton.isEnabled
         removeSimulatedUserPositionButton.isEnabled = simulatedUserPosition != nil
+        poisByDistanceButton.isEnabled = simulatedUserPosition != nil
+        poisByTimeButton.isEnabled = simulatedUserPosition != nil
     }
     
     private func disableStartButtons() {
@@ -170,6 +177,25 @@ final class POIsViewController: MapViewController {
             pointOfInterestManager.unselectPOI(selectedPOI)
         }
         selectedPOI = nil
+    }
+    
+    private func getCoordinateFromSimulatedUserPosition() -> Coordinate {
+        let from = simulatedUserPosition!
+        return Coordinate(coordinate2D: from.coordinate, levels: getLevelFromAnnotation(from))
+    }
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! POIsListViewController // swiftlint:disable:this force_cast
+        vc.mapView = map
+        vc.userCoordinate = getCoordinateFromSimulatedUserPosition()
+        
+        if let button = sender as? UIButton, button == poisByDistanceButton {
+            vc.sortingType = .distance
+        } else {
+            vc.sortingType = .time
+        }
     }
 }
 

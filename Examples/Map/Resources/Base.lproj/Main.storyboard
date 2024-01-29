@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,7 +13,7 @@
         <!--Initial View Controller-->
         <scene sceneID="BGU-AC-d6q">
             <objects>
-                <viewController id="9Br-Si-CgX" customClass="InitialViewController" customModule="MapExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Br-Si-CgX" customClass="InitialViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N3a-rT-LhF">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
         <!--Is View Controller-->
         <scene sceneID="KnQ-aL-AFq">
             <objects>
-                <viewController id="3S0-Vr-XtB" customClass="POIsViewController" customModule="MapExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3S0-Vr-XtB" customClass="POIsViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ygm-k9-QXt" customClass="MapView" customModule="WemapMapSDK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,7 +90,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTR-zN-tqg">
                                 <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Close"/>
                                 <connections>
                                     <action selector="closeTouched" destination="3S0-Vr-XtB" eventType="touchUpInside" id="z5e-od-mw3"/>
                                 </connections>
@@ -185,6 +185,36 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liI-SY-mON">
+                                <rect key="frame" x="16" y="62.333333333333329" width="153.66666666666666" height="34.333333333333329"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Disable selection"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Disable selection"/>
+                                <connections>
+                                    <action selector="toggleSelection" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Kbw-Rx-cV7"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eX7-Ig-0w9" userLabel="POIs Stack View">
+                                <rect key="frame" x="64" y="127.33333333333333" width="262" height="34.333333333333329"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSY-Be-4t6" userLabel="Pois distance">
+                                        <rect key="frame" x="0.0" y="0.0" width="129" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="POIs distance"/>
+                                        <connections>
+                                            <segue destination="gzk-cD-ZOk" kind="presentation" id="o0J-JP-At4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cax-fM-df9">
+                                        <rect key="frame" x="133" y="0.0" width="129" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="tinted" title="POIs time"/>
+                                        <connections>
+                                            <segue destination="gzk-cD-ZOk" kind="presentation" id="qcS-M8-0Dd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d3b-ax-gvx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -201,7 +231,11 @@
                             <constraint firstItem="beM-pR-pdz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="Wlu-di-euD"/>
                             <constraint firstItem="qSE-4D-Cgk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Wwz-Sf-aKU"/>
                             <constraint firstItem="qSE-4D-Cgk" firstAttribute="centerX" secondItem="d3b-ax-gvx" secondAttribute="centerX" id="f7q-xp-Aum"/>
+                            <constraint firstItem="eX7-Ig-0w9" firstAttribute="centerX" secondItem="ygm-k9-QXt" secondAttribute="centerX" id="gE6-40-DXB"/>
+                            <constraint firstItem="eX7-Ig-0w9" firstAttribute="top" secondItem="cfI-hD-86U" secondAttribute="bottom" constant="8" id="jIr-Gg-dni"/>
+                            <constraint firstItem="liI-SY-mON" firstAttribute="top" secondItem="pTR-zN-tqg" secondAttribute="bottom" constant="8" id="nBj-Z3-3ij"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pTR-zN-tqg" secondAttribute="trailing" constant="16" id="ppZ-M7-mhw"/>
+                            <constraint firstItem="liI-SY-mON" firstAttribute="leading" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="r9G-EN-Uod"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="bottom" secondItem="qSE-4D-Cgk" secondAttribute="bottom" constant="8" id="w6N-5j-aUE"/>
                         </constraints>
                     </view>
@@ -210,11 +244,14 @@
                         <outlet property="applyFilterButton" destination="R2g-xX-YbX" id="eqp-9H-XSU"/>
                         <outlet property="levelControl" destination="beM-pR-pdz" id="rF5-28-kcd"/>
                         <outlet property="navigationInfo" destination="cfI-hD-86U" id="GYB-cr-bzP"/>
+                        <outlet property="poisByDistanceButton" destination="fSY-Be-4t6" id="xAd-Td-fbl"/>
+                        <outlet property="poisByTimeButton" destination="cax-fM-df9" id="vYF-eN-Ccx"/>
                         <outlet property="removeFiltersButton" destination="oVB-gb-ZbE" id="6z8-Yb-21D"/>
                         <outlet property="removeSimulatedUserPositionButton" destination="vy3-fr-L4t" id="kea-Lw-Q9I"/>
                         <outlet property="startNavigationButton" destination="Fy2-Pw-56X" id="jAD-oq-V50"/>
                         <outlet property="startNavigationFromSimulatedUserPositionButton" destination="9Bv-La-GGd" id="RO3-Pv-eqB"/>
                         <outlet property="stopNavigationButton" destination="foH-2j-5JC" id="Fea-b0-kfh"/>
+                        <outlet property="toggleSelectionButton" destination="liI-SY-mON" id="0Be-7Y-cdo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhR-C8-j8m" sceneMemberID="firstResponder"/>
@@ -224,7 +261,7 @@
         <!--Samples Table View Controller-->
         <scene sceneID="jKc-Wp-AFa">
             <objects>
-                <tableViewController storyboardIdentifier="samplesTVC" id="4Of-lU-Y1D" customClass="SamplesTableViewController" customModule="MapExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="samplesTVC" id="4Of-lU-Y1D" customClass="SamplesTableViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="kKf-Ns-LcD">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,7 +366,7 @@
         <!--Levels View Controller-->
         <scene sceneID="953-jI-J7Y">
             <objects>
-                <viewController id="e5r-Qo-bVo" customClass="LevelsViewController" customModule="MapExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="e5r-Qo-bVo" customClass="LevelsViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R25-Dt-xmM" customClass="MapView" customModule="WemapMapSDK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,7 +385,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0y-Na-b7I">
                                 <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Close"/>
                                 <connections>
                                     <action selector="closeTouched" destination="e5r-Qo-bVo" eventType="touchUpInside" id="bj9-s0-xEN"/>
                                 </connections>
@@ -402,7 +439,7 @@
         <!--Navigation View Controller-->
         <scene sceneID="GWs-dU-5sd">
             <objects>
-                <viewController id="nxR-az-56C" customClass="NavigationViewController" customModule="MapExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nxR-az-56C" customClass="NavigationViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCZ-Ju-NLZ" customClass="MapView" customModule="WemapMapSDK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,7 +447,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEn-DW-lV9">
                                 <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Close"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Close"/>
                                 <connections>
                                     <action selector="closeTouched" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Gww-Wh-ayH"/>
                                     <action selector="closeTouched" destination="nxR-az-56C" eventType="touchUpInside" id="HHc-Hg-XfP"/>
@@ -518,13 +555,57 @@
             </objects>
             <point key="canvasLocation" x="1802" y="551"/>
         </scene>
+        <!--Is List View Controller-->
+        <scene sceneID="xWC-lk-0oQ">
+            <objects>
+                <tableViewController storyboardIdentifier="poisTVC" id="gzk-cD-ZOk" customClass="POIsListViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="zUo-lv-iey">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="IJb-DG-5iK" detailTextLabel="01V-yJ-HyT" style="IBUITableViewCellStyleSubtitle" id="Gyk-RS-fdC">
+                                <rect key="frame" x="0.0" y="50" width="390" height="58.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gyk-RS-fdC" id="M2a-nn-opw">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="58.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Point of interest name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IJb-DG-5iK">
+                                            <rect key="frame" x="20" y="7.9999999999999982" width="166.66666666666666" height="20.333333333333332"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Here will appear POI's content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="01V-yJ-HyT">
+                                            <rect key="frame" x="20" y="31.333333333333329" width="207.33333333333334" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ytp-pO-Boa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1122" y="1216"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="o0J-JP-At4"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.19200000166893005" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

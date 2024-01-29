@@ -45,12 +45,25 @@ final class NavigationViewController: MapViewController {
         map.userTrackingMode = .followWithHeading
         
         // this way you can specify user location indicator appearance
-//        map.userLocationManager.userLocationAnnotationViewStyle = .init(
-//            puckFillColor: .systemPink,
-//            puckBorderColor: .black,
-//            puckArrowFillColor: .green,
-//            outOfActiveLevelStyle: .init(puckFillColor: .darkGray, alpha: 0.3)
-//        )
+    
+//        let foreground = UIImage(named: "UserPuckIcon")
+//        let heading = UIImage(named: "UserArrow")
+        
+        map.userLocationManager.userLocationViewStyle = .init(
+//            foregroundImage: foreground,
+//            backgroundImage: UIImage(named: "UserIcon"),
+//            headingImage: heading,
+            foregroundTintColor: .systemPink,
+            backgroundTintColor: .black,
+            headingTintColor: .green,
+            outOfActiveLevelStyle: .init(
+//                foregroundImage: foreground,
+//                headingImage: heading,
+                foregroundTintColor: .darkGray,
+                headingTintColor: .red,
+                alpha: 0.5
+            )
+        )
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,12 +97,21 @@ final class NavigationViewController: MapViewController {
         let point = MGLPointAnnotation()
         point.coordinate = coord
         point.title = "user-created"
-        point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
+        point.subtitle = getCurrentLevel(for: coord)
         map.addAnnotation(point)
         
         map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0))
         
         updateUI()
+    }
+    
+    private func getCurrentLevel(for coordinate: CLLocationCoordinate2D) -> String {
+        guard let building = focusedBuilding else {
+            debugPrint("Failed to retrieve focused building. Considering this annotation as outdoor")
+            return String()
+        }
+        
+        return building.boundingBox.contains(coordinate) ? String(building.activeLevel.id) : String()
     }
     
     @IBAction func startNavigationFromUserLocation() {
@@ -158,14 +180,15 @@ final class NavigationViewController: MapViewController {
         disableStartButtons()
         
         navigationManager
-//            .startNavigation(from: origin, to: destination, options: globalNavigationOptions, itinerarySearchOptions: .init(useStairs: false))
-            .startNavigation(from: origin, to: destination, options: globalNavigationOptions)
+            .startNavigation(from: origin, to: destination, options: globalNavigationOptions /* , itinerarySearchOptions: .init(useStairs: false) */ )
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)
                     stopNavigationButton.isEnabled = true
                 },
                 onFailure: { [unowned self] error in
+                    stopNavigationButton.isEnabled = false
+                    updateUI()
                     ToastHelper.showToast(
                         message: "Failed to start navigation from user position to - \(destination) with error - \(error)",
                         onView: view, hideDelay: Delay.long
@@ -186,12 +209,10 @@ final class NavigationViewController: MapViewController {
     }
     
     private func getLevelFromAnnotation(_ annotation: MGLAnnotation) -> [Float] {
-        guard let building = focusedBuilding else {
-            debugPrint("Failed to retrieve focused building. Can't check if annotation is indoor or outdoor")
+        guard let subtitle = annotation.subtitle! else {
             return []
         }
-        
-        return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
+        return subtitle.isEmpty ? [] : [Float(subtitle)!]
     }
 }
 
@@ -208,7 +229,8 @@ extension NavigationViewController: NavigationManagerDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false
-        navigationInfo.text = info.description
+        let nextStep = info.nextStep?.getNavigationInstructions().instructions ?? "no"
+        navigationInfo.text = info.shortDescription + "\nNext - \(nextStep)"
     }
     
     func navigationManager(_: NavigationManager, didStartNavigation itinerary: Itinerary) {
@@ -216,8 +238,8 @@ extension NavigationViewController: NavigationManagerDelegate {
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
         
-        itinerary.legs.flatMap(\.steps).forEach {
-            let instructions = $0.getNavigationInstructions()
+        for leg in itinerary.legs.flatMap(\.steps) {
+            let instructions = leg.getNavigationInstructions()
             debugPrint(instructions)
         }
     }

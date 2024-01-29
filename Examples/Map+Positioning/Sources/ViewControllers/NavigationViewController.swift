@@ -25,6 +25,7 @@ final class NavigationViewController: MapViewController {
     @IBOutlet var startNavigationFromUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var removeUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
+    @IBOutlet var userTrackingModeButton: UIButton!
     
     private weak var cameraVC: CameraViewController?
     
@@ -51,8 +52,6 @@ final class NavigationViewController: MapViewController {
         vpsLocationSource?.vpsDelegate = self
         
         createLongPressGestureRecognizer()
-        
-        map.userTrackingMode = .followWithHeading
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -131,6 +130,29 @@ final class NavigationViewController: MapViewController {
     
     @IBAction func rescan() {
         showCamera(session: vpsLocationSource!.session)
+    }
+    
+    @IBAction func userTrackingModeButtonTouched() {
+        
+        var nextModeRaw = map.userTrackingMode.rawValue + 1
+        nextModeRaw = nextModeRaw < 3 ? nextModeRaw : 0
+        
+        map.userTrackingMode = MGLUserTrackingMode(rawValue: nextModeRaw)!
+        
+        let title: String
+        switch map.userTrackingMode {
+        case .none:
+            title = "none"
+        case .follow:
+            title = "follow"
+        case .followWithHeading:
+            title = "heading"
+            map.showsHeading = true
+            map.showsUserHeadingIndicator = true
+        default:
+            fatalError()
+        }
+        userTrackingModeButton.setTitle(title, for: .normal)
     }
     
     private func startNavigation(origin: Coordinate?, destination: Coordinate) {

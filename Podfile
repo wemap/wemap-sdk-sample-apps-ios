@@ -11,15 +11,15 @@ platform :ios, '11.0'
 
 abstract_target 'Map' do
 
-  pod 'WemapMapSDK', '~>0.11.0'
+  pod 'WemapMapSDK', '~>0.12.0'
 
   pod 'NAOSwiftProvider', :git => 'git@github.com:wemap/NAOSwiftProvider.git', :tag => '1.2.2'
-  pod 'WemapPositioningSDKPolestar', '~>0.11.0'
+  pod 'WemapPositioningSDKPolestar', '~>0.12.0'
 
   target 'MapExample'
 
   target 'Map+PositioningExample' do
-    pod 'WemapPositioningSDK/VPSARKit', '~>0.11.0'
+    pod 'WemapPositioningSDK/VPSARKit', '~>0.12.0'
   end
 end
 

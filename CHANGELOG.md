@@ -2,6 +2,48 @@
 
 ---
 
+## [0.12.0]
+
+### Breaking changes
+
+* `WemapMap.userLocationManager.userLocationAnnotationViewStyle` has been renamed to `WemapMap.userLocationManager.userLocationViewStyle`
+* `UserLocationAnnotationViewStyle` has been renamed to `UserLocationViewStyle`. Also its properties have been renamed accordingly:
+  * `puckFillColor` has been renamed to `foregroundTintColor`
+  * `puckBorderColor` has been renamed to `backgroundTintColor`
+  * `puckArrowFillColor` has been renamed to `headingTintColor`
+* `OutOfActiveLevelStyle` properties have been renamed accordingly:
+  * `puckFillColor` has been renamed to `foregroundTintColor`
+  * `puckArrowFillColor` has been renamed to `headingTintColor`
+* `PointOfInterest` has been changed:
+  * `coordinate2D` has been moved to `coordinate.coordinate2D`
+  * `levelID` has been moved to `coordinate.levels`
+
+### Added
+
+* MapSDK/CoreSDK: Let the possibility to sort PoIs by travel time/distance from UserPosition in a "batch" version
+* MapSDK: Add remaining distance to the step to NavigationInfo
+* MapSDK: PointOfInterest should have a field "Coordinate" to avoid manual transformation later (i.e. nav to a POI)
+* MapSDK: Let the possibility to the developer to disable/enable PoI selection
+* MapSDK: Add the possibility to change the user location icon dynamically
+* MapSDK: ability to change color of outdoor part of itinerary
+
+### Changed
+
+* MapSDK: make NavigationInstructions attributes public
+
+### Fixed
+
+* MapSDK: navigation details steps order is wrong
+* MapSDK: filterByTag method do the opposite of the desired effect
+* MapSDK: building's active level is reset when viewport has significantly changed even if the building is still in focus
+* MapSDK: outdoor part of itinerary is visible only when selected level 0
+* MapSDK: blue dot greyed outdoor when camera is following the user
+
+### Dependencies
+
+* Turf 2.7.0 -> 2.8.0
+* NAOSDK 4.11.13.1 -> 4.11.14
+
 ## [0.11.0]
 
 ### Breaking changes
