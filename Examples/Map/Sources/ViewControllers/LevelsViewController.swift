@@ -7,7 +7,7 @@
 //
 // swiftlint:disable force_try
 
-import Mapbox
+import MapLibre
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK

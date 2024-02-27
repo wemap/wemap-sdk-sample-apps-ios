@@ -2,6 +2,69 @@
 
 ---
 
+## [0.13.0]
+
+### Breaking changes
+
+* Due to migration from MapLibre 5.13.0 to [6.1.1](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.0.0) additional changes needed:
+  * Changed the prefix of files, classes, methods, variables and everything from `MGL` to `MLN`. If you are using NSKeyedArchiver or similar mechanishm to save the state, the app may crash after this change when trying to unarchive the state using old names of the classes. You need to clean the saved state of the app and save it using new classes.
+  * The Swift package needs to be imported with `import MapLibre` instead of `import Mapbox`.
+* removed support for iOS 11
+* `VPSARKitLocationSource.State.limited(reason: VPSARKitLocationSource.State.Reason)` has been changed to `VPSARKitLocationSource.State.limited(reason: ARCamera.TrackingState.Reason)`:
+  * `VPSARKitLocationSource.State.Reason.correction` has been removed
+* `WemapMapViewDelegate.map(_: MapView, didTouchFeature feature: MGLFeature)` and `WemapMapViewDelegate.map(_ map: MapView, didTouchPointOfInterest poi: PointOfInterest)` delegate methods have been removed.
+Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestManager, didTouchPointOfInterest poi: PointOfInterest)` or `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest)` instead.
+* `WemapMap.setEnvironment(_: Environment)` has been moved to `WemapCore.setEnvironment(_: Environment)`
+* `Itinerary` has been changed:
+  * `let from: Coordinate` has been renamed to `let origin: Coordinate`
+  * `let to: Coordinate` has been renamed to `let destination: Coordinate`
+  * `let mode: TravelMode` has been renamed to `let transitMode: TravelMode`
+* `Leg` has been changed:
+  * `let from: Coordinate` has been renamed to `let start: Coordinate`
+  * `let to: Coordinate` has been renamed to `let end: Coordinate`
+  * `let mode: TravelMode` has been renamed to `let transitMode: TravelMode`
+* `TravelMode.bike` has been changed to `TravelMode.bike(preference: TravelMode.Preference)`
+* `ItineraryParameters.init(from: Coordinate, to: Coordinate, mode: TravelMode, options: ItinerarySearchOptions)` has been changed to `ItineraryParameters.init(origin: Coordinate, destination: Coordinate, travelMode: TravelMode, searchOptions: ItinerarySearchOptions?)`
+* `ItineraryParametersMultipleDestinations` has been renamed to `ItinerariesParametersMultipleDestinations`:
+  * `init(origin: Coordinate, pointsOfInterest: [PointOfInterest], mapId: Int, mode: TravelMode, options: ItinerarySearchOptions)` has been changed to `init(origin: Coordinate, pointsOfInterest: [PointOfInterest], mapId: Int, travelMode: TravelMode, searchOptions: ItinerarySearchOptions?)`
+  * `init(origin: Coordinate, coordinates: [Coordinate], mapId: Int?, mode: TravelMode, options: ItinerarySearchOptions)` has been changed to `init(origin: Coordinate, coordinates: [Coordinate], mapId: Int?, travelMode: TravelMode, searchOptions: ItinerarySearchOptions?)`
+* `ItinerarySearchOptions` has been changed:
+  * `let useStairs: Bool` has been replaced by `let avoidStairs: Bool`
+  * `let useEscalators: Bool` has been replaced by `let avoidEscalators: Bool`
+  * `let useElevators: Bool` has been replaced by `let avoidElevators: Bool`
+* `ItinerariesResponse` has been changed:
+  * `let from: Coordinate` has been removed
+  * `let to: Coordinate` has been removed
+  * `let error: String?` has been replaced by `let status: Status`
+* `ItineraryManager` has been changed:
+  * `getItineraries(from: Coordinate, to: Coordinate, searchOptions: ItinerarySearchOptions)` has been changed to `getItineraries(origin: Coordinate, destination: Coordinate, travelMode: TravelMode, searchOptions: ItinerarySearchOptions?)`
+* `NavigationManager` has been changed:
+  * `startNavigation(from: Coordinate, to: Coordinate, timeout: DispatchTimeInterval, options: NavigationOptions, itinerarySearchOptions: ItinerarySearchOptions)` has been changed to `startNavigation(origin: Coordinate?, destination: Coordinate, travelMode: TravelMode, options: NavigationOptions, searchOptions: ItinerarySearchOptions?, timeout: DispatchTimeInterval)`
+  * `startNavigation(_: Itinerary, options: NavigationOptions, itinerarySearchOptions: ItinerarySearchOptions)` has been changed to  `startNavigation(_: Itinerary, options: NavigationOptions, searchOptions: ItinerarySearchOptions?)`
+
+### Added
+
+* CoreSDK: Add fastest, safest, tourism preferences for bike travel mode
+* MapSDK: expose pitch from MapData, take into account the initial value
+* MapSDK: expose bearing from MapData, take into account the initial value
+
+### Changed
+
+* CoreSDK: migrate to Itineraries API v2
+* MapSDK: migrate to MapLibre 6.0.0
+* MapSDK: replace didTouchFeature by didTouchPointOfInterest
+
+### Fixed
+
+* MapSDK: some POIs are selected and immediately unselected
+* MapSDK: MapView is not deallocated on view dismissal
+
+### Dependencies
+
+* Itineraries API v1 -> v2
+* MapLibre 5.13.0 -> 6.1.1
+* NAOSwiftProvider 1.2.2 -> 1.3.0
+
 ## [0.12.0]
 
 ### Breaking changes

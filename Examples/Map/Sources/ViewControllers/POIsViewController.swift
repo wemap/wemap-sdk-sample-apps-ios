@@ -6,7 +6,7 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Mapbox
+import MapLibre
 import RxSwift
 import UIKit
 import WemapCoreSDK
@@ -35,7 +35,7 @@ final class POIsViewController: MapViewController {
     private var navigationManager: NavigationManager { map.navigationManager }
     
     private var selectedPOI: PointOfInterest?
-    private var simulatedUserPosition: MGLAnnotation?
+    private var simulatedUserPosition: MLNAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +114,7 @@ final class POIsViewController: MapViewController {
         let destination = selectedPOI!.coordinate
         
         navigationManager
-            .startNavigation(from: origin, to: destination, options: globalNavigationOptions)
+            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)
@@ -142,7 +142,7 @@ final class POIsViewController: MapViewController {
         }
         
         let coord = map.convert(gesture.location(in: map), toCoordinateFrom: map)
-        let point = MGLPointAnnotation()
+        let point = MLNPointAnnotation()
         point.coordinate = coord
         point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
         map.addAnnotation(point)
@@ -163,7 +163,7 @@ final class POIsViewController: MapViewController {
         startNavigationFromSimulatedUserPositionButton.isEnabled = false
     }
     
-    private func getLevelFromAnnotation(_ annotation: MGLAnnotation) -> [Float] {
+    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
         guard let building = focusedBuilding else {
             debugPrint("Failed to rerieve focused building. Can't check if annotation is indoor or outdoor")
             return []
@@ -211,6 +211,10 @@ extension POIsViewController: PointOfInterestManagerDelegate {
         selectedPOI = nil
         updateUI()
     }
+    
+    func pointOfInterestManager(_: PointOfInterestManager, didTouchPointOfInterest poi: PointOfInterest) {
+        ToastHelper.showToast(message: "didTouchPointOfInterest - \(poi)", onView: view, hideDelay: Delay.short)
+    }
 }
 
 extension POIsViewController: NavigationManagerDelegate {
@@ -247,10 +251,6 @@ extension POIsViewController: NavigationManagerDelegate {
 }
 
 extension POIsViewController: WemapMapViewDelegate {
-    
-    func map(_: MapView, didTouchFeature _: MGLFeature) {
-        ToastHelper.showToast(message: "didTouchFeature", onView: view, hideDelay: Delay.short)
-    }
     
     func map(_: MapView, didTouchAtPoint _: CGPoint) {
         unselectSelectedPOI()

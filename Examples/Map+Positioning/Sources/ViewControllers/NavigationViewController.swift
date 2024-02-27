@@ -7,7 +7,7 @@
 //
 
 import ARKit
-import Mapbox
+import MapLibre
 import RxSwift
 import UIKit
 import WemapCoreSDK
@@ -27,9 +27,11 @@ final class NavigationViewController: MapViewController {
     @IBOutlet var navigationInfo: UILabel!
     @IBOutlet var userTrackingModeButton: UIButton!
     
+    private weak var currentVPSToast: UIView?
+    
     private weak var cameraVC: CameraViewController?
     
-    private var userCreatedAnnotations: [MGLAnnotation] {
+    private var userCreatedAnnotations: [MLNAnnotation] {
         map.annotations?
             .filter { $0.title == "user-created" } ?? []
     }
@@ -82,7 +84,7 @@ final class NavigationViewController: MapViewController {
             return
         }
         let coord = map.convert(gesture.location(in: map), toCoordinateFrom: map)
-        let point = MGLPointAnnotation()
+        let point = MLNPointAnnotation()
         point.coordinate = coord
         point.title = "user-created"
         point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
@@ -137,7 +139,7 @@ final class NavigationViewController: MapViewController {
         var nextModeRaw = map.userTrackingMode.rawValue + 1
         nextModeRaw = nextModeRaw < 3 ? nextModeRaw : 0
         
-        map.userTrackingMode = MGLUserTrackingMode(rawValue: nextModeRaw)!
+        map.userTrackingMode = MLNUserTrackingMode(rawValue: nextModeRaw)!
         
         let title: String
         switch map.userTrackingMode {
@@ -159,7 +161,7 @@ final class NavigationViewController: MapViewController {
         disableStartButtons()
         
         navigationManager
-            .startNavigation(from: origin, to: destination)
+            .startNavigation(origin: origin, destination: destination)
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)
@@ -185,7 +187,7 @@ final class NavigationViewController: MapViewController {
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
     }
     
-    private func getLevelFromAnnotation(_ annotation: MGLAnnotation) -> [Float] {
+    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
         guard let building = focusedBuilding else {
             debugPrint("Failed to retrieve focused building. Can't check if annotation is indoor or outdoor")
             return []
@@ -256,9 +258,21 @@ extension NavigationViewController: VPSARKitLocationSourceDelegate {
     func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         
         debugPrint("state - \(state)")
-        
-        guard state == .scanRequired, cameraVC == nil else { return }
-        
-        showCamera(session: locationSource.session, assignCamera: true)
+
+        switch state {
+        case .scanRequired where cameraVC == nil:
+            showCamera(session: locationSource.session, assignCamera: true)
+        case let .limited(reason):
+            showVPSToast(message: "Tracking is limited due to - \(reason)")
+        case .noTracking:
+            showVPSToast(message: "Tracking is not available yet. Rotate your phone around")
+        default:
+            currentVPSToast?.removeFromSuperview()
+        }
+    }
+    
+    private func showVPSToast(message: String) {
+        currentVPSToast?.removeFromSuperview()
+        currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: .infinity)
     }
 }

@@ -36,10 +36,12 @@ class CameraViewController: UIViewController {
         
         vpsLocationSource.observer = self
         
+        weak var previousToast: UIView?
         vpsLocationSource
             .rx.didFail
             .emit(onNext: { [unowned self] in
-                ToastHelper.showToast(message: "VPS failed with error - \($0)", onView: view)
+                previousToast?.removeFromSuperview()
+                previousToast = ToastHelper.showToast(message: "VPS failed with error - \($0)", onView: view)
             })
             .disposed(by: disposeBag)
         

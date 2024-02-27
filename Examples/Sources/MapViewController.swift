@@ -21,7 +21,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
     
     @IBOutlet var levelControl: UISegmentedControl!
     
-//    private let maxBounds = MGLCoordinateBounds(
+//    private let maxBounds = MLNCoordinateBounds(
 //        sw: CLLocationCoordinate2D(latitude: 48.84045277048898, longitude: 2.371600716985739),
 //        ne: CLLocationCoordinate2D(latitude: 48.84811619854466, longitude: 2.377353558713054)
 //    )

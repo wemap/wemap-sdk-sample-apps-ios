@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 import WemapMapSDK
+import WemapCoreSDK
 
 class InitialViewController: UIViewController {
 
@@ -22,7 +23,8 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
         
         // uncomment if you want to use dev environment
-//        WemapMap.setEnvironment(.dev)
+//        WemapCore.setEnvironment(.dev)
+//        WemapCore.setItinerariesEnvironment(.dev)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
