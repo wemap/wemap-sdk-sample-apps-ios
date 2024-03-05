@@ -10,7 +10,6 @@ import RxCocoa
 import RxSwift
 import UIKit
 import WemapMapSDK
-import WemapCoreSDK
 
 class InitialViewController: UIViewController {
 

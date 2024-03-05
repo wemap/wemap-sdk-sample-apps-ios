@@ -2,6 +2,25 @@
 
 ---
 
+## [0.14.0]
+
+### Breaking changes
+
+* `NavigationInfo` and `NavigationInfoHandler` have been moved from `WemapMapSDK` to `WemapCoreSDK`
+
+### Added
+
+* CoreSDK: add optional mapId parameter to ItineraryParameters
+
+### Changed
+
+* CoreSDK: Make NavigationInfoHandler usable without MapSDK
+
+### Dependencies
+
+* MapLibre 6.1.1 -> 6.2.0
+* Alamofire 5.8.1 -> 5.9.0
+
 ## [0.13.0]
 
 ### Breaking changes
