@@ -180,7 +180,7 @@ final class NavigationViewController: MapViewController {
         disableStartButtons()
         
         navigationManager
-            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions/*, searchOptions: .init(avoidStairs: true)*/ )
+            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions /* , searchOptions: .init(avoidStairs: true) */ )
             .subscribe(
                 onSuccess: { [unowned self] itinerary in
                     simulator?.setItinerary(itinerary)

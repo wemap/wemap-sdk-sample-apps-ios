@@ -11,27 +11,27 @@ PODS:
     - RxSwift (= 6.6.0)
   - RxSwift (6.6.0)
   - Turf (2.8.0)
-  - WemapCoreSDK (0.14.0):
+  - WemapCoreSDK (0.14.1):
     - Alamofire (~> 5.9.0)
     - RxCocoa (~> 6.6.0)
     - RxSwift (~> 6.6.0)
     - Turf (~> 2.8.0)
-  - WemapMapSDK (0.14.0):
+  - WemapMapSDK (0.14.1):
     - MapLibre (~> 6.2.0)
-    - WemapCoreSDK (~> 0.14.0)
-  - WemapPositioningSDK/Core (0.14.0):
+    - WemapCoreSDK (~> 0.14.1)
+  - WemapPositioningSDK/Core (0.14.1):
     - RxSwift (~> 6.6.0)
-    - WemapCoreSDK (~> 0.14.0)
-  - WemapPositioningSDK/VPSARKit (0.14.0):
+    - WemapCoreSDK (~> 0.14.1)
+  - WemapPositioningSDK/VPSARKit (0.14.1):
     - WemapPositioningSDK/Core
-  - WemapPositioningSDKPolestar (0.14.0):
+  - WemapPositioningSDKPolestar (0.14.1):
     - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.14.0)
+    - WemapCoreSDK (~> 0.14.1)
 
 DEPENDENCIES:
-  - WemapMapSDK (~> 0.14.0)
-  - WemapPositioningSDK/VPSARKit (~> 0.14.0)
-  - WemapPositioningSDKPolestar (~> 0.14.0)
+  - WemapMapSDK (~> 0.14.1)
+  - WemapPositioningSDK/VPSARKit (~> 0.14.1)
+  - WemapPositioningSDKPolestar (~> 0.14.1)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -58,11 +58,11 @@ SPEC CHECKSUMS:
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   Turf: aa2ede4298009639d10db36aba1a7ebaad072a5e
-  WemapCoreSDK: d3903a58484dc3f9f2d171efc75b72eaf13c1ed6
-  WemapMapSDK: 2a5402a5421aff15a567b000797c7186c8790043
-  WemapPositioningSDK: 817d9ff10b3e9494a04a181b81422802b465135f
-  WemapPositioningSDKPolestar: 5a291b462d040f7c433203ed42c6aa8120d526df
+  WemapCoreSDK: d248e67942126209e23b23648d27db12733ecb0f
+  WemapMapSDK: b0dd0c000bef28e0d798b1d36eab5379a405cbff
+  WemapPositioningSDK: b4c49790ca76732eafb82f82456076018b8bf9d5
+  WemapPositioningSDKPolestar: e101adbb00a3112fc2ed419dbdb16309ddd9c318
 
-PODFILE CHECKSUM: da1cef364bd3be0ddac6c8e684331f5a5e9a7796
+PODFILE CHECKSUM: 3ba591141379b6cbf25cb3352dda4bb867622324
 
 COCOAPODS: 1.15.2

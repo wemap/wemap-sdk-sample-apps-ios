@@ -2,6 +2,12 @@
 
 ---
 
+## [0.14.1]
+
+### Fixed
+
+* MapSDK: allow POIs that are not attached to the building to be shown on the map
+
 ## [0.14.0]
 
 ### Breaking changes
