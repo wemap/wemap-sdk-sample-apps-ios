@@ -9,7 +9,7 @@ platform :ios, '12.0'
 
 #################################################################################
 
-wemap_sdks_version = '~>0.14.1'
+wemap_sdks_version = '~>0.14.2'
 
 abstract_target 'Map' do
 
