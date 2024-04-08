@@ -2,6 +2,16 @@
 
 ---
 
+## [0.14.3]
+
+### Fixed
+
+* PosSDK: Polestar LocationSource does not work
+
+### Dependencies
+
+* NAOSDK 4.11.14 -> 4.11.15
+
 ## [0.14.2]
 
 ### Fixed
