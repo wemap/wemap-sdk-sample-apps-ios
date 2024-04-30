@@ -248,6 +248,7 @@ extension NavigationViewController: NavigationManagerDelegate {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
+        startNavigationButton.isEnabled = true
     }
     
     func navigationManager(_: NavigationManager, didArriveAtDestination _: Itinerary) {

@@ -2,6 +2,34 @@
 
 ---
 
+## [0.15.0]
+
+### Breaking changes
+
+* `LevelChange.direction: String` has been changed to `LevelChange.direction: Incline`
+* `Step` has been changed:
+  * `let isGate: Bool` has been moved to `extras.isGate`
+  * `let subwayEntranceName: String?` has been moved to `extras.subwayEntranceName`
+* `Leg` has been changed:
+  * `let start: Coordinate` has been changed to `let start: Destination`
+  * `let end: Coordinate` has been changed to `let end: Destination`
+* `ItinerariesParametersMultipleDestinations` has been renamed to `ItinerariesParametersMultiDestinations`
+* `ItinerarySearchOptions` has been replaced everywhere from nullable parameter to parameter with a default value
+
+### Added
+
+* PosSDK(VPS): add checkVpsAvailability() method
+* MapSDK: offline maps support
+
+### Fixed
+
+* PosSDK(VPS): wrong level detection if altitude < 0 
+
+### Dependencies
+
+* MapLibre 6.2.0 -> 6.4.0
+* RxSwift 6.6.0 -> 6.7.0
+
 ## [0.14.3]
 
 ### Fixed
