@@ -2,6 +2,20 @@
 
 ---
 
+## [0.15.1](https://github.com/wemap/wemap-sdk-ios/releases/tag/0.15.1)
+
+### Fixed
+
+* PosSDK: PS: enable the use for simulator
+
+### Dependencies
+
+* MapLibre 6.4.0 -> 6.4.1
+* RxBlocking 6.7.0 -> 6.7.1
+* RxCocoa 6.7.0 -> 6.7.1
+* RxRelay 6.7.0 -> 6.7.1
+* RxSwift 6.7.0 -> 6.7.1
+
 ## [0.15.0]
 
 ### Breaking changes
