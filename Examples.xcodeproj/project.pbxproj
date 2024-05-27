@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E2CAF20ECE8E3A758E0B2BF /* Pods_Map_Map_PositioningExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */; };
-		CE0EB40981D8ED019241348D /* Pods_Map_MapExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */; };
+		2D4645EBC183E753EC5B9ADC /* Pods_Map_PositioningExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348B2FB9470DD892371A540A /* Pods_Map_PositioningExample.framework */; };
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D221789C2B67E35200165BEB /* POIsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221789B2B67E35100165BEB /* POIsListViewController.swift */; };
 		D22178A42B67E44F00165BEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D221789E2B67E44F00165BEB /* Assets.xcassets */; };
@@ -39,7 +38,7 @@
 		D2A6254F28F6AEB900274721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6254D28F6AEB900274721 /* AppDelegate.swift */; };
 		D2A6255428F6C08400274721 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
 		D2CF427D2AA5DFCD004EB2C1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF427C2AA5DFCD004EB2C1 /* CameraViewController.swift */; };
-		D2D14A482A375E24000772E8 /* nao.kml in Resources */ = {isa = PBXBuildFile; fileRef = D2A7120829BB98A5001596C7 /* nao.kml */; };
+		D2D4BFE72C04B254005E5309 /* nao.kml in Resources */ = {isa = PBXBuildFile; fileRef = D2D4BFE62C04B254005E5309 /* nao.kml */; };
 		D2D62C4F29E6F7450000463E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4B29E6F7450000463E /* NavigationViewController.swift */; };
 		D2D62C5029E6F7450000463E /* SamplesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */; };
 		D2D62C5129E6F7450000463E /* POIsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D62C4D29E6F7450000463E /* POIsViewController.swift */; };
@@ -51,14 +50,16 @@
 		D2FD56B429802C6C003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56B329802C6C003F508D /* Config.swift */; };
 		D2FD56B62980341A003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56B52980341A003F508D /* Config.swift */; };
 		D2FECD5429D32EA80071F999 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECD5329D32EA80071F999 /* InitialViewController.swift */; };
+		E95C5E3CE21061134C84CA52 /* Pods_MapExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBBD003B6BA5EB8FCA715F /* Pods_MapExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-Map+PositioningExample.debug.xcconfig"; path = "Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample.debug.xcconfig"; sourceTree = "<group>"; };
-		108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-Map+PositioningExample.release.xcconfig"; path = "Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample.release.xcconfig"; sourceTree = "<group>"; };
-		3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-MapExample.release.xcconfig"; path = "Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample.release.xcconfig"; sourceTree = "<group>"; };
-		72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-MapExample.debug.xcconfig"; path = "Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample.debug.xcconfig"; sourceTree = "<group>"; };
-		A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_Map_PositioningExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00F99882626E544CF352D0A4 /* Pods-Map+PositioningExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map+PositioningExample.release.xcconfig"; path = "Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample.release.xcconfig"; sourceTree = "<group>"; };
+		348B2FB9470DD892371A540A /* Pods_Map_PositioningExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_PositioningExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CDE2A2FBD28C9A5302FE675 /* Pods-MapExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExample.debug.xcconfig"; path = "Target Support Files/Pods-MapExample/Pods-MapExample.debug.xcconfig"; sourceTree = "<group>"; };
+		601DC89DC0A9F0EEE53387D2 /* Pods-Map+PositioningExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map+PositioningExample.debug.xcconfig"; path = "Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample.debug.xcconfig"; sourceTree = "<group>"; };
+		813276D5A944621D44CCD4C2 /* Pods-MapExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExample.release.xcconfig"; path = "Target Support Files/Pods-MapExample/Pods-MapExample.release.xcconfig"; sourceTree = "<group>"; };
+		98FBBD003B6BA5EB8FCA715F /* Pods_MapExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D221789B2B67E35100165BEB /* POIsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsListViewController.swift; sourceTree = "<group>"; };
 		D221789E2B67E44F00165BEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,8 +82,8 @@
 		D2A6254928F6AB2000274721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2A6254D28F6AEB900274721 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A6255328F6C08400274721 /* ToastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
-		D2A7120829BB98A5001596C7 /* nao.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nao.kml; sourceTree = "<group>"; };
 		D2CF427C2AA5DFCD004EB2C1 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D2D4BFE62C04B254005E5309 /* nao.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nao.kml; sourceTree = "<group>"; };
 		D2D62C4B29E6F7450000463E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesTableViewController.swift; sourceTree = "<group>"; };
 		D2D62C4D29E6F7450000463E /* POIsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		D2FD56B329802C6C003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FD56B52980341A003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FECD5329D32EA80071F999 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_MapExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE0EB40981D8ED019241348D /* Pods_Map_MapExample.framework in Frameworks */,
+				E95C5E3CE21061134C84CA52 /* Pods_MapExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E2CAF20ECE8E3A758E0B2BF /* Pods_Map_Map_PositioningExample.framework in Frameworks */,
+				2D4645EBC183E753EC5B9ADC /* Pods_Map_PositioningExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,10 +120,10 @@
 		AD5C7306C3547FF2CBF11694 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */,
-				108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */,
-				72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */,
-				3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */,
+				601DC89DC0A9F0EEE53387D2 /* Pods-Map+PositioningExample.debug.xcconfig */,
+				00F99882626E544CF352D0A4 /* Pods-Map+PositioningExample.release.xcconfig */,
+				4CDE2A2FBD28C9A5302FE675 /* Pods-MapExample.debug.xcconfig */,
+				813276D5A944621D44CCD4C2 /* Pods-MapExample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -190,8 +190,8 @@
 		D250CA8F28D35BDB00DBFF5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A4973E7E1D6C75282C72502E /* Pods_Map_Map_PositioningExample.framework */,
-				D8E3437822D76BED17FF22F0 /* Pods_Map_MapExample.framework */,
+				348B2FB9470DD892371A540A /* Pods_Map_PositioningExample.framework */,
+				98FBBD003B6BA5EB8FCA715F /* Pods_MapExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -221,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				D2FD569B29801ECE003F508D /* Settings.bundle */,
+				D2D4BFE62C04B254005E5309 /* nao.kml */,
 				D2A6254128F6AB0000274721 /* Assets.xcassets */,
 				D2A6254228F6AB0000274721 /* Main.storyboard */,
 			);
@@ -232,7 +233,6 @@
 			children = (
 				D2FD569929801EBB003F508D /* Settings.bundle */,
 				D2D62C5529E6F7900000463E /* consumer_data.json */,
-				D2A7120829BB98A5001596C7 /* nao.kml */,
 				D2A6254728F6AB2000274721 /* Assets.xcassets */,
 				D2A6254828F6AB2000274721 /* Main.storyboard */,
 			);
@@ -288,7 +288,6 @@
 				D250C9D428D3176F00DBFF5D /* Frameworks */,
 				D250C9D528D3176F00DBFF5D /* Resources */,
 				F208A40B331C486E97836D23 /* [CP] Embed Pods Frameworks */,
-				E23F73A3F0788398FD71D041 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,7 +359,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2D14A482A375E24000772E8 /* nao.kml in Resources */,
 				D2A6254A28F6AB2000274721 /* Assets.xcassets in Resources */,
 				D2D62C5629E6F7900000463E /* consumer_data.json in Resources */,
 				D2FD569A29801EBB003F508D /* Settings.bundle in Resources */,
@@ -379,6 +377,7 @@
 				D22178A92B67E44F00165BEB /* LaunchScreen.strings in Resources */,
 				D2FD569C29801ECE003F508D /* Settings.bundle in Resources */,
 				D22178A52B67E44F00165BEB /* Assets.xcassets in Resources */,
+				D2D4BFE72C04B254005E5309 /* nao.kml in Resources */,
 				D22178A72B67E44F00165BEB /* LaunchScreen.storyboard in Resources */,
 				D2A6254528F6AB0000274721 /* Main.storyboard in Resources */,
 			);
@@ -402,7 +401,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Map-Map+PositioningExample-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Map+PositioningExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -415,15 +414,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CF08D79DDD138043AEBCFCF2 /* [CP] Check Pods Manifest.lock */ = {
@@ -441,7 +440,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Map-MapExample-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MapExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -454,32 +453,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-Map+PositioningExample/Pods-Map-Map+PositioningExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E23F73A3F0788398FD71D041 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F208A40B331C486E97836D23 /* [CP] Embed Pods Frameworks */ = {
@@ -488,15 +470,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map-MapExample/Pods-Map-MapExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -704,7 +686,7 @@
 		};
 		D250CA0228D3177000DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72DA2B85EB3140F417399773 /* Pods-Map-MapExample.debug.xcconfig */;
+			baseConfigurationReference = 4CDE2A2FBD28C9A5302FE675 /* Pods-MapExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -734,7 +716,7 @@
 		};
 		D250CA0328D3177000DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3512D1807FA8A14952D918B5 /* Pods-Map-MapExample.release.xcconfig */;
+			baseConfigurationReference = 813276D5A944621D44CCD4C2 /* Pods-MapExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -766,7 +748,7 @@
 		};
 		D250CA4228D31EF100DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06506EEA6ACD622F244A5F57 /* Pods-Map-Map+PositioningExample.debug.xcconfig */;
+			baseConfigurationReference = 601DC89DC0A9F0EEE53387D2 /* Pods-Map+PositioningExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -797,7 +779,7 @@
 		};
 		D250CA4328D31EF100DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 108FBA1776FB21CAD48AEA81 /* Pods-Map-Map+PositioningExample.release.xcconfig */;
+			baseConfigurationReference = 00F99882626E544CF352D0A4 /* Pods-Map+PositioningExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

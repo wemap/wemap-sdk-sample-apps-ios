@@ -9,7 +9,9 @@
 import RxSwift
 import WemapCoreSDK
 import WemapMapSDK
+#if canImport(WemapPositioningSDKPolestar)
 import WemapPositioningSDKPolestar
+#endif
 #if canImport(WemapPositioningSDKVPSARKit)
 import WemapPositioningSDKVPSARKit
 #endif
@@ -43,9 +45,11 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         let source: LocationSource?
         switch locationSourceType {
         case .simulator: source = SimulatorLocationSource()
-        case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
         case .systemDefault, .none: source = nil
+#if canImport(WemapPositioningSDKPolestar)
+        case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
         case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
+#endif
 #if canImport(WemapPositioningSDKVPSARKit)
         case .vps: source = VPSARKitLocationSource(serviceURL: Constants.vpsEndpoint)
 #endif
