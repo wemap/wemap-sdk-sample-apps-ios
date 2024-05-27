@@ -26,7 +26,7 @@
   AWS_ACCESS_KEY_ID=*** \
   AWS_SECRET_ACCESS_KEY=*** \
   AWS_REGION=*** \
-  [bundle exec] pod install --repo-update
+  bundle exec pod install --repo-update
   ```
 
 * open `WemapExamples.xcworkspace`

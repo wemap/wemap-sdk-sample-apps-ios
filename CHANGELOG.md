@@ -2,7 +2,18 @@
 
 ---
 
-## [0.15.1](https://github.com/wemap/wemap-sdk-ios/releases/tag/0.15.1)
+## [0.15.2]
+
+### Fixed
+
+* MapSDK: POI markers are hidden below a certain zoom level
+* PosSDK(VPS): accept VPS endpoint with and without '/' at the end
+
+### Dependencies
+
+* MapLibre 6.4.1 -> 6.4.2
+
+## [0.15.1]
 
 ### Fixed
 
@@ -37,7 +48,7 @@
 
 ### Fixed
 
-* PosSDK(VPS): wrong level detection if altitude < 0 
+* PosSDK(VPS): wrong level detection if altitude < 0
 
 ### Dependencies
 

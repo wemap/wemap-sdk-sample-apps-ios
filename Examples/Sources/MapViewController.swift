@@ -47,7 +47,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
         case .systemDefault, .none: source = nil
         case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
 #if canImport(WemapPositioningSDKVPSARKit)
-        case .vps: source = VPSARKitLocationSource(serviceURL: URL(string: Constants.vpsEndpoint)!)
+        case .vps: source = VPSARKitLocationSource(serviceURL: Constants.vpsEndpoint)
 #endif
         }
         
