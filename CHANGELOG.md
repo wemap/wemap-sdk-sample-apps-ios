@@ -2,6 +2,22 @@
 
 ---
 
+## [0.16.0]
+
+### Breaking changes
+
+* `NavigationInstructions` struct has been moved from `WemapMapSDK` to `WemapCoreSDK`
+* `Direction` enum has been moved from `WemapMapSDK` to `WemapCoreSDK`
+* `Step.getNavigationInstructions` has been moved from `WemapMapSDK` to `WemapCoreSDK`
+
+### Added
+
+* CoreSDK: expose mediaUrl, mediaType of POI
+
+### Changed
+
+* CoreSDK: move Step.getNavigationInstructions to CoreSDK
+
 ## [0.15.2]
 
 ### Fixed
