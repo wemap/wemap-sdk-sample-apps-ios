@@ -149,8 +149,6 @@ final class NavigationViewController: MapViewController {
             title = "follow"
         case .followWithHeading:
             title = "heading"
-            map.showsHeading = true
-            map.showsUserHeadingIndicator = true
         default:
             fatalError()
         }
