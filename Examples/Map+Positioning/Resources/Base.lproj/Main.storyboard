@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -265,29 +265,18 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eoN-AW-Sdz">
-                                <rect key="frame" x="20" y="107.33333333333331" width="350" height="280"/>
-                                <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="Ppd-ze-cqo"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bKC-0F-On0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eoN-AW-Sdz" firstAttribute="top" secondItem="VlV-Oc-B3x" secondAttribute="bottom" constant="20" id="0OK-FI-MOz"/>
                             <constraint firstItem="nwe-j2-iDT" firstAttribute="bottom" secondItem="bKC-0F-On0" secondAttribute="bottom" constant="-20" id="96R-C0-FYg"/>
                             <constraint firstItem="nwe-j2-iDT" firstAttribute="centerX" secondItem="4sh-1W-JyX" secondAttribute="centerX" id="AQl-Wh-wc6"/>
-                            <constraint firstItem="bKC-0F-On0" firstAttribute="trailing" secondItem="eoN-AW-Sdz" secondAttribute="trailing" constant="20" id="N9R-iP-GKb"/>
                             <constraint firstItem="VlV-Oc-B3x" firstAttribute="centerX" secondItem="4sh-1W-JyX" secondAttribute="centerX" id="Q9i-vU-q0i"/>
-                            <constraint firstItem="eoN-AW-Sdz" firstAttribute="leading" secondItem="bKC-0F-On0" secondAttribute="leading" constant="20" id="Yyy-Dk-kR4"/>
                             <constraint firstItem="VlV-Oc-B3x" firstAttribute="top" secondItem="bKC-0F-On0" secondAttribute="top" constant="20" id="qMr-5Q-7fO"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="infoLabel" destination="VlV-Oc-B3x" id="nGt-R2-qq9"/>
-                        <outlet property="previewImageView" destination="eoN-AW-Sdz" id="R6p-1Q-fuw"/>
                         <outlet property="startScanButton" destination="BMS-2O-skb" id="l9j-05-GWf"/>
                         <outlet property="stopScanButton" destination="X3W-wH-3aV" id="bCH-tu-2AP"/>
                     </connections>
