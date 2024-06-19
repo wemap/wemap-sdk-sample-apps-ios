@@ -11,29 +11,29 @@ PODS:
     - RxSwift (= 6.7.1)
   - RxSwift (6.7.1)
   - Turf (2.8.0)
-  - WemapCoreSDK (0.15.4):
+  - WemapCoreSDK (0.15.5):
     - Alamofire (~> 5.9.0)
     - RxCocoa (~> 6.7.0)
     - RxSwift (~> 6.7.0)
     - Turf (~> 2.8.0)
-  - WemapMapSDK (0.15.4):
+  - WemapMapSDK (0.15.5):
     - MapLibre (~> 6.4.0)
-    - WemapCoreSDK (~> 0.15.4)
+    - WemapCoreSDK (~> 0.15.5)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/Core (0.15.4):
+  - WemapPositioningSDK/Core (0.15.5):
     - RxSwift (~> 6.7.0)
-    - WemapCoreSDK (~> 0.15.4)
-  - WemapPositioningSDK/VPSARKit (0.15.4):
+    - WemapCoreSDK (~> 0.15.5)
+  - WemapPositioningSDK/VPSARKit (0.15.5):
     - WemapPositioningSDK/Core
-  - WemapPositioningSDKPolestar (0.15.4):
+  - WemapPositioningSDKPolestar (0.15.5):
     - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.15.4)
+    - WemapCoreSDK (~> 0.15.5)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapMapSDK (~> 0.15.4)
-  - WemapPositioningSDK/VPSARKit (~> 0.15.4)
-  - WemapPositioningSDKPolestar (~> 0.15.4)
+  - WemapMapSDK (~> 0.15.5)
+  - WemapPositioningSDK/VPSARKit (~> 0.15.5)
+  - WemapPositioningSDKPolestar (~> 0.15.5)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -61,12 +61,12 @@ SPEC CHECKSUMS:
   RxRelay: 4151ba01152436b08271e08410135e099880eae5
   RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
   Turf: aa2ede4298009639d10db36aba1a7ebaad072a5e
-  WemapCoreSDK: d247352aafae5e19729fdd4fedc094a8dd1f646d
-  WemapMapSDK: 51a2c311fe10d790e1972ba30fcbfd0082e8de5f
-  WemapPositioningSDK: ec45b0687dfa08f289c8a1d7629173d4beff123d
-  WemapPositioningSDKPolestar: a706bec646df75b84618ece89f6ef3902725c3ef
+  WemapCoreSDK: 8efa08d4bfdcbc6a393f52526813f9804de3d1b1
+  WemapMapSDK: 09caad9ec3fa662cb9b278e199a14b91384d6b45
+  WemapPositioningSDK: 3a1434e9375a9152dc89458b9b8d1892b071525e
+  WemapPositioningSDKPolestar: 6e1ebdd3bfff0824b7c591ea67151374416aff4f
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: ae0aeb3f26400e3ff87bd93db39e7781af04bd30
+PODFILE CHECKSUM: 2d5ecd79b8679d194659f004221eb72c1d737d11
 
 COCOAPODS: 1.15.2

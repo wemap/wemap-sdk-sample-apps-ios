@@ -2,6 +2,12 @@
 
 ---
 
+## [0.15.5]
+
+### Fixed
+
+* PosSDK(VPS): VPS session is not reset when the application returns from background
+
 ## [0.15.4]
 
 ### Fixed
