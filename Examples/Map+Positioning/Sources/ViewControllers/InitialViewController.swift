@@ -10,6 +10,8 @@ import RxCocoa
 import RxSwift
 import UIKit
 import WemapMapSDK
+import WemapPositioningSDKPolestar
+import WemapPositioningSDKVPSARKit
 
 class InitialViewController: UIViewController {
 
@@ -44,6 +46,29 @@ class InitialViewController: UIViewController {
     
     @IBAction func showMap() {
         
+        let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+        
+        let isAvailable = switch locationSourceType {
+        case .simulator: SimulatorLocationSource.isAvailable
+        case .polestar, .polestarEmulator: PolestarLocationSource.isAvailable
+        case .vps: VPSARKitLocationSource.isAvailable
+        case .systemDefault, .none: true
+        }
+        
+        guard isAvailable else {
+            return showUnavailableAlert()
+        }
+        
+        loadMap()
+    }
+    
+    private func showUnavailableAlert(message: String = "Desired location source is unavailable on this device") {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func loadMap() {
         guard let text = mapIDTextField.text, let id = Int(text) else {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
@@ -67,7 +92,7 @@ class InitialViewController: UIViewController {
             
             show(vc, sender: nil)
         } else {
-            // Fallback on earlier versions
+            showUnavailableAlert(message: "This sample supports only iOS 13 and higher")
         }
     }
 }

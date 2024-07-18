@@ -6,10 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Foundation
-import WemapCoreSDK
-import WemapMapSDK
-
 enum Constants {
     
     static var mapID: Int {

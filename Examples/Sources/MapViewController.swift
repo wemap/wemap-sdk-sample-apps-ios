@@ -81,12 +81,6 @@ class MapViewController: UIViewController, BuildingManagerDelegate {
             let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
             map.setCamera(camera, animated: true)
         }
-        
-        if !(map.userLocationManager.locationSource?.isAvailable ?? true) {
-            let vc = UIAlertController(title: nil, message: "Desired location source is unavailable", preferredStyle: .alert)
-            vc.addAction(.init(title: "Cancel", style: .cancel))
-            present(vc, animated: true)
-        }
     }
     
     @IBAction func levelChanged(_ sender: UISegmentedControl) {

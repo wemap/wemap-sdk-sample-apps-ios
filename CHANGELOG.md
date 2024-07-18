@@ -2,6 +2,31 @@
 
 ---
 
+## [0.17.0]
+
+### Breaking changes
+
+* `LocationSource`
+  * `var isAvailable: Bool` changed to `static var isAvailable: Bool`
+
+### Added
+
+* PosSDK: Add static "isAvailable" method to LocationSource
+
+### Fixed
+
+* MapSDK: Some navigation instructions have a "null" suffix
+* MapSDK: Multi-level itinerary segments are shown for all levels
+* PosSDK(VPS): VPS session is not reset when the application returns from background
+* PosSDK(VPS): Switch to SCAN_REQUIRED state when user is static in an elevator or escalator in navigation mode
+
+### Dependencies
+
+* Map
+  * MapLibre 6.4.2 -> 6.5.2
+* Polestar
+  * NAOSDK 4.11.15.2 -> 4.11.16
+
 ## [0.16.1]
 
 ### Fixed

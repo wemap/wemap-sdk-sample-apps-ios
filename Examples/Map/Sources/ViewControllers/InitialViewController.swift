@@ -12,7 +12,7 @@ import UIKit
 import WemapMapSDK
 
 class InitialViewController: UIViewController {
-
+    
     @IBOutlet var mapIDTextField: UITextField!
     @IBOutlet var sourcePicker: UIPickerView!
     
@@ -56,6 +56,27 @@ class InitialViewController: UIViewController {
     
     @IBAction func showMap() {
         
+        let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+        
+        let isAvailable = switch locationSourceType {
+        case .simulator: SimulatorLocationSource.isAvailable
+        case .systemDefault, .none: true
+        }
+        
+        guard isAvailable else {
+            return showUnavailableAlert()
+        }
+        
+        loadMap()
+    }
+    
+    private func showUnavailableAlert() {
+        let alert = UIAlertController(title: nil, message: "Desired location source is unavailable on this device", preferredStyle: .alert)
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func loadMap() {
         guard let text = mapIDTextField.text, let id = Int(text) else {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
