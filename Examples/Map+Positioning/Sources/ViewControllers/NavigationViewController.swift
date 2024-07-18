@@ -64,6 +64,7 @@ final class NavigationViewController: MapViewController {
                 "1 annotation to start from user location. 2 annotations to start from custom location",
             onView: view, hideDelay: Delay.short
         )
+        map.userTrackingMode = .follow
     }
     
     @IBAction func closeTouched() {

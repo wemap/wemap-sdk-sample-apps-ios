@@ -24,6 +24,19 @@
 
 * CoreSDK: move Step.getNavigationInstructions to CoreSDK
 
+## [0.15.5]
+
+### Fixed
+
+* PosSDK(VPS): VPS session is not reset when the application returns from background
+
+## [0.15.4]
+
+### Fixed
+
+* PosSDK(VPS): Switch to SCAN_REQUIRED state when user is static in an elevator or escalator in navigation mode
+* PosSDK(VPS): Change VPS request timeout to 20s
+
 ## [0.15.3]
 
 ### Fixed

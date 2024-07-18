@@ -16,7 +16,6 @@ import WemapPositioningSDKVPSARKit
 class CameraViewController: UIViewController {
 
     @IBOutlet var infoLabel: UILabel!
-    @IBOutlet var previewImageView: UIImageView!
     @IBOutlet var startScanButton: UIButton!
     @IBOutlet var stopScanButton: UIButton!
     
@@ -33,8 +32,6 @@ class CameraViewController: UIViewController {
         arView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(arView, at: 0)
         arView.session = session
-        
-        vpsLocationSource.observer = self
         
         weak var previousToast: UIView?
         vpsLocationSource
@@ -78,13 +75,5 @@ class CameraViewController: UIViewController {
     
     deinit {
         stateListener.dispose()
-    }
-}
-
-@available(iOS 13.0, *)
-extension CameraViewController: VPSARKitLocationSourceObserver {
-    
-    func locationSource(_: VPSARKitLocationSource, willSendImage image: UIImage) {
-        previewImageView.image = image
     }
 }

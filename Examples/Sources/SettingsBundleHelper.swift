@@ -18,11 +18,11 @@ private enum GlobalPreferencesKey: String {
          turfVersion
 }
 
-final class SettingsBundleHelper {
+enum SettingsBundleHelper {
     
     private static let defaults = UserDefaults.standard
     
-    class func applySettings(customKeysAndValues: [String: Any] = [:]) {
+    static func applySettings(customKeysAndValues: [String: Any] = [:]) {
         
         defaults.setValuesForKeys(customKeysAndValues)
 

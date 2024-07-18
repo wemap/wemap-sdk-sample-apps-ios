@@ -21,4 +21,12 @@ extension UserDefaults {
     static func double(forKey key: PreferencesKey, defaultValue: Double) -> Double {
         UserDefaults.value(forKey: key) != nil ? standard.double(forKey: key.rawValue) : defaultValue
     }
+    
+    static func float(forKey key: PreferencesKey, defaultValue: Float) -> Float {
+        UserDefaults.value(forKey: key) != nil ? standard.float(forKey: key.rawValue) : defaultValue
+    }
+    
+    static func int(forKey key: PreferencesKey, defaultValue: Int) -> Int {
+        UserDefaults.value(forKey: key) != nil ? standard.integer(forKey: key.rawValue) : defaultValue
+    }
 }
