@@ -26,7 +26,7 @@ class POIsListViewController: UITableViewController {
     
     private lazy var poisWithInfo: [PointOfInterestWithInfo] = mapView.pointOfInterestManager
         .getPOIs()
-        .map { PointOfInterestWithInfo($0, ItineraryInfo.unknown()) }
+        .map { PointOfInterestWithInfo($0, nil) }
     
     private var poiManager: PointOfInterestManager { mapView.pointOfInterestManager }
     
@@ -52,7 +52,7 @@ class POIsListViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
                 cell.textLabel?.text = poi.name
                 cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\n" +
-                    "address - \(poi.address)\ndistance - \(info.distance)\nduration - \(info.duration)"
+                "address - \(poi.address)\ndistance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
                 return cell
             }
             .disposed(by: disposeBag)
