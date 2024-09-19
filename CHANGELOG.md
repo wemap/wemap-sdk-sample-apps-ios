@@ -2,6 +2,13 @@
 
 ---
 
+### Fixed
+
+* Sample Map+Positioning(VPS): user position is not updated after closing scanning view
+    > Starting iOS 18, there is a bug where ARSession is automatically stopped by ARView when the view is dismissed/hidden.
+     Because of this, the positioning process stops after a few seconds.
+     If you are using ARView, we suggest a [workaround in our sample application](./Examples/Map+Positioning/Sources/ViewControllers/CameraViewController.swift)
+
 ## [0.17.0]
 
 ### Breaking changes
