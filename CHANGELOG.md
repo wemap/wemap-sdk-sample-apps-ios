@@ -56,6 +56,13 @@
 
 * CoreSDK: move Step.getNavigationInstructions to CoreSDK
 
+## [0.15.6]
+
+### Fixed
+
+* MapSDK: occasional crash on start navigation on iOS 15 with languages other than English
+* MapSDK: Some navigation instructions have a "null" suffix
+
 ## [0.15.5]
 
 ### Fixed
