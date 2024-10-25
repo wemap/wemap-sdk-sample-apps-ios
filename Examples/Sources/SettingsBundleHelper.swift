@@ -14,15 +14,14 @@ private enum GlobalPreferencesKey: String {
          buildNumber,
          coreVersion,
          alamofireVersion,
-         rxSwiftVersion,
-         turfVersion
+         rxSwiftVersion
 }
 
 enum SettingsBundleHelper {
     
-    private static let defaults = UserDefaults.standard
-    
     static func applySettings(customKeysAndValues: [String: Any] = [:]) {
+        
+        let defaults = UserDefaults.standard
         
         defaults.setValuesForKeys(customKeysAndValues)
 

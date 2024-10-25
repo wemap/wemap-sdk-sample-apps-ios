@@ -32,33 +32,30 @@ final class NavigationViewController: MapViewController {
         map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
-    private var navigationManager: NavigationManager { map.navigationManager }
+    private var navigationManager: MapNavigationManaging { map.navigationManager }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createLongPressGestureRecognizer()
+
+        updateUI()
+    }
+    
+    override func lateInit() {
+        super.lateInit()
+        
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
-        
-        createLongPressGestureRecognizer()
         
         map.userTrackingMode = .followWithHeading
         
         // this way you can specify user location indicator appearance
-    
-//        let foreground = UIImage(named: "UserPuckIcon")
-//        let heading = UIImage(named: "UserArrow")
-        
         map.userLocationManager.userLocationViewStyle = .init(
-//            foregroundImage: foreground,
-//            backgroundImage: UIImage(named: "UserIcon"),
-//            headingImage: heading,
             foregroundTintColor: .systemPink,
             backgroundTintColor: .black,
             headingTintColor: .green,
             outOfActiveLevelStyle: .init(
-//                foregroundImage: foreground,
-//                headingImage: heading,
                 foregroundTintColor: .darkGray,
                 headingTintColor: .red,
                 alpha: 0.5
@@ -156,10 +153,12 @@ final class NavigationViewController: MapViewController {
         disableStartButtons()
         
         navigationManager
-            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions /* , searchOptions: .init(avoidStairs: true) */ )
+            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions // ,
+//                             searchOptions: .init(avoidStairs: true), itineraryOptions: globalItineraryOptions
+            )
             .subscribe(
-                onSuccess: { [unowned self] itinerary in
-                    simulator?.setItinerary(itinerary)
+                onSuccess: { [unowned self] navigation in
+                    simulator?.setItinerary(navigation.itinerary)
                     stopNavigationButton.isEnabled = true
                 },
                 onFailure: { [unowned self] error in
@@ -196,7 +195,7 @@ extension NavigationViewController: PointOfInterestManagerDelegate {
     
     func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
         ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short) {
-            self.pointOfInterestManager.unselectPOI(poi)
+            _ = self.pointOfInterestManager.unselectPOI(poi)
         }
     }
 }
@@ -209,33 +208,33 @@ extension NavigationViewController: NavigationManagerDelegate {
         navigationInfo.text = info.shortDescription + "\nNext - \(nextStep)"
     }
     
-    func navigationManager(_: NavigationManager, didStartNavigation itinerary: Itinerary) {
+    func navigationManager(_: NavigationManager, didStartNavigation navigation: Navigation) {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
         
-        for leg in itinerary.legs.flatMap(\.steps) {
+        for leg in navigation.itinerary.legs.flatMap(\.steps) {
             let instructions = leg.getNavigationInstructions()
             debugPrint(instructions)
         }
     }
     
-    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
         startNavigationButton.isEnabled = true
     }
     
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Itinerary) {
+    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
         ToastHelper.showToast(message: "Navigation manager didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
     
-    func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {
+    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
         ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
     }
     
-    func navigationManager(_: NavigationManager, didRecalculateItinerary itinerary: Itinerary) {
-        ToastHelper.showToast(message: "Navigation itinerary recalculated - \(itinerary)", onView: view, hideDelay: Delay.short)
+    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+        ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }

@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 import WemapMapSDK
+import WemapCoreSDK
 
 class InitialViewController: UIViewController {
     
@@ -38,9 +39,8 @@ class InitialViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // if you need to retrieve all points of interest for some map in advance
-//        let service = PointOfInterestService()
-//
-//        service
+//        ServiceFactory
+//            .getPointOfInterestService()
 //            .pointsOfInterestList(mapID: Constants.mapID)
 //            .subscribe(onSuccess: {
 //                debugPrint("received pois - \($0)")

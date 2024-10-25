@@ -1,39 +1,40 @@
 PODS:
-  - Alamofire (5.9.1)
-  - MapLibre (6.5.2)
-  - NAOSDK (4.11.16)
+  - Alamofire (5.10.1)
+  - MapLibre (6.7.1)
+  - NAOSDK (4.11.17)
   - NAOSwiftProvider (1.3.0):
     - NAOSDK
-  - RxCocoa (6.7.1):
-    - RxRelay (= 6.7.1)
-    - RxSwift (= 6.7.1)
-  - RxRelay (6.7.1):
-    - RxSwift (= 6.7.1)
-  - RxSwift (6.7.1)
-  - Turf (2.8.0)
-  - WemapCoreSDK (0.17.0):
-    - Alamofire (~> 5.9.0)
-    - RxCocoa (~> 6.7.0)
-    - RxSwift (~> 6.7.0)
-    - Turf (~> 2.8.0)
-  - WemapMapSDK (0.17.0):
-    - MapLibre (~> 6.5.0)
-    - WemapCoreSDK (~> 0.17.0)
+  - RxCocoa (6.8.0):
+    - RxRelay (= 6.8.0)
+    - RxSwift (= 6.8.0)
+  - RxRelay (6.8.0):
+    - RxSwift (= 6.8.0)
+  - RxSwift (6.8.0)
+  - Turf (3.1.0)
+  - WemapCoreSDK (0.18.0):
+    - Alamofire (~> 5.10.0)
+    - RxCocoa (~> 6.8.0)
+    - RxRelay (~> 6.8.0)
+    - RxSwift (~> 6.8.0)
+    - Turf (~> 3.1.0)
+  - WemapMapSDK (0.18.0):
+    - MapLibre (~> 6.7.1)
+    - WemapCoreSDK (~> 0.18.0)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/Core (0.17.0):
-    - RxSwift (~> 6.7.0)
-    - WemapCoreSDK (~> 0.17.0)
-  - WemapPositioningSDK/VPSARKit (0.17.0):
+  - WemapPositioningSDK/Core (0.18.0):
+    - RxSwift (~> 6.8.0)
+    - WemapCoreSDK (~> 0.18.0)
+  - WemapPositioningSDK/VPSARKit (0.18.0):
     - WemapPositioningSDK/Core
-  - WemapPositioningSDKPolestar (0.17.0):
+  - WemapPositioningSDKPolestar (0.18.0):
     - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.17.0)
+    - WemapCoreSDK (~> 0.18.0)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapMapSDK (~> 0.17.0)
-  - WemapPositioningSDK/VPSARKit (~> 0.17.0)
-  - WemapPositioningSDKPolestar (~> 0.17.0)
+  - WemapMapSDK (~> 0.18.0)
+  - WemapPositioningSDK/VPSARKit (~> 0.18.0)
+  - WemapPositioningSDKPolestar (~> 0.18.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -53,20 +54,20 @@ SPEC REPOS:
     - Zip
 
 SPEC CHECKSUMS:
-  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
-  MapLibre: 5aebeb30e404765c9fecabdd97d3c126fbb3deaa
-  NAOSDK: b0615d3aee65a4bf7ef2bf62be71ff33a9c4f4f2
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  MapLibre: a82ab2ca7a727a2f0a72b2c474c13e8633e2fc91
+  NAOSDK: 5ac7cbc342712eb0f6c390c8cfe57dd6d047da6d
   NAOSwiftProvider: e685abcce0d2023daa3c58a017ff8b6787832753
-  RxCocoa: f5609cb4637587a7faa99c5d5787e3ad582b75a4
-  RxRelay: 4151ba01152436b08271e08410135e099880eae5
-  RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
-  Turf: aa2ede4298009639d10db36aba1a7ebaad072a5e
-  WemapCoreSDK: 2d19a9f3bafcb6478bdd3f5374b618e1fbf6f90c
-  WemapMapSDK: 22d7ec5d6c3d37e7ef6df870cde44e8a4f580f45
-  WemapPositioningSDK: 192386858cc587821c3e3d4309279f7c48c97878
-  WemapPositioningSDKPolestar: 816fae706c3472ad6cc1759eefa91a3641f9adb4
+  RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
+  RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
+  RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
+  Turf: 4acd6b0251ee2c7e7c672311d785466721065829
+  WemapCoreSDK: 0e1935a835d956bef71f206a2e362fe9d2dfbe22
+  WemapMapSDK: 196d5dfaf2f7fae282ac2901a0c24ed99e5fd44a
+  WemapPositioningSDK: 97251a803aae3ba500d578c6bba006ec5abbff6d
+  WemapPositioningSDKPolestar: 0b05ea1ae5254cedd3c5af5b5440b4827cf19685
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 44f7c7a6760d01d78a809a59f59707ac82ad2bc2
+PODFILE CHECKSUM: 2043854662147235692ed7f9908064c27b6c4182
 
 COCOAPODS: 1.15.2

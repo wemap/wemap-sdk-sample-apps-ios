@@ -36,29 +36,9 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>WemapMap</string>
-			<key>Key</key>
-			<string>mapVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>WemapCore</string>
+			<string>CoreSDK</string>
 			<key>Key</key>
 			<string>coreVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>MapLibre</string>
-			<key>Key</key>
-			<string>mapLibreVersion</string>
 			<key>DefaultValue</key>
 			<string>Unknown</string>
 		</dict>
@@ -84,37 +64,29 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>MapSDK</string>
+			<key>Key</key>
+			<string>mapVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>MapLibre</string>
+			<key>Key</key>
+			<string>mapLibreVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Preferences</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Minimum zoom level for indoor layers</string>
-			<key>Key</key>
-			<string>indoorMinZoomLevel</string>
-			<key>DefaultValue</key>
-			<string>17</string>
-			<key>IsSecure</key>
-			<false/>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Enable visual debugger</string>
-			<key>Key</key>
-			<string>visualDebuggingEnabled</string>
-			<key>DefaultValue</key>
-			<string>NO</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -123,26 +95,6 @@
 			<string>Switch levels automatically on user movements</string>
 			<key>Key</key>
 			<string>switchLevelsAutomaticallyOnUserMovements</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Recalculate itinerary if user is far from itinerary</string>
-			<key>Key</key>
-			<string>itineraryRecalculationEnabled</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Project user location on itinerary</string>
-			<key>Key</key>
-			<string>userLocationProjectionOnItineraryEnabled</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>

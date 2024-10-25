@@ -44,16 +44,20 @@ final class NavigationViewController: MapViewController {
         map.userLocationManager.locationSource as? VPSARKitLocationSource
     }
     
-    private var navigationManager: NavigationManager { map.navigationManager }
+    private var navigationManager: MapNavigationManaging { map.navigationManager }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createLongPressGestureRecognizer()
+    }
+    
+    override func lateInit() {
+        super.lateInit()
         
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
         vpsLocationSource?.vpsDelegate = self
-        
-        createLongPressGestureRecognizer()
+        vpsLocationSource?.observer = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +68,10 @@ final class NavigationViewController: MapViewController {
                 "1 annotation to start from user location. 2 annotations to start from custom location",
             onView: view, hideDelay: Delay.short
         )
+    }
+    
+    override func mapViewLoaded(_ mapView: MapView, style: MLNStyle, data: MapData) {
+        super.mapViewLoaded(mapView, style: style, data: data)
         map.userTrackingMode = .follow
     }
     
@@ -162,8 +170,8 @@ final class NavigationViewController: MapViewController {
         navigationManager
             .startNavigation(origin: origin, destination: destination)
             .subscribe(
-                onSuccess: { [unowned self] itinerary in
-                    simulator?.setItinerary(itinerary)
+                onSuccess: { [unowned self] navigation in
+                    simulator?.setItinerary(navigation.itinerary)
                     stopNavigationButton.isEnabled = true
                 },
                 onFailure: { [unowned self] error in
@@ -213,7 +221,7 @@ extension NavigationViewController: PointOfInterestManagerDelegate {
     
     func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
         ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short) {
-            self.pointOfInterestManager.unselectPOI(poi)
+            _ = self.pointOfInterestManager.unselectPOI(poi)
         }
     }
 }
@@ -226,46 +234,52 @@ extension NavigationViewController: NavigationManagerDelegate {
         navigationInfo.text = info.description
     }
     
-    func navigationManager(_: NavigationManager, didStartNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didStartNavigation _: Navigation) {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
     }
     
-    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
     }
     
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Itinerary) {
+    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
         ToastHelper.showToast(message: "Navigation didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
     
-    func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {
+    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
         ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
     }
     
-    func navigationManager(_: NavigationManager, didRecalculateItinerary itinerary: Itinerary) {
-        ToastHelper.showToast(message: "Navigation itinerary recalculated - \(itinerary)", onView: view, hideDelay: Delay.short)
+    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+        ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }
 
 @available(iOS 13.0, *)
 extension NavigationViewController: VPSARKitLocationSourceDelegate {
     
+    func locationSource(_: VPSARKitLocationSource, didFailWithError error: VPSARKitLocationSourceError) {
+        debugPrint("VPS failed with error: \(error)")
+    }
+    
+    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
+        debugPrint("VPS scan status changed: \(status)")
+    }
+    
     func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         
         debugPrint("state - \(state)")
 
         switch state {
-        case .scanRequired where cameraVC == nil:
+        case .notPositioning where cameraVC == nil:
             showCamera(session: locationSource.session, assignCamera: true)
-        case let .limited(reason):
+        case let .degradedPositioning(reason):
             showVPSToast(message: "Tracking is limited due to - \(reason)")
-        case .noTracking:
-            showVPSToast(message: "Tracking is not available yet. Rotate your phone around")
-        default:
+        default: // .accuratePositioning
             currentVPSToast?.removeFromSuperview()
         }
     }
@@ -273,5 +287,28 @@ extension NavigationViewController: VPSARKitLocationSourceDelegate {
     private func showVPSToast(message: String) {
         currentVPSToast?.removeFromSuperview()
         currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: .infinity)
+    }
+}
+
+@available(iOS 13.0, *)
+extension NavigationViewController: VPSARKitLocationSourceObserver {
+    
+    func locationSource(_: VPSARKitLocationSource, didChangeMovementState state: Int) {
+        let stateString = switch state {
+        case 0: "unknown"
+        case 1: "static"
+        case 2: "dynamic"
+        default: "not expected number \(state)"
+        }
+        debugPrint("Movement state changed to - \(stateString)")
+    }
+    
+    func locationSource(_: VPSARKitLocationSource, didChangeConveyingState state: Int) {
+        let stateString = switch state {
+        case 0: "notConveying"
+        case 1: "conveying"
+        default: "not expected number \(state)"
+        }
+        debugPrint("Conveing state changed to - \(stateString)")
     }
 }

@@ -2,12 +2,109 @@
 
 ---
 
+## [0.18.0]
+
+### Breaking changes
+
+* MapSDK
+  * Now by default it is possible to select only one POI at a time. To enable multiple POIs selection, you have to change `selectionMode` to `.multiple` in `PointOfInterestManager`.
+  * `WemapMapViewDelegate` renamed to `MapViewDelegate`:
+    * `func map(_ map: MapView, didTouchAtPoint point: CGPoint)` renamed to `func mapView(_ mapView: MapView, didTouchAtPoint point: CGPoint)`
+  * `BuildingManagerDelegate` changed:
+    * `func map(_ map: MapView, didChangeLevel level: Level, ofBuilding building: Building)` changed to `func buildingManager(_ manager: BuildingManager, didChangeLevel level: Level, ofBuilding building: Building)`
+    * `func map(_ map: MapView, didFocusBuilding building: Building?)` changed to `func buildingManager(_ manager: BuildingManager, didFocusBuilding building: Building?)`
+  * `MapConstants` properties moved to `CoreConstants`:
+    * `itineraryRecalculationEnabled`
+    * `userLocationProjectionOnItineraryEnabled`
+  * `MapView` changed:
+    * `let pointOfInterestManager` changed type from `PointOfInterestManager` to `MapPointOfInterestManaging`
+    * `let navigationManager` changed type from `NavigationManager` to `MapNavigationManaging`
+      * `isSelectionEnabled` changed to `isUserSelectionEnabled`. Also changed its logic. Previously this property was used to disable all ways to selecting POIs - programmatically and by user clicking on POI on the map.
+        Now this property applies only to user actions - if `isUserSelectionEnabled = false` - user will not be able to select POI, but POI can still be selected programmatically.
+      * `func startNavigation(origin: Coordinate?, destination: Coordinate, travelMode: TravelMode, options: NavigationOptions, searchOptions: ItinerarySearchOptions, timeout: DispatchTimeInterval) -> Single<Itinerary>` changed to `func startNavigation(origin: Coordinate?, destination: Coordinate, travelMode: TravelMode, options: NavigationOptions, searchOptions: ItinerarySearchOptions, timeout: DispatchTimeInterval) -> Single<Navigation>`
+      * `func startNavigation(_ itinerary: Itinerary, options: NavigationOptions, searchOptions: ItinerarySearchOptions) -> Single<Itinerary>` changed to `func startNavigation(_ itinerary: Itinerary, options: NavigationOptions, searchOptions: ItinerarySearchOptions) -> Single<Navigation>`
+      * `func stopNavigation() -> Result<Itinerary, NavigationError>` changed to `func stopNavigation() -> Result<Navigation, Error>`
+  * Removed `BuildingData`
+  * Moved from `WemapMapSDK` to `WemapCoreSDK`:
+    * `Category`
+    * `Tag`
+    * `UseTags`
+    * `SimulatorLocationSource`
+    * `SimulationOptions`
+    * `Extras` moved to `MapData.Extras`
+    * `PointOfInterestManager` class changed to protocol `PointOfInterestManaging`
+    * `PointOfInterestManagerDelegate`
+    * `PointOfInterestWithInfo.info: ItineraryInfo` changed to `PointOfInterestWithInfo.info: ItineraryInfo?`
+    * `MapData`
+      * `let bounds: MLNCoordinateBounds` changed to `let bounds: BoundingBox`
+      * `let maxBounds: MLNCoordinateBounds?` changed to `let maxBounds: BoundingBox?`
+    * `NavigationManager` class changed to protocol `NavigationManaging`
+      * `var updateTimeInterval: DispatchTimeInterval` renamed to `var infoUpdatesTimeInterval: DispatchTimeInterval`
+    * `NavigationManagerDelegate`
+      * `func navigationManager(_ manager: NavigationManager, didStartNavigation itinerary: Itinerary)` changed to `func navigationManager(_ manager: NavigationManager, didStartNavigation navigation: Navigation)`
+      * `func navigationManager(_ manager: NavigationManager, didStopNavigation itinerary: Itinerary)` changed to `func navigationManager(_ manager: NavigationManager, didStopNavigation navigation: Navigation)`
+      * `func navigationManager(_ manager: NavigationManager, didArriveAtDestination itinerary: Itinerary)` changed to `func navigationManager(_ manager: NavigationManager, didArriveAtDestination navigation: Navigation)`
+      * `func navigationManager(_ manager: NavigationManager, didFailWithError error: NavigationError)` changed to `func navigationManager(_ manager: NavigationManager, didFailWithError error: Error)`
+      * `func navigationManager(_ manager: NavigationManager, didRecalculateItinerary itinerary: Itinerary)` changed to `func navigationManager(_ manager: NavigationManager, didRecalculateNavigation navigation: Navigation)`
+    * `NavigationError`
+      * Removed `failedToAddItineraryToMap`
+      * `failedToRemoveItineraryFromMap` renamed to `failedToRemoveNavigation`
+    * `NavigationOptions`
+      * `let userTrackingMode: MLNUserTrackingMode?` removed. You can use `map.userTrackingMode` instead
+      * `let itineraryOptions: ItineraryOptions` removed. Now it should be provided as independent parameter to `MapNavigationManaging.startNavigation()`
+* CoreSDK
+  * `ItineraryService` class changed to protocol `ItineraryServicing`. Now you can't create it yourself, but you can request it through `ServiceFactory.getItineraryService()`
+  * `PointOfInterestService` class changed to protocol `PointOfInterestServicing`. Now you can't create it yourself, but you can request it through `ServiceFactory.getPointOfInterestService()`
+  * `PointOfInterest`
+    * `let imageUrl: String` renamed to `let imageURL: String`
+  * `LocationSourceDelegate`
+    * `func locationSource(_ locationSource: any LocationSource, didUpdateLocation coordinate: Coordinate)` renamed to `func locationSource(_ locationSource: any LocationSource, didUpdateCoordinate coordinate: Coordinate)`
+* PosSDK(VPS)
+  * `VPSARKitLocationSource` changed:
+    * `ScanReason` renamed to `NotPositioningReason`
+    * `State` cases changed accordingly:
+      * `scanRequired(reason: ScanReason)` renamed to `notPositioning(reason: NotPositioningReason)`
+      * `limited(reason: ARCamera.TrackingState.Reason)` changed to `degradedPositioning(reason: DegradedPositioningReason)`
+        * `limited(reason: ARCamera.TrackingState.Reason)` moved to `DegradedPositioningReason.session(reason: ARCamera.TrackingState.Reason)`
+      * `normal` renamed to `accuratePositioning`
+      * Removed `noTracking`
+  * Removed `VPSServiceError`
+  
+### Added
+
+* PosSDK(VPS): Enhancement of lifecycle
+* MapSDK: Make PoIs loaded before returning Map
+* CoreSDK: add single PoI selection mode and it is used by default (instead of multiple PoIs selection)
+* MapSDK: throw an error if BuildingData is corrupted
+* MapSDK: Make the camera zoom when user tracking mode is changed to follow/tracking
+* MapSDK: Set userTrackingMode to None when BuildingManager.setLevel is called
+* PosSDK(VPS): Trigger the reason of rescan necessary. Ex.: because of conveying detected
+* MapSDK: add map view callback mapViewLoaded
+
+### Changed
+
+* PosSDK(VPS): rename VPS states
+
 ### Fixed
 
+* CoreSDK: handle sorting by graph distance/duration error in BE response
+* CoreSDK: memory issue on resource deallocation
+* MapSDK: initial coordinate bounds are too small
 * Sample Map+Positioning(VPS): user position is not updated after closing scanning view
     > Starting iOS 18, there is a bug where ARSession is automatically stopped by ARView when the view is dismissed/hidden.
      Because of this, the positioning process stops after a few seconds.
      If you are using ARView, we suggest a [workaround in our sample application](./Examples/Map+Positioning/Sources/ViewControllers/CameraViewController.swift)
+
+### Dependencies
+
+* Core
+  * Turf 2.8.0 -> 3.1.0
+  * RxSwift 6.7.1 -> 6.8.0
+  * Alamofire 5.9.1 -> 5.10.1
+* Map
+  * MapLibre 6.5.2 -> 6.7.1
+* Polestar
+  * NAOSDK 4.11.16 -> 4.11.17
 
 ## [0.17.0]
 

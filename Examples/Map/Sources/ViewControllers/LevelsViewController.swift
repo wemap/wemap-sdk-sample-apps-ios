@@ -7,7 +7,6 @@
 //
 // swiftlint:disable force_try
 
-import MapLibre
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -19,12 +18,6 @@ final class LevelsViewController: MapViewController {
         let data = try! Data(contentsOf: dataURL)
         return try! JSONDecoder().decode([ConsumerData].self, from: data)
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        map.userTrackingMode = .followWithHeading
-    }
     
     @IBAction func closeTouched() {
         dismiss(animated: true)
@@ -47,7 +40,7 @@ final class LevelsViewController: MapViewController {
         pointOfInterestManager.selectPOI(desiredPOI)
         
         showToast(poiID: desiredPOI.id) {
-            self.pointOfInterestManager.unselectPOI(desiredPOI)
+            _ = self.pointOfInterestManager.unselectPOI(desiredPOI)
         }
     }
     

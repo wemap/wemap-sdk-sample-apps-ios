@@ -27,27 +27,38 @@ final class POIsViewController: MapViewController {
     @IBOutlet var toggleSelectionButton: UIButton!
     @IBOutlet var poisByDistanceButton: UIButton!
     @IBOutlet var poisByTimeButton: UIButton!
+    @IBOutlet var userSelectionSwitch: UISwitch!
     
     private var simulator: SimulatorLocationSource? {
         map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
-    private var navigationManager: NavigationManager { map.navigationManager }
+    private var navigationManager: MapNavigationManaging { map.navigationManager }
     
-    private var selectedPOI: PointOfInterest?
     private var simulatedUserPosition: MLNAnnotation?
+    
+    private var selectedPOI: PointOfInterest? {
+        pointOfInterestManager.getSelectedPOI()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createLongPressGestureRecognizer()
+    }
+    
+    override func lateInit() {
+        super.lateInit()
         
-        map.mapDelegate = self
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
         
         map.userTrackingMode = .followWithHeading
         
-        createLongPressGestureRecognizer()
-        toggleSelectionButton.setTitle("Enable selection", for: .selected)
+        userSelectionSwitch.rx.isOn
+            .subscribe(onNext: { [unowned self] isOn in
+                pointOfInterestManager.isUserSelectionEnabled = isOn
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,14 +109,18 @@ final class POIsViewController: MapViewController {
     }
     
     @IBAction func removeFilters() {
-        pointOfInterestManager.removeFilters()
+        _ = pointOfInterestManager.removeFilters()
         applyFilterButton.isEnabled = true
         removeFiltersButton.isEnabled = false
     }
     
     @IBAction func toggleSelection() {
-        toggleSelectionButton.isSelected.toggle()
-        pointOfInterestManager.isSelectionEnabled.toggle()
+        var newModeRaw = pointOfInterestManager.selectionMode.rawValue + 1
+        newModeRaw = newModeRaw < PointOfInterestManager.SelectionMode.allCases.count ? newModeRaw : 0
+        let newMode = PointOfInterestManager.SelectionMode(rawValue: newModeRaw)!
+        
+        pointOfInterestManager.selectionMode = newMode
+        toggleSelectionButton.setTitle("Selection: \(newMode.description)", for: .normal)
     }
     
     private func startNavigationToSelectedPOI(origin: Coordinate? = nil) {
@@ -116,8 +131,8 @@ final class POIsViewController: MapViewController {
         navigationManager
             .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions)
             .subscribe(
-                onSuccess: { [unowned self] itinerary in
-                    simulator?.setItinerary(itinerary)
+                onSuccess: { [unowned self] navigation in
+                    simulator?.setItinerary(navigation.itinerary)
                     stopNavigationButton.isEnabled = true
                 },
                 onFailure: { [unowned self] error in
@@ -151,7 +166,7 @@ final class POIsViewController: MapViewController {
     }
     
     private func updateUI() {
-        startNavigationButton.isEnabled = selectedPOI != nil && !stopNavigationButton.isEnabled
+        startNavigationButton.isEnabled = !stopNavigationButton.isEnabled && selectedPOI != nil
         startNavigationFromSimulatedUserPositionButton.isEnabled = selectedPOI != nil && simulatedUserPosition != nil && !stopNavigationButton.isEnabled
         removeSimulatedUserPositionButton.isEnabled = simulatedUserPosition != nil
         poisByDistanceButton.isEnabled = simulatedUserPosition != nil
@@ -172,16 +187,13 @@ final class POIsViewController: MapViewController {
         return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
     }
     
-    private func unselectSelectedPOI() {
-        if let selectedPOI {
-            pointOfInterestManager.unselectPOI(selectedPOI)
-        }
-        selectedPOI = nil
-    }
-    
     private func getCoordinateFromSimulatedUserPosition() -> Coordinate {
         let from = simulatedUserPosition!
         return Coordinate(coordinate2D: from.coordinate, levels: getLevelFromAnnotation(from))
+    }
+    
+    override func mapView(_: MapView, didTouchAtPoint _: CGPoint) {
+        _ = pointOfInterestManager.unselectPOI()
     }
     
     // MARK: - Navigation
@@ -201,14 +213,11 @@ final class POIsViewController: MapViewController {
 
 extension POIsViewController: PointOfInterestManagerDelegate {
     
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
-        unselectSelectedPOI()
-        selectedPOI = poi
+    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
         updateUI()
     }
     
     func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
-        selectedPOI = nil
         updateUI()
     }
     
@@ -224,35 +233,28 @@ extension POIsViewController: NavigationManagerDelegate {
         navigationInfo.text = info.description
     }
     
-    func navigationManager(_: NavigationManager, didStartNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didStartNavigation _: Navigation) {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
     }
     
-    func navigationManager(_: NavigationManager, didStopNavigation _: Itinerary) {
+    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
     }
     
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Itinerary) {
+    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
         ToastHelper.showToast(message: "Navigation manager didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
     
-    func navigationManager(_: NavigationManager, didFailWithError error: NavigationError) {
+    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
     }
     
-    func navigationManager(_: NavigationManager, didRecalculateItinerary itinerary: Itinerary) {
-        ToastHelper.showToast(message: "Navigation itinerary recalculated - \(itinerary)", onView: view, hideDelay: Delay.short)
-    }
-}
-
-extension POIsViewController: WemapMapViewDelegate {
-    
-    func map(_: MapView, didTouchAtPoint _: CGPoint) {
-        unselectSelectedPOI()
+    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+        ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }

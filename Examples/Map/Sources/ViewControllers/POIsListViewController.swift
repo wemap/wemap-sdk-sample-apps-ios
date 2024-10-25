@@ -24,11 +24,11 @@ class POIsListViewController: UITableViewController {
     
     private let disposeBag = DisposeBag()
     
-    private lazy var poisWithInfo: [PointOfInterestWithInfo] = mapView.pointOfInterestManager
+    private lazy var poisWithInfo: [PointOfInterestWithInfo] = poiManager
         .getPOIs()
-        .map { PointOfInterestWithInfo($0, ItineraryInfo.unknown()) }
+        .map { PointOfInterestWithInfo($0, nil) }
     
-    private var poiManager: PointOfInterestManager { mapView.pointOfInterestManager }
+    private var poiManager: MapPointOfInterestManaging { mapView.pointOfInterestManager }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +52,14 @@ class POIsListViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
                 cell.textLabel?.text = poi.name
                 cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\n" +
-                    "address - \(poi.address)\ndistance - \(info.distance)\nduration - \(info.duration)"
+                    "address - \(poi.address)\ndistance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
                 return cell
             }
             .disposed(by: disposeBag)
     }
     
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mapView.pointOfInterestManager.selectPOI(poisWithInfo[indexPath.row].poi)
+        _ = poiManager.selectPOI(poisWithInfo[indexPath.row].poi)
         dismiss(animated: true)
     }
 }

@@ -63,7 +63,7 @@ class CameraViewController: UIViewController {
         vpsLocationSource.startScan()
         stateListener.disposable = vpsLocationSource
             .rx.didChangeState.asObservable()
-            .filter { $0 == .normal }
+            .filter { $0 == .accuratePositioning }
             .take(1).asSingle()
             .subscribe(onSuccess: { [unowned self] _ in
                 dismiss(animated: true)

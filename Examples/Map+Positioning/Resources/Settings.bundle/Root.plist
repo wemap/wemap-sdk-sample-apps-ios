@@ -96,19 +96,35 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Camera image side</string>
+			<string>Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Switch levels automatically on user movements</string>
+			<key>Key</key>
+			<string>switchLevelsAutomaticallyOnUserMovements</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Stop distance threshold</string>
 			<key>FooterText</key>
-			<string>The maximum size of the smaller side of the camera image sent to the server</string>
+			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 15 meters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Camera image side</string>
+			<string>Stop distance threshold</string>
 			<key>Key</key>
-			<string>cameraImageMaxSizeSmallerSide</string>
+			<string>stopDistanceThreshold</string>
 			<key>DefaultValue</key>
-			<string>720</string>
+			<string>15</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -122,41 +138,19 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>VPS Preferences</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Static position detector</string>
+			<string>User position threshold</string>
+			<key>FooterText</key>
+			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 25 meters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Window duration seconds</string>
+			<string>User position threshold</string>
 			<key>Key</key>
-			<string>staticPositionDetectorWindowDurationSeconds</string>
+			<string>userPositionThreshold</string>
 			<key>DefaultValue</key>
-			<string>3</string>
-			<key>IsSecure</key>
-			<false/>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Geofence radius meters</string>
-			<key>Key</key>
-			<string>staticPositionDetectorGeofenceRadiusMeters</string>
-			<key>DefaultValue</key>
-			<string>1</string>
+			<string>25</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -170,53 +164,19 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Conveying detector</string>
+			<string>Navigation recalculation time interval</string>
+			<key>FooterText</key>
+			<string>The navigation recalculation time interval, measured in seconds, indicates the interval between consecutive navigation recalculations. An interval of less than 5 seconds is forbidden. Default is 5 seconds</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Duration seconds</string>
+			<string>Navigation recalculation time interval</string>
 			<key>Key</key>
-			<string>conveyingDetectionDurationSeconds</string>
-			<key>DefaultValue</key>
-			<string>3</string>
-			<key>IsSecure</key>
-			<false/>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Elevator buffer width</string>
-			<key>Key</key>
-			<string>conveyingDetectorElevatorBufferWidth</string>
+			<string>navigationRecalculationTimeInterval</string>
 			<key>DefaultValue</key>
 			<string>5</string>
-			<key>IsSecure</key>
-			<false/>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Linear conveying buffers width</string>
-			<key>Key</key>
-			<string>conveyingDetectorLinearConveyingBuffersWidth</string>
-			<key>DefaultValue</key>
-			<string>2</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

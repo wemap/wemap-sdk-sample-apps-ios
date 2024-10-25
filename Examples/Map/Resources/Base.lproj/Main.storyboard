@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -36,7 +36,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="19158" borderStyle="roundedRect" placeholder="Map ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="23254" borderStyle="roundedRect" placeholder="Map ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
                                         <rect key="frame" x="0.0" y="28.333333333333343" width="73.666666666666671" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
@@ -186,10 +186,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liI-SY-mON">
-                                <rect key="frame" x="16" y="62.333333333333329" width="153.66666666666666" height="34.333333333333329"/>
+                                <rect key="frame" x="16" y="62.333333333333329" width="148.66666666666666" height="34.333333333333329"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Disable selection"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Disable selection"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Selection: single"/>
                                 <connections>
                                     <action selector="toggleSelection" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Kbw-Rx-cV7"/>
                                 </connections>
@@ -215,6 +215,20 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="H80-uy-6Ib">
+                                <rect key="frame" x="208" y="22" width="166" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LL-Ki-456">
+                                        <rect key="frame" x="0.0" y="0.0" width="109" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Zi-qy-F7G">
+                                        <rect key="frame" x="117" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d3b-ax-gvx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -225,6 +239,7 @@
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cfI-hD-86U" secondAttribute="trailing" constant="8" id="BgA-q5-DqP"/>
                             <constraint firstItem="cfI-hD-86U" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Eq2-yh-Up8"/>
                             <constraint firstItem="beM-pR-pdz" firstAttribute="top" secondItem="pTR-zN-tqg" secondAttribute="bottom" constant="8" id="FCJ-AR-iQh"/>
+                            <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" secondItem="H80-uy-6Ib" secondAttribute="trailing" constant="16" id="Gyl-vU-NfT"/>
                             <constraint firstItem="cfI-hD-86U" firstAttribute="top" secondItem="beM-pR-pdz" secondAttribute="bottom" constant="8" symbolic="YES" id="QfW-xm-Z1h"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" secondItem="beM-pR-pdz" secondAttribute="trailing" constant="16" id="TNW-BH-hEs"/>
                             <constraint firstItem="pTR-zN-tqg" firstAttribute="top" secondItem="ygm-k9-QXt" secondAttribute="top" constant="20" symbolic="YES" id="W9M-6h-f5O"/>
@@ -237,6 +252,7 @@
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pTR-zN-tqg" secondAttribute="trailing" constant="16" id="ppZ-M7-mhw"/>
                             <constraint firstItem="liI-SY-mON" firstAttribute="leading" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="r9G-EN-Uod"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="bottom" secondItem="qSE-4D-Cgk" secondAttribute="bottom" constant="8" id="w6N-5j-aUE"/>
+                            <constraint firstItem="H80-uy-6Ib" firstAttribute="top" secondItem="d3b-ax-gvx" secondAttribute="top" constant="22" id="y6X-Kp-6PT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjR-zi-AQu"/>
@@ -252,6 +268,7 @@
                         <outlet property="startNavigationFromSimulatedUserPositionButton" destination="9Bv-La-GGd" id="RO3-Pv-eqB"/>
                         <outlet property="stopNavigationButton" destination="foH-2j-5JC" id="Fea-b0-kfh"/>
                         <outlet property="toggleSelectionButton" destination="liI-SY-mON" id="0Be-7Y-cdo"/>
+                        <outlet property="userSelectionSwitch" destination="3Zi-qy-F7G" id="nLT-4v-vKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhR-C8-j8m" sceneMemberID="firstResponder"/>
@@ -605,7 +622,7 @@
             <color red="0.0" green="0.19200000166893005" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

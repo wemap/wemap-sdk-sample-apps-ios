@@ -11,21 +11,22 @@ import WemapPositioningSDK
 import WemapPositioningSDKVPSARKit
 
 enum PreferencesKey: String {
+    // versions
     case mapVersion,
          positioningVersion,
          mapLibreVersion,
-         cameraImageMaxSizeSmallerSide,
-         staticPositionDetectorWindowDurationSeconds,
-         staticPositionDetectorGeofenceRadiusMeters,
-         conveyingDetectorDurationSeconds,
-         conveyingDetectorElevatorBufferWidth,
-         conveyingDetectorLinearConveyingBuffersWidth
+         // constants
+         switchLevelsAutomaticallyOnUserMovements,
+         // Global navigation options
+         stopDistanceThreshold,
+         userPositionThreshold,
+         navigationRecalculationTimeInterval
 }
 
 func customKeysAndValues() -> [String: Any] {
     
-    VPSARKitConstants.cameraImageMaxSizeSmallerSide = UserDefaults
-        .double(forKey: .cameraImageMaxSizeSmallerSide, defaultValue: VPSARKitConstants.cameraImageMaxSizeSmallerSide)
+    MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
+        .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
     
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,
@@ -33,31 +34,5 @@ func customKeysAndValues() -> [String: Any] {
         .positioningVersion: Bundle.positioning.version
     ]
     
-    VPSARKitConstants.StaticPositionDetector.windowDurationSeconds = UserDefaults.double(
-        forKey: .staticPositionDetectorWindowDurationSeconds,
-        defaultValue: VPSARKitConstants.StaticPositionDetector.windowDurationSeconds
-    )
-    
-    VPSARKitConstants.StaticPositionDetector.geofenceRadiusMeters = UserDefaults.float(
-        forKey: .staticPositionDetectorGeofenceRadiusMeters,
-        defaultValue: VPSARKitConstants.StaticPositionDetector.geofenceRadiusMeters
-    )
-    
-    VPSARKitConstants.ConveyingDetector.durationSeconds = UserDefaults.int(
-        forKey: .conveyingDetectorDurationSeconds,
-        defaultValue: VPSARKitConstants.ConveyingDetector.durationSeconds
-    )
-    
-    VPSARKitConstants.ConveyingDetector.elevatorBufferWidth = UserDefaults.double(
-        forKey: .conveyingDetectorElevatorBufferWidth,
-        defaultValue: VPSARKitConstants.ConveyingDetector.elevatorBufferWidth
-    )
-    
-    VPSARKitConstants.ConveyingDetector.linearConveyingBuffersWidth = UserDefaults.double(
-        forKey: .conveyingDetectorLinearConveyingBuffersWidth,
-        defaultValue: VPSARKitConstants.ConveyingDetector.linearConveyingBuffersWidth
-    )
-    
-    let dict = Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
-    return dict
+    return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
 }

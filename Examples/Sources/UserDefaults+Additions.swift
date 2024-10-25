@@ -10,8 +10,8 @@ import Foundation
 
 extension UserDefaults {
     
-    static func bool(forKey key: PreferencesKey) -> Bool {
-        standard.bool(forKey: key.rawValue)
+    static func bool(forKey key: PreferencesKey, defaultValue: Bool) -> Bool {
+        UserDefaults.value(forKey: key) != nil ? standard.bool(forKey: key.rawValue) : defaultValue
     }
     
     static func value(forKey key: PreferencesKey) -> Any? {

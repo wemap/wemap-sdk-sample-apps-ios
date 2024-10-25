@@ -9,6 +9,7 @@
 import RxCocoa
 import RxSwift
 import UIKit
+import WemapCoreSDK
 import WemapMapSDK
 import WemapPositioningSDKPolestar
 import WemapPositioningSDKVPSARKit

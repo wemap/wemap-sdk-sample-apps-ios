@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WemapMapSDK
+import WemapCoreSDK
 
 class SamplesTableViewController: UITableViewController {
 
