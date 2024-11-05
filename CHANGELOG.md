@@ -106,6 +106,11 @@
 * Polestar
   * NAOSDK 4.11.16 -> 4.11.17
 
+### Compatibility
+
+* Xcode 16.0
+* Swift 6 (effective 5.10)
+
 ## [0.17.0]
 
 ### Breaking changes
@@ -131,11 +136,21 @@
 * Polestar
   * NAOSDK 4.11.15.2 -> 4.11.16
 
+### Compatibility
+
+* Xcode 15.4
+* Swift 5.10
+
 ## [0.16.1]
 
 ### Fixed
 
 * MapSDK: buildings that are not related to the current map have been loaded
+
+### Compatibility
+
+* Xcode 15.4
+* Swift 5.10
 
 ## [0.16.0]
 
@@ -153,6 +168,11 @@
 
 * CoreSDK: move Step.getNavigationInstructions to CoreSDK
 
+### Compatibility
+
+* Xcode 15.4
+* Swift 5.10
+
 ## [0.15.6]
 
 ### Fixed
@@ -160,11 +180,21 @@
 * MapSDK: occasional crash on start navigation on iOS 15 with languages other than English
 * MapSDK: Some navigation instructions have a "null" suffix
 
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
+
 ## [0.15.5]
 
 ### Fixed
 
 * PosSDK(VPS): VPS session is not reset when the application returns from background
+
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
 
 ## [0.15.4]
 
@@ -173,11 +203,21 @@
 * PosSDK(VPS): Switch to SCAN_REQUIRED state when user is static in an elevator or escalator in navigation mode
 * PosSDK(VPS): Change VPS request timeout to 20s
 
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
+
 ## [0.15.3]
 
 ### Fixed
 
 * MapSDK: buildings that are not related to the current map have been loaded
+
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
 
 ## [0.15.2]
 
@@ -189,6 +229,11 @@
 ### Dependencies
 
 * MapLibre 6.4.1 -> 6.4.2
+
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
 
 ## [0.15.1]
 
@@ -203,6 +248,11 @@
 * RxCocoa 6.7.0 -> 6.7.1
 * RxRelay 6.7.0 -> 6.7.1
 * RxSwift 6.7.0 -> 6.7.1
+
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
 
 ## [0.15.0]
 
@@ -232,6 +282,11 @@
 * MapLibre 6.2.0 -> 6.4.0
 * RxSwift 6.6.0 -> 6.7.0
 
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
+
 ## [0.14.3]
 
 ### Fixed
@@ -242,17 +297,32 @@
 
 * NAOSDK 4.11.14 -> 4.11.15
 
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
+
 ## [0.14.2]
 
 ### Fixed
 
 * MapSDK: centerToPOI fails if POI doesn't have level or there is no building in focus
 
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
+
 ## [0.14.1]
 
 ### Fixed
 
 * MapSDK: allow POIs that are not attached to the building to be shown on the map
+
+### Compatibility
+
+* Xcode 15.3
+* Swift 5.10
 
 ## [0.14.0]
 
@@ -272,6 +342,11 @@
 
 * MapLibre 6.1.1 -> 6.2.0
 * Alamofire 5.8.1 -> 5.9.0
+
+### Compatibility
+
+* Xcode 15.2
+* Swift 5.9
 
 ## [0.13.0]
 
