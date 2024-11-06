@@ -2,6 +2,17 @@
 
 ---
 
+## [0.15.7]
+
+### Fixed
+
+* CoreSDK: handle level change type - incline plane
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
+
 ## [0.15.6]
 
 ### Fixed
