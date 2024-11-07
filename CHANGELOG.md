@@ -2,6 +2,22 @@
 
 ---
 
+## [0.18.1]
+
+### Fixed
+
+* CoreSDK: handle level change type - incline plane
+
+### Dependencies
+
+* Map
+  * MapLibre 6.7.1 -> 6.8.0
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
+
 ## [0.18.0]
 
 ### Breaking changes
