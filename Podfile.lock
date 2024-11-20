@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.10.1)
-  - MapLibre (6.8.0)
-  - NAOSDK (4.11.17)
+  - MapLibre (6.8.1)
+  - NAOSDK (4.11.17.2)
   - NAOSwiftProvider (1.3.0):
     - NAOSDK
   - RxCocoa (6.8.0):
@@ -55,8 +55,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
-  MapLibre: 4dad59442b71e55d3c524f237fdcd6dd3ecf3e1b
-  NAOSDK: 5ac7cbc342712eb0f6c390c8cfe57dd6d047da6d
+  MapLibre: 46c5f2254df2ea03bcd097778bb19c92207d8c2a
+  NAOSDK: 0807ba7b7dbe889eeb1e648bb9f115b9925c7ba4
   NAOSwiftProvider: e685abcce0d2023daa3c58a017ff8b6787832753
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705

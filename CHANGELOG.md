@@ -2,6 +2,17 @@
 
 ---
 
+### Fixed
+
+* MapSDK: some styles don't load (caused by MapLibre 6.8.0)
+
+### Dependencies
+
+* Map
+  * MapLibre 6.8.0 -> 6.8.1
+* Polestar
+  * NAOSDK 4.11.17 -> 4.11.17.2
+
 ## [0.18.1]
 
 ### Fixed
