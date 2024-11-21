@@ -11,30 +11,30 @@ PODS:
     - RxSwift (= 6.8.0)
   - RxSwift (6.8.0)
   - Turf (3.1.0)
-  - WemapCoreSDK (0.18.1):
+  - WemapCoreSDK (0.18.2):
     - Alamofire (~> 5.10.0)
     - RxCocoa (~> 6.8.0)
     - RxRelay (~> 6.8.0)
     - RxSwift (~> 6.8.0)
     - Turf (~> 3.1.0)
-  - WemapMapSDK (0.18.1):
-    - MapLibre (~> 6.8.0)
-    - WemapCoreSDK (~> 0.18.1)
+  - WemapMapSDK (0.18.2):
+    - MapLibre (~> 6.8.1)
+    - WemapCoreSDK (~> 0.18.2)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/Core (0.18.1):
+  - WemapPositioningSDK/Core (0.18.2):
     - RxSwift (~> 6.8.0)
-    - WemapCoreSDK (~> 0.18.1)
-  - WemapPositioningSDK/VPSARKit (0.18.1):
+    - WemapCoreSDK (~> 0.18.2)
+  - WemapPositioningSDK/VPSARKit (0.18.2):
     - WemapPositioningSDK/Core
-  - WemapPositioningSDKPolestar (0.18.1):
+  - WemapPositioningSDKPolestar (0.18.2):
     - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.18.1)
+    - WemapCoreSDK (~> 0.18.2)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapMapSDK (~> 0.18.1)
-  - WemapPositioningSDK/VPSARKit (~> 0.18.1)
-  - WemapPositioningSDKPolestar (~> 0.18.1)
+  - WemapMapSDK (~> 0.18.2)
+  - WemapPositioningSDK/VPSARKit (~> 0.18.2)
+  - WemapPositioningSDKPolestar (~> 0.18.2)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -62,12 +62,12 @@ SPEC CHECKSUMS:
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
   Turf: 4acd6b0251ee2c7e7c672311d785466721065829
-  WemapCoreSDK: 3fe3ae864fd3e586cce6768b0692aa12c2f22a4e
-  WemapMapSDK: 4e879dbff56bfcbbdeb5c27d31af55b407571d68
-  WemapPositioningSDK: db4463c50637fb6330679fe98f656992e3e2eeef
-  WemapPositioningSDKPolestar: 19baa08170a044e10d571cd8ee9677f36843eebb
+  WemapCoreSDK: e7ead30d88f6dcb75036121290c057c790e6d16e
+  WemapMapSDK: 14a17d5f5496bba7bd093745f87b0eb869579397
+  WemapPositioningSDK: 8ecdb7d54dcec46afc5ff8bdb982a0f345ed699e
+  WemapPositioningSDKPolestar: 207fd44785a8e03d993aaae5a917a81ca04ed4ea
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: b3312603c4712c7fd63f63b54dabf49df2f51f6f
+PODFILE CHECKSUM: 91986880b8ce71baf012ee6fb58ba81873c6de77
 
 COCOAPODS: 1.16.2

@@ -2,9 +2,12 @@
 
 ---
 
+## [0.18.2]
+
 ### Fixed
 
 * MapSDK: some styles don't load (caused by MapLibre 6.8.0)
+* PosSDK(VPS): crash on start VPS on simulator
 
 ### Dependencies
 
@@ -12,6 +15,11 @@
   * MapLibre 6.8.0 -> 6.8.1
 * Polestar
   * NAOSDK 4.11.17 -> 4.11.17.2
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
 
 ## [0.18.1]
 
