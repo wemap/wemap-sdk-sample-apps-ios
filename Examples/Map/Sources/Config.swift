@@ -16,16 +16,24 @@ enum PreferencesKey: String {
          mapLibreVersion,
          // constants
          switchLevelsAutomaticallyOnUserMovements,
+         itineraryRecalculationEnabled,
+         userLocationProjectionOnItineraryEnabled,
          // Global navigation options
-         stopDistanceThreshold,
+         arrivedDistanceThreshold,
          userPositionThreshold,
          navigationRecalculationTimeInterval
 }
 
 func customKeysAndValues() -> [String: Any] {
-
+    
     MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
         .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
+    
+    CoreConstants.itineraryRecalculationEnabled = UserDefaults
+        .bool(forKey: .itineraryRecalculationEnabled, defaultValue: CoreConstants.itineraryRecalculationEnabled)
+    
+    CoreConstants.userLocationProjectionOnItineraryEnabled = UserDefaults
+        .bool(forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: CoreConstants.userLocationProjectionOnItineraryEnabled)
     
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,

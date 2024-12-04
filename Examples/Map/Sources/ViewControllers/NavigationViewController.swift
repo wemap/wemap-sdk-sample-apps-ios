@@ -48,7 +48,7 @@ final class NavigationViewController: MapViewController {
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
         
-        map.userTrackingMode = .followWithHeading
+        map.userTrackingMode = .follow
         
         // this way you can specify user location indicator appearance
         map.userLocationManager.userLocationViewStyle = .init(
@@ -213,8 +213,8 @@ extension NavigationViewController: NavigationManagerDelegate {
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
         
-        for leg in navigation.itinerary.legs.flatMap(\.steps) {
-            let instructions = leg.getNavigationInstructions()
+        for step in navigation.itinerary.legs.flatMap(\.steps) {
+            let instructions = step.getNavigationInstructions()
             debugPrint(instructions)
         }
     }
@@ -223,7 +223,7 @@ extension NavigationViewController: NavigationManagerDelegate {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
-        startNavigationButton.isEnabled = true
+        updateUI()
     }
     
     func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {

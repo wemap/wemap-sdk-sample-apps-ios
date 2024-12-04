@@ -100,9 +100,29 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Recalculate itinerary if user is far from itinerary</string>
+			<key>Key</key>
+			<string>itineraryRecalculationEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Project user location on itinerary</string>
+			<key>Key</key>
+			<string>userLocationProjectionOnItineraryEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Stop distance threshold</string>
+			<string>Arrived distance threshold</string>
 			<key>FooterText</key>
 			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 15 meters</string>
 		</dict>
@@ -110,9 +130,9 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Stop distance threshold</string>
+			<string>Arrived distance threshold</string>
 			<key>Key</key>
-			<string>stopDistanceThreshold</string>
+			<string>arrivedDistanceThreshold</string>
 			<key>DefaultValue</key>
 			<string>15</string>
 			<key>IsSecure</key>

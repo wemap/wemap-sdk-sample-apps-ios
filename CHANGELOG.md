@@ -2,6 +2,35 @@
 
 ---
 
+## [0.19.0]
+
+### Breaking changes
+
+* CoreSDK
+  * Removed `NavigationOptions.StopOptions` struct
+    * `NavigationOptions.StopOptions.stopWhenArrivedAtDestination: Bool` moved to `NavigationOptions.stopWhenArrivedAtDestination: Bool`
+    * `NavigationOptions.StopOptions.stopDistanceThreshold: CLLocationDistance` moved to `NavigationOptions.arrivedDistanceThreshold: CLLocationDistance`
+  * `NavigationOptions.init(stopNavigationOptions: StopOptions, userPositionThreshold: CLLocationDistance, navigationRecalculationTimeInterval: TimeInterval)` changed to `NavigationOptions.init(stopWhenArrivedAtDestination: Bool, arrivedDistanceThreshold: CLLocationDistance, userPositionThreshold: CLLocationDistance, navigationRecalculationTimeInterval: TimeInterval)`
+
+### Added
+
+* CoreSDK: remaining/traveled distance is calculated according to the user's projection constant
+
+### Changed
+
+* PosSDK(VPS): Use jpg images for VPS by default
+* PosSDK(VPS): minInclinationAngle default is 65 degrees
+
+### Dependencies
+
+* Core
+  * Alamofire 5.10.1 -> 5.10.2
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
+
 ## [0.18.2]
 
 ### Fixed

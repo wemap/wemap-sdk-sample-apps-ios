@@ -14,7 +14,7 @@ import WemapMapSDK
 import WemapPositioningSDKPolestar
 import WemapPositioningSDKVPSARKit
 
-class InitialViewController: UIViewController {
+final class InitialViewController: UIViewController {
 
     @IBOutlet var mapIDTextField: UITextField!
     @IBOutlet var sourcePicker: UIPickerView!

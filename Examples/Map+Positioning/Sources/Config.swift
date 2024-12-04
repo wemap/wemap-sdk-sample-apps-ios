@@ -18,7 +18,7 @@ enum PreferencesKey: String {
          // constants
          switchLevelsAutomaticallyOnUserMovements,
          // Global navigation options
-         stopDistanceThreshold,
+         arrivedDistanceThreshold,
          userPositionThreshold,
          navigationRecalculationTimeInterval
 }

@@ -9,10 +9,10 @@
 import RxCocoa
 import RxSwift
 import UIKit
-import WemapMapSDK
 import WemapCoreSDK
+import WemapMapSDK
 
-class InitialViewController: UIViewController {
+final class InitialViewController: UIViewController {
     
     @IBOutlet var mapIDTextField: UITextField!
     @IBOutlet var sourcePicker: UIPickerView!
