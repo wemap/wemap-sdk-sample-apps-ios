@@ -237,6 +237,22 @@
 * Xcode 15.4
 * Swift 5.10
 
+## [0.15.8]
+
+### Added
+
+* CoreSDK: navigation instruction translations to Dutch, German, Portuguese and Russian
+
+### Dependencies
+
+* Polestar
+  * NAOSDK 4.11.17 -> 4.11.17.2
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
+
 ## [0.15.7]
 
 ### Fixed
