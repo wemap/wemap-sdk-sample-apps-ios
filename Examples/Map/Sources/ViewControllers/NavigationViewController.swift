@@ -49,18 +49,6 @@ final class NavigationViewController: MapViewController {
         pointOfInterestManager.delegate = self
         
         map.userTrackingMode = .follow
-        
-        // this way you can specify user location indicator appearance
-        map.userLocationManager.userLocationViewStyle = .init(
-            foregroundTintColor: .systemPink,
-            backgroundTintColor: .black,
-            headingTintColor: .green,
-            outOfActiveLevelStyle: .init(
-                foregroundTintColor: .darkGray,
-                headingTintColor: .red,
-                alpha: 0.5
-            )
-        )
     }
     
     override func viewDidAppear(_ animated: Bool) {

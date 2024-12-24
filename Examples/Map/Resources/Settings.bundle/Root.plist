@@ -122,6 +122,12 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Navigation</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Arrived distance threshold</string>
 			<key>FooterText</key>
 			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 15 meters</string>

@@ -15,8 +15,6 @@ enum PreferencesKey: String {
     case mapVersion,
          positioningVersion,
          mapLibreVersion,
-         // constants
-         switchLevelsAutomaticallyOnUserMovements,
          // Global navigation options
          arrivedDistanceThreshold,
          userPositionThreshold,
@@ -24,9 +22,6 @@ enum PreferencesKey: String {
 }
 
 func customKeysAndValues() -> [String: Any] {
-    
-    MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
-        .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
     
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,

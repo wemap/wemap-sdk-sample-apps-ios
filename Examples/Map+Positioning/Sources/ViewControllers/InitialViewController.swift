@@ -85,6 +85,9 @@ final class InitialViewController: UIViewController {
     }
     
     private func showMap(_ mapData: MapData) {
+        
+        SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
+        
         if #available(iOS 13.0, *) {
             // swiftlint:disable:next force_cast
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController

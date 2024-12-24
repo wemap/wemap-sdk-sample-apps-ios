@@ -82,6 +82,7 @@ class CameraViewController: UIViewController {
         }
         super.viewWillDisappear(animated)
     }
+
     // end
     
     @IBAction func stopScan() {

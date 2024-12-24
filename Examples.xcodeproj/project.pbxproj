@@ -76,6 +76,12 @@
 		D233124E2CCB8D3100970133 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D250C9D728D3176F00DBFF5D /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA4428D31EF100DBFF5D /* Map+Pos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map+Pos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D26506C22D19AFE4008F7E81 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D26506C32D19AFED008F7E81 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D26506C42D19B016008F7E81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D26506C52D19B022008F7E81 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D26506C62D19B058008F7E81 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D26506C72D19B07B008F7E81 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D26AB6352B304C3000408BF8 /* UserDefaults+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Additions.swift"; sourceTree = "<group>"; };
 		D26AB6382B3050B100408BF8 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		D273E3152AA0DE5E00114854 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -358,6 +364,12 @@
 				en,
 				Base,
 				fr,
+				nl,
+				de,
+				ru,
+				es,
+				pt,
+				it,
 			);
 			mainGroup = D250C9CE28D3176F00DBFF5D;
 			productRefGroup = D250C9D828D3176F00DBFF5D /* Products */;
@@ -553,6 +565,12 @@
 			isa = PBXVariantGroup;
 			children = (
 				D22178A02B67E44F00165BEB /* Base */,
+				D26506C22D19AFE4008F7E81 /* nl */,
+				D26506C32D19AFED008F7E81 /* de */,
+				D26506C42D19B016008F7E81 /* ru */,
+				D26506C52D19B022008F7E81 /* es */,
+				D26506C62D19B058008F7E81 /* pt */,
+				D26506C72D19B07B008F7E81 /* it */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -636,7 +654,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.18.0;
+				MARKETING_VERSION = 0.19.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -693,7 +711,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.18.0;
+				MARKETING_VERSION = 0.19.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

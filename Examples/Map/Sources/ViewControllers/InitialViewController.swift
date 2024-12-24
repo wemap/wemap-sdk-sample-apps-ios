@@ -93,6 +93,8 @@ final class InitialViewController: UIViewController {
     
     private func showMap(_ mapData: MapData) {
         
+        SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
+        
         // swiftlint:disable:next force_cast
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController
         vc.mapData = mapData

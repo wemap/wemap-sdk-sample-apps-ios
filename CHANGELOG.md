@@ -2,6 +2,27 @@
 
 ---
 
+## [0.19.1]
+
+### Added
+
+* CoreSDK: add availability to specify the language for navigation instructions
+* CoreSDK: add navigation instruction translations to Dutch, German, Portuguese and Russian
+
+### Changed
+
+* SDKs: improve logger and add category, subsystem and type
+
+### Dependencies
+
+* Map
+  * MapLibre 6.8.1 -> 6.9.0
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.19.0]
 
 ### Breaking changes
