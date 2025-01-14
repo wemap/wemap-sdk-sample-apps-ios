@@ -2,6 +2,22 @@
 
 ---
 
+## [0.15.9]
+
+### Fixed
+
+* CoreSDK: sortPOIsByGraphDistance/Duration doesn't work in some cases
+
+### Dependencies
+
+* Polestar
+  * NAOSDK 4.11.17.2 -> 4.11.18
+
+### Compatibility
+
+* Xcode 16.1
+* Swift 6 (effective 5.10)
+
 ## [0.15.8]
 
 ### Added
