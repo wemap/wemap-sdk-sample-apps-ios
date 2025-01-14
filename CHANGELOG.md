@@ -415,6 +415,12 @@
 * Xcode 15.3
 * Swift 5.10
 
+## [0.14.4]
+
+### Fixed
+
+* CoreSDK: handle sorting by graph distance/duration error
+
 ## [0.14.3]
 
 ### Fixed
