@@ -16,9 +16,10 @@ enum SortingType {
     case distance, time
 }
 
-class POIsListViewController: UITableViewController {
+final class POIsListViewController: UITableViewController {
     
     unowned var mapView: MapView!
+    
     var userCoordinate: Coordinate!
     var sortingType = SortingType.distance
     
@@ -51,15 +52,15 @@ class POIsListViewController: UITableViewController {
                 let info = poiWithInfo.info
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
                 cell.textLabel?.text = poi.name
-                cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\n" +
-                    "address - \(poi.address)\ndistance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
+                cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\naddress - \(poi.address)\n" +
+                "distance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
                 return cell
             }
             .disposed(by: disposeBag)
     }
     
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = poiManager.selectPOI(poisWithInfo[indexPath.row].poi)
+        poiManager.selectPOI(poisWithInfo[indexPath.row].poi)
         dismiss(animated: true)
     }
 }
