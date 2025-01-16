@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-               BuildableName = "Map+Pos.app"
-               BlueprintName = "Map+PositioningExample"
+               BlueprintIdentifier = "D250CA5B28D31EF700DBFF5D"
+               BuildableName = "Pos.app"
+               BlueprintName = "PositioningExample"
                ReferencedContainer = "container:Examples.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+Pos.app"
-            BlueprintName = "Map+PositioningExample"
+            BlueprintIdentifier = "D250CA5B28D31EF700DBFF5D"
+            BuildableName = "Pos.app"
+            BlueprintName = "PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+Pos.app"
-            BlueprintName = "Map+PositioningExample"
+            BlueprintIdentifier = "D250CA5B28D31EF700DBFF5D"
+            BuildableName = "Pos.app"
+            BlueprintName = "PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,9 +72,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D250CA2F28D31EF100DBFF5D"
-            BuildableName = "Map+Pos.app"
-            BlueprintName = "Map+PositioningExample"
+            BlueprintIdentifier = "D250CA5B28D31EF700DBFF5D"
+            BuildableName = "Pos.app"
+            BlueprintName = "PositioningExample"
             ReferencedContainer = "container:Examples.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -22,6 +22,10 @@ target 'Map+PositioningExample' do
   pod 'WemapPositioningSDK/VPSARKit', wemap_sdks_version
 end
 
+target 'PositioningExample' do
+  pod 'WemapPositioningSDK/VPSARKit', wemap_sdks_version
+end
+
 #################################################################################
 
 post_install do |installer|
