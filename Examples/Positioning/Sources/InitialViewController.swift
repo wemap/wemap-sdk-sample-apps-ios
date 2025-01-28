@@ -62,7 +62,7 @@ final class InitialViewController: UIViewController {
             .subscribe(onSuccess: {
                 self.showMap($0)
             }, onFailure: {
-                debugPrint("Failed to get style URL with error - \($0)")
+                debugPrint("Failed to get map data with error - \($0)")
             })
             .disposed(by: disposeBag)
     }

@@ -2,9 +2,26 @@
 
 ---
 
+## [0.19.2]
+
 ### Added
 
 * Examples: add new sample app to demonstrate VPS LS without Map
+
+### Fixed
+
+* PosSDK(VPS): crash on destroying VPS LS during tracking degradation
+* CoreSDK: crash on BE response with no itineraries
+
+### Dependencies
+
+* Polestar
+  * NAOSDK 4.11.17.2 -> 4.11.18
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
 
 ## [0.19.1]
 
