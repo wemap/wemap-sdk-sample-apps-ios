@@ -244,9 +244,7 @@ final class NavigationViewController: MapViewController {
 extension NavigationViewController: PointOfInterestManagerDelegate {
     
     func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
-        ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short) {
-            _ = self.pointOfInterestManager.unselectPOI(poi)
-        }
+        ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short)
     }
 }
 

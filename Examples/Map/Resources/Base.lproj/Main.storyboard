@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfC-aW-f5l">
                                 <rect key="frame" x="145.33333333333334" y="775.66666666666663" width="99.333333333333343" height="34.333333333333371"/>
+                                <accessibility key="accessibilityConfiguration" identifier="buttonLoadMapId"/>
                                 <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Load Map"/>
@@ -38,6 +39,7 @@
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="23254" borderStyle="roundedRect" placeholder="Map ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
                                         <rect key="frame" x="0.0" y="28.333333333333343" width="73.666666666666671" height="34"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="textFieldMapIdId"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
@@ -54,12 +56,14 @@
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfH-mK-K5J">
                                         <rect key="frame" x="0.0" y="28.333333333333314" width="320" height="216"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="pickerLocationSourceId"/>
                                     </pickerView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zce-M4-BEm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="backgroundId"/>
                         <constraints>
                             <constraint firstItem="IoM-Le-ifI" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="147" id="IM5-cQ-cMT"/>
                             <constraint firstItem="9FZ-pv-L5Q" firstAttribute="centerX" secondItem="zce-M4-BEm" secondAttribute="centerX" id="WaA-gU-8bF"/>
@@ -309,6 +313,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="levelsSampleId"/>
                                         <connections>
                                             <segue destination="e5r-Qo-bVo" kind="show" id="gsb-lk-qLa"/>
                                         </connections>
@@ -431,6 +436,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="USo-zn-2oG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="mapViewId"/>
                         <constraints>
                             <constraint firstItem="VcO-oS-YBy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R25-Dt-xmM" secondAttribute="leadingMargin" constant="16" id="Hzn-tK-QIY"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="VcO-oS-YBy" secondAttribute="trailing" constant="16" id="OdY-7l-eJ5"/>
@@ -622,7 +628,7 @@
             <color red="0.0" green="0.19200000166893005" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

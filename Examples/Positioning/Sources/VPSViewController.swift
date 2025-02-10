@@ -17,7 +17,6 @@ final class VPSViewController: UIViewController {
     var mapData: MapData?
     
     @IBOutlet var mapPlaceholder: UIView!
-    @IBOutlet var rescanButton: UIButton!
     
     @IBOutlet var debugTextState: UILabel!
     @IBOutlet var debugTextScanStatus: UILabel!
@@ -47,7 +46,7 @@ final class VPSViewController: UIViewController {
         arView.session = vpsLocationSource.session
     }
     
-    private func setupLocationSource () {
+    private func setupLocationSource() {
         vpsLocationSource = VPSARKitLocationSource(serviceURL: mapData?.extras?.vpsEndpoint ?? Constants.vpsEndpoint)
         vpsLocationSource.delegate = self
         vpsLocationSource.vpsDelegate = self
@@ -104,13 +103,13 @@ final class VPSViewController: UIViewController {
 @available(iOS 13.0, *)
 extension VPSViewController: LocationSourceDelegate {
     
-    func locationSource(_ locationSource: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
+    func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
         DispatchQueue.main.async { [self] in
             debugTextCoordinate.text = String(format: "lat: %.5f, lng: %.5f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
         }
     }
     
-    func locationSource(_ locationSource: any LocationSource, didUpdateAttitude attitude: Attitude) {
+    func locationSource(_: any LocationSource, didUpdateAttitude attitude: Attitude) {
         DispatchQueue.main.async { [self] in
             let q = attitude.quaternion.vector
             debugTextAttitude.text = String(format: "w: %.2f, x: %.2f, y: %.2f, z: %.2f", q.w, q.x, q.y, q.z)
@@ -118,7 +117,7 @@ extension VPSViewController: LocationSourceDelegate {
         }
     }
     
-    func locationSource(_ locationSource: any LocationSource, didFailWithError error: any Error) {
+    func locationSource(_: any LocationSource, didFailWithError error: any Error) {
         DispatchQueue.main.async { [self] in
             showError(message: "LS: \(error)")
         }
@@ -128,7 +127,7 @@ extension VPSViewController: LocationSourceDelegate {
 @available(iOS 13.0, *)
 extension VPSViewController: VPSARKitLocationSourceDelegate {
     
-    func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         debugTextState.text = "\(state)"
         
         // if rescan requested - don't update UI on state changes. UI will be updated on scan status change
@@ -144,18 +143,18 @@ extension VPSViewController: VPSARKitLocationSourceDelegate {
         }
     }
     
-    func locationSource(_ locationSource: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
+    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
         debugTextScanStatus.text = "\(status)"
         updateScanButtons(status: status)
         
         // rescan successful, reset rescanRequested and update UI
-        if status == .stopped && vpsLocationSource.state == .accuratePositioning {
+        if status == .stopped, vpsLocationSource.state == .accuratePositioning {
             rescanRequested = false
             showMapPlaceholder()
         }
     }
     
-    func locationSource(_ locationSource: VPSARKitLocationSource, didFailWithError error: VPSARKitLocationSourceError) {
+    func locationSource(_: VPSARKitLocationSource, didFailWithError error: VPSARKitLocationSourceError) {
         showError(message: error.description)
     }
 }

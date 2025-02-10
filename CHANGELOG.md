@@ -2,6 +2,32 @@
 
 ---
 
+## [0.20.0]
+
+### Added
+
+* PosSDK(VPS): ability to check distance to VPS coverage
+  * [`VPSARKitLocationSource.distanceToVPSCoverage(from coordinate: Coordinate) -> Single<CLLocationDistance>`][0]
+* CoreSDK: ability to project user position on the graph
+  * Disabled by default. To enable use [`CoreConstants.userLocationProjectionOnGraphEnabled = true`][1], before `MapView` instance creation.
+
+### Deprecated
+
+* PosSDK(VPS)
+  * [`VPSARKitLocationSource.checkVPSAvailability(at coordinate2D: CLLocationCoordinate2D)`][2] changed to [`VPSARKitLocationSource.isVPSAvailable(at coordinate: Coordinate)`][3]
+
+### Dependencies
+
+* Core
+  * Turf 3.1.0 -> 4.0.0
+* Map
+  * MapLibre 6.9.0 -> 6.10.0
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.19.2]
 
 ### Added
@@ -12,6 +38,10 @@
 
 * PosSDK(VPS): crash on destroying VPS LS during tracking degradation
 * CoreSDK: crash on BE response with no itineraries
+
+### Removed
+
+* CoreSDK: unused `ItineraryError` class
 
 ### Dependencies
 
@@ -733,3 +763,8 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * MapSDK: Stop event did not reach even if remaining distance is less than threshold
 * MapSDK: Navigation info is wrong when itinerary contains indoor and outdoor parts
 * MapSDK: it's possible to remove navigation itinerary using itinerary manager (it should not)
+
+[0]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC21distanceToVPSCoverage4from7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSdG0A7CoreSDK10CoordinateC_tF
+[1]: https://developers.getwemap.com/ios-native-sdk/Enums/CoreConstants#/s:12WemapCoreSDK0B9ConstantsO36userLocationProjectionOnGraphEnabledSbvpZ
+[2]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC20checkVPSAvailability2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbGSo22CLLocationCoordinate2DV_tF
+[3]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC14isVPSAvailable2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbG0A7CoreSDK10CoordinateC_tF

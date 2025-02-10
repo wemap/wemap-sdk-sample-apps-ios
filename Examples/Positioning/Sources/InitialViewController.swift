@@ -6,7 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import RxCocoa
 import RxSwift
 import UIKit
 import WemapCoreSDK

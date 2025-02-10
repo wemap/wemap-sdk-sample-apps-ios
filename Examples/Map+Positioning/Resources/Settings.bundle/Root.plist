@@ -36,39 +36,9 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>MapSDK</string>
-			<key>Key</key>
-			<string>mapVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>PositioningSDK</string>
-			<key>Key</key>
-			<string>positioningVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
 			<string>CoreSDK</string>
 			<key>Key</key>
 			<string>coreVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>MapLibre</string>
-			<key>Key</key>
-			<string>mapLibreVersion</string>
 			<key>DefaultValue</key>
 			<string>Unknown</string>
 		</dict>
@@ -91,6 +61,166 @@
 			<string>rxSwiftVersion</string>
 			<key>DefaultValue</key>
 			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>MapSDK</string>
+			<key>Key</key>
+			<string>mapVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>MapLibre</string>
+			<key>Key</key>
+			<string>mapLibreVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>PositioningSDK</string>
+			<key>Key</key>
+			<string>positioningVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Switch levels automatically on user movements</string>
+			<key>Key</key>
+			<string>switchLevelsAutomaticallyOnUserMovements</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Recalculate itinerary if user is far from itinerary</string>
+			<key>Key</key>
+			<string>itineraryRecalculationEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Project user location on itinerary</string>
+			<key>Key</key>
+			<string>userLocationProjectionOnItineraryEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Project user location on indoor graph</string>
+			<key>Key</key>
+			<string>userLocationProjectionOnGraphEnabled</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Navigation</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Arrived distance threshold</string>
+			<key>FooterText</key>
+			<string>The distance measured in meters, indicating when the navigation manager considers that the user has arrived at the final destination. Default is 15 meters</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Arrived distance threshold</string>
+			<key>Key</key>
+			<string>arrivedDistanceThreshold</string>
+			<key>DefaultValue</key>
+			<string>15</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>User position threshold</string>
+			<key>FooterText</key>
+			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 25 meters</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>User position threshold</string>
+			<key>Key</key>
+			<string>userPositionThreshold</string>
+			<key>DefaultValue</key>
+			<string>25</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Navigation recalculation time interval</string>
+			<key>FooterText</key>
+			<string>The navigation recalculation time interval, measured in seconds, indicates the interval between consecutive navigation recalculations. An interval of less than 5 seconds is forbidden. Default is 5 seconds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Navigation recalculation time interval</string>
+			<key>Key</key>
+			<string>navigationRecalculationTimeInterval</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
 		</dict>
 	</array>
 </dict>

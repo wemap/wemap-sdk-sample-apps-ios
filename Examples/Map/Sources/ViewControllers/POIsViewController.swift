@@ -193,7 +193,11 @@ final class POIsViewController: MapViewController {
     }
     
     override func mapView(_: MapView, didTouchAtPoint _: CGPoint) {
-        _ = pointOfInterestManager.unselectPOI()
+        if pointOfInterestManager.selectionMode.isSingle {
+            _ = pointOfInterestManager.unselectPOI()
+        } else {
+            _ = pointOfInterestManager.unselectAllPOIs()
+        }
     }
     
     // MARK: - Navigation

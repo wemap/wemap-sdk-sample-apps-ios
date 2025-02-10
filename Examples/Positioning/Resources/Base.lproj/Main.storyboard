@@ -226,7 +226,6 @@
                         <outlet property="debugTextScanStatus" destination="zFl-JY-kZG" id="E9P-Ss-OBe"/>
                         <outlet property="debugTextState" destination="QUO-LG-IUc" id="GvX-Zv-07k"/>
                         <outlet property="mapPlaceholder" destination="gkH-f9-Kqt" id="dpC-lP-kcn"/>
-                        <outlet property="rescanButton" destination="DTS-wC-nUp" id="Js7-fK-0kD"/>
                         <outlet property="scanButtons" destination="xbv-4Q-0Rr" id="I2k-QC-Xg9"/>
                         <outlet property="startScanButton" destination="gjk-Q3-qDh" id="nrh-C4-oBF"/>
                         <outlet property="stopScanButton" destination="0YH-OW-PQR" id="ucz-uY-tfg"/>
