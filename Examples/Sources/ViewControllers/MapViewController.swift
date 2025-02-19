@@ -46,7 +46,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDeleg
         map.mapData = mapData
         
         levelControl.isHidden = true
-        
+        levelControl.accessibilityIdentifier = "levelsControlId"
         // to see coordinate returned by location source
 //        weak var previous: UIView?
 //        map.userLocationManager
@@ -129,6 +129,7 @@ class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDeleg
     
     func mapViewLoaded(_: MapView, style _: MLNStyle, data _: MapData) {
         lateInit()
+        view.accessibilityIdentifier = "mapViewLoaded"
     }
     
     func mapView(_: MapView, didTouchAtPoint _: CGPoint) {

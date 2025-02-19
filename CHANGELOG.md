@@ -2,6 +2,28 @@
 
 ---
 
+## [0.20.1]
+
+### Fixed
+
+* CoreSDK: arrived callback is triggered even if user is on another level
+
+### Deprecated
+
+* CoreSDK
+  * `WemapCore.setEnvironment(_ environment: Environment) -> Bool` will be changed to `WemapCore.setEnvironment(_ environment: Environment)`
+  * `WemapCore.setItinerariesEnvironment(_ environment: Environment) -> Bool` will be changed to `WemapCore.setItinerariesEnvironment(_ environment: Environment)`
+
+### Dependencies
+
+* Map
+  * MapLibre 6.10.0 -> 6.11.0
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.20.0]
 
 ### Added
