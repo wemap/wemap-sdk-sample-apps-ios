@@ -2,6 +2,29 @@
 
 ---
 
+## [0.20.2]
+
+### Changed
+
+* PosSDK(VPS): send images in color by default for VPS
+
+### Fixed
+
+* MapSDK: sometimes level switches too early
+* MapSDK: crash on attempt to add the same itinerary twice (as navigation and as itinerary)
+
+### Dependencies
+
+* Core
+  * RxSwift 6.8.0 -> 6.9.0
+* Map
+  * MapLibre 6.11.0 -> 6.12.1
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.20.1]
 
 ### Fixed

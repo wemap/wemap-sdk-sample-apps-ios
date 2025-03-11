@@ -9,7 +9,7 @@ platform :ios, '12.0'
 
 #################################################################################
 
-wemap_sdks_version = '~>0.20.1'
+wemap_sdks_version = '~>0.20.2'
 
 target 'MapExample' do
   pod 'WemapMapSDK', wemap_sdks_version
