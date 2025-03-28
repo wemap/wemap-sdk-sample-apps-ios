@@ -27,6 +27,9 @@
 		D26AB63D2B30532F00408BF8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D26AB63F2B30534F00408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
 		D26AB6402B30534F00408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
+		D26FEAB82D96BAFF003CA1F5 /* DelegateDispatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FEAB72D96BAFF003CA1F5 /* DelegateDispatchers.swift */; };
+		D26FEABA2D96BB16003CA1F5 /* geoJsonItinerary.json in Resources */ = {isa = PBXBuildFile; fileRef = D26FEAB92D96BB16003CA1F5 /* geoJsonItinerary.json */; };
+		D26FEABB2D96BB81003CA1F5 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
 		D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3152AA0DE5E00114854 /* InitialViewController.swift */; };
 		D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3162AA0DE5E00114854 /* NavigationViewController.swift */; };
 		D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
@@ -90,6 +93,8 @@
 		D25992D32C35941B0041F9FE /* GlobalNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNavigationOptions.swift; sourceTree = "<group>"; };
 		D267EF712D381607004AE5B6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D26AB63E2B30534F00408BF8 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		D26FEAB72D96BAFF003CA1F5 /* DelegateDispatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateDispatchers.swift; sourceTree = "<group>"; };
+		D26FEAB92D96BB16003CA1F5 /* geoJsonItinerary.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoJsonItinerary.json; sourceTree = "<group>"; };
 		D273E3152AA0DE5E00114854 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D273E3162AA0DE5E00114854 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		D273E3252AA0EDDC00114854 /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
@@ -269,6 +274,7 @@
 		D2A6253428F6AA8500274721 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D26FEAB92D96BB16003CA1F5 /* geoJsonItinerary.json */,
 				D2FD56AC29801F36003F508D /* Settings.bundle */,
 				D2A6253528F6AA8500274721 /* Assets.xcassets */,
 				D2A6253628F6AA8500274721 /* Main.storyboard */,
@@ -331,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				D2FD56B52980341A003F508D /* Config.swift */,
+				D26FEAB72D96BAFF003CA1F5 /* DelegateDispatchers.swift */,
 				D22EC7412A78166E007BC4DE /* LocationSourceType.swift */,
 				D273E3132AA0DE5E00114854 /* ViewControllers */,
 			);
@@ -496,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D250CA6B28D31EF700DBFF5D /* Assets.xcassets in Resources */,
+				D26FEABA2D96BB16003CA1F5 /* geoJsonItinerary.json in Resources */,
 				D2A6253828F6AA8500274721 /* Assets.xcassets in Resources */,
 				D2FD56AD29801F36003F508D /* Settings.bundle in Resources */,
 				D250CA6C28D31EF700DBFF5D /* LaunchScreen.storyboard in Resources */,
@@ -683,6 +691,7 @@
 				D2D90E972B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */,
 				D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */,
 				D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */,
+				D26FEAB82D96BAFF003CA1F5 /* DelegateDispatchers.swift in Sources */,
 				D2F8E1722C46C2220063C9A7 /* GlobalItineraryOptions.swift in Sources */,
 				D25992D52C35941B0041F9FE /* GlobalNavigationOptions.swift in Sources */,
 				D26AB63D2B30532F00408BF8 /* Constants.swift in Sources */,
@@ -693,6 +702,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26FEABB2D96BB81003CA1F5 /* UserDefaults+Additions.swift in Sources */,
 				D2A55FE829801A3900402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6255128F6AEB900274721 /* AppDelegate.swift in Sources */,
 				D21BA7242D390C6B00A1C95D /* ToastHelper.swift in Sources */,
@@ -802,7 +812,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.20.0;
+				MARKETING_VERSION = 0.21.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -861,7 +871,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.20.0;
+				MARKETING_VERSION = 0.21.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -36,17 +36,7 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>WemapPositioning</string>
-			<key>Key</key>
-			<string>positioningVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>WemapCore</string>
+			<string>CoreSDK</string>
 			<key>Key</key>
 			<string>coreVersion</string>
 			<key>DefaultValue</key>
@@ -71,6 +61,42 @@
 			<string>rxSwiftVersion</string>
 			<key>DefaultValue</key>
 			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>PositioningSDK</string>
+			<key>Key</key>
+			<string>positioningVersion</string>
+			<key>DefaultValue</key>
+			<string>Unknown</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Project user location on itinerary</string>
+			<key>Key</key>
+			<string>userLocationProjectionOnItineraryEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Project user location on indoor graph</string>
+			<key>Key</key>
+			<string>userLocationProjectionOnGraphEnabled</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 	</array>
 </dict>

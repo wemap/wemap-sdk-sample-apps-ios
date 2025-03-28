@@ -88,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEn-DW-lV9">
-                                <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
+                                <rect key="frame" x="16" y="63" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Close"/>
                                 <connections>
@@ -96,7 +96,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="aOh-9H-7pz" userLabel="Level control">
-                                <rect key="frame" x="327" y="62.333333333333343" width="55" height="32"/>
+                                <rect key="frame" x="327" y="95" width="55" height="32"/>
                                 <segments>
                                     <segment title="0" enabled="NO"/>
                                     <segment title="1"/>
@@ -154,7 +154,7 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigation info will be here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7og-Sa-tTm">
-                                <rect key="frame" x="103.00000000000001" y="101.33333333333333" width="184.33333333333337" height="18"/>
+                                <rect key="frame" x="103.00000000000001" y="134" width="184.33333333333337" height="18"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59991629464285712" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="200" id="Iwu-dD-d2A"/>
@@ -164,18 +164,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lR-Dt-Msu">
-                                <rect key="frame" x="8" y="62.333333333333329" width="80" height="34.333333333333329"/>
+                                <rect key="frame" x="8" y="105.33333333333333" width="86" height="34.333333333333329"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="oTd-Pe-nBn"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Rescan"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Localize"/>
                                 <connections>
-                                    <action selector="rescan" destination="nxR-az-56C" eventType="touchUpInside" id="hVk-FJ-6Cj"/>
+                                    <action selector="localize" destination="nxR-az-56C" eventType="touchUpInside" id="apC-fk-iDe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9T-mX-MjI">
-                                <rect key="frame" x="297" y="101.33333333333333" width="85" height="34.333333333333329"/>
+                                <rect key="frame" x="297" y="134" width="85" height="34.333333333333343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="qmy-7I-32W"/>
                                 </constraints>
@@ -195,7 +195,7 @@
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tEn-DW-lV9" secondAttribute="trailing" constant="16" id="JoT-qO-iiQ"/>
                             <constraint firstItem="7og-Sa-tTm" firstAttribute="centerX" secondItem="oCZ-Ju-NLZ" secondAttribute="centerX" id="Kr2-j7-NuQ"/>
                             <constraint firstItem="g9T-mX-MjI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7og-Sa-tTm" secondAttribute="trailing" constant="8" id="L5d-Zi-tHk"/>
-                            <constraint firstItem="tEn-DW-lV9" firstAttribute="top" secondItem="oCZ-Ju-NLZ" secondAttribute="top" constant="20" symbolic="YES" id="L8k-tC-sbK"/>
+                            <constraint firstItem="tEn-DW-lV9" firstAttribute="top" secondItem="GHT-jT-dLy" secondAttribute="top" constant="16" id="L8k-tC-sbK"/>
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" secondItem="aOh-9H-7pz" secondAttribute="trailing" constant="8" id="OPP-xg-Yvu"/>
                             <constraint firstItem="UCc-r8-KjV" firstAttribute="centerX" secondItem="oCZ-Ju-NLZ" secondAttribute="centerX" id="OsV-9p-Dvq"/>
                             <constraint firstItem="aOh-9H-7pz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1lR-Dt-Msu" secondAttribute="trailing" constant="8" id="QmO-gS-Sff"/>
@@ -205,7 +205,7 @@
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" secondItem="g9T-mX-MjI" secondAttribute="trailing" constant="8" id="nNM-hh-NVM"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UCc-r8-KjV" secondAttribute="trailing" constant="16" id="nuV-6d-e19"/>
                             <constraint firstItem="1lR-Dt-Msu" firstAttribute="top" secondItem="tEn-DW-lV9" secondAttribute="bottom" constant="8" id="okn-g0-1Cr"/>
-                            <constraint firstItem="aOh-9H-7pz" firstAttribute="top" secondItem="tEn-DW-lV9" secondAttribute="bottom" constant="8" id="pT2-Xd-LIj"/>
+                            <constraint firstItem="aOh-9H-7pz" firstAttribute="top" secondItem="GHT-jT-dLy" secondAttribute="top" constant="48" id="pT2-Xd-LIj"/>
                             <constraint firstItem="7og-Sa-tTm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1lR-Dt-Msu" secondAttribute="trailing" priority="999" constant="8" id="ujd-ak-QKr"/>
                             <constraint firstItem="UCc-r8-KjV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oCZ-Ju-NLZ" secondAttribute="leading" constant="16" id="yXF-iL-qCT"/>
                         </constraints>
@@ -213,6 +213,7 @@
                     <navigationItem key="navigationItem" id="qXG-tS-7D4"/>
                     <connections>
                         <outlet property="levelControl" destination="aOh-9H-7pz" id="V57-hp-w2q"/>
+                        <outlet property="localizeButton" destination="1lR-Dt-Msu" id="51A-ze-JtD"/>
                         <outlet property="navigationInfo" destination="7og-Sa-tTm" id="1zl-rq-AHc"/>
                         <outlet property="removeUserCreatedAnnotationsButton" destination="c02-nc-Ixf" id="Ru5-UG-u9C"/>
                         <outlet property="startNavigationButton" destination="YXv-ra-19v" id="sWA-H6-rZa"/>
@@ -233,8 +234,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Positioning has not been started yet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlV-Oc-B3x">
-                                <rect key="frame" x="58.333333333333343" y="67" width="273.33333333333326" height="20.333333333333329"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanning has not been started yet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlV-Oc-B3x">
+                                <rect key="frame" x="65" y="719.33333333333337" width="260" height="20.333333333333371"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="Aii-fb-7aq"/>
@@ -264,14 +265,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFF-2q-oHv">
+                                <rect key="frame" x="16" y="63" width="67" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Close"/>
+                                <connections>
+                                    <action selector="close" destination="Ua1-wC-xhj" eventType="touchUpInside" id="Sma-iH-nTp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bKC-0F-On0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nwe-j2-iDT" firstAttribute="bottom" secondItem="bKC-0F-On0" secondAttribute="bottom" constant="-20" id="96R-C0-FYg"/>
+                            <constraint firstItem="vFF-2q-oHv" firstAttribute="top" secondItem="bKC-0F-On0" secondAttribute="top" constant="16" id="9uh-K5-Goz"/>
                             <constraint firstItem="nwe-j2-iDT" firstAttribute="centerX" secondItem="4sh-1W-JyX" secondAttribute="centerX" id="AQl-Wh-wc6"/>
                             <constraint firstItem="VlV-Oc-B3x" firstAttribute="centerX" secondItem="4sh-1W-JyX" secondAttribute="centerX" id="Q9i-vU-q0i"/>
-                            <constraint firstItem="VlV-Oc-B3x" firstAttribute="top" secondItem="bKC-0F-On0" secondAttribute="top" constant="20" id="qMr-5Q-7fO"/>
+                            <constraint firstItem="vFF-2q-oHv" firstAttribute="leading" secondItem="bKC-0F-On0" secondAttribute="leading" constant="16" id="WLw-xo-jlG"/>
+                            <constraint firstItem="nwe-j2-iDT" firstAttribute="top" secondItem="VlV-Oc-B3x" secondAttribute="bottom" constant="16" id="j5W-JU-1i4"/>
                         </constraints>
                     </view>
                     <connections>

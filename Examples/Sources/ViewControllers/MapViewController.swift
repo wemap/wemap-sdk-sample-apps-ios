@@ -112,13 +112,13 @@ class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDeleg
             
             let source: LocationSource?
             switch locationSourceType {
-            case .simulator: source = SimulatorLocationSource(options: .init(deviationRange: -20.0 ... 20.0))
+            case .simulator: source = SimulatorLocationSource(mapData: mapData, options: .init(deviationRange: -20.0 ... 20.0))
 #if canImport(WemapPositioningSDKPolestar)
-            case .polestar: source = PolestarLocationSource(apiKey: Constants.polestarApiKey)
-            case .polestarEmulator: source = PolestarLocationSource(apiKey: "emulator")
+            case .polestar: source = PolestarLocationSource(mapData: mapData, apiKey: Constants.polestarApiKey)
+            case .polestarEmulator: source = PolestarLocationSource(mapData: mapData, apiKey: "emulator")
 #endif
 #if canImport(WemapPositioningSDKVPSARKit)
-            case .vps: source = VPSARKitLocationSource(serviceURL: mapData.extras?.vpsEndpoint ?? Constants.vpsEndpoint)
+            case .vps: source = VPSARKitLocationSource(mapData: mapData)
 #endif
             default: source = nil
             }

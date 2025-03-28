@@ -204,17 +204,36 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UpJ-ET-aCz" userLabel="itinerary source switch stack">
+                                <rect key="frame" x="8" y="196.66666666666666" width="288" height="31"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xTS-VK-tYE" userLabel="itinerary source switch">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="itinerarySourceSwitchValueChanged" destination="1v7-DP-xs7" eventType="valueChanged" id="auB-og-vvW"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use manually created Itinerary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taE-T7-Ecs" userLabel="itinerary source label">
+                                        <rect key="frame" x="57" y="0.0" width="231" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6fa-Fg-VJ2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xbv-4Q-0Rr" firstAttribute="centerX" secondItem="X46-23-SPH" secondAttribute="centerX" id="E8F-8g-4W7"/>
                             <constraint firstAttribute="trailing" secondItem="gkH-f9-Kqt" secondAttribute="trailing" id="NHQ-Xw-Lgl"/>
+                            <constraint firstItem="UpJ-ET-aCz" firstAttribute="leading" secondItem="6fa-Fg-VJ2" secondAttribute="leading" constant="8" id="QsV-5e-3rO"/>
                             <constraint firstAttribute="bottom" secondItem="gkH-f9-Kqt" secondAttribute="bottom" id="X4O-k3-HSO"/>
                             <constraint firstItem="niO-bu-cJb" firstAttribute="leading" secondItem="6fa-Fg-VJ2" secondAttribute="leading" constant="8" id="flU-Ys-ZJg"/>
                             <constraint firstItem="gkH-f9-Kqt" firstAttribute="top" secondItem="X46-23-SPH" secondAttribute="top" id="lun-J1-Yau"/>
                             <constraint firstItem="gkH-f9-Kqt" firstAttribute="leading" secondItem="X46-23-SPH" secondAttribute="leading" id="mSn-na-HWg"/>
                             <constraint firstItem="niO-bu-cJb" firstAttribute="top" secondItem="6fa-Fg-VJ2" secondAttribute="top" constant="8" id="pim-5g-Ow4"/>
+                            <constraint firstItem="UpJ-ET-aCz" firstAttribute="top" secondItem="niO-bu-cJb" secondAttribute="bottom" constant="8" id="vH1-hb-o3v"/>
                             <constraint firstItem="6fa-Fg-VJ2" firstAttribute="trailing" secondItem="niO-bu-cJb" secondAttribute="trailing" constant="8" id="vYQ-T3-bnu"/>
                             <constraint firstItem="6fa-Fg-VJ2" firstAttribute="bottom" secondItem="xbv-4Q-0Rr" secondAttribute="bottom" constant="8" id="wVk-JT-1mV"/>
                         </constraints>
@@ -225,6 +244,8 @@
                         <outlet property="debugTextHeading" destination="C8u-iA-g0F" id="rLT-In-Bhs"/>
                         <outlet property="debugTextScanStatus" destination="zFl-JY-kZG" id="E9P-Ss-OBe"/>
                         <outlet property="debugTextState" destination="QUO-LG-IUc" id="GvX-Zv-07k"/>
+                        <outlet property="itinerarySourceLabel" destination="taE-T7-Ecs" id="PH4-gv-sug"/>
+                        <outlet property="itinerarySourceSwitch" destination="xTS-VK-tYE" id="UTH-yA-Q8y"/>
                         <outlet property="mapPlaceholder" destination="gkH-f9-Kqt" id="dpC-lP-kcn"/>
                         <outlet property="scanButtons" destination="xbv-4Q-0Rr" id="I2k-QC-Xg9"/>
                         <outlet property="startScanButton" destination="gjk-Q3-qDh" id="nrh-C4-oBF"/>

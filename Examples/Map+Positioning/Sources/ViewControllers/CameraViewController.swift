@@ -11,20 +11,23 @@ import RealityKit
 import RxSwift
 import UIKit
 import WemapPositioningSDKVPSARKit
+import WemapMapSDK
 
 @available(iOS 13.0, *)
 class CameraViewController: UIViewController {
 
+    var session: ARSession!
+    var vpsLocationSource: VPSARKitLocationSource!
+    var vpsDelegateDispatcher: VPSDelegateDispatcher!
+    var locationManagerDelegateDispatcher: LocationManagerDelegateDispatcher!
+    
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var startScanButton: UIButton!
     @IBOutlet var stopScanButton: UIButton!
     
-    var session: ARSession!
-    var vpsLocationSource: VPSARKitLocationSource!
-    
-    private let stateListener = SerialDisposable()
     private let disposeBag = DisposeBag()
     private var arView: ARView!
+    private weak var currentToast: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,40 +37,20 @@ class CameraViewController: UIViewController {
         view.insertSubview(arView, at: 0)
         arView.session = session
         
-        weak var previousToast: UIView?
-        vpsLocationSource
-            .rx.didFail
-            .emit(onNext: { [unowned self] in
-                previousToast?.removeFromSuperview()
-                previousToast = ToastHelper.showToast(message: "VPS failed with error - \($0)", onView: view)
-            })
-            .disposed(by: disposeBag)
-        
-        vpsLocationSource
-            .rx.didChangeScanStatus
-            .emit(onNext: { [unowned self] in
-                if $0 == .started {
-                    infoLabel.text = "VPS scanning started"
-                    startScanButton.isEnabled = false
-                    stopScanButton.isEnabled = true
-                } else {
-                    infoLabel.text = "VPS scanning stopped"
-                    startScanButton.isEnabled = true
-                    stopScanButton.isEnabled = false
-                }
-            })
-            .disposed(by: disposeBag)
+        locationManagerDelegateDispatcher.secondary = self
+        vpsDelegateDispatcher.secondary = self
     }
     
     @IBAction func startScan() {
         vpsLocationSource.startScan()
-        stateListener.disposable = vpsLocationSource
-            .rx.didChangeState.asObservable()
-            .filter { $0 == .accuratePositioning }
-            .take(1).asSingle()
-            .subscribe(onSuccess: { [unowned self] _ in
-                dismiss(animated: true)
-            })
+    }
+    
+    @IBAction func stopScan() {
+        vpsLocationSource.stopScan()
+    }
+    
+    @IBAction func close() {
+        dismiss(animated: true)
     }
     
     // FIXME: workaround to avoid automatic stopping of the session due to iOS 18 changes.
@@ -82,14 +65,52 @@ class CameraViewController: UIViewController {
         }
         super.viewWillDisappear(animated)
     }
-
-    // end
     
-    @IBAction func stopScan() {
-        vpsLocationSource.stopScan()
+    private func showToast(message: String) {
+        currentToast?.removeFromSuperview()
+        currentToast = ToastHelper.showToast(message: message, onView: view)
+    }
+}
+
+@available(iOS 13.0, *)
+extension CameraViewController: VPSARKitLocationSourceDelegate {
+    
+    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
+        debugPrint("VPS scan status changed - \(status)")
+        
+        if status == .started {
+            infoLabel.text = "VPS scanning started"
+            startScanButton.isEnabled = false
+            stopScanButton.isEnabled = true
+        } else {
+            infoLabel.text = "VPS scanning stopped"
+            startScanButton.isEnabled = true
+            stopScanButton.isEnabled = false
+            if vpsLocationSource.state == .accuratePositioning {
+                showToast(message: "Scanning is stopped and state is accurate, so you can close scanner.")
+            }
+        }
     }
     
-    deinit {
-        stateListener.dispose()
+    func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+        
+        debugPrint("VPS state changed - \(state)")
+        
+        switch state {
+        case .notPositioning:
+            showToast(message: "State is not positioning. Scan your environment")
+        case let .degradedPositioning(reason):
+            showToast(message: "State is degraded because \(reason). Scan your environment a bit more.")
+        default: // .accuratePositioning
+            showToast(message: "State is accurate and you can close scanner.")
+        }
+    }
+}
+
+@available(iOS 13.0, *)
+extension CameraViewController: UserLocationManagerDelegate {
+    
+    func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
+        showToast(message: "Location Source failed with error - \(error)")
     }
 }

@@ -26,10 +26,12 @@ final class NavigationViewController: MapViewController {
     @IBOutlet var removeUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
     @IBOutlet var userTrackingModeButton: UIButton!
+    @IBOutlet var localizeButton: UIButton!
+    
+    private let vpsDelegateDispatcher = VPSDelegateDispatcher()
+    private let locationManagerDelegateDispatcher = LocationManagerDelegateDispatcher()
     
     private weak var currentVPSToast: UIView?
-    
-    private weak var cameraVC: CameraViewController?
     
     private var userCreatedAnnotations: [MLNAnnotation] {
         map.annotations?
@@ -49,6 +51,7 @@ final class NavigationViewController: MapViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createLongPressGestureRecognizer()
+        localizeButton.isHidden = locationSourceType != .vps
     }
     
     override func lateInit() {
@@ -56,8 +59,16 @@ final class NavigationViewController: MapViewController {
         
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
-        vpsLocationSource?.vpsDelegate = self
-        vpsLocationSource?.observer = self
+        
+        map.userLocationManager.delegate = locationManagerDelegateDispatcher
+        vpsLocationSource?.vpsDelegate = vpsDelegateDispatcher
+        
+        locationManagerDelegateDispatcher.primary = self
+        vpsDelegateDispatcher.primary = self
+        
+        if let state = vpsLocationSource?.state {
+            handleStateChange(state)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -163,7 +174,7 @@ final class NavigationViewController: MapViewController {
         updateUI()
     }
     
-    @IBAction func rescan() {
+    @IBAction func localize() {
         showCamera(session: vpsLocationSource!.session)
     }
     
@@ -174,17 +185,13 @@ final class NavigationViewController: MapViewController {
         
         map.userTrackingMode = MLNUserTrackingMode(rawValue: nextModeRaw)!
         
-        let title: String
-        switch map.userTrackingMode {
-        case .none:
-            title = "none"
-        case .follow:
-            title = "follow"
-        case .followWithHeading:
-            title = "heading"
-        default:
-            fatalError()
+        let title: String = switch map.userTrackingMode {
+        case .none: "none"
+        case .follow: "follow"
+        case .followWithHeading: "heading"
+        default: fatalError()
         }
+        
         userTrackingModeButton.setTitle(title, for: .normal)
     }
     
@@ -227,16 +234,33 @@ final class NavigationViewController: MapViewController {
         return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
     }
     
-    private func showCamera(session: ARSession, assignCamera: Bool = false) {
+    private func showCamera(session: ARSession) {
         // swiftlint:disable:next force_cast
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cameraVC") as! CameraViewController
         vc.session = session
         vc.vpsLocationSource = vpsLocationSource!
-        if assignCamera {
-            cameraVC = vc
-        }
-        
+        vc.vpsDelegateDispatcher = vpsDelegateDispatcher
+        vc.locationManagerDelegateDispatcher = locationManagerDelegateDispatcher
         present(vc, animated: true)
+    }
+    
+    private func handleStateChange(_ state: VPSARKitLocationSource.State) {
+        debugPrint("VPS state changed - \(state)")
+        
+        switch state {
+        case .notPositioning:
+            showVPSToast(message: "Scan is required. Please click on localize, scan your environment. "
+                         + "Camera will be closed automatically as soon as you're localized")
+        case let .degradedPositioning(reason):
+            showVPSToast(message: "Tracking is limited due to - \(reason)")
+        default: // .accuratePositioning
+            currentVPSToast?.removeFromSuperview()
+        }
+    }
+    
+    private func showVPSToast(message: String) {
+        currentVPSToast?.removeFromSuperview()
+        currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: 20, bottomInset: -200)
     }
 }
 
@@ -284,53 +308,15 @@ extension NavigationViewController: NavigationManagerDelegate {
 @available(iOS 13.0, *)
 extension NavigationViewController: VPSARKitLocationSourceDelegate {
     
-    func locationSource(_: VPSARKitLocationSource, didFailWithError error: VPSARKitLocationSourceError) {
-        debugPrint("VPS failed with error: \(error)")
-    }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        debugPrint("VPS scan status changed: \(status)")
-    }
-    
     func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
-        
-        debugPrint("state - \(state)")
-
-        switch state {
-        case .notPositioning where cameraVC == nil:
-            showCamera(session: locationSource.session, assignCamera: true)
-        case let .degradedPositioning(reason):
-            showVPSToast(message: "Tracking is limited due to - \(reason)")
-        default: // .accuratePositioning
-            currentVPSToast?.removeFromSuperview()
-        }
-    }
-    
-    private func showVPSToast(message: String) {
-        currentVPSToast?.removeFromSuperview()
-        currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: .infinity)
+        handleStateChange(state)
     }
 }
 
 @available(iOS 13.0, *)
-extension NavigationViewController: VPSARKitLocationSourceObserver {
+extension NavigationViewController: UserLocationManagerDelegate {
     
-    func locationSource(_: VPSARKitLocationSource, didChangeMovementState state: Int) {
-        let stateString = switch state {
-        case 0: "unknown"
-        case 1: "static"
-        case 2: "dynamic"
-        default: "not expected number \(state)"
-        }
-        debugPrint("Movement state changed to - \(stateString)")
-    }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeConveyingState state: Int) {
-        let stateString = switch state {
-        case 0: "notConveying"
-        case 1: "conveying"
-        default: "not expected number \(state)"
-        }
-        debugPrint("Conveing state changed to - \(stateString)")
+    func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
+        debugPrint("LocationManager failed with error - \(error)")
     }
 }

@@ -19,8 +19,4 @@ enum Constants {
     static var polestarApiKey: String {
         fatalError("Specify polestarApiKey and remove fatalError")
     }
-    
-    static var vpsEndpoint: String {
-        fatalError("Specify vpsEndpoint and remove fatalError")
-    }
 }

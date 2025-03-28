@@ -2,6 +2,33 @@
 
 ---
 
+## [0.21.0]
+
+### Added
+
+* SDKs: any LocationSource can project user coordinate on the graph or itinerary
+* PosSDK(VPS): Add ability to set itinerary from outside of SDK to VPSLocationSource
+* MapSDK: accept already drawn itinerary as a new navigation
+
+### Fixed
+
+* PosSDK(VPS): level is changed few times in a row when scanned image from another level
+
+### Deprecated
+
+* CoreSDK
+  * `SimulatorLocationSource.init(options: SimulationOptions)` is replaced by `SimulatorLocationSource.init(mapData: MapData, options: SimulationOptions)`. If you continue to use deprecated method, user location projection on the graph will not work.
+* PosSDK(VPS)
+  * `VPSARKitLocationSource.init(serviceURL: String)` is replaced by `VPSARKitLocationSource.init?(mapData: MapData)`. If you continue to use deprecated method, user location projection on the graph will not work.
+  * `VPSARKitLocationSourceDelegate.locationSource(_ locationSource: VPSARKitLocationSource, didFailWithError error: VPSARKitLocationSourceError)` will be removed. VPS Location Source errors are now forwarded to `LocationSourceDelegate.locationSource(_:didFailWithError:)` if VPS is used on its own, or to `UserLocationManagerDelegate.locationSource(_:didFailWithError:)` when used with the MapSDK.
+* PosSDK(Polestar)
+  * `PolestarLocationSource.init(apiKey: String)` is replaced by `PolestarLocationSource.init(mapData: MapData, apiKey: String)`. If you continue to use deprecated method, user location projection on the graph will not work.
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.20.2]
 
 ### Changed
