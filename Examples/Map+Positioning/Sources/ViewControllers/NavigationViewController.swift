@@ -250,7 +250,7 @@ final class NavigationViewController: MapViewController {
         switch state {
         case .notPositioning:
             showVPSToast(message: "Scan is required. Please click on localize, scan your environment. "
-                         + "Camera will be closed automatically as soon as you're localized")
+                + "Camera will be closed automatically as soon as you're localized")
         case let .degradedPositioning(reason):
             showVPSToast(message: "Tracking is limited due to - \(reason)")
         default: // .accuratePositioning
@@ -308,7 +308,7 @@ extension NavigationViewController: NavigationManagerDelegate {
 @available(iOS 13.0, *)
 extension NavigationViewController: VPSARKitLocationSourceDelegate {
     
-    func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         handleStateChange(state)
     }
 }

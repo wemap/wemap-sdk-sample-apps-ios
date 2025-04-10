@@ -2,6 +2,23 @@
 
 ---
 
+## [0.22.0]
+
+### Added
+
+* CoreSDK: Enhance offline graph calculation with more considerations
+  * Added new option [`ItinerarySearchOption.isWheelchair`][4]
+
+### Dependencies
+
+* Map
+  * MapLibre 6.12.1 -> 6.12.3
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.21.0]
 
 ### Added
@@ -840,3 +857,4 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 [1]: https://developers.getwemap.com/ios-native-sdk/Enums/CoreConstants#/s:12WemapCoreSDK0B9ConstantsO36userLocationProjectionOnGraphEnabledSbvpZ
 [2]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC20checkVPSAvailability2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbGSo22CLLocationCoordinate2DV_tF
 [3]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC14isVPSAvailable2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbG0A7CoreSDK10CoordinateC_tF
+[4]: https://developers.getwemap.com/ios-native-sdk/Structs/ItinerarySearchOptions#/s:12WemapCoreSDK22ItinerarySearchOptionsV12isWheelchairSbvp

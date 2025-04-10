@@ -10,8 +10,8 @@ import ARKit
 import RealityKit
 import RxSwift
 import UIKit
-import WemapPositioningSDKVPSARKit
 import WemapMapSDK
+import WemapPositioningSDKVPSARKit
 
 @available(iOS 13.0, *)
 class CameraViewController: UIViewController {
@@ -25,7 +25,6 @@ class CameraViewController: UIViewController {
     @IBOutlet var startScanButton: UIButton!
     @IBOutlet var stopScanButton: UIButton!
     
-    private let disposeBag = DisposeBag()
     private var arView: ARView!
     private weak var currentToast: UIView?
     
@@ -92,7 +91,7 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
         }
     }
     
-    func locationSource(_ locationSource: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         
         debugPrint("VPS state changed - \(state)")
         

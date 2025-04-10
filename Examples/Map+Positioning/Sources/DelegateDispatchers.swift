@@ -6,8 +6,8 @@
 //  Copyright © 2025 Wemap SAS. All rights reserved.
 //
 
-import WemapPositioningSDKVPSARKit
 import WemapMapSDK
+import WemapPositioningSDKVPSARKit
 
 final class VPSDelegateDispatcher: VPSARKitLocationSourceDelegate {
     
