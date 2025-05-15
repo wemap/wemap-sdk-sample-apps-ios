@@ -18,7 +18,7 @@ enum SortingType {
 
 final class POIsListViewController: UITableViewController {
     
-    unowned var mapView: MapView!
+    unowned var poiManager: MapPointOfInterestManaging!
     
     var userCoordinate: Coordinate!
     var sortingType = SortingType.distance
@@ -28,8 +28,6 @@ final class POIsListViewController: UITableViewController {
     private lazy var poisWithInfo: [PointOfInterestWithInfo] = poiManager
         .getPOIs()
         .map { PointOfInterestWithInfo($0, nil) }
-    
-    private var poiManager: MapPointOfInterestManaging { mapView.pointOfInterestManager }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,6 @@
 
 import ARKit
 import RealityKit
-import RxSwift
 import UIKit
 import WemapMapSDK
 import WemapPositioningSDKVPSARKit

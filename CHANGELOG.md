@@ -2,6 +2,31 @@
 
 ---
 
+## [0.22.2]
+
+### Changed
+
+* MapExample: rework Points of Interest sample
+
+### Fixed
+
+* MapSDK: blue dot is blocked when .followWithHeading is used
+* MapSDK: filtered or hidden POIs are still clickable
+* MapSDK: showAllPOIs method is not working as expected
+* MapSDK: crash on unselect many POIs at the same time
+
+### Dependencies
+
+* Map
+  * MapLibre 6.12.3 -> 6.13.0
+* Polestar
+  * NAOSDK 4.11.18 -> 4.12.0
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.22.0]
 
 ### Added

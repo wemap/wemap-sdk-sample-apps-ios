@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Br-Si-CgX">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfC-aW-f5l">
-                                <rect key="frame" x="145.33333333333334" y="775.66666666666663" width="99.333333333333343" height="34.333333333333371"/>
+                                <rect key="frame" x="145.33333333333334" y="741.66666666666663" width="99.333333333333343" height="34.333333333333371"/>
                                 <accessibility key="accessibilityConfiguration" identifier="buttonLoadMapId"/>
                                 <color key="tintColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IoM-Le-ifI" userLabel="Map Id Stack View">
-                                <rect key="frame" x="158.33333333333334" y="194" width="73.666666666666657" height="62.333333333333314"/>
+                                <rect key="frame" x="158.33333333333334" y="241.00000000000003" width="73.666666666666657" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0t-p0-MjJ">
                                         <rect key="frame" x="10.666666666666657" y="0.0" width="52" height="20.333333333333332"/>
@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="23254" borderStyle="roundedRect" placeholder="Map ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdK-E3-PaG">
-                                        <rect key="frame" x="0.0" y="28.333333333333343" width="73.666666666666671" height="34"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333314" width="73.666666666666671" height="34"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textFieldMapIdId"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
@@ -46,7 +46,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9FZ-pv-L5Q" userLabel="Location Source Stack View">
-                                <rect key="frame" x="35" y="491.33333333333331" width="320" height="244.33333333333331"/>
+                                <rect key="frame" x="35" y="457.33333333333331" width="320" height="244.33333333333331"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDj-o5-D1o">
                                         <rect key="frame" x="98.333333333333343" y="0.0" width="123.33333333333334" height="20.333333333333332"/>
@@ -55,7 +55,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfH-mK-K5J">
-                                        <rect key="frame" x="0.0" y="28.333333333333314" width="320" height="216"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333371" width="320" height="216"/>
                                         <accessibility key="accessibilityConfiguration" identifier="pickerLocationSourceId"/>
                                     </pickerView>
                                 </subviews>
@@ -88,7 +88,7 @@
             <objects>
                 <viewController id="3S0-Vr-XtB" customClass="POIsViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ygm-k9-QXt" customClass="MapView" customModule="WemapMapSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTR-zN-tqg">
@@ -112,13 +112,13 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qSE-4D-Cgk" userLabel="Buttons Stack View">
-                                <rect key="frame" x="13.333333333333343" y="679" width="363.33333333333326" height="147"/>
+                                <rect key="frame" x="39" y="672" width="312" height="107"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bBV-hW-ztP">
-                                        <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="34.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34.333333333333336"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2g-xX-YbX">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Apply filter"/>
                                                 <connections>
@@ -126,7 +126,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVB-gb-ZbE">
-                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                                <rect key="frame" x="158" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Remove filters"/>
                                                 <connections>
@@ -136,43 +136,43 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5sV-cu-Trd">
-                                        <rect key="frame" x="0.0" y="36.333333333333364" width="363.33333333333331" height="74.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="36.333333333333371" width="312" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bv-La-GGd">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="74.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation from simulated user position"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Show hidden POI"/>
                                                 <connections>
-                                                    <action selector="startNavigationFromSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="yWt-e3-QQl"/>
+                                                    <action selector="showHiddenPOI" destination="3S0-Vr-XtB" eventType="touchUpInside" id="KzB-FA-6Kl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy3-fr-L4t">
-                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="74.333333333333329"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy3-fr-L4t">
+                                                <rect key="frame" x="158" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Remove simulated user position"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Hide random POI"/>
                                                 <connections>
-                                                    <action selector="removeSimulatedUserPosition" destination="3S0-Vr-XtB" eventType="touchUpInside" id="kg8-zg-SWx"/>
+                                                    <action selector="hideRandomPOI" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Ge2-8N-DIf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-Js-R9U">
-                                        <rect key="frame" x="0.0" y="112.66666666666661" width="363.33333333333331" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="72.666666666666629" width="312" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fy2-Pw-56X">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Start Navigation"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Show all POIs"/>
                                                 <connections>
-                                                    <action selector="startNavigation" destination="3S0-Vr-XtB" eventType="touchUpInside" id="Csx-Jr-lXI"/>
+                                                    <action selector="showAllPOIs" destination="3S0-Vr-XtB" eventType="touchUpInside" id="tcT-WM-fGJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foH-2j-5JC">
-                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foH-2j-5JC">
+                                                <rect key="frame" x="158" y="0.0" width="154" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Stop Navigation"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Hide all POIs"/>
                                                 <connections>
-                                                    <action selector="stopNavigation" destination="3S0-Vr-XtB" eventType="touchUpInside" id="QeB-ef-hU3"/>
+                                                    <action selector="hideAllPOIs" destination="3S0-Vr-XtB" eventType="touchUpInside" id="NJf-fp-Dyg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -220,7 +220,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="H80-uy-6Ib">
-                                <rect key="frame" x="208" y="22" width="166" height="31"/>
+                                <rect key="frame" x="208" y="69" width="166" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LL-Ki-456">
                                         <rect key="frame" x="0.0" y="0.0" width="109" height="31"/>
@@ -262,22 +262,22 @@
                     <navigationItem key="navigationItem" id="vjR-zi-AQu"/>
                     <connections>
                         <outlet property="applyFilterButton" destination="R2g-xX-YbX" id="eqp-9H-XSU"/>
+                        <outlet property="hideAllPOIsButton" destination="foH-2j-5JC" id="FWM-cT-XaZ"/>
+                        <outlet property="hideRandomPOIButton" destination="vy3-fr-L4t" id="Jb9-qE-oCZ"/>
                         <outlet property="levelControl" destination="beM-pR-pdz" id="rF5-28-kcd"/>
-                        <outlet property="navigationInfo" destination="cfI-hD-86U" id="GYB-cr-bzP"/>
+                        <outlet property="navigationInfoLabel" destination="cfI-hD-86U" id="n9X-OY-avJ"/>
                         <outlet property="poisByDistanceButton" destination="fSY-Be-4t6" id="xAd-Td-fbl"/>
                         <outlet property="poisByTimeButton" destination="cax-fM-df9" id="vYF-eN-Ccx"/>
                         <outlet property="removeFiltersButton" destination="oVB-gb-ZbE" id="6z8-Yb-21D"/>
-                        <outlet property="removeSimulatedUserPositionButton" destination="vy3-fr-L4t" id="kea-Lw-Q9I"/>
-                        <outlet property="startNavigationButton" destination="Fy2-Pw-56X" id="jAD-oq-V50"/>
-                        <outlet property="startNavigationFromSimulatedUserPositionButton" destination="9Bv-La-GGd" id="RO3-Pv-eqB"/>
-                        <outlet property="stopNavigationButton" destination="foH-2j-5JC" id="Fea-b0-kfh"/>
+                        <outlet property="showAllPOIsButton" destination="Fy2-Pw-56X" id="wf5-yx-xND"/>
+                        <outlet property="showHiddenPOIButton" destination="9Bv-La-GGd" id="oll-Sz-9cL"/>
                         <outlet property="toggleSelectionButton" destination="liI-SY-mON" id="0Be-7Y-cdo"/>
                         <outlet property="userSelectionSwitch" destination="3Zi-qy-F7G" id="nLT-4v-vKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhR-C8-j8m" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="551"/>
+            <point key="canvasLocation" x="1091" y="193"/>
         </scene>
         <!--Samples Table View Controller-->
         <scene sceneID="jKc-Wp-AFa">
@@ -298,14 +298,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Levels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mu5-xG-zcD">
-                                                    <rect key="frame" x="20" y="7.9999999999999982" width="48" height="20.333333333333332"/>
+                                                    <rect key="frame" x="16" y="7.9999999999999982" width="48" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to set custom indoor location provider and switch between levels" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GxQ-po-0GH">
-                                                    <rect key="frame" x="20" y="31.333333333333329" width="345.66666666666669" height="36"/>
+                                                    <rect key="frame" x="16" y="31.333333333333329" width="345.66666666666669" height="36"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -319,21 +319,21 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tIF-S2-jwh" detailTextLabel="xya-C7-X8Y" style="IBUITableViewCellStyleSubtitle" id="V8e-kx-9nn">
-                                        <rect key="frame" x="0.0" y="126.66666412353516" width="390" height="76.666664123535156"/>
+                                        <rect key="frame" x="0.0" y="126.66666412353516" width="390" height="58.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V8e-kx-9nn" id="tRd-PB-6lc">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="76.666664123535156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="58.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Points of interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tIF-S2-jwh">
-                                                    <rect key="frame" x="20" y="7.9999999999999982" width="137" height="20.333333333333332"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Points of interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tIF-S2-jwh" userLabel="Points of interest">
+                                                    <rect key="frame" x="16" y="7.9999999999999982" width="128.66666666666666" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to perform selection of POIs on the map" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xya-C7-X8Y">
-                                                    <rect key="frame" x="20" y="31.333333333333329" width="299.33333333333331" height="36"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to hide/show and select/unselect POIs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xya-C7-X8Y">
+                                                    <rect key="frame" x="16" y="31.333333333333329" width="342.33333333333331" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -346,21 +346,21 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="PGL-3c-gd2" detailTextLabel="K1f-jS-ERe" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="0nr-Zz-INf">
-                                        <rect key="frame" x="0.0" y="203.33332824707031" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="185.33333206176758" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0nr-Zz-INf" id="7NG-ew-ooF">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Navigation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PGL-3c-gd2">
-                                                    <rect key="frame" x="20" y="-1" width="81" height="20.333333333333332"/>
+                                                    <rect key="frame" x="16" y="-1" width="81" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shows how to start navigation to user-created annotation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K1f-jS-ERe">
-                                                    <rect key="frame" x="20" y="22.333333333333329" width="263" height="36"/>
+                                                    <rect key="frame" x="16" y="22.333333333333329" width="263" height="36"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -390,7 +390,7 @@
             <objects>
                 <viewController id="e5r-Qo-bVo" customClass="LevelsViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R25-Dt-xmM" customClass="MapView" customModule="WemapMapSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="w2I-TT-A45" userLabel="Level control">
@@ -413,7 +413,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VcO-oS-YBy">
-                                <rect key="frame" x="68.333333333333329" y="783.66666666666663" width="253.33333333333337" height="34.333333333333371"/>
+                                <rect key="frame" x="68.333333333333329" y="736.66666666666663" width="253.33333333333337" height="34.333333333333371"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqA-TL-il6">
                                         <rect key="frame" x="0.0" y="0.0" width="122.66666666666667" height="34.333333333333336"/>
@@ -457,14 +457,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1A-ce-18L" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="-102"/>
+            <point key="canvasLocation" x="1091" y="-453"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="GWs-dU-5sd">
             <objects>
                 <viewController id="nxR-az-56C" customClass="NavigationViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCZ-Ju-NLZ" customClass="MapView" customModule="WemapMapSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEn-DW-lV9">
@@ -488,7 +488,7 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="UCc-r8-KjV">
-                                <rect key="frame" x="17" y="713.33333333333337" width="356" height="112.66666666666663"/>
+                                <rect key="frame" x="17" y="666.33333333333337" width="356" height="112.66666666666663"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mte-5V-VGH" userLabel="Navigation Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="356" height="74.333333333333329"/>
@@ -576,14 +576,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFx-Td-eEW" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1802" y="551"/>
+            <point key="canvasLocation" x="1091" y="855"/>
         </scene>
         <!--Is List View Controller-->
         <scene sceneID="xWC-lk-0oQ">
             <objects>
                 <tableViewController storyboardIdentifier="poisTVC" id="gzk-cD-ZOk" customClass="POIsListViewController" customModule="Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="zUo-lv-iey">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -595,14 +595,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Point of interest name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IJb-DG-5iK">
-                                            <rect key="frame" x="20" y="7.9999999999999982" width="166.66666666666666" height="20.333333333333332"/>
+                                            <rect key="frame" x="16" y="7.9999999999999982" width="166.66666666666666" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Here will appear POI's content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="01V-yJ-HyT">
-                                            <rect key="frame" x="20" y="31.333333333333329" width="207.33333333333334" height="18"/>
+                                            <rect key="frame" x="16" y="31.333333333333329" width="207.33333333333334" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -617,7 +617,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ytp-pO-Boa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="1216"/>
+            <point key="canvasLocation" x="1788" y="193"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

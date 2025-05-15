@@ -15,31 +15,21 @@ import WemapMapSDK
 final class POIsViewController: MapViewController {
     
     typealias Delay = UIConstants.Delay
-    typealias Inset = UIConstants.Inset
     
     @IBOutlet var applyFilterButton: UIButton!
     @IBOutlet var removeFiltersButton: UIButton!
-    @IBOutlet var startNavigationButton: UIButton!
-    @IBOutlet var stopNavigationButton: UIButton!
-    @IBOutlet var startNavigationFromSimulatedUserPositionButton: UIButton!
-    @IBOutlet var removeSimulatedUserPositionButton: UIButton!
-    @IBOutlet var navigationInfo: UILabel!
+    @IBOutlet var showHiddenPOIButton: UIButton!
+    @IBOutlet var hideRandomPOIButton: UIButton!
+    @IBOutlet var showAllPOIsButton: UIButton!
+    @IBOutlet var hideAllPOIsButton: UIButton!
+    @IBOutlet var navigationInfoLabel: UILabel!
     @IBOutlet var toggleSelectionButton: UIButton!
     @IBOutlet var poisByDistanceButton: UIButton!
     @IBOutlet var poisByTimeButton: UIButton!
     @IBOutlet var userSelectionSwitch: UISwitch!
     
-    private var simulator: SimulatorLocationSource? {
-        map.userLocationManager.locationSource as? SimulatorLocationSource
-    }
-    
-    private var navigationManager: MapNavigationManaging { map.navigationManager }
-    
+    private var hiddenPOI: PointOfInterest?
     private var simulatedUserPosition: MLNAnnotation?
-    
-    private var selectedPOI: PointOfInterest? {
-        pointOfInterestManager.getSelectedPOI()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +39,6 @@ final class POIsViewController: MapViewController {
     override func lateInit() {
         super.lateInit()
         
-        navigationManager.delegate = self
         pointOfInterestManager.delegate = self
         
         map.userTrackingMode = .followWithHeading
@@ -59,46 +48,34 @@ final class POIsViewController: MapViewController {
                 pointOfInterestManager.isUserSelectionEnabled = isOn
             })
             .disposed(by: disposeBag)
+        
+        map.userLocationManager
+            .rx.coordinate
+            .take(1)
+            .subscribe(onNext: { [unowned self] in
+                enableSortButtons()
+                navigationInfoLabel.text = $0.shortDescription
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        ToastHelper.showToast(
-            message: "Select one POI on the map and after click on start navigation button. " +
-                "If you use simulator - perform long tap at any place on the map and then select at least one POI to start navigation",
-            onView: view, hideDelay: Delay.short
-        )
+        let text = "If you use simulator, long tap at any place on the map to simulate user location. After you'll be able to sort POIs by time/distance"
+        ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.short)
     }
     
     @IBAction func closeTouched() {
         dismiss(animated: true)
     }
     
-    @IBAction func startNavigation() {
-        startNavigationToSelectedPOI()
-    }
-    
-    @IBAction func stopNavigation() {
-        let result = navigationManager.stopNavigation()
-        switch result {
-        case .success:
-            simulator?.reset()
-            stopNavigationButton.isEnabled = false
-            updateUI()
-        case let .failure(error):
-            ToastHelper.showToast(message: "Failed to stop navigation with error - \(error)", onView: view, hideDelay: Delay.long)
-        }
-    }
-    
-    @IBAction func startNavigationFromSimulatedUserPosition() {
-        let origin = getCoordinateFromSimulatedUserPosition()
-        startNavigationToSelectedPOI(origin: origin)
-    }
-    
-    @IBAction func removeSimulatedUserPosition() {
-        map.removeAnnotation(simulatedUserPosition!)
-        simulatedUserPosition = nil
-        updateUI()
+    @IBAction func toggleSelection() {
+        var newModeRaw = pointOfInterestManager.selectionMode.rawValue + 1
+        newModeRaw = newModeRaw < PointOfInterestManager.SelectionMode.allCases.count ? newModeRaw : 0
+        let newMode = PointOfInterestManager.SelectionMode(rawValue: newModeRaw)!
+        
+        pointOfInterestManager.selectionMode = newMode
+        toggleSelectionButton.setTitle("Selection: \(newMode.description)", for: .normal)
     }
     
     @IBAction func applyFilter() {
@@ -114,32 +91,66 @@ final class POIsViewController: MapViewController {
         removeFiltersButton.isEnabled = false
     }
     
-    @IBAction func toggleSelection() {
-        var newModeRaw = pointOfInterestManager.selectionMode.rawValue + 1
-        newModeRaw = newModeRaw < PointOfInterestManager.SelectionMode.allCases.count ? newModeRaw : 0
-        let newMode = PointOfInterestManager.SelectionMode(rawValue: newModeRaw)!
+    @IBAction func showHiddenPOI() {
+        guard let hiddenPOI else {
+            fatalError("Hidden POI is nil")
+        }
         
-        pointOfInterestManager.selectionMode = newMode
-        toggleSelectionButton.setTitle("Selection: \(newMode.description)", for: .normal)
+        ToastHelper.showToast(message: "Showing POI - \(hiddenPOI.name)", onView: view)
+        pointOfInterestManager.centerToPOI(hiddenPOI)
+        if pointOfInterestManager.showPOI(hiddenPOI) {
+            self.hiddenPOI = nil
+            updateShowHidePOIButtons()
+        } else {
+            ToastHelper.showToast(message: "Failed to show POI - \(hiddenPOI.name)", onView: view)
+        }
     }
     
-    private func startNavigationToSelectedPOI(origin: Coordinate? = nil) {
-        disableStartButtons()
+    @IBAction func hideRandomPOI() {
+        guard let randomPOI = pointOfInterestManager.getPOIs().randomElement() else {
+            fatalError("Random POI is nil")
+        }
         
-        let destination = selectedPOI!.coordinate
-        
-        navigationManager
-            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions)
-            .subscribe(
-                onSuccess: { [unowned self] navigation in
-                    simulator?.setItinerary(navigation.itinerary)
-                    stopNavigationButton.isEnabled = true
-                },
-                onFailure: { [unowned self] error in
-                    ToastHelper.showToast(message: "Failed to start navigation to - \(destination) with error - \(error)", onView: view, hideDelay: Delay.long)
-                    updateUI()
-                }
-            ).disposed(by: disposeBag)
+        ToastHelper.showToast(message: "Hiding POI - \(randomPOI.name)", onView: view)
+        pointOfInterestManager.centerToPOI(randomPOI)
+        if pointOfInterestManager.hidePOI(randomPOI) {
+            hiddenPOI = randomPOI
+            updateShowHidePOIButtons()
+        } else {
+            ToastHelper.showToast(message: "Failed to hide POI - \(randomPOI.name)", onView: view)
+        }
+    }
+    
+    @IBAction func showAllPOIs() {
+        let shown = pointOfInterestManager.showAllPOIs()
+        hideAllPOIsButton.isEnabled = shown
+        showAllPOIsButton.isEnabled = !shown
+    }
+    
+    @IBAction func hideAllPOIs() {
+        let hidden = pointOfInterestManager.hideAllPOIs()
+        hideAllPOIsButton.isEnabled = !hidden
+        showAllPOIsButton.isEnabled = hidden
+        if hidden {
+            hiddenPOI = nil
+            updateShowHidePOIButtons()
+        }
+    }
+    
+    // MARK: - Private
+    
+    private func enableSortButtons() {
+        poisByTimeButton.isEnabled = true
+        poisByDistanceButton.isEnabled = true
+    }
+    
+    private func getLastCoordinate() -> Coordinate {
+        map.userLocationManager.lastCoordinate ?? getSimulatedCoordinate()
+    }
+    
+    private func getSimulatedCoordinate() -> Coordinate {
+        let from = simulatedUserPosition!
+        return Coordinate(coordinate2D: from.coordinate, levels: getLevelFromAnnotation(from))
     }
     
     private func createLongPressGestureRecognizer() {
@@ -162,20 +173,7 @@ final class POIsViewController: MapViewController {
         point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
         map.addAnnotation(point)
         simulatedUserPosition = point
-        updateUI()
-    }
-    
-    private func updateUI() {
-        startNavigationButton.isEnabled = !stopNavigationButton.isEnabled && selectedPOI != nil
-        startNavigationFromSimulatedUserPositionButton.isEnabled = selectedPOI != nil && simulatedUserPosition != nil && !stopNavigationButton.isEnabled
-        removeSimulatedUserPositionButton.isEnabled = simulatedUserPosition != nil
-        poisByDistanceButton.isEnabled = simulatedUserPosition != nil
-        poisByTimeButton.isEnabled = simulatedUserPosition != nil
-    }
-    
-    private func disableStartButtons() {
-        startNavigationButton.isEnabled = false
-        startNavigationFromSimulatedUserPositionButton.isEnabled = false
+        enableSortButtons()
     }
     
     private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
@@ -187,11 +185,6 @@ final class POIsViewController: MapViewController {
         return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
     }
     
-    private func getCoordinateFromSimulatedUserPosition() -> Coordinate {
-        let from = simulatedUserPosition!
-        return Coordinate(coordinate2D: from.coordinate, levels: getLevelFromAnnotation(from))
-    }
-    
     override func mapView(_: MapView, didTouchAtPoint _: CGPoint) {
         if pointOfInterestManager.selectionMode.isSingle {
             _ = pointOfInterestManager.unselectPOI()
@@ -200,12 +193,18 @@ final class POIsViewController: MapViewController {
         }
     }
     
+    private func updateShowHidePOIButtons() {
+        let hiddenPOIExists = hiddenPOI != nil
+        showHiddenPOIButton.isEnabled = hiddenPOIExists
+        hideRandomPOIButton.isEnabled = !hiddenPOIExists
+    }
+    
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! POIsListViewController // swiftlint:disable:this force_cast
-        vc.mapView = map
-        vc.userCoordinate = getCoordinateFromSimulatedUserPosition()
+        vc.poiManager = pointOfInterestManager
+        vc.userCoordinate = getLastCoordinate()
         
         if let button = sender as? UIButton, button == poisByDistanceButton {
             vc.sortingType = .distance
@@ -215,50 +214,11 @@ final class POIsViewController: MapViewController {
     }
 }
 
+// MARK: - PointOfInterestManagerDelegate
+
 extension POIsViewController: PointOfInterestManagerDelegate {
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
-        updateUI()
-    }
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
-        updateUI()
-    }
     
     func pointOfInterestManager(_: PointOfInterestManager, didTouchPointOfInterest poi: PointOfInterest) {
         ToastHelper.showToast(message: "didTouchPointOfInterest - \(poi)", onView: view, hideDelay: Delay.short)
-    }
-}
-
-extension POIsViewController: NavigationManagerDelegate {
-    
-    func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
-        navigationInfo.isHidden = false
-        navigationInfo.text = info.description
-    }
-    
-    func navigationManager(_: NavigationManager, didStartNavigation _: Navigation) {
-        navigationInfo.isHidden = false
-        ToastHelper.showToast(message: "Navigation started", onView: view)
-        stopNavigationButton.isEnabled = true
-    }
-    
-    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
-        navigationInfo.isHidden = true
-        ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
-        stopNavigationButton.isEnabled = false
-    }
-    
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
-        ToastHelper.showToast(message: "Navigation manager didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
-    }
-    
-    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
-        navigationInfo.isHidden = true
-        ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
-    }
-    
-    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
-        ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }
