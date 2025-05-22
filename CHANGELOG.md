@@ -82,6 +82,24 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
+## [0.20.3]
+
+### Fixed
+
+* PosSDK(VPS): fix unnecessary request for rescan on exit from conveyor
+
+### Dependencies
+
+* Map
+  * MapLibre 6.12.1 -> 6.12.3
+* Polestar
+  * NAOSDK 4.11.18 -> 4.12.0
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.20.2]
 
 ### Changed
