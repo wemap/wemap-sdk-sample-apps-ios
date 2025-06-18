@@ -92,6 +92,19 @@ final class VPSViewController: UIViewController {
     }
     
     /**
+     - Warning: This method is temporary and may be removed in any future release.
+     */
+    @IBAction func forceUserPositionButtonTouched() {
+        // Let consider levels mapping (level 0 => 0m, -1 => level -3.5m, level -2 => -7m) // From Wemap BO
+        // We want to set position to the end of escalators at level -1
+        let locationAfterEscalators = Coordinate(latitude: 48.88018539374073, longitude: 2.3567438682277952, altitude: -3.5)
+        let locationUpdated = vpsLocationSource.forceUpdatePosition(coordinate: locationAfterEscalators)
+        if !locationUpdated {
+            Logger.e("Failed to force user position.")
+        }
+    }
+    
+    /**
      Once you start receiving updated `Coordinate`s, you can assign an itinerary to the `VPSARKitLocationSource`.
      
      Assigning an itinerary to `VPSARKitLocationSource` when a user is following an A→B itinerary enhances the overall navigation experience (e.g., itinerary projections, conveyor detection, etc.).
@@ -229,7 +242,7 @@ extension VPSViewController: LocationSourceDelegate {
     
     func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
         DispatchQueue.main.async { [self] in
-            debugTextCoordinate.text = String(format: "lat: %.5f, lng: %.5f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
+            debugTextCoordinate.text = String(format: "lat: %.4f, lng: %.4f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
         }
     }
     

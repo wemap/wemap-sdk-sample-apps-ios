@@ -2,6 +2,13 @@
 
 ---
 
+## [0.22.4]
+
+### Compatibility
+
+* Xcode 16.2
+* Swift 6 (effective 5.10)
+
 ## [0.22.3]
 
 ### Fixed
