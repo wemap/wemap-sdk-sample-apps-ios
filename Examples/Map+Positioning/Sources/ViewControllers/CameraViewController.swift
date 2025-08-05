@@ -76,7 +76,7 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
     func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
         debugPrint("VPS scan status changed - \(status)")
         
-        if status == .started {
+        if status.isStarted {
             infoLabel.text = "VPS scanning started"
             startScanButton.isEnabled = false
             stopScanButton.isEnabled = true
@@ -84,7 +84,7 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
             infoLabel.text = "VPS scanning stopped"
             startScanButton.isEnabled = true
             stopScanButton.isEnabled = false
-            if vpsLocationSource.state == .accuratePositioning {
+            if vpsLocationSource.state.isAccurate {
                 showToast(message: "Scanning is stopped and state is accurate, so you can close scanner.")
             }
         }

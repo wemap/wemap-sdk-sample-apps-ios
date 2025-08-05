@@ -2,6 +2,36 @@
 
 ---
 
+## [0.23.0]
+
+### Added
+
+* SDKs: logging the use of public API. Enabled by default. To disable `Logger.level = .debug`
+* PosSDK(VPS): Position extrapolation when conveyor is detected
+* Samples(Map): Create a Level switcher view
+* MapSDK: expose drawn itineraries of ItineraryManager
+* Samples: new full-featured Map+Pos(VPS) sample app
+
+### Changed
+
+* MapSDK: various resource usage optimizations
+* PosSDK(VPS): improve quality of VPS recognition and resource usage
+* MapSDK: change default color of itinerary and user location (`#2F7DE1`)
+
+### Fixed
+
+* MapSDK: GPS permission is requested even if VPS LS is used
+* MapSDK: limit infinite navigation recalculation issue
+
+### Removed
+
+* support for Xcode 15.x versions due to [SDK minimum requirements](https://developer.apple.com/news/upcoming-requirements/?id=02212025a)
+
+### Compatibility
+
+* Xcode 16.3
+* Swift 6.1 (effective 5.10)
+
 ## [0.22.4]
 
 ### Compatibility

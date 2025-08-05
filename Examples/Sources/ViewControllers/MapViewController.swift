@@ -17,12 +17,10 @@ import WemapPositioningSDKPolestar
 import WemapPositioningSDKVPSARKit
 #endif
 
-class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDelegate {
+class MapViewController: UIViewController, MapViewDelegate {
     
     var mapData: MapData!
     var locationSourceType: LocationSourceType!
-    
-    @IBOutlet var levelControl: UISegmentedControl!
     
 //    private let maxBounds = MLNCoordinateBounds(
 //        sw: .init(latitude: 48.84045277048898, longitude: 2.371600716985739),
@@ -39,14 +37,23 @@ class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDeleg
     var focusedBuilding: Building? { buildingManager.focusedBuilding }
     var disposeBag = DisposeBag()
     
+    private let levelSwitch = LevelSwitch()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         map.mapDelegate = self
         map.mapData = mapData
         
-        levelControl.isHidden = true
-        levelControl.accessibilityIdentifier = "levelsControlId"
+        levelSwitch.isHidden = true
+        levelSwitch.accessibilityIdentifier = "levelsControlId"
+        
+        map.addSubview(levelSwitch)
+        NSLayoutConstraint.activate([
+            levelSwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            levelSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
+        ])
+        
         // to see coordinate returned by location source
 //        weak var previous: UIView?
 //        map.userLocationManager
@@ -72,41 +79,10 @@ class MapViewController: UIViewController, BuildingManagerDelegate, MapViewDeleg
         focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
     }
     
-    // MARK: BuildingManagerDelegate
-    
-    func buildingManager(_: BuildingManager, didChangeLevel level: Level, ofBuilding building: Building) {
-        debugPrint("\(#function) with \(level.id), of building \(building.name)")
-        levelControl.selectedSegmentIndex = building.activeLevelIndex
-    }
-    
-    func buildingManager(_: BuildingManager, didFocusBuilding building: Building?) {
-        
-        debugPrint("\(#function) with building \(building?.name ?? "nil")")
-        
-        guard let building else {
-            levelControl.isHidden = true
-            return
-        }
-        
-        levelControl.removeAllSegments()
-        let enumeratedLevels = building.levels.enumerated()
-        for (index, level) in enumeratedLevels {
-            levelControl.insertSegment(withTitle: level.shortName, at: index, animated: true)
-        }
-        levelControl.selectedSegmentIndex = building.activeLevelIndex
-        levelControl.isEnabled = true
-        levelControl.isHidden = false
-    }
-    
-    func buildingManager(_: BuildingManager, didFailWithError error: any Error) {
-        debugPrint("\(#function) with error \(error)")
-    }
-    
     func lateInit() {
+        levelSwitch.bind(buildingManager: buildingManager)
         // camera bounds can be specified even if they don't exist in MapData
 //        map.cameraBounds = maxBounds
-        buildingManager.delegate = self
-        buildingManager(buildingManager, didFocusBuilding: buildingManager.focusedBuilding)
         
         if locationManager.locationSource == nil {
             

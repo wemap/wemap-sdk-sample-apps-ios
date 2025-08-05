@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -99,18 +98,6 @@
                                     <action selector="closeTouched" destination="3S0-Vr-XtB" eventType="touchUpInside" id="z5e-od-mw3"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="beM-pR-pdz" userLabel="Level control">
-                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
-                                <segments>
-                                    <segment title="0" enabled="NO"/>
-                                    <segment title="1"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="AccentColor"/>
-                                <connections>
-                                    <action selector="levelChanged:" destination="e5r-Qo-bVo" eventType="valueChanged" id="AzG-VU-6VR"/>
-                                    <action selector="levelChanged:" destination="3S0-Vr-XtB" eventType="valueChanged" id="czL-mx-Wpm"/>
-                                </connections>
-                            </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qSE-4D-Cgk" userLabel="Buttons Stack View">
                                 <rect key="frame" x="39" y="672" width="312" height="107"/>
                                 <subviews>
@@ -220,7 +207,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="H80-uy-6Ib">
-                                <rect key="frame" x="208" y="69" width="166" height="31"/>
+                                <rect key="frame" x="208" y="62.333333333333343" width="166" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LL-Ki-456">
                                         <rect key="frame" x="0.0" y="0.0" width="109" height="31"/>
@@ -242,21 +229,18 @@
                             <constraint firstItem="pTR-zN-tqg" firstAttribute="leading" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="BVa-pj-BpX"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cfI-hD-86U" secondAttribute="trailing" constant="8" id="BgA-q5-DqP"/>
                             <constraint firstItem="cfI-hD-86U" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Eq2-yh-Up8"/>
-                            <constraint firstItem="beM-pR-pdz" firstAttribute="top" secondItem="pTR-zN-tqg" secondAttribute="bottom" constant="8" id="FCJ-AR-iQh"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" secondItem="H80-uy-6Ib" secondAttribute="trailing" constant="16" id="Gyl-vU-NfT"/>
-                            <constraint firstItem="cfI-hD-86U" firstAttribute="top" secondItem="beM-pR-pdz" secondAttribute="bottom" constant="8" symbolic="YES" id="QfW-xm-Z1h"/>
-                            <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" secondItem="beM-pR-pdz" secondAttribute="trailing" constant="16" id="TNW-BH-hEs"/>
                             <constraint firstItem="pTR-zN-tqg" firstAttribute="top" secondItem="ygm-k9-QXt" secondAttribute="top" constant="20" symbolic="YES" id="W9M-6h-f5O"/>
-                            <constraint firstItem="beM-pR-pdz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="Wlu-di-euD"/>
                             <constraint firstItem="qSE-4D-Cgk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="8" id="Wwz-Sf-aKU"/>
+                            <constraint firstItem="H80-uy-6Ib" firstAttribute="top" secondItem="liI-SY-mON" secondAttribute="top" id="cUv-xI-SR8"/>
                             <constraint firstItem="qSE-4D-Cgk" firstAttribute="centerX" secondItem="d3b-ax-gvx" secondAttribute="centerX" id="f7q-xp-Aum"/>
                             <constraint firstItem="eX7-Ig-0w9" firstAttribute="centerX" secondItem="ygm-k9-QXt" secondAttribute="centerX" id="gE6-40-DXB"/>
                             <constraint firstItem="eX7-Ig-0w9" firstAttribute="top" secondItem="cfI-hD-86U" secondAttribute="bottom" constant="8" id="jIr-Gg-dni"/>
                             <constraint firstItem="liI-SY-mON" firstAttribute="top" secondItem="pTR-zN-tqg" secondAttribute="bottom" constant="8" id="nBj-Z3-3ij"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pTR-zN-tqg" secondAttribute="trailing" constant="16" id="ppZ-M7-mhw"/>
+                            <constraint firstItem="cfI-hD-86U" firstAttribute="top" secondItem="H80-uy-6Ib" secondAttribute="bottom" constant="8" symbolic="YES" id="qbq-bj-Kiu"/>
                             <constraint firstItem="liI-SY-mON" firstAttribute="leading" secondItem="d3b-ax-gvx" secondAttribute="leading" constant="16" id="r9G-EN-Uod"/>
                             <constraint firstItem="d3b-ax-gvx" firstAttribute="bottom" secondItem="qSE-4D-Cgk" secondAttribute="bottom" constant="8" id="w6N-5j-aUE"/>
-                            <constraint firstItem="H80-uy-6Ib" firstAttribute="top" secondItem="d3b-ax-gvx" secondAttribute="top" constant="22" id="y6X-Kp-6PT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjR-zi-AQu"/>
@@ -264,7 +248,6 @@
                         <outlet property="applyFilterButton" destination="R2g-xX-YbX" id="eqp-9H-XSU"/>
                         <outlet property="hideAllPOIsButton" destination="foH-2j-5JC" id="FWM-cT-XaZ"/>
                         <outlet property="hideRandomPOIButton" destination="vy3-fr-L4t" id="Jb9-qE-oCZ"/>
-                        <outlet property="levelControl" destination="beM-pR-pdz" id="rF5-28-kcd"/>
                         <outlet property="navigationInfoLabel" destination="cfI-hD-86U" id="n9X-OY-avJ"/>
                         <outlet property="poisByDistanceButton" destination="fSY-Be-4t6" id="xAd-Td-fbl"/>
                         <outlet property="poisByTimeButton" destination="cax-fM-df9" id="vYF-eN-Ccx"/>
@@ -393,17 +376,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="w2I-TT-A45" userLabel="Level control">
-                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
-                                <segments>
-                                    <segment title="0" enabled="NO"/>
-                                    <segment title="1"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="AccentColor"/>
-                                <connections>
-                                    <action selector="levelChanged:" destination="e5r-Qo-bVo" eventType="valueChanged" id="pep-2g-jl9"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0y-Na-b7I">
                                 <rect key="frame" x="16" y="20.000000000000004" width="67" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
@@ -441,19 +413,13 @@
                             <constraint firstItem="VcO-oS-YBy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R25-Dt-xmM" secondAttribute="leadingMargin" constant="16" id="Hzn-tK-QIY"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="VcO-oS-YBy" secondAttribute="trailing" constant="16" id="OdY-7l-eJ5"/>
                             <constraint firstItem="USo-zn-2oG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c0y-Na-b7I" secondAttribute="trailing" constant="16" id="QMb-7Q-IKJ"/>
-                            <constraint firstItem="w2I-TT-A45" firstAttribute="top" secondItem="c0y-Na-b7I" secondAttribute="bottom" constant="8" id="dPz-Hn-5JP"/>
                             <constraint firstItem="USo-zn-2oG" firstAttribute="bottom" secondItem="VcO-oS-YBy" secondAttribute="bottom" constant="16" id="fkq-RO-yD5"/>
-                            <constraint firstItem="USo-zn-2oG" firstAttribute="trailing" secondItem="w2I-TT-A45" secondAttribute="trailing" constant="16" id="igc-vE-NK7"/>
                             <constraint firstItem="c0y-Na-b7I" firstAttribute="leading" secondItem="USo-zn-2oG" secondAttribute="leading" constant="16" id="jKF-Ba-7gt"/>
-                            <constraint firstItem="w2I-TT-A45" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="USo-zn-2oG" secondAttribute="leading" constant="16" id="lLv-rz-qzI"/>
                             <constraint firstItem="c0y-Na-b7I" firstAttribute="top" secondItem="R25-Dt-xmM" secondAttribute="top" constant="20" symbolic="YES" id="qOg-CF-ZYh"/>
                             <constraint firstItem="VcO-oS-YBy" firstAttribute="centerX" secondItem="R25-Dt-xmM" secondAttribute="centerX" id="s0x-yy-TZM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ygY-LW-o3L"/>
-                    <connections>
-                        <outlet property="levelControl" destination="w2I-TT-A45" id="U4c-cI-Ofs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1A-ce-18L" sceneMemberID="firstResponder"/>
             </objects>
@@ -476,17 +442,6 @@
                                     <action selector="closeTouched" destination="nxR-az-56C" eventType="touchUpInside" id="HHc-Hg-XfP"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="aOh-9H-7pz" userLabel="Level control">
-                                <rect key="frame" x="319" y="62.333333333333343" width="55" height="32"/>
-                                <segments>
-                                    <segment title="0" enabled="NO"/>
-                                    <segment title="1"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="AccentColor"/>
-                                <connections>
-                                    <action selector="levelChanged:" destination="nxR-az-56C" eventType="valueChanged" id="gDz-SF-ONa"/>
-                                </connections>
-                            </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="UCc-r8-KjV">
                                 <rect key="frame" x="17" y="666.33333333333337" width="356" height="112.66666666666663"/>
                                 <subviews>
@@ -535,7 +490,7 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigation info will be here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7og-Sa-tTm">
-                                <rect key="frame" x="103.00000000000001" y="101.33333333333333" width="184.33333333333337" height="18"/>
+                                <rect key="frame" x="103.00000000000001" y="55" width="184.33333333333337" height="18"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59991629464285712" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="Iwu-dD-d2A"/>
@@ -549,24 +504,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tEn-DW-lV9" firstAttribute="leading" secondItem="GHT-jT-dLy" secondAttribute="leading" constant="16" id="4op-S7-eLQ"/>
+                            <constraint firstItem="7og-Sa-tTm" firstAttribute="top" secondItem="GHT-jT-dLy" secondAttribute="top" constant="8" id="5qB-jM-a7s"/>
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="bottom" secondItem="UCc-r8-KjV" secondAttribute="bottom" constant="8" id="E24-dH-mfc"/>
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tEn-DW-lV9" secondAttribute="trailing" constant="16" id="JoT-qO-iiQ"/>
                             <constraint firstItem="7og-Sa-tTm" firstAttribute="centerX" secondItem="oCZ-Ju-NLZ" secondAttribute="centerX" id="Kr2-j7-NuQ"/>
                             <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7og-Sa-tTm" secondAttribute="trailing" constant="8" id="L5d-Zi-tHk"/>
                             <constraint firstItem="tEn-DW-lV9" firstAttribute="top" secondItem="oCZ-Ju-NLZ" secondAttribute="top" constant="20" symbolic="YES" id="L8k-tC-sbK"/>
-                            <constraint firstItem="GHT-jT-dLy" firstAttribute="trailing" secondItem="aOh-9H-7pz" secondAttribute="trailing" constant="16" id="OPP-xg-Yvu"/>
                             <constraint firstItem="UCc-r8-KjV" firstAttribute="centerX" secondItem="oCZ-Ju-NLZ" secondAttribute="centerX" id="OsV-9p-Dvq"/>
-                            <constraint firstItem="aOh-9H-7pz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GHT-jT-dLy" secondAttribute="leading" constant="16" id="euD-tN-8Z8"/>
-                            <constraint firstItem="7og-Sa-tTm" firstAttribute="top" secondItem="aOh-9H-7pz" secondAttribute="bottom" constant="8" symbolic="YES" id="fWk-a1-kkn"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UCc-r8-KjV" secondAttribute="trailing" constant="16" id="nuV-6d-e19"/>
-                            <constraint firstItem="aOh-9H-7pz" firstAttribute="top" secondItem="tEn-DW-lV9" secondAttribute="bottom" constant="8" id="pT2-Xd-LIj"/>
                             <constraint firstItem="7og-Sa-tTm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GHT-jT-dLy" secondAttribute="leading" constant="8" id="ujd-ak-QKr"/>
                             <constraint firstItem="UCc-r8-KjV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oCZ-Ju-NLZ" secondAttribute="leading" constant="16" id="yXF-iL-qCT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qXG-tS-7D4"/>
                     <connections>
-                        <outlet property="levelControl" destination="aOh-9H-7pz" id="V57-hp-w2q"/>
                         <outlet property="navigationInfo" destination="7og-Sa-tTm" id="1zl-rq-AHc"/>
                         <outlet property="removeUserCreatedAnnotationsButton" destination="c02-nc-Ixf" id="Ru5-UG-u9C"/>
                         <outlet property="startNavigationButton" destination="YXv-ra-19v" id="sWA-H6-rZa"/>
@@ -624,9 +575,6 @@
         <segue reference="o0J-JP-At4"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.19200000166893005" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

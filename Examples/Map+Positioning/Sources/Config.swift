@@ -8,8 +8,8 @@
 
 import WemapCoreSDK
 import WemapMapSDK
-import WemapPositioningSDK
 import WemapPositioningSDKVPSARKit
+import Foundation
 
 enum PreferencesKey: String {
     // versions
@@ -48,7 +48,7 @@ func customKeysAndValues() -> [String: Any] {
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,
         .mapLibreVersion: Bundle.mapLibre.version,
-        .positioningVersion: Bundle.positioning.version
+        .positioningVersion: Bundle.positioningVPSARKit.version
     ]
     
     return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })

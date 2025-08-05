@@ -7,7 +7,8 @@
 //
 
 import WemapCoreSDK
-import WemapPositioningSDK
+import WemapPositioningSDKVPSARKit
+import Foundation
 
 enum PreferencesKey: String {
     case positioningVersion,
@@ -26,7 +27,7 @@ func customKeysAndValues() -> [String: Any] {
         .bool(forKey: .userLocationProjectionOnGraphEnabled, defaultValue: CoreConstants.userLocationProjectionOnGraphEnabled)
     
     let specificKeysAndValues: [PreferencesKey: Any] = [
-        .positioningVersion: Bundle.positioning.version
+        .positioningVersion: Bundle.positioningVPSARKit.version
     ]
     
     let dict = Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })

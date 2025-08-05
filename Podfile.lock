@@ -11,30 +11,28 @@ PODS:
     - RxSwift (= 6.9.0)
   - RxSwift (6.9.0)
   - Turf (4.0.0)
-  - WemapCoreSDK (0.22.4):
+  - WemapCoreSDK (0.23.0):
     - Alamofire (~> 5.10.0)
     - RxCocoa (~> 6.9.0)
     - RxRelay (~> 6.9.0)
     - RxSwift (~> 6.9.0)
     - Turf (~> 4.0.0)
-  - WemapMapSDK (0.22.4):
+  - WemapMapSDK (0.23.0):
     - MapLibre (~> 6.13.0)
-    - WemapCoreSDK (~> 0.22.4)
+    - WemapCoreSDK (~> 0.23.0)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/Core (0.22.4):
+  - WemapPositioningSDK/VPSARKit (0.23.0):
     - RxSwift (~> 6.9.0)
-    - WemapCoreSDK (~> 0.22.4)
-  - WemapPositioningSDK/VPSARKit (0.22.4):
-    - WemapPositioningSDK/Core
-  - WemapPositioningSDKPolestar (0.22.4):
+    - WemapCoreSDK (~> 0.23.0)
+  - WemapPositioningSDKPolestar (0.23.0):
     - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.22.4)
+    - WemapCoreSDK (~> 0.23.0)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapMapSDK (~> 0.22.4)
-  - WemapPositioningSDK/VPSARKit (~> 0.22.4)
-  - WemapPositioningSDKPolestar (~> 0.22.4)
+  - WemapMapSDK (~> 0.23.0)
+  - WemapPositioningSDK/VPSARKit (~> 0.23.0)
+  - WemapPositioningSDKPolestar (~> 0.23.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -62,12 +60,12 @@ SPEC CHECKSUMS:
   RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
   RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
   Turf: c9eb11a65d96af58cac523460fd40fec5061b081
-  WemapCoreSDK: 0aa446096350f0db531b95eda321403d2bf96b21
-  WemapMapSDK: d94d4ad993bbda04c08534fa613f877c066b8918
-  WemapPositioningSDK: 58f9a1c4966adcc8223f0c1e83b5852eeda9da46
-  WemapPositioningSDKPolestar: daac61427139d05c15193d2295551e0e32b418fa
+  WemapCoreSDK: 1443cb011c8570faa1c26e1f701f793590cd0ab6
+  WemapMapSDK: a11aa4af804667f08b98f963e9ca510cd9a87a59
+  WemapPositioningSDK: 5ae0ee8188081d22209ac62dc91daba360d8654e
+  WemapPositioningSDKPolestar: 0a90d78bf879709551fbb456322ab61ffb55a4d3
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 38ca7673db82c9c6812c1ef8bbc52ba28f9540dd
+PODFILE CHECKSUM: 1bfacf8dc8949d17fae5cad122f135bee56c5744
 
 COCOAPODS: 1.16.2

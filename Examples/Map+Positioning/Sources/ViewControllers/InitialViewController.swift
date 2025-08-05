@@ -89,10 +89,22 @@ final class InitialViewController: UIViewController {
         SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
         
         if #available(iOS 13.0, *) {
-            // swiftlint:disable:next force_cast
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
-            vc.mapData = mapData
-            vc.locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+            
+            let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+            
+            let vc: UIViewController
+            if locationSourceType == .vps {
+                // swiftlint:disable:next force_cast
+                let vpsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
+                vpsVC.mapData = mapData
+                vc = vpsVC
+            } else {
+                // swiftlint:disable:next force_cast
+                let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
+                navVC.mapData = mapData
+                navVC.locationSourceType = locationSourceType
+                vc = navVC
+            }
             
             show(vc, sender: nil)
         } else {

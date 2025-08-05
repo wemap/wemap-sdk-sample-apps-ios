@@ -115,8 +115,7 @@ final class VPSViewController: UIViewController {
         mapPlaceholder.isHidden = false
         scanButtons.isHidden = true
         if itinerarySourceSwitch.isOn {
-//            loadItineraryFromGeoJSON()
-            hardcodedItinerary()
+            vpsLocationSource.itinerary = hardcodedItinerary() // ItineraryLoader.loadFromGeoJSON()
         } else {
             calculateItinerary()
         }
@@ -128,7 +127,7 @@ final class VPSViewController: UIViewController {
     }
     
     private func updateScanButtons(status: VPSARKitLocationSource.ScanStatus) {
-        let isScanning = status == .started
+        let isScanning = status.isStarted
         startScanButton.isEnabled = !isScanning
         stopScanButton.isEnabled = isScanning
     }
@@ -154,17 +153,7 @@ final class VPSViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func loadItineraryFromGeoJSON() {
-        do {
-            let data = try Data(contentsOf: Bundle.main.url(forResource: "geoJsonItinerary", withExtension: "json")!)
-            let geoJsonItinerary = try JSONDecoder().decode(GeoJsonItinerary.self, from: data)
-            vpsLocationSource.itinerary = geoJsonItinerary.toItinerary()
-        } catch {
-            debugPrint("Failed to load geo itinerary from file with error - \(error)")
-        }
-    }
-    
-    private func hardcodedItinerary() {
+    private func hardcodedItinerary() -> Itinerary {
         
         let origin = Coordinate(latitude: 48.88007462, longitude: 2.35591097, level: 0)
         let destination = Coordinate(latitude: 48.88141308, longitude: 2.35747255, level: -2)
@@ -227,7 +216,7 @@ final class VPSViewController: UIViewController {
         let legSegmentsLevelMinus2 = LegSegment.fromCoordinates(coordinatesLevelMinus2)
         
         let segments = legSegmentsLevel0 + legSegmentsFrom0ToMinus1 + legSegmentsLevelMinus1 + legSegmentsFromMinus1ToMinus2 + legSegmentsLevelMinus2
-        vpsLocationSource.itinerary = .init(origin: origin, destination: destination, segments: segments)
+        return .init(origin: origin, destination: destination, segments: segments)
     }
     
     deinit {
@@ -242,7 +231,7 @@ extension VPSViewController: LocationSourceDelegate {
     
     func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
         DispatchQueue.main.async { [self] in
-            debugTextCoordinate.text = String(format: "lat: %.4f, lng: %.4f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
+            debugTextCoordinate.text = String(format: "lat: %.6f, lng: %.6f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
         }
     }
     
@@ -285,7 +274,7 @@ extension VPSViewController: VPSARKitLocationSourceDelegate {
         updateScanButtons(status: status)
         
         // rescan successful, reset rescanRequested and update UI
-        if status == .stopped, vpsLocationSource.state == .accuratePositioning {
+        if status == .stopped, vpsLocationSource.state.isAccurate {
             rescanRequested = false
             showMapPlaceholder()
         }
