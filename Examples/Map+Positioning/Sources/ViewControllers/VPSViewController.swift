@@ -290,7 +290,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
                 closeCameraTouched()
                 ToastHelper.showToast(message: "Failed to localize you in reasonable time. Try again later", onView: view, hideDelay: Delay.long)
             })
-     }
+    }
 
     // MARK: - POIs
     

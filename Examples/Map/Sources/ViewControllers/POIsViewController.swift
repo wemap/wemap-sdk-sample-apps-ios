@@ -41,8 +41,6 @@ final class POIsViewController: MapViewController {
         
         pointOfInterestManager.delegate = self
         
-        map.userTrackingMode = .followWithHeading
-        
         userSelectionSwitch.rx.isOn
             .subscribe(onNext: { [unowned self] isOn in
                 pointOfInterestManager.isUserSelectionEnabled = isOn

@@ -6,9 +6,9 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
+import Foundation
 import WemapCoreSDK
 import WemapPositioningSDKVPSARKit
-import Foundation
 
 enum PreferencesKey: String {
     case positioningVersion,

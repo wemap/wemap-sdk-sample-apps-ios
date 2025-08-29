@@ -16,6 +16,9 @@ import WemapPositioningSDKPolestar
 #if canImport(WemapPositioningSDKVPSARKit)
 import WemapPositioningSDKVPSARKit
 #endif
+#if canImport(WemapPositioningSDKGPS)
+import WemapPositioningSDKGPS
+#endif
 
 class MapViewController: UIViewController, MapViewDelegate {
     
@@ -65,15 +68,6 @@ class MapViewController: UIViewController, MapViewDelegate {
 //            .disposed(by: disposeBag)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let initialBounds = map.mapData?.bounds.toCoordinateBounds() {
-            let camera = map.cameraThatFitsCoordinateBounds(initialBounds)
-            map.setCamera(camera, animated: true)
-        }
-    }
-    
     @IBAction func levelChanged(_ sender: UISegmentedControl) {
         debugPrint("level changed - \(sender.selectedSegmentIndex)")
         focusedBuilding!.activeLevelIndex = sender.selectedSegmentIndex
@@ -95,6 +89,9 @@ class MapViewController: UIViewController, MapViewDelegate {
 #endif
 #if canImport(WemapPositioningSDKVPSARKit)
             case .vps: source = VPSARKitLocationSource(mapData: mapData)
+#endif
+#if canImport(WemapPositioningSDKGPS)
+            case .gps: source = GPSLocationSource(mapData: mapData)
 #endif
             default: source = nil
             }

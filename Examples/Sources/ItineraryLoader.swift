@@ -6,8 +6,8 @@
 //  Copyright © 2025 Wemap SAS. All rights reserved.
 //
 
-import WemapCoreSDK
 import Foundation
+import WemapCoreSDK
 
 enum ItineraryLoader {
     

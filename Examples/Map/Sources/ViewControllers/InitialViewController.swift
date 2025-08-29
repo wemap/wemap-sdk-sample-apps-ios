@@ -83,8 +83,8 @@ final class InitialViewController: UIViewController {
         
         WemapMap.shared
             .getMapData(mapID: id, token: Constants.token)
-            .subscribe(onSuccess: {
-                self.showMap($0)
+            .subscribe(onSuccess: { mapData in
+                self.showMap(mapData)
             }, onFailure: {
                 debugPrint("Failed to get style URL with error - \($0)")
             })

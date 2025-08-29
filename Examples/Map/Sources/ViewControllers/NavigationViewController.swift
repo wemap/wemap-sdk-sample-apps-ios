@@ -38,7 +38,6 @@ final class NavigationViewController: MapViewController {
         super.viewDidLoad()
         
         createLongPressGestureRecognizer()
-
         updateUI()
     }
     
@@ -47,8 +46,6 @@ final class NavigationViewController: MapViewController {
         
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
-        
-        map.userTrackingMode = .follow
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,6 +145,7 @@ final class NavigationViewController: MapViewController {
                 onSuccess: { [unowned self] navigation in
                     simulator?.setItinerary(navigation.itinerary)
                     stopNavigationButton.isEnabled = true
+                    map.userTrackingMode = .followWithHeading
                 },
                 onFailure: { [unowned self] error in
                     stopNavigationButton.isEnabled = false

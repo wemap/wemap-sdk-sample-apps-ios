@@ -9,7 +9,7 @@ platform :ios, '12.0'
 
 #################################################################################
 
-wemap_sdks_version = '~>0.23.0'
+wemap_sdks_version = '~>0.24.0'
 
 target 'MapExample' do
   pod 'WemapMapSDK', wemap_sdks_version
@@ -25,6 +25,17 @@ end
 target 'PositioningExample' do
   pod 'WemapPositioningSDK/VPSARKit', wemap_sdks_version
 end
+
+target 'Positioning+ARExample' do
+
+  platform :ios, '13.0'
+
+  pod 'WemapGeoARSDK', wemap_sdks_version
+  
+  pod 'WemapPositioningSDK/GPS', wemap_sdks_version
+  pod 'WemapPositioningSDK/VPSARKit', wemap_sdks_version
+end
+
 
 #################################################################################
 

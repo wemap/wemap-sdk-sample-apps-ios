@@ -5,7 +5,6 @@
 //  Created by Evgenii Khrushchev on 22/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
-// swiftlint:disable force_try
 
 import UIKit
 import WemapCoreSDK
@@ -13,45 +12,42 @@ import WemapMapSDK
 
 final class LevelsViewController: MapViewController {
     
-    private lazy var consumerData: [ConsumerData] = {
-        let dataURL = Bundle.main.url(forResource: "consumer_data", withExtension: "json")!
-        let data = try! Data(contentsOf: dataURL)
-        return try! JSONDecoder().decode([ConsumerData].self, from: data)
-    }()
+    private var uniqueLevels: Set<Float> = []
+    
+    private var pois: Set<PointOfInterest> { pointOfInterestManager.getPOIs() }
+    
+    override func lateInit() {
+        super.lateInit()
+        uniqueLevels = Set(pois.compactMap { $0.coordinate.levels.first })
+    }
     
     @IBAction func closeTouched() {
         dismiss(animated: true)
     }
     
     @IBAction func firstTouched() {
-        selectPOI(with: consumerData[0])
+        
+        guard let minLevel = uniqueLevels.min() else {
+            return debugPrint("Failed to select POI on min level because there are no levels")
+        }
+        
+        selectPOI(atLevel: minLevel)
     }
     
     @IBAction func secondTouched() {
-        selectPOI(with: consumerData[1])
-    }
-    
-    private func selectPOI(with consumerData: ConsumerData) {
-        
-        guard let desiredPOI = pointOfInterestManager.getPOIs().first(where: { $0.customerID == consumerData.externalID }) else {
-            return debugPrint("POI with id - \(consumerData.externalID) has not been found in POIs")
+        guard let maxLevel = uniqueLevels.max() else {
+            return debugPrint("Failed to select POI on max level because there are no levels")
         }
         
-        pointOfInterestManager.selectPOI(desiredPOI)
-        
-        showToast(poiID: desiredPOI.id) {
-            _ = self.pointOfInterestManager.unselectPOI(desiredPOI)
-        }
+        selectPOI(atLevel: maxLevel)
     }
     
-    private func showToast(poiID: Int, onDismiss: (() -> Void)? = nil) {
-        ToastHelper.showToast(
-            message: "POI selected with id - \(poiID)",
-            onView: view,
-            hideDelay: 5,
-            onDismiss: onDismiss
-        )
+    private func selectPOI(atLevel level: Float) {
+        
+        guard let randomPOI = pois.filter({ LevelUtils.intersects($0.coordinate.levels, [level]) }).randomElement() else {
+            return debugPrint("Failed to get random POI at level \(level)")
+        }
+        
+        pointOfInterestManager.selectPOI(randomPOI)
     }
 }
-
-// swiftlint:enable force_try

@@ -2,6 +2,24 @@
 
 ---
 
+## [0.24.0]
+
+### Added
+
+* Samples(Pos+AR): add sample application to demo PosSDK + GeoAR
+* Pos(GPS): add GPS Location Source library
+* GeoAR: add GeoAR library
+
+### Dependencies
+
+* Map
+  * MapLibre 6.13.0 -> 6.18.0
+
+### Compatibility
+
+* Xcode 16.4
+* Swift 6.1.2 (effective 5.10)
+
 ## [0.23.0]
 
 ### Added

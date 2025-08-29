@@ -10,17 +10,17 @@ enum LocationSourceType: Int, CaseIterable {
     
     case vps,
          simulator,
-         polestar,
          systemDefault,
+         polestar,
          polestarEmulator
          
     var name: String {
         switch self {
-        case .simulator: "Simulator"
-        case .polestar: "Polestar"
-        case .systemDefault: "System Default"
-        case .polestarEmulator: "Polestar Emulator"
         case .vps: "VPS"
+        case .simulator: "Simulator"
+        case .systemDefault: "System Default"
+        case .polestar: "Polestar"
+        case .polestarEmulator: "Polestar Emulator"
         }
     }
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
+import Foundation
 import WemapCoreSDK
 import WemapMapSDK
 import WemapPositioningSDKVPSARKit
-import Foundation
 
 enum PreferencesKey: String {
     // versions
