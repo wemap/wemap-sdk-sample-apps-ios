@@ -2,6 +2,24 @@
 
 ---
 
+## [0.24.1]
+
+### Fixed
+
+* Pos(VPS): fix wrong orientation after VPS scan
+
+### Dependencies
+
+* Map
+  * MapLibre 6.18.0 -> 6.18.1
+* Polestar
+  * NAOSDK 4.12.0 -> 4.12.1
+
+### Compatibility
+
+* Xcode 16.4
+* Swift 6.1.2 (effective 5.10)
+
 ## [0.24.0]
 
 ### Added
