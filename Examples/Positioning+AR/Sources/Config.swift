@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import WemapGeoARSDK
 import WemapCoreSDK
+import WemapGeoARSDK
 import WemapPositioningSDKVPSARKit
 
 enum ARGlobals {

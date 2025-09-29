@@ -2,6 +2,26 @@
 
 ---
 
+## [0.24.2]
+
+### Behavioral changes
+
+* Pos(VPS): all `LocationSourceDelegate` methods as well as `VPSARKitLocationSourceDelegate` are now executed on a dedicated queue. On main queue if `delegateQueue` is not specified.
+
+### Added
+
+* Pos(VPS): add ability to specify dispatch queue for location source delegate updates and vps delegate updates
+
+### Changed
+
+* Pos(VPS): rework VPS system threading
+  * this limits random divergencies and drift of VPS relative positioning
+
+### Compatibility
+
+* Xcode 16.4
+* Swift 6.1.2 (effective 5.10)
+
 ## [0.24.1]
 
 ### Fixed

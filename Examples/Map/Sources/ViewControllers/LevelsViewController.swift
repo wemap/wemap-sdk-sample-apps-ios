@@ -18,7 +18,7 @@ final class LevelsViewController: MapViewController {
     
     override func lateInit() {
         super.lateInit()
-        uniqueLevels = Set(pois.compactMap { $0.coordinate.levels.first })
+        uniqueLevels = Set(pois.compactMap(\.coordinate.levels.first))
     }
     
     @IBAction func closeTouched() {

@@ -27,7 +27,7 @@ final class InitialViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        mapIDTextField.text = "\(Constants.mapID)"
+        mapIDTextField.text = "22418"
     }
     
     @objc func dismissKeyboard() {

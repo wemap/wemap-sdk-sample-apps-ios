@@ -1,5 +1,5 @@
 //
-//  GEoARViewController.swift
+//  GeoARViewController.swift
 //  Examples
 //
 //  Created by Evgenii Khrushchev on 03/07/2024.
@@ -7,8 +7,8 @@
 //
 
 import RxSwift
-import WemapGeoARSDK
 import WemapCoreSDK
+import WemapGeoARSDK
 
 class GeoARViewController: UIViewController, GeoARViewDelegate {
     

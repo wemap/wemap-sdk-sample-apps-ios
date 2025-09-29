@@ -273,7 +273,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     private func createScanningTimer() {
         scanningTimer.disposable = Observable<Int>
-            .timer(.seconds(20), scheduler: MainScheduler.instance)
+            .timer(.seconds(20), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] _ in
                 askToContinue()
             })
@@ -336,7 +336,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
                 locationManager
                     .rx.coordinate
                     .take(1).asSingle()
-                    .timeout(.seconds(20), scheduler: MainScheduler.instance)
+                    .timeout(.seconds(20), scheduler: MainScheduler.asyncInstance)
             }
             .subscribe(onSuccess: { [unowned self] userLocation in
                 calculateAndDrawItinerary(from: userLocation, to: selectedPOI.coordinate)

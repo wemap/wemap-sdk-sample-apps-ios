@@ -7,8 +7,8 @@
 //
 
 import RxSwift
-import WemapGeoARSDK
 import WemapCoreSDK
+import WemapGeoARSDK
 import WemapPositioningSDKGPS
 
 class GPSLSViewController: GeoARViewController {
@@ -88,11 +88,11 @@ extension GPSLSViewController: NavigationManagerDelegate {
 
 extension GPSLSViewController: PointOfInterestManagerDelegate {
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
         updateNavButtons()
     }
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didUnselectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
         updateNavButtons()
     }
 }

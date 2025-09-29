@@ -7,8 +7,8 @@
 //
 
 import RxSwift
-import WemapGeoARSDK
 import WemapCoreSDK
+import WemapGeoARSDK
 
 final class SimulatorLSViewController: GeoARViewController {
     
@@ -47,7 +47,8 @@ final class SimulatorLSViewController: GeoARViewController {
                 onFailure: { [unowned self] in
                     debugPrint("failed to start navigation with error - \($0)")
                     updateNavButtons()
-                })
+                }
+            )
             .disposed(by: disposeBag)
     }
     
@@ -83,11 +84,11 @@ extension SimulatorLSViewController: NavigationManagerDelegate {
 
 extension SimulatorLSViewController: PointOfInterestManagerDelegate {
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
         updateNavButtons()
     }
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didUnselectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
         updateNavButtons()
     }
 }

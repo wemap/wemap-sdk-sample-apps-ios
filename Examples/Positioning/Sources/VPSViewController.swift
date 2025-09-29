@@ -230,23 +230,17 @@ final class VPSViewController: UIViewController {
 extension VPSViewController: LocationSourceDelegate {
     
     func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
-        DispatchQueue.main.async { [self] in
-            debugTextCoordinate.text = String(format: "lat: %.6f, lng: %.6f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
-        }
+        debugTextCoordinate.text = String(format: "lat: %.6f, lng: %.6f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
     }
     
     func locationSource(_: any LocationSource, didUpdateAttitude attitude: Attitude) {
-        DispatchQueue.main.async { [self] in
-            let q = attitude.quaternion.vector
-            debugTextAttitude.text = String(format: "w: %.2f, x: %.2f, y: %.2f, z: %.2f", q.w, q.x, q.y, q.z)
-            debugTextHeading.text = String(format: "%.2f", attitude.headingDegrees)
-        }
+        let q = attitude.quaternion.vector
+        debugTextAttitude.text = String(format: "w: %.2f, x: %.2f, y: %.2f, z: %.2f", q.w, q.x, q.y, q.z)
+        debugTextHeading.text = String(format: "%.2f", attitude.headingDegrees)
     }
     
     func locationSource(_: any LocationSource, didFailWithError error: any Error) {
-        DispatchQueue.main.async { [self] in
-            showError(message: "LS: \(error)")
-        }
+        showError(message: "LS: \(error)")
     }
 }
 

@@ -7,8 +7,8 @@
 //
 
 import RxSwift
-import WemapGeoARSDK
 import WemapCoreSDK
+import WemapGeoARSDK
 import WemapPositioningSDKVPSARKit
 
 final class VPSLSViewController: GeoARViewController {
@@ -133,11 +133,11 @@ extension VPSLSViewController: VPSARKitLocationSourceDelegate {
 
 extension VPSLSViewController: PointOfInterestManagerDelegate {
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
         startNavigationButton.isEnabled = true
     }
     
-    func pointOfInterestManager(_ manager: PointOfInterestManager, didUnselectPointOfInterest poi: PointOfInterest) {
+    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
         startNavigationButton.isEnabled = false
     }
 }
