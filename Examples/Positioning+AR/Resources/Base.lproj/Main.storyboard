@@ -44,7 +44,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cGy-4U-jWy" kind="show" id="1Ee-hU-inJ"/>
+                                            <segue destination="cGy-4U-jWy" kind="show" identifier="Simulator" id="1Ee-hU-inJ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="CAG-aN-Daf" detailTextLabel="o3M-qi-JE8" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="HEg-Bf-M63">
@@ -71,7 +71,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="sYM-JY-fex" kind="show" id="5Rc-g3-TyN"/>
+                                            <segue destination="sYM-JY-fex" kind="show" identifier="VPS" id="5Rc-g3-TyN"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="IPW-we-eND" detailTextLabel="WgP-um-hIX" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="a6y-o5-uAd">
@@ -98,7 +98,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="bey-SA-zvQ" kind="show" id="3G7-mk-gDz"/>
+                                            <segue destination="cGy-4U-jWy" kind="show" identifier="GPS" id="00Y-Kt-Bzq"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -112,12 +112,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXb-11-8cu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="943"/>
+            <point key="canvasLocation" x="1654" y="923"/>
         </scene>
-        <!--SimulatorLS View Controller-->
+        <!--GenericLS View Controller-->
         <scene sceneID="Tnx-6P-fzT">
             <objects>
-                <viewController storyboardIdentifier="SimulatorSceneVC" id="cGy-4U-jWy" customClass="SimulatorLSViewController" customModule="Pos_AR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SimulatorSceneVC" id="cGy-4U-jWy" customClass="GenericLSViewController" customModule="Pos_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gSS-Qw-nhM" customClass="GeoARView" customModule="WemapGeoARSDK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,25 +129,72 @@
                                     <action selector="close:" destination="cGy-4U-jWy" eventType="touchUpInside" id="FX8-LS-M1h"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LYd-nl-ujR">
-                                <rect key="frame" x="47.333333333333343" y="726.66666666666663" width="295.33333333333326" height="34.333333333333371"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LYd-nl-ujR">
+                                <rect key="frame" x="13.333333333333343" y="642" width="363.33333333333326" height="119"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-G8-aQD">
-                                        <rect key="frame" x="0.0" y="0.0" width="143.66666666666666" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Start navigation"/>
-                                        <connections>
-                                            <action selector="startNavigation" destination="cGy-4U-jWy" eventType="touchUpInside" id="82O-rN-Kko"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DLY-zc-SO9">
-                                        <rect key="frame" x="151.66666666666669" y="0.0" width="143.66666666666669" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted" title="Stop navigation"/>
-                                        <connections>
-                                            <action selector="stopNavigation" destination="cGy-4U-jWy" eventType="touchUpInside" id="Ef0-b6-4uY"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vcW-ic-sT6" userLabel="POI buttons stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="34.333333333333336"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0om-sb-f7d">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Add POI"/>
+                                                <connections>
+                                                    <action selector="addPOI" destination="cGy-4U-jWy" eventType="touchUpInside" id="POI-kr-fkc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coT-5u-jqg">
+                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Remove random POI"/>
+                                                <connections>
+                                                    <action selector="removePOI" destination="cGy-4U-jWy" eventType="touchUpInside" id="U0U-6P-0WO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jAm-9V-ZvA" userLabel="POI buttons stack">
+                                        <rect key="frame" x="0.0" y="42.333333333333371" width="363.33333333333331" height="34.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoK-3f-alQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Add many POI"/>
+                                                <connections>
+                                                    <action selector="addPOIs" destination="cGy-4U-jWy" eventType="touchUpInside" id="0Wg-Cu-rfc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sX3-xS-TWq">
+                                                <rect key="frame" x="183.66666666666669" y="0.0" width="179.66666666666669" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Remove all POIs"/>
+                                                <connections>
+                                                    <action selector="removePOIs" destination="cGy-4U-jWy" eventType="touchUpInside" id="Ypa-Zo-j9i"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kaa-4s-S6w" userLabel="Navigation Stack View">
+                                        <rect key="frame" x="0.0" y="84.666666666666629" width="363.33333333333331" height="34.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-G8-aQD">
+                                                <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Start navigation"/>
+                                                <connections>
+                                                    <action selector="startNavigation" destination="cGy-4U-jWy" eventType="touchUpInside" id="82O-rN-Kko"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DLY-zc-SO9">
+                                                <rect key="frame" x="185.66666666666669" y="0.0" width="177.66666666666669" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Stop navigation"/>
+                                                <connections>
+                                                    <action selector="stopNavigation" destination="cGy-4U-jWy" eventType="touchUpInside" id="Ef0-b6-4uY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -162,13 +209,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="so5-aj-PmV"/>
                     <connections>
+                        <outlet property="addPOIButton" destination="0om-sb-f7d" id="qHK-qf-l7M"/>
+                        <outlet property="addPOIsButton" destination="ZoK-3f-alQ" id="Tig-AW-qT1"/>
+                        <outlet property="removePOIButton" destination="coT-5u-jqg" id="RRb-ow-iR0"/>
+                        <outlet property="removePOIsButton" destination="sX3-xS-TWq" id="ayy-t7-2bZ"/>
                         <outlet property="startNavigationButton" destination="qa1-G8-aQD" id="Bvx-jd-eqb"/>
                         <outlet property="stopNavigationButton" destination="DLY-zc-SO9" id="30G-pM-egj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUc-Nl-WlX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="943"/>
+            <point key="canvasLocation" x="2594" y="614"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cl1-d7-pae">
@@ -252,63 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIj-yq-WKQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="1629"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="wWt-1t-DPC">
-            <objects>
-                <viewController storyboardIdentifier="GPSLSVC" id="bey-SA-zvQ" customClass="GPSLSViewController" customModule="Pos_AR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ua9-FF-nM0" customClass="GeoARView" customModule="WemapGeoARSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="et8-E3-fvm">
-                                <rect key="frame" x="16" y="63" width="67" height="34.333333333333343"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Close"/>
-                                <connections>
-                                    <action selector="close:" destination="bey-SA-zvQ" eventType="touchUpInside" id="0VK-Ax-KRH"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vHo-55-Inq">
-                                <rect key="frame" x="47.333333333333343" y="726.66666666666663" width="295.33333333333326" height="34.333333333333371"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kw9-72-yWP">
-                                        <rect key="frame" x="0.0" y="0.0" width="143.66666666666666" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Start navigation"/>
-                                        <connections>
-                                            <action selector="startNavigation" destination="bey-SA-zvQ" eventType="touchUpInside" id="hZD-LD-9Bv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99c-MM-0Ub">
-                                        <rect key="frame" x="151.66666666666669" y="0.0" width="143.66666666666669" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted" title="Stop navigation"/>
-                                        <connections>
-                                            <action selector="stopNavigation" destination="bey-SA-zvQ" eventType="touchUpInside" id="o3b-Yl-GwH"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="r2Z-LU-7zW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="et8-E3-fvm" firstAttribute="top" secondItem="r2Z-LU-7zW" secondAttribute="top" constant="16" id="IGk-6x-2NI"/>
-                            <constraint firstItem="r2Z-LU-7zW" firstAttribute="bottom" secondItem="vHo-55-Inq" secondAttribute="bottom" constant="26" id="IhM-Ag-dtx"/>
-                            <constraint firstItem="vHo-55-Inq" firstAttribute="centerX" secondItem="Ua9-FF-nM0" secondAttribute="centerX" id="Z7q-qu-xtA"/>
-                            <constraint firstItem="et8-E3-fvm" firstAttribute="leading" secondItem="r2Z-LU-7zW" secondAttribute="leading" constant="16" id="vvP-Bi-Xv5"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Mwh-Rf-QDE"/>
-                    <connections>
-                        <outlet property="startNavigationButton" destination="Kw9-72-yWP" id="Sni-uO-ptn"/>
-                        <outlet property="stopNavigationButton" destination="99c-MM-0Ub" id="fXu-LP-5ly"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FSu-9w-nyv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2502" y="2298"/>
+            <point key="canvasLocation" x="2594" y="1265"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="kpc-VJ-UFj">
@@ -362,6 +357,9 @@
             <point key="canvasLocation" x="975" y="943"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="00Y-Kt-Bzq"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

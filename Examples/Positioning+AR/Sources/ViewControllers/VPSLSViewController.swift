@@ -23,8 +23,6 @@ final class VPSLSViewController: GeoARViewController {
         locationManager.locationSource as! VPSARKitLocationSource // swiftlint:disable:this force_cast
     }
     
-    private var pointOfInterestManager: ARPointOfInterestManaging { arView.pointOfInterestManager }
-    
     private weak var currentVPSToast: UIView?
     
     override func geoARViewLoaded(_ arView: GeoARView, mapData: MapData) {

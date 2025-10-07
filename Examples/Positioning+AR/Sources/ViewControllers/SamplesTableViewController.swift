@@ -24,5 +24,15 @@ class SamplesTableViewController: UITableViewController {
         if let arController = segue.destination as? GeoARViewController {
             arController.mapData = mapData
         }
+
+        guard let genericLSController = segue.destination as? GenericLSViewController else {
+            return
+        }
+
+        genericLSController.locationSourceId = switch segue.identifier {
+        case "Simulator": 0
+        case "GPS": 1
+        default: fatalError("Unknown segue identifier")
+        }
     }
 }

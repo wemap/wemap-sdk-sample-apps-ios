@@ -2,6 +2,17 @@
 
 ---
 
+## [0.25.0]
+
+### Added
+
+* GeoAR: add functionality for dynamically adding/removing PoIs
+
+### Compatibility
+
+* Xcode 16.4
+* Swift 6.1.2 (effective 5.10)
+
 ## [0.24.2]
 
 ### Behavioral changes

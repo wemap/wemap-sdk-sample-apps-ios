@@ -24,7 +24,8 @@ class GeoARViewController: UIViewController, GeoARViewDelegate {
     
     var navigationManager: ARNavigationManaging { arView.navigationManager }
     var locationManager: ARLocationManager { arView.locationManager }
-    
+    var pointOfInterestManager: ARPointOfInterestManaging { arView.pointOfInterestManager }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         arView.viewDelegate = self

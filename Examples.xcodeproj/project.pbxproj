@@ -28,7 +28,7 @@
 		D22EC7482A79017A007BC4DE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
 		D2315E6F2C0717C600BAF1CB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D2315E702C0717E700BAF1CB /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
-		D2315E802C07185300BAF1CB /* SimulatorLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2315E772C07185200BAF1CB /* SimulatorLSViewController.swift */; };
+		D2429A152E93FE82001D6F1F /* GenericLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2429A142E93FE82001D6F1F /* GenericLSViewController.swift */; };
 		D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
 		D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
@@ -48,7 +48,6 @@
 		D26AB63D2B30532F00408BF8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
 		D26AB63F2B30534F00408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
 		D26AB6402B30534F00408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
-		D2714E932C6B9823008A7293 /* GPSLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2714E922C6B9823008A7293 /* GPSLSViewController.swift */; };
 		D273E31A2AA0DE5E00114854 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3152AA0DE5E00114854 /* InitialViewController.swift */; };
 		D273E31B2AA0DE5E00114854 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273E3162AA0DE5E00114854 /* NavigationViewController.swift */; };
 		D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
@@ -119,7 +118,7 @@
 		D22612AD2DCE2AF60053B250 /* ItineraryLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryLoader.swift; sourceTree = "<group>"; };
 		D22EC7412A78166E007BC4DE /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
 		D22EC7472A79017A007BC4DE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D2315E772C07185200BAF1CB /* SimulatorLSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulatorLSViewController.swift; sourceTree = "<group>"; };
+		D2429A142E93FE82001D6F1F /* GenericLSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericLSViewController.swift; sourceTree = "<group>"; };
 		D250C9D728D3176F00DBFF5D /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D250CA2528D31E4D00DBFF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D250CA2728D31E4D00DBFF5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -132,7 +131,6 @@
 		D267D81B2D9560B8001658F3 /* DelegateDispatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateDispatchers.swift; sourceTree = "<group>"; };
 		D267EF712D381607004AE5B6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D26AB63E2B30534F00408BF8 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
-		D2714E922C6B9823008A7293 /* GPSLSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSLSViewController.swift; sourceTree = "<group>"; };
 		D273E3152AA0DE5E00114854 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D273E3162AA0DE5E00114854 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		D273E3252AA0EDDC00114854 /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
@@ -235,10 +233,9 @@
 		D2315E792C07185200BAF1CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2714E922C6B9823008A7293 /* GPSLSViewController.swift */,
+				D2429A142E93FE82001D6F1F /* GenericLSViewController.swift */,
 				D2D864FD2DDB886F005D1704 /* InitialViewController.swift */,
 				D2D864FF2DDB8963005D1704 /* SamplesTableViewController.swift */,
-				D2315E772C07185200BAF1CB /* SimulatorLSViewController.swift */,
 				D2B1F1692C072EA3009975E7 /* VPSLSViewController.swift */,
 			);
 			path = ViewControllers;
@@ -904,7 +901,6 @@
 				D2A55FE929801A3900402286 /* SettingsBundleHelper.swift in Sources */,
 				D2D864FE2DDB8874005D1704 /* InitialViewController.swift in Sources */,
 				D2B1F16A2C072EA3009975E7 /* VPSLSViewController.swift in Sources */,
-				D2315E802C07185300BAF1CB /* SimulatorLSViewController.swift in Sources */,
 				D25992E22C359F020041F9FE /* GeoARViewController.swift in Sources */,
 				D2D865002DDB896D005D1704 /* SamplesTableViewController.swift in Sources */,
 				D2A6255228F6AEB900274721 /* AppDelegate.swift in Sources */,
@@ -912,8 +908,8 @@
 				D2315E702C0717E700BAF1CB /* UIConstants.swift in Sources */,
 				D2315E6F2C0717C600BAF1CB /* Constants.swift in Sources */,
 				D2FD56C2298049CF003F508D /* Config.swift in Sources */,
-				D2714E932C6B9823008A7293 /* GPSLSViewController.swift in Sources */,
 				D25992D22C358F1E0041F9FE /* UserDefaults+Additions.swift in Sources */,
+				D2429A152E93FE82001D6F1F /* GenericLSViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,7 +1020,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.24.2;
+				MARKETING_VERSION = 0.25.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1083,7 +1079,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.24.2;
+				MARKETING_VERSION = 0.25.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
