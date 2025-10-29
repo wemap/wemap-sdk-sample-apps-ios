@@ -87,28 +87,28 @@ final class InitialViewController: UIViewController {
     private func showMap(_ mapData: MapData) {
         
         SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
-        
-        if #available(iOS 13.0, *) {
-            
-            let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
-            
-            let vc: UIViewController
-            if locationSourceType == .vps {
-                // swiftlint:disable:next force_cast
-                let vpsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
-                vpsVC.mapData = mapData
-                vc = vpsVC
-            } else {
-                // swiftlint:disable:next force_cast
-                let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
-                navVC.mapData = mapData
-                navVC.locationSourceType = locationSourceType
-                vc = navVC
-            }
-            
-            show(vc, sender: nil)
-        } else {
-            showUnavailableAlert(message: "This sample supports only iOS 13 and higher")
+
+        let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+
+        if locationSourceType == .vps && mapData.extras?.vpsEndpoint == nil {
+            ToastHelper.showToast(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", onView: view)
+            return
         }
+
+        let vc: UIViewController
+        if locationSourceType == .vps {
+            // swiftlint:disable:next force_cast
+            let vpsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
+            vpsVC.mapData = mapData
+            vc = vpsVC
+        } else {
+            // swiftlint:disable:next force_cast
+            let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
+            navVC.mapData = mapData
+            navVC.locationSourceType = locationSourceType
+            vc = navVC
+        }
+
+        show(vc, sender: nil)
     }
 }

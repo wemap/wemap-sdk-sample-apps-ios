@@ -2,6 +2,45 @@
 
 ---
 
+## [0.26.0]
+
+### Breaking changes
+
+* All: this version is not backward compatibile with previous Xcode and Swift versions
+* SDKs: minimum iOS deployment target increased from 12.0 to 13.0
+* Pos(Polestar): pod name changed from `WemapPositioningSDKPolestar` to `WemapPositioningSDK/Polestar`
+
+### Added
+
+* Pos(Polestar): add arm64 simulator support
+
+### Changed
+
+* All: migrate to Xcode 26
+* Pos(Polestar): make polestar sdk dynamic
+
+### Fixed
+
+* Pos(VPS): fix some ArKit orientation/position jumps after session start and in difficult conditions
+* Samples(VPS): attempt to load the map without VPS will crash the app
+
+### Removed
+
+* support for iOS 12
+
+### Dependencies
+
+* Map
+  * MapLibre 6.18.1 -> 6.19.3
+* Pos(Polestar)
+  * Removed NAOSDK 4.12.1
+  * Added NAOSDKFramework 4.12.0
+
+### Compatibility
+
+* Xcode 26.0.1
+* Swift 6.2 (effective 5.10)
+
 ## [0.25.0]
 
 ### Added

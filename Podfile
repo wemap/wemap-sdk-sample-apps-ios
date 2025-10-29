@@ -5,11 +5,11 @@ workspace 'WemapExamples.xcworkspace'
 
 use_frameworks!
 
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 #################################################################################
 
-wemap_sdks_version = '~>0.25.0'
+wemap_sdks_version = '~>0.26.0'
 
 target 'MapExample' do
   pod 'WemapMapSDK', wemap_sdks_version
@@ -18,7 +18,7 @@ end
 target 'Map+PositioningExample' do
   pod 'WemapMapSDK', wemap_sdks_version
   
-  pod 'WemapPositioningSDKPolestar', wemap_sdks_version
+  pod 'WemapPositioningSDK/Polestar', wemap_sdks_version
   pod 'WemapPositioningSDK/VPSARKit', wemap_sdks_version
 end
 
@@ -27,8 +27,6 @@ target 'PositioningExample' do
 end
 
 target 'Positioning+ARExample' do
-
-  platform :ios, '13.0'
 
   pod 'WemapGeoARSDK', wemap_sdks_version
   

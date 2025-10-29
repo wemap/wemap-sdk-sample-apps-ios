@@ -11,7 +11,8 @@ import RxSwift
 enum AlertFactory {
     
     static func presentSimpleAlert(
-        on vc: UIViewController, message: String, errorMessage: String, positiveText: String = "Ok", negativeText: String = "Cancel"
+        message: String, errorMessage: String,
+        positiveText: String = "Ok", negativeText: String = "Cancel", on vc: UIViewController
     ) -> Single<Void> {
         .create(subscribe: { observer in
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -29,5 +30,14 @@ enum AlertFactory {
                 alert?.dismiss(animated: true)
             }
         })
+    }
+
+    static func presentInfoAlert(message: String, buttonText: String = "Ok", on vc: UIViewController) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: buttonText, style: .cancel) { _ in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(cancelAction)
+        vc.present(alert, animated: true)
     }
 }

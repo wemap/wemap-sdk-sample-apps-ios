@@ -16,7 +16,6 @@ import WemapCoreSDK
 import WemapMapSDK
 import WemapPositioningSDKVPSARKit
 
-@available(iOS 13.0, *)
 // swiftlint:disable:next type_body_length
 final class VPSViewController:
 UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, NavigationManagerDelegate, VPSARKitLocationSourceDelegate, MapViewDelegate {
@@ -119,7 +118,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
                 
                 AlertFactory
                     .presentSimpleAlert(
-                        on: self, message: message, errorMessage: "You decided to scan later", positiveText: "Scan now", negativeText: "Scan later"
+                        message: message, errorMessage: "You decided to scan later",
+                        positiveText: "Scan now", negativeText: "Scan later", on: self
                     )
                     .subscribe(onSuccess: { [unowned self] in
                         startScan()
@@ -229,7 +229,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     private func askForScan(message: String) -> Single<Void> {
         AlertFactory
-            .presentSimpleAlert(on: self, message: message, errorMessage: "User refused to open camera", positiveText: "Open camera")
+            .presentSimpleAlert(message: message, errorMessage: "User refused to open camera", positiveText: "Open camera", on: self)
     }
     
     private func positioningLost() {
@@ -282,8 +282,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     private func askToContinue() {
         scanningTimer.disposable = AlertFactory
             .presentSimpleAlert(
-                on: self, message: "We cannot localize you. Do you want to continue to try?",
-                errorMessage: "You decided to get back to the map", positiveText: "Continue", negativeText: "Back to map"
+                message: "We cannot localize you. Do you want to continue to try?", errorMessage: "You decided to get back to the map",
+                positiveText: "Continue", negativeText: "Back to map", on: self
             ).subscribe(onSuccess: { [unowned self] in
                 createScanningTimer()
             }, onFailure: { [unowned self] _ in
@@ -475,9 +475,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             Single.just(())
         case .denied, .restricted:
             AlertFactory.presentSimpleAlert(
-                on: self,
                 message: "In order to be localized, we need to use your camera. Please go to app settings and accept camera permission",
-                errorMessage: "User denied to go to settings and accept camera permission"
+                errorMessage: "User denied to go to settings and accept camera permission", on: self
             ).map { [unowned self] in
                 openAppSettings() // it will force app restart, so no need for the furter actions
             }
@@ -490,9 +489,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     private func showAlertAndRequestPermissions() -> Single<Void> {
         AlertFactory.presentSimpleAlert(
-            on: self,
             message: "In order to be localized, we will use your camera. Please accept following permissions",
-            errorMessage: "User refused to review permissions"
+            errorMessage: "User refused to review permissions", on: self
         ).flatMap { [unowned self] in
             requestPermissions()
         }
@@ -523,7 +521,6 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
 
 // MARK: - MLNMapViewDelegate
 
-@available(iOS 13.0, *)
 extension VPSViewController: MLNMapViewDelegate {
     
     func mapView(_: MLNMapView, didChange _: MLNUserTrackingMode, animated _: Bool) {

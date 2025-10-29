@@ -14,7 +14,6 @@ import WemapCoreSDK
 import WemapMapSDK
 import WemapPositioningSDKVPSARKit
 
-@available(iOS 13.0, *)
 final class NavigationViewController: MapViewController {
     
     typealias Delay = UIConstants.Delay
@@ -264,7 +263,6 @@ final class NavigationViewController: MapViewController {
     }
 }
 
-@available(iOS 13.0, *)
 extension NavigationViewController: PointOfInterestManagerDelegate {
     
     func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
@@ -272,7 +270,6 @@ extension NavigationViewController: PointOfInterestManagerDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension NavigationViewController: NavigationManagerDelegate {
     
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
@@ -305,7 +302,6 @@ extension NavigationViewController: NavigationManagerDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension NavigationViewController: VPSARKitLocationSourceDelegate {
     
     func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
@@ -313,7 +309,6 @@ extension NavigationViewController: VPSARKitLocationSourceDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension NavigationViewController: UserLocationManagerDelegate {
     
     func locationManager(_: UserLocationManager, didFailWithError error: any Error) {

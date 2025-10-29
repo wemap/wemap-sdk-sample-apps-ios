@@ -69,15 +69,11 @@ final class InitialViewController: UIViewController {
     private func showMap(_ mapData: MapData) {
         
         SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
-        
-        if #available(iOS 13.0, *) {
-            // swiftlint:disable:next force_cast
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController
-            vc.mapData = mapData
-            
-            show(vc, sender: nil)
-        } else {
-            showUnavailableAlert(message: "This sample supports only iOS 13 and higher")
-        }
+
+        // swiftlint:disable:next force_cast
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController
+        vc.mapData = mapData
+
+        show(vc, sender: nil)
     }
 }

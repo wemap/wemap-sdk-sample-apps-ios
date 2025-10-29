@@ -1,9 +1,7 @@
 PODS:
   - Alamofire (5.10.2)
-  - MapLibre (6.18.1)
-  - NAOSDK (4.12.1)
-  - NAOSwiftProvider (1.3.0):
-    - NAOSDK
+  - MapLibre (6.19.3)
+  - NAOSDKFramework (4.12.0)
   - RxCocoa (6.9.0):
     - RxRelay (= 6.9.0)
     - RxSwift (= 6.9.0)
@@ -11,47 +9,47 @@ PODS:
     - RxSwift (= 6.9.0)
   - RxSwift (6.9.0)
   - Turf (4.0.0)
-  - WemapCoreSDK (0.25.0):
+  - WemapCoreSDK (0.26.0):
     - Alamofire (~> 5.10.0)
     - RxCocoa (~> 6.9.0)
     - RxRelay (~> 6.9.0)
     - RxSwift (~> 6.9.0)
     - Turf (~> 4.0.0)
-  - WemapGeoARSDK (0.25.0):
-    - WemapCoreSDK (~> 0.25.0)
-  - WemapMapSDK (0.25.0):
-    - MapLibre (~> 6.18.1)
-    - WemapCoreSDK (~> 0.25.0)
+  - WemapGeoARSDK (0.26.0):
+    - WemapCoreSDK (~> 0.26.0)
+  - WemapMapSDK (0.26.0):
+    - MapLibre (~> 6.19.3)
+    - WemapCoreSDK (~> 0.26.0)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/GPS (0.25.0):
-    - WemapCoreSDK (~> 0.25.0)
-  - WemapPositioningSDK/VPSARKit (0.25.0):
+  - WemapPositioningSDK/GPS (0.26.0):
+    - NAOSDKFramework (~> 4.12.0)
+    - WemapCoreSDK (~> 0.26.0)
+  - WemapPositioningSDK/Polestar (0.26.0):
+    - NAOSDKFramework (~> 4.12.0)
+    - WemapCoreSDK (~> 0.26.0)
+  - WemapPositioningSDK/VPSARKit (0.26.0):
+    - NAOSDKFramework (~> 4.12.0)
     - RxSwift (~> 6.9.0)
-    - WemapCoreSDK (~> 0.25.0)
-  - WemapPositioningSDKPolestar (0.25.0):
-    - NAOSwiftProvider (~> 1.3.0)
-    - WemapCoreSDK (~> 0.25.0)
+    - WemapCoreSDK (~> 0.26.0)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapGeoARSDK (~> 0.25.0)
-  - WemapMapSDK (~> 0.25.0)
-  - WemapPositioningSDK/GPS (~> 0.25.0)
-  - WemapPositioningSDK/VPSARKit (~> 0.25.0)
-  - WemapPositioningSDKPolestar (~> 0.25.0)
+  - WemapGeoARSDK (~> 0.26.0)
+  - WemapMapSDK (~> 0.26.0)
+  - WemapPositioningSDK/GPS (~> 0.26.0)
+  - WemapPositioningSDK/Polestar (~> 0.26.0)
+  - WemapPositioningSDK/VPSARKit (~> 0.26.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
-    - NAOSwiftProvider
     - WemapCoreSDK
     - WemapGeoARSDK
     - WemapMapSDK
     - WemapPositioningSDK
-    - WemapPositioningSDKPolestar
   trunk:
     - Alamofire
     - MapLibre
-    - NAOSDK
+    - NAOSDKFramework
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -60,20 +58,18 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
-  MapLibre: 49ab1d8cd24245a31d795e37bb637248d016e9ef
-  NAOSDK: a681e437dbc78beb1fed8a71f7dea973d063cb62
-  NAOSwiftProvider: e685abcce0d2023daa3c58a017ff8b6787832753
+  MapLibre: e32870abdf2430d0b547d2c6b354c7f44dfbbd37
+  NAOSDKFramework: f57f6eb89284df63125fa7d64c8bf5c947235ce5
   RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
   RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
   RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
   Turf: c9eb11a65d96af58cac523460fd40fec5061b081
-  WemapCoreSDK: 3ef2eb3781b7f118d55dffd0498f773a726614e6
-  WemapGeoARSDK: 5347b14a77897afb07a67678756a1ab2b0aff9a1
-  WemapMapSDK: 88f89b2411e4779e173c7520ab35fa7e63fe8aac
-  WemapPositioningSDK: c60e280e67a1403147bf7091c42c69e4c3fea400
-  WemapPositioningSDKPolestar: a020b4b09c3b05bc985ec1000fc2262f07ccf808
+  WemapCoreSDK: a9d0d98319eee6d98fa24152ca63e73761de7a51
+  WemapGeoARSDK: a8424c0636b5037633d3791f1a7e9cb8cf92a963
+  WemapMapSDK: a5eb0ac7bfebf1a36bd1a738cec99bc4c3150b9e
+  WemapPositioningSDK: 5848c221211d0800f796c06bfa6f0523f7a84af7
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 94a487b609727fe1afa932ac20cde3c3b79d141a
+PODFILE CHECKSUM: 09b399e10576ffd7b84b6906b443e71df950dba9
 
 COCOAPODS: 1.16.2

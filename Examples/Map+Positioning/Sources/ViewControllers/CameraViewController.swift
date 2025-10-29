@@ -12,7 +12,6 @@ import UIKit
 import WemapMapSDK
 import WemapPositioningSDKVPSARKit
 
-@available(iOS 13.0, *)
 class CameraViewController: UIViewController {
 
     var session: ARSession!
@@ -70,7 +69,6 @@ class CameraViewController: UIViewController {
     }
 }
 
-@available(iOS 13.0, *)
 extension CameraViewController: VPSARKitLocationSourceDelegate {
     
     func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
@@ -105,7 +103,6 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension CameraViewController: UserLocationManagerDelegate {
     
     func locationManager(_: UserLocationManager, didFailWithError error: any Error) {

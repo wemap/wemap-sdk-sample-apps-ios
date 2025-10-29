@@ -12,7 +12,6 @@ import UIKit
 import WemapCoreSDK
 import WemapPositioningSDKVPSARKit
 
-@available(iOS 13.0, *)
 final class VPSViewController: UIViewController {
     
     var mapData: MapData!
@@ -226,7 +225,6 @@ final class VPSViewController: UIViewController {
 
 // MARK: Delegates
 
-@available(iOS 13.0, *)
 extension VPSViewController: LocationSourceDelegate {
     
     func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
@@ -244,7 +242,6 @@ extension VPSViewController: LocationSourceDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension VPSViewController: VPSARKitLocationSourceDelegate {
     
     func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {

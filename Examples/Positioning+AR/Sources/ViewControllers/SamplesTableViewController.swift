@@ -14,13 +14,20 @@ class SamplesTableViewController: UITableViewController {
     var mapData: MapData!
     
     // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        
-        guard let mapData else {
-            fatalError("You have to successfully retrieve style URL first")
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "VPS" && mapData.extras?.vpsEndpoint == nil {
+            AlertFactory.presentInfoAlert(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", on: self)
+            if let indexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            return false
         }
-        
+        return true
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+
         if let arController = segue.destination as? GeoARViewController {
             arController.mapData = mapData
         }
