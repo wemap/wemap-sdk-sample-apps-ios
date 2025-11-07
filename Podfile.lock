@@ -22,13 +22,11 @@ PODS:
     - WemapCoreSDK (~> 0.26.0)
     - Zip (~> 2.1)
   - WemapPositioningSDK/GPS (0.26.0):
-    - NAOSDKFramework (~> 4.12.0)
     - WemapCoreSDK (~> 0.26.0)
   - WemapPositioningSDK/Polestar (0.26.0):
     - NAOSDKFramework (~> 4.12.0)
     - WemapCoreSDK (~> 0.26.0)
   - WemapPositioningSDK/VPSARKit (0.26.0):
-    - NAOSDKFramework (~> 4.12.0)
     - RxSwift (~> 6.9.0)
     - WemapCoreSDK (~> 0.26.0)
   - Zip (2.1.2)
@@ -67,7 +65,7 @@ SPEC CHECKSUMS:
   WemapCoreSDK: a9d0d98319eee6d98fa24152ca63e73761de7a51
   WemapGeoARSDK: a8424c0636b5037633d3791f1a7e9cb8cf92a963
   WemapMapSDK: a5eb0ac7bfebf1a36bd1a738cec99bc4c3150b9e
-  WemapPositioningSDK: 5848c221211d0800f796c06bfa6f0523f7a84af7
+  WemapPositioningSDK: 26b994ae475e58cbb56b64b8d32a6ef2c590302a
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
 PODFILE CHECKSUM: 09b399e10576ffd7b84b6906b443e71df950dba9
