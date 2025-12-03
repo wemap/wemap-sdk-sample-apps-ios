@@ -2,6 +2,18 @@
 
 ---
 
+## [0.26.3]
+
+### Added
+
+* SampleApp(Map+Pos[VPS]): add an example of slowConnectionDetected error
+* Pos(VPS): allow to change slowConnectionDetected time interval
+
+### Compatibility
+
+* Xcode 26.1.1
+* Swift 6.2.1 (effective 5.10)
+
 ## [0.26.0]
 
 ### Breaking changes

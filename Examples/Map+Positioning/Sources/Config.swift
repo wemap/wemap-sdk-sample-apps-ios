@@ -22,6 +22,8 @@ enum PreferencesKey: String {
          userLocationProjectionOnGraphEnabled,
          // Map constants
          switchLevelsAutomaticallyOnUserMovements,
+         // VPS constants
+         slowConnectionSeconds,
          // Global navigation options
          arrivedDistanceThreshold,
          userPositionThreshold,
@@ -44,6 +46,10 @@ func customKeysAndValues() -> [String: Any] {
     MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
         .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
     
+    // VPS
+    VPSARKitConstants.slowConnectionSeconds = UserDefaults
+        .int(forKey: .slowConnectionSeconds, defaultValue: VPSARKitConstants.slowConnectionSeconds)
+
     // Versions
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,

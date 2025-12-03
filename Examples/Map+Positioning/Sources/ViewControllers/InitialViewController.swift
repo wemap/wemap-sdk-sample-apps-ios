@@ -18,6 +18,7 @@ final class InitialViewController: UIViewController {
 
     @IBOutlet var mapIDTextField: UITextField!
     @IBOutlet var sourcePicker: UIPickerView!
+    @IBOutlet var loadMapButton: UIButton!
     
     private let disposeBag = DisposeBag()
     
@@ -68,18 +69,22 @@ final class InitialViewController: UIViewController {
         alert.addAction(.init(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
-    
+
     private func loadMap() {
         guard let text = mapIDTextField.text, let id = Int(text) else {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
-        
+
+        loadMapButton.isEnabled = false
+
         WemapMap.shared
             .getMapData(mapID: id, token: Constants.token)
             .subscribe(onSuccess: {
                 self.showMap($0)
             }, onFailure: {
-                debugPrint("Failed to get style URL with error - \($0)")
+                ToastHelper.showToast(message: "Failed to get style URL with error - \($0)", onView: self.view)
+            }, onDisposed: {
+                self.loadMapButton.isEnabled = true
             })
             .disposed(by: disposeBag)
     }

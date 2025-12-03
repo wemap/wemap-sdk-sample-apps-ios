@@ -142,6 +142,38 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>VPS Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Slow connection seconds</string>
+			<key>FooterText</key>
+			<string>The maximum allowed time in seconds for a VPS request, at which the connection will be considered slow and the error slowConnectionDetected will be triggered. Default is 5 seconds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Slow connection seconds</string>
+			<key>Key</key>
+			<string>slowConnectionSeconds</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Navigation</string>
 		</dict>
 		<dict>

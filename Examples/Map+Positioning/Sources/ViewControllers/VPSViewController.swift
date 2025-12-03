@@ -241,8 +241,13 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
         if !cameraOverlay.isHidden {
-            errorCameraToast?.removeFromSuperview()
-            errorCameraToast = ToastHelper.showToast(message: "\(error)", onView: cameraOverlay, hideDelay: 1)
+            if let vpsError = error as? VPSARKitLocationSourceError, case .slowConnectionDetected = vpsError {
+                let message = "This is taking longer than expected. It looks like your internet connection is slow or unstable"
+                ToastHelper.showToast(message: message, onView: cameraOverlay, hideDelay: 5, bottomInset: Inset.top)
+            } else {
+                errorCameraToast?.removeFromSuperview()
+                errorCameraToast = ToastHelper.showToast(message: "\(error)", onView: cameraOverlay, hideDelay: 1)
+            }
         } else {
             debugPrint("LocationManager failed with error - \(error)")
         }
