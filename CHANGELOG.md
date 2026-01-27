@@ -2,6 +2,17 @@
 
 ---
 
+## [0.26.4]
+
+### Added
+
+* Map: add ability to specify direction along with edgePadding for setCenter
+
+### Compatibility
+
+* Xcode 26.2
+* Swift 6.2.3 (effective 5.10)
+
 ## [0.26.3]
 
 ### Added

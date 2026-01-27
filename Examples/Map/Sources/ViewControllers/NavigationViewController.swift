@@ -82,8 +82,8 @@ final class NavigationViewController: MapViewController {
         point.subtitle = getCurrentLevel(for: coord)
         map.addAnnotation(point)
         
-        map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0))
-        
+        map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0), direction: 90)
+
         updateUI()
     }
     
