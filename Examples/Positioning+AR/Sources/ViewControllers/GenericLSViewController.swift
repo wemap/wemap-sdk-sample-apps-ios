@@ -6,10 +6,10 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
+import CoreLocation
 import RxSwift
 import WemapCoreSDK
 import WemapGeoARSDK
-import CoreLocation
 import WemapPositioningSDKGPS
 
 final class GenericLSViewController: GeoARViewController {
@@ -19,15 +19,14 @@ final class GenericLSViewController: GeoARViewController {
     @IBOutlet var startNavigationButton: UIButton!
     @IBOutlet var stopNavigationButton: UIButton!
 
-    @IBOutlet var addPOIButton: UIButton!
-    @IBOutlet var removePOIButton: UIButton!
+    private var simulator: SimulatorLocationSource? {
+        locationManager.locationSource as? SimulatorLocationSource
+    }
 
-    @IBOutlet var addPOIsButton: UIButton!
-    @IBOutlet var removePOIsButton: UIButton!
+    private var selectedPOI: PointOfInterest? {
+        pointOfInterestManager.getSelectedPOI()
+    }
 
-    private var simulator: SimulatorLocationSource? { locationManager.locationSource as? SimulatorLocationSource }
-
-    private var selectedPOI: PointOfInterest? { pointOfInterestManager.getSelectedPOI() }
     private var customPOIs: Set<PointOfInterest> = []
 
     private var direction: CLLocationDirection = -90
@@ -120,10 +119,10 @@ final class GenericLSViewController: GeoARViewController {
     }
 
     @IBAction func addPOIs() {
-        let pois = (0...2).compactMap { _ in
+        let pois = (0 ... 2).compactMap { _ in
             generatePOI()
         }
-        guard pois.count > 0 else {
+        guard !pois.isEmpty else {
             ToastHelper.showToast(message: "Failed to generate POIs", onView: view)
             return
         }

@@ -50,7 +50,7 @@ final class POIsListViewController: UITableViewController {
                 let info = poiWithInfo.info
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
                 cell.textLabel?.text = poi.name
-                cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\naddress - \(poi.address)\n"
+                cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\naddress - \(poi.address ?? "missing")\n"
                     + "distance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
                 return cell
             }

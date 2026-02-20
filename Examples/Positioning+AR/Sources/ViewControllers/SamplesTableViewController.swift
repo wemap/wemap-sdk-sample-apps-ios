@@ -15,8 +15,8 @@ class SamplesTableViewController: UITableViewController {
     
     // MARK: - Navigation
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "VPS" && mapData.extras?.vpsEndpoint == nil {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
+        if identifier == "VPS", mapData.extras?.vpsEndpoint == nil {
             AlertFactory.presentInfoAlert(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", on: self)
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPath, animated: true)

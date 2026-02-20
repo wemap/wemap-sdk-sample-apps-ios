@@ -176,7 +176,7 @@
 			<key>Key</key>
 			<string>userPositionThreshold</string>
 			<key>DefaultValue</key>
-			<string>25</string>
+			<string>15</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

@@ -77,7 +77,7 @@ final class POIsViewController: MapViewController {
     }
     
     @IBAction func applyFilter() {
-        if pointOfInterestManager.filterByTag("52970") {
+        if pointOfInterestManager.filterByTags(["53003", "53014"], matchMode: .and) {
             applyFilterButton.isEnabled = false
             removeFiltersButton.isEnabled = true
         }

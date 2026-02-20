@@ -172,10 +172,11 @@ final class VPSViewController: UIViewController {
             [2.35657153, 48.88013655],
             [2.3567008, 48.8801748]
         ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: [-1, 0]) }
-        
-        let levelChangeFrom0ToMinus1 = LevelChange(difference: -1, direction: .down, type: .escalator)
-        let legSegmentsFrom0ToMinus1 = LegSegment.fromCoordinates(coordinatesFrom0ToMinus1, levelChange: levelChangeFrom0ToMinus1)
-        
+
+        let legSegmentsFrom0ToMinus1 = LegSegment.fromCoordinates(
+            coordinatesFrom0ToMinus1, levelDifference: -1, stepKind: .escalator, stepDirection: .down
+        )
+
         let coordinatesLevelMinus1 = [
             [2.3567008, 48.8801748],
             [2.35672744, 48.88017653],
@@ -195,10 +196,11 @@ final class VPSViewController: UIViewController {
             [2.357253, 48.88061996],
             [2.35727559, 48.88066565]
         ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: [-2, -1]) }
-        
-        let levelChangeFromMinus1ToMinus2 = LevelChange(difference: -1, direction: .down, type: .escalator)
-        let legSegmentsFromMinus1ToMinus2 = LegSegment.fromCoordinates(coordinatesFromMinus1ToMinus2, levelChange: levelChangeFromMinus1ToMinus2)
-        
+
+        let legSegmentsFromMinus1ToMinus2 = LegSegment.fromCoordinates(
+            coordinatesFromMinus1ToMinus2, levelDifference: -1, stepKind: .escalator, stepDirection: .down
+        )
+
         let coordinatesLevelMinus2 = [
             [2.35727559, 48.88066565],
             [2.35731332, 48.88074658],
@@ -214,7 +216,8 @@ final class VPSViewController: UIViewController {
         
         let legSegmentsLevelMinus2 = LegSegment.fromCoordinates(coordinatesLevelMinus2)
         
-        let segments = legSegmentsLevel0 + legSegmentsFrom0ToMinus1 + legSegmentsLevelMinus1 + legSegmentsFromMinus1ToMinus2 + legSegmentsLevelMinus2
+        let segments = legSegmentsLevel0 + legSegmentsFrom0ToMinus1 + legSegmentsLevelMinus1
+            + legSegmentsFromMinus1ToMinus2 + legSegmentsLevelMinus2
         return .init(origin: origin, destination: destination, segments: segments)
     }
     
@@ -269,5 +272,9 @@ extension VPSViewController: VPSARKitLocationSourceDelegate {
             rescanRequested = false
             showMapPlaceholder()
         }
+    }
+
+    func locationSource(_: VPSARKitLocationSource, didChangeBackgroundScanStatus status: VPSARKitLocationSource.ScanStatus) {
+        debugPrint("Background scan status: \(status)")
     }
 }

@@ -22,6 +22,7 @@ final class NavigationViewController: MapViewController {
     @IBOutlet var startNavigationFromUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var removeUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
+    @IBOutlet var wheelchairSwitch: UISwitch!
     
     private var userCreatedAnnotations: [MLNAnnotation] {
         map.annotations?
@@ -32,7 +33,9 @@ final class NavigationViewController: MapViewController {
         map.userLocationManager.locationSource as? SimulatorLocationSource
     }
     
-    private var navigationManager: MapNavigationManaging { map.navigationManager }
+    private var navigationManager: MapNavigationManaging {
+        map.navigationManager
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +53,21 @@ final class NavigationViewController: MapViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        ToastHelper.showToast(
-            message: "Create 1 or 2 annotations by long press on the map to be able to start navigation. " +
-                "1 annotation to start from user location. 2 annotations to start from custom location",
-            onView: view, hideDelay: Delay.short
-        )
+
+        map.itineraryManager
+            .searchRuleNames(graphId: mapData.extras?.graphId ?? "")
+            .subscribe(onSuccess: {
+                Logger.v("Available rule names - \($0)")
+            }, onFailure: {
+                Logger.e("Failed to get rule names with error - \($0)")
+            })
+            .disposed(by: disposeBag)
+
+        let message = """
+            Create 1 or 2 annotations by long press on the map to be able to start navigation.
+            1 annotation to start from user location. 2 annotations to start from custom location"
+        """
+        ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
     }
     
     @IBAction func closeTouched() {
@@ -82,8 +94,8 @@ final class NavigationViewController: MapViewController {
         point.subtitle = getCurrentLevel(for: coord)
         map.addAnnotation(point)
         
-        map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0), direction: 90)
-
+        map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0))
+        
         updateUI()
     }
     
@@ -136,10 +148,13 @@ final class NavigationViewController: MapViewController {
     
     private func startNavigation(origin: Coordinate?, destination: Coordinate) {
         disableStartButtons()
-        
+
+        let rules: ItinerarySearchRules = wheelchairSwitch.isOn ? .wheelchair : .init()
+
         navigationManager
-            .startNavigation(origin: origin, destination: destination, options: globalNavigationOptions // ,
-//                             searchOptions: .init(avoidStairs: true), itineraryOptions: globalItineraryOptions
+            .startNavigation(
+                origin: origin, destination: destination, options: globalNavigationOptions,
+                searchRules: rules, itineraryOptions: globalItineraryOptions
             )
             .subscribe(
                 onSuccess: { [unowned self] navigation in

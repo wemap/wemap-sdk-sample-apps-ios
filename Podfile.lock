@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (5.10.2)
-  - MapLibre (6.19.3)
+  - Alamofire (5.11.1)
+  - MapLibre (6.23.0)
   - NAOSDKFramework (4.12.0)
   - RxCocoa (6.9.0):
     - RxRelay (= 6.9.0)
@@ -9,34 +9,34 @@ PODS:
     - RxSwift (= 6.9.0)
   - RxSwift (6.9.0)
   - Turf (4.0.0)
-  - WemapCoreSDK (0.26.4):
-    - Alamofire (~> 5.10.0)
+  - WemapCoreSDK (0.27.0):
+    - Alamofire (~> 5.11.0)
     - RxCocoa (~> 6.9.0)
     - RxRelay (~> 6.9.0)
     - RxSwift (~> 6.9.0)
     - Turf (~> 4.0.0)
-  - WemapGeoARSDK (0.26.4):
-    - WemapCoreSDK (~> 0.26.4)
-  - WemapMapSDK (0.26.4):
-    - MapLibre (~> 6.19.3)
-    - WemapCoreSDK (~> 0.26.4)
+  - WemapGeoARSDK (0.27.0):
+    - WemapCoreSDK (~> 0.27.0)
+  - WemapMapSDK (0.27.0):
+    - MapLibre (~> 6.23.0)
+    - WemapCoreSDK (~> 0.27.0)
     - Zip (~> 2.1)
-  - WemapPositioningSDK/GPS (0.26.4):
-    - WemapCoreSDK (~> 0.26.4)
-  - WemapPositioningSDK/Polestar (0.26.4):
+  - WemapPositioningSDK/GPS (0.27.0):
+    - WemapCoreSDK (~> 0.27.0)
+  - WemapPositioningSDK/Polestar (0.27.0):
     - NAOSDKFramework (~> 4.12.0)
-    - WemapCoreSDK (~> 0.26.4)
-  - WemapPositioningSDK/VPSARKit (0.26.4):
+    - WemapCoreSDK (~> 0.27.0)
+  - WemapPositioningSDK/VPSARKit (0.27.0):
     - RxSwift (~> 6.9.0)
-    - WemapCoreSDK (~> 0.26.4)
+    - WemapCoreSDK (~> 0.27.0)
   - Zip (2.1.2)
 
 DEPENDENCIES:
-  - WemapGeoARSDK (~> 0.26.4)
-  - WemapMapSDK (~> 0.26.4)
-  - WemapPositioningSDK/GPS (~> 0.26.4)
-  - WemapPositioningSDK/Polestar (~> 0.26.4)
-  - WemapPositioningSDK/VPSARKit (~> 0.26.4)
+  - WemapGeoARSDK (~> 0.27.0)
+  - WemapMapSDK (~> 0.27.0)
+  - WemapPositioningSDK/GPS (~> 0.27.0)
+  - WemapPositioningSDK/Polestar (~> 0.27.0)
+  - WemapPositioningSDK/VPSARKit (~> 0.27.0)
 
 SPEC REPOS:
   https://github.com/wemap/cocoapods-specs.git:
@@ -55,19 +55,19 @@ SPEC REPOS:
     - Zip
 
 SPEC CHECKSUMS:
-  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
-  MapLibre: e32870abdf2430d0b547d2c6b354c7f44dfbbd37
+  Alamofire: eec6cd8f73b242b59e34153a606a909eb9864b14
+  MapLibre: c0fcafabb341f230657d959970c6eb47fb55750e
   NAOSDKFramework: f57f6eb89284df63125fa7d64c8bf5c947235ce5
   RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
   RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
   RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
   Turf: c9eb11a65d96af58cac523460fd40fec5061b081
-  WemapCoreSDK: 7f97f8586a50e5371c3b37e674181120961a02a5
-  WemapGeoARSDK: 668e19889311151b96953476aa010753e46d2089
-  WemapMapSDK: 74bd6e369a92661f5de017265acd97c5eb466a52
-  WemapPositioningSDK: d1c6e79d060ac946647c33d0e63a8a3f6e6119dc
+  WemapCoreSDK: 5a94b009cff509fa65c1b78be58f23244ae9f4d0
+  WemapGeoARSDK: ebc351d4ad19665fac2bd03e7b639b7145ba7168
+  WemapMapSDK: c099804561a2be9f3acc95607b6de6f9cf9602f9
+  WemapPositioningSDK: 74d3e57bba9f36d30f28684003cdd82cf1a61af4
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: d42e2a9f0a85e4a7108072cfb4ebcea918d17cf8
+PODFILE CHECKSUM: 9d46dcbfc903da0a6dc9228465d93aadba115c6d
 
 COCOAPODS: 1.16.2

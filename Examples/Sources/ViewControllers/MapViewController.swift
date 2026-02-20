@@ -34,10 +34,22 @@ class MapViewController: UIViewController, MapViewDelegate {
         view as! MapView // swiftlint:disable:this force_cast
     }
     
-    var pointOfInterestManager: MapPointOfInterestManaging { map.pointOfInterestManager }
-    var locationManager: UserLocationManager { map.userLocationManager }
-    var buildingManager: BuildingManager { map.buildingManager }
-    var focusedBuilding: Building? { buildingManager.focusedBuilding }
+    var pointOfInterestManager: MapPointOfInterestManaging {
+        map.pointOfInterestManager
+    }
+
+    var locationManager: UserLocationManager {
+        map.userLocationManager
+    }
+
+    var buildingManager: BuildingManager {
+        map.buildingManager
+    }
+
+    var focusedBuilding: Building? {
+        buildingManager.focusedBuilding
+    }
+
     var disposeBag = DisposeBag()
     
     private let levelSwitch = LevelSwitch()

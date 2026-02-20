@@ -14,7 +14,9 @@ final class LevelsViewController: MapViewController {
     
     private var uniqueLevels: Set<Float> = []
     
-    private var pois: Set<PointOfInterest> { pointOfInterestManager.getPOIs() }
+    private var pois: Set<PointOfInterest> {
+        pointOfInterestManager.getPOIs()
+    }
     
     override func lateInit() {
         super.lateInit()

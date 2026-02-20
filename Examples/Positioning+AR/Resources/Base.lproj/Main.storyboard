@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mXm-ti-uu4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mXm-ti-uu4">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -119,7 +119,7 @@
             <objects>
                 <viewController storyboardIdentifier="SimulatorSceneVC" id="cGy-4U-jWy" customClass="GenericLSViewController" customModule="Pos_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gSS-Qw-nhM" customClass="GeoARView" customModule="WemapGeoARSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="797"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ5-0e-scF">
@@ -130,7 +130,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LYd-nl-ujR">
-                                <rect key="frame" x="13.333333333333343" y="642" width="363.33333333333326" height="119"/>
+                                <rect key="frame" x="13.333333333333343" y="652" width="363.33333333333326" height="119"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vcW-ic-sT6" userLabel="POI buttons stack">
                                         <rect key="frame" x="0.0" y="0.0" width="363.33333333333331" height="34.333333333333336"/>
@@ -209,24 +209,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="so5-aj-PmV"/>
                     <connections>
-                        <outlet property="addPOIButton" destination="0om-sb-f7d" id="qHK-qf-l7M"/>
-                        <outlet property="addPOIsButton" destination="ZoK-3f-alQ" id="Tig-AW-qT1"/>
-                        <outlet property="removePOIButton" destination="coT-5u-jqg" id="RRb-ow-iR0"/>
-                        <outlet property="removePOIsButton" destination="sX3-xS-TWq" id="ayy-t7-2bZ"/>
                         <outlet property="startNavigationButton" destination="qa1-G8-aQD" id="Bvx-jd-eqb"/>
                         <outlet property="stopNavigationButton" destination="DLY-zc-SO9" id="30G-pM-egj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUc-Nl-WlX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2594" y="614"/>
+            <point key="canvasLocation" x="2502" y="943"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cl1-d7-pae">
             <objects>
                 <viewController storyboardIdentifier="VPSLSVC" id="sYM-JY-fex" customClass="VPSLSViewController" customModule="Pos_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HGZ-CH-qDe" customClass="GeoARView" customModule="WemapGeoARSDK">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="797"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3T-G5-HWv">
@@ -237,7 +233,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cG7-py-NoK">
-                                <rect key="frame" x="47.333333333333343" y="684.33333333333337" width="295.33333333333326" height="76.666666666666629"/>
+                                <rect key="frame" x="47.333333333333343" y="694.33333333333337" width="295.33333333333326" height="76.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vvB-Ec-d9m">
                                         <rect key="frame" x="0.0" y="0.0" width="295.33333333333331" height="34.333333333333336"/>
@@ -303,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIj-yq-WKQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2594" y="1265"/>
+            <point key="canvasLocation" x="2502" y="1629"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="kpc-VJ-UFj">
@@ -358,7 +354,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="00Y-Kt-Bzq"/>
+        <segue reference="1Ee-hU-inJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="secondaryLabelColor">

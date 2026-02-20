@@ -42,24 +42,42 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     @IBOutlet var navigationView: UIView!
     @IBOutlet var navigationInfo: UILabel!
     
-    private var pointOfInterestManager: MapPointOfInterestManaging { mapView.pointOfInterestManager }
-    private var navigationManager: MapNavigationManaging { mapView.navigationManager }
-    private var itineraryManager: ItineraryManager { mapView.itineraryManager }
-    private var locationManager: UserLocationManager { mapView.userLocationManager }
+    private var pointOfInterestManager: MapPointOfInterestManaging {
+        mapView.pointOfInterestManager
+    }
+
+    private var navigationManager: MapNavigationManaging {
+        mapView.navigationManager
+    }
+
+    private var itineraryManager: ItineraryManager {
+        mapView.itineraryManager
+    }
+
+    private var locationManager: UserLocationManager {
+        mapView.userLocationManager
+    }
     
-    private var currentItinerary: Itinerary? { itineraryManager.itineraries.first }
+    private var currentItinerary: Itinerary? {
+        itineraryManager.itineraries.first
+    }
     
     private let levelSwitch = LevelSwitch()
     private let disposeBag = DisposeBag()
-    
+
     private var arView: ARView?
     private var scanningTimer = SerialDisposable()
     private weak var errorCameraToast: UILabel?
-    
+    private weak var vpsErrorCameraToast: UILabel?
+
     private var vpsLocationSource: VPSARKitLocationSource!
     private var rescanSuggested = false
     private let impreciseMessage = "Your location seems imprecise, you can scan again to refine your position if necessary"
-    
+
+    private lazy var haptic: UINotificationFeedbackGenerator? = AppConstants.enableHapticFeedback ? UINotificationFeedbackGenerator() : nil
+
+    private weak var backgroundScanHint: UILabel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -191,6 +209,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         vpsLocationSource.vpsDelegate = self
         locationManager.locationSource = vpsLocationSource
         vpsLocationSource.start()
+        mapView.showsUserHeadingIndicator = true
         return Single.just(())
     }
     
@@ -232,36 +251,42 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             .presentSimpleAlert(message: message, errorMessage: "User refused to open camera", positiveText: "Open camera", on: self)
     }
     
-    private func positioningLost() {
+    private func positioningLost(reason: VPSARKitLocationSource.State.NotPositioningReason) {
         mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
+        haptic?.notificationOccurred(.error)
         if locationManager.lastCoordinate != nil {
-            locateUser(message: "We lost your position. In order to relocalize you we will use your camera")
+            locateUser(message: "We lost your position. In order to relocalize you we will use your camera. \(reason)")
         }
     }
     
     func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
-        if !cameraOverlay.isHidden {
-            if let vpsError = error as? VPSARKitLocationSourceError, case .slowConnectionDetected = vpsError {
-                let message = "This is taking longer than expected. It looks like your internet connection is slow or unstable"
-                ToastHelper.showToast(message: message, onView: cameraOverlay, hideDelay: 5, bottomInset: Inset.top)
-            } else {
-                errorCameraToast?.removeFromSuperview()
-                errorCameraToast = ToastHelper.showToast(message: "\(error)", onView: cameraOverlay, hideDelay: 1)
-            }
-        } else {
-            debugPrint("LocationManager failed with error - \(error)")
+        if cameraOverlay.isHidden {
+            return debugPrint("LocationManager failed with error - \(error)")
         }
+        if let vpsError = error as? VPSARKitLocationSourceError, case .slowConnectionDetected = vpsError {
+            let message = "This is taking longer than expected. It looks like your internet connection is slow or unstable"
+            vpsErrorCameraToast?.removeFromSuperview()
+            vpsErrorCameraToast = ToastHelper.showToast(message: message, onView: cameraOverlay, hideDelay: 5, bottomInset: Inset.top)
+            return
+        }
+        errorCameraToast?.removeFromSuperview()
+        errorCameraToast = ToastHelper.showToast(message: "\(error)", onView: cameraOverlay, hideDelay: 1)
     }
-    
+
     func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
         debugPrint("VPS state changed - \(state)")
-        
-        mapView.showsUserLocation = !state.isLost
+        showBackgroundScanHintIfNeeded()
+
         cameraButton.isHidden = state.isLost
         degradedStateIcon.isHidden = !state.isDegraded
-        
+
         if state.isLost {
-            positioningLost()
+            let reason = if case let .notPositioning(reason) = state {
+                reason
+            } else {
+                VPSARKitLocationSource.State.NotPositioningReason.none
+            }
+            positioningLost(reason: reason)
         }
     }
     
@@ -275,12 +300,42 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             closeCameraTouched()
         }
     }
-    
+
+    func locationSource(_: VPSARKitLocationSource, didChangeBackgroundScanStatus status: VPSARKitLocationSource.ScanStatus) {
+        debugPrint("Background scan status changed - \(status)")
+        showBackgroundScanHintIfNeeded()
+    }
+
+    func locationSource(_: VPSARKitLocationSource, didLocalizeUserAtCoordinate _: Coordinate, attitude _: Attitude, backgroundScan: Bool) {
+        guard !backgroundScan || vpsLocationSource.state.isDegraded else {
+            return
+        }
+        haptic?.notificationOccurred(.success)
+    }
+
+    func locationSource(_: VPSARKitLocationSource, cameraDidChangeTrackingState camera: ARCamera) {
+        debugPrint("Tracking state - \(camera.trackingState)")
+    }
+
+    private func showBackgroundScanHintIfNeeded() {
+        guard vpsLocationSource.backgroundScanStatus.isStarted, vpsLocationSource.state.isDegraded else {
+            backgroundScanHint?.removeFromSuperview()
+            return
+        }
+        guard backgroundScanHint == nil else {
+            return
+        }
+        backgroundScanHint = ToastHelper.showToast(
+            message: "Please hold your phone vertically in front of you to let system recognize your surroundings",
+            onView: view, hideDelay: .greatestFiniteMagnitude
+        )
+    }
+
     private func createScanningTimer() {
         scanningTimer.disposable = Observable<Int>
             .timer(.seconds(20), scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [unowned self] _ in
-                askToContinue()
+            .subscribe(onNext: { [weak self] _ in
+                self?.askToContinue()
             })
     }
     
@@ -357,8 +412,9 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     }
     
     private func calculateAndDrawItinerary(from: Coordinate, to: Coordinate) {
+        let searchRules: ItinerarySearchRules = AppConstants.useWheelchair ? .wheelchair : .init()
         itineraryManager
-            .getItineraries(origin: from, destination: to)
+            .getItineraries(origin: from, destination: to, searchRules: searchRules)
             .subscribe(
                 onSuccess: { [unowned self] itineraries in
                     renderItinerary(itineraries.first!)
@@ -404,7 +460,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     @IBAction func startNavigationTouched() {
         navigationManager
-            .startNavigation(currentItinerary!)
+            .startNavigation(currentItinerary!, options: globalNavigationOptions)
             .subscribe(onSuccess: { [unowned self] _ in
                 renderNavigation()
             }, onFailure: { [unowned self] error in

@@ -102,9 +102,9 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Switch levels automatically on user movements</string>
+			<string>Enable haptic feedback</string>
 			<key>Key</key>
-			<string>switchLevelsAutomaticallyOnUserMovements</string>
+			<string>enableHapticFeedback</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
@@ -137,6 +137,34 @@
 			<string>userLocationProjectionOnGraphEnabled</string>
 			<key>DefaultValue</key>
 			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Switch levels automatically on user movements</string>
+			<key>Key</key>
+			<string>switchLevelsAutomaticallyOnUserMovements</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Stale state timeout in milliseconds</string>
+			<key>Key</key>
+			<string>staleTimeoutMilliseconds</string>
+			<key>DefaultValue</key>
+			<string>5000</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -178,6 +206,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Use wheelchair</string>
+			<key>Key</key>
+			<string>useWheelchair</string>
+			<key>DefaultValue</key>
+			<string>NO</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Arrived distance threshold</string>
@@ -208,7 +246,7 @@
 			<key>Title</key>
 			<string>User position threshold</string>
 			<key>FooterText</key>
-			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 25 meters</string>
+			<string>The distance measured in meters indicates when the user&apos;s location will no longer be projected onto the itinerary and navigation will be recalculated. Default is 15 meters</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -218,7 +256,7 @@
 			<key>Key</key>
 			<string>userPositionThreshold</string>
 			<key>DefaultValue</key>
-			<string>25</string>
+			<string>15</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>

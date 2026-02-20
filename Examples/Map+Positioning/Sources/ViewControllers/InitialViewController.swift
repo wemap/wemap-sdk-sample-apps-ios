@@ -24,7 +24,7 @@ final class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // uncomment if you want to use dev environment
 //        WemapCore.setEnvironment(.dev)
 //        WemapCore.setItinerariesEnvironment(.dev)
@@ -81,10 +81,10 @@ final class InitialViewController: UIViewController {
             .getMapData(mapID: id, token: Constants.token)
             .subscribe(onSuccess: {
                 self.showMap($0)
-            }, onFailure: {
-                ToastHelper.showToast(message: "Failed to get style URL with error - \($0)", onView: self.view)
-            }, onDisposed: {
-                self.loadMapButton.isEnabled = true
+            }, onFailure: { [unowned self] in
+                ToastHelper.showToast(message: "Failed to get style URL with error - \($0)", onView: view)
+            }, onDisposed: { [unowned self] in
+                loadMapButton.isEnabled = true
             })
             .disposed(by: disposeBag)
     }
@@ -95,7 +95,7 @@ final class InitialViewController: UIViewController {
 
         let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
 
-        if locationSourceType == .vps && mapData.extras?.vpsEndpoint == nil {
+        if locationSourceType == .vps, mapData.extras?.vpsEndpoint == nil {
             ToastHelper.showToast(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", onView: view)
             return
         }

@@ -22,9 +22,17 @@ class GeoARViewController: UIViewController, GeoARViewDelegate {
         view as! GeoARView // swiftlint:disable:this force_cast
     }
     
-    var navigationManager: ARNavigationManaging { arView.navigationManager }
-    var locationManager: ARLocationManager { arView.locationManager }
-    var pointOfInterestManager: ARPointOfInterestManaging { arView.pointOfInterestManager }
+    var navigationManager: ARNavigationManaging {
+        arView.navigationManager
+    }
+
+    var locationManager: ARLocationManager {
+        arView.locationManager
+    }
+
+    var pointOfInterestManager: ARPointOfInterestManaging {
+        arView.pointOfInterestManager
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

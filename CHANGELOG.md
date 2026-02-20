@@ -2,6 +2,67 @@
 
 ---
 
+## [0.27.0]
+
+### Breaking changes
+
+* Core
+  * Removed `Step.Extras` struct.
+  * Removed `LevelChange` struct. All related properties are now available in `Step` struct.
+  * Removed `LevelChangeType` enum. Use `Step.Kind` instead.
+  * `Direction` enum replaced by `Step.Direction`.
+  * `ItinerarySearchOptions` struct replaced by `ItinerarySearchRules`. So `searchOptions` parameter replaced everywhere to `searchRules` accordingly.
+* Map
+  * Removed `OutOfActiveLevelStyle` struct. Now you can only specify opacity of the user indicator when user is not on the active level by `UserLocationViewStyles.outOfActiveLevelOpacity`.
+  * Removed `UserLocationView` protocol.
+  * Removed `UserLocationViewState` class.
+  * Removed `UserLocationState` enum.
+  * `UserLocationViewStyle` class replaced by `UserLocationViewStyles`.
+  * `UserLocationManager`
+    * `var userLocationViewStyle: UserLocationViewStyle` changed to `var userLocationViewStyles: UserLocationViewStyles`.
+    * Removed `var userLocationView: UserLocationView?`. Use `UserLocationManager.userLocationViewStyles` instead.
+  * `WemapMap.loadLocalMapData(fromZip zip: URL)` moved to `PackdataManaging.loadMapData(fromZip zip: URL)`.
+
+### Added
+
+* Core: add AND and OR logic for filter by tags
+* Map: ability to download and check for available updates of offline packdata
+* Core: add support for custom rules for itineraries
+* Core: expose `extraMedias` of POI
+* Map: add support for stale state and accuracy ring of user location indicator
+* Pos(VPS): Add support for Conveying in elevators
+* SampleApp(Map+Pos[VPS]): add haptic feedback on successful scan (success) and on positioning lost (error), also add it on background scan success when state is degraded
+* Pos(VPS): expose raw camera tracking state from ARKit
+* Pos(VPS): Force a re-scan if user moves away itinerary
+* Pos(VPS): add background scan to improve general system stability. It will be started based on different conditions like:
+  * distance traveled
+  * time passed since last successful VPS scan
+  * quality of relative positioning
+
+### Changed
+
+* Map: allow heading indicator not only for followWithHeading mode
+
+### Fixed
+
+* Map: crash on access magneticHeading of CLHeading
+* Map: Itinerary recalculation infinite loop
+* Map: The showPOIs method is not functioning properly
+* Map: changing `showsUserHeadingIndicator` and `showsUserLocation` is not taken into account by user location indicator
+* Pos(VPS): blue dot don't turn gray on notPositioning
+
+### Dependencies
+
+* Core
+  * Alamofire 5.10.2 -> 5.11.1
+* Map
+  * MapLibre 6.19.3 -> 6.23.0
+
+### Compatibility
+
+* Xcode 26.2
+* Swift 6.2.3 (effective 5.10)
+
 ## [0.26.4]
 
 ### Added

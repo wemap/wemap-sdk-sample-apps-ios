@@ -12,7 +12,7 @@ import WemapCoreSDK
 var globalNavigationOptions: NavigationOptions {
     .init(
         arrivedDistanceThreshold: UserDefaults.double(forKey: .arrivedDistanceThreshold, defaultValue: 15),
-        userPositionThreshold: UserDefaults.double(forKey: .userPositionThreshold, defaultValue: 25),
+        userPositionThreshold: UserDefaults.double(forKey: .userPositionThreshold, defaultValue: 15),
         navigationRecalculationTimeInterval: UserDefaults.double(forKey: .navigationRecalculationTimeInterval, defaultValue: 5)
     )
 }

@@ -30,6 +30,5 @@ func customKeysAndValues() -> [String: Any] {
         .positioningVersion: Bundle.positioningVPSARKit.version
     ]
     
-    let dict = Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
-    return dict
+    return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
 }
