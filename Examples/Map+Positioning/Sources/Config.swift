@@ -26,8 +26,12 @@ enum PreferencesKey: String {
          // Map constants
          switchLevelsAutomaticallyOnUserMovements,
          staleTimeoutMilliseconds,
+         staleStateTimeout,
          // VPS constants
          slowConnectionSeconds,
+         backgroundScanTimeInterval,
+         degradedDistanceThreshold,
+         notPositioningDistanceThreshold,
          // Global navigation options
          arrivedDistanceThreshold,
          userPositionThreshold,
@@ -63,13 +67,22 @@ func customKeysAndValues() -> [String: Any] {
     MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
         .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
     
-    MapConstants.staleTimeoutMilliseconds = UserDefaults
-        .int(forKey: .staleTimeoutMilliseconds, defaultValue: MapConstants.staleTimeoutMilliseconds)
+    MapConstants.staleStateTimeout = UserDefaults
+        .double(forKey: .staleStateTimeout, defaultValue: MapConstants.staleStateTimeout)
 
     // MARK: - VPS
 
     VPSARKitConstants.slowConnectionSeconds = UserDefaults
         .int(forKey: .slowConnectionSeconds, defaultValue: VPSARKitConstants.slowConnectionSeconds)
+
+    VPSControllerConstants.backgroundScanTimeInterval = UserDefaults
+        .double(forKey: .backgroundScanTimeInterval, defaultValue: VPSControllerConstants.backgroundScanTimeInterval)
+
+    StateManagerConstants.degradedDistanceThreshold = UserDefaults
+        .double(forKey: .degradedDistanceThreshold, defaultValue: StateManagerConstants.degradedDistanceThreshold)
+
+    StateManagerConstants.notPositioningDistanceThreshold = UserDefaults
+        .double(forKey: .notPositioningDistanceThreshold, defaultValue: StateManagerConstants.notPositioningDistanceThreshold)
 
     // MARK: - Versions
 

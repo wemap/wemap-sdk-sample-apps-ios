@@ -59,21 +59,46 @@
                                     </pickerView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lLV-P2-8Za">
-                                <rect key="frame" x="254.33333333333334" y="110" width="119.66666666666666" height="28"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FBu-Zl-aq8" userLabel="Switches Stack View">
+                                <rect key="frame" x="256.33333333333331" y="110" width="117.66666666666669" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OU9-uG-u0A">
-                                        <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GpM-Pb-Lpe">
-                                        <rect key="frame" x="58.666666666666657" y="0.0" width="63" height="28"/>
-                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lLV-P2-8Za" userLabel="Offline/Online Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OU9-uG-u0A">
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GpM-Pb-Lpe">
+                                                <rect key="frame" x="56.666666666666686" y="0.0" width="63" height="28"/>
+                                                <connections>
+                                                    <action selector="onlineSwitchToggle" destination="9Br-Si-CgX" eventType="valueChanged" id="osN-Wa-ENE"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Cuy-4d-lPI" userLabel="Env Stack View">
+                                        <rect key="frame" x="0.0" y="36" width="117.66666666666667" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prod" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wam-K3-2SD" userLabel="Prod">
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7o-cH-6RY">
+                                                <rect key="frame" x="56.666666666666686" y="0.0" width="63" height="28"/>
+                                                <connections>
+                                                    <action selector="envSwitched" destination="9Br-Si-CgX" eventType="valueChanged" id="Tfg-Af-GHv"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-50-Rd5">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-50-Rd5">
                                 <rect key="frame" x="16" y="110.00000000000001" width="164" height="57.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline packdata" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTl-XE-x6d" userLabel="Offline packdata">
@@ -98,9 +123,9 @@
                         <accessibility key="accessibilityConfiguration" identifier="backgroundId"/>
                         <constraints>
                             <constraint firstItem="IoM-Le-ifI" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="147" id="IM5-cQ-cMT"/>
-                            <constraint firstItem="lLV-P2-8Za" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="16" id="JVF-oV-N3G"/>
-                            <constraint firstItem="zce-M4-BEm" firstAttribute="trailing" secondItem="lLV-P2-8Za" secondAttribute="trailing" constant="16" id="VKj-us-yGc"/>
+                            <constraint firstItem="zce-M4-BEm" firstAttribute="trailing" secondItem="FBu-Zl-aq8" secondAttribute="trailing" constant="16" id="NUn-lg-yLd"/>
                             <constraint firstItem="9FZ-pv-L5Q" firstAttribute="centerX" secondItem="zce-M4-BEm" secondAttribute="centerX" id="WaA-gU-8bF"/>
+                            <constraint firstItem="FBu-Zl-aq8" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="16" id="XzR-g3-b8c"/>
                             <constraint firstItem="vHV-50-Rd5" firstAttribute="leading" secondItem="zce-M4-BEm" secondAttribute="leading" constant="16" id="dNq-xK-x0s"/>
                             <constraint firstItem="RfC-aW-f5l" firstAttribute="centerX" secondItem="N3a-rT-LhF" secondAttribute="centerX" id="ed5-3h-mhG"/>
                             <constraint firstItem="vHV-50-Rd5" firstAttribute="top" secondItem="zce-M4-BEm" secondAttribute="top" constant="16" id="gjw-Jc-YY7"/>
@@ -112,6 +137,8 @@
                     </view>
                     <connections>
                         <outlet property="checkAndDownloadButton" destination="gPf-js-TG4" id="G4H-Xo-NUl"/>
+                        <outlet property="envLabel" destination="Wam-K3-2SD" id="lx1-5O-yxT"/>
+                        <outlet property="envSwitch" destination="q7o-cH-6RY" id="hPm-j5-D8w"/>
                         <outlet property="loadMapButton" destination="RfC-aW-f5l" id="vk2-bi-ZUp"/>
                         <outlet property="mapIDTextField" destination="GdK-E3-PaG" id="LLR-B9-sMl"/>
                         <outlet property="onlineLabel" destination="OU9-uG-u0A" id="m67-U4-Abk"/>

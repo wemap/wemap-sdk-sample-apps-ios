@@ -1,12 +1,12 @@
 //
 //  InitialViewController.swift
-//  MapExample
+//  PosExample
 //
 //  Created by Evgenii Khrushchev on 28/03/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import RxSwift
+import Combine
 import UIKit
 import WemapCoreSDK
 import WemapPositioningSDKVPSARKit
@@ -14,9 +14,11 @@ import WemapPositioningSDKVPSARKit
 final class InitialViewController: UIViewController {
 
     @IBOutlet var mapIDTextField: UITextField!
-    
-    private let disposeBag = DisposeBag()
-    
+
+    private let mapService = ServiceFactory.getMapService()
+
+    private var cancellable: AnyCancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,16 +56,16 @@ final class InitialViewController: UIViewController {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
         
-        ServiceFactory
-            .getMapService()
+        cancellable = mapService
             .map(byID: id, token: Constants.token)
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onSuccess: {
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0 {
+                    debugPrint("Failed to get map data with error - \(error)")
+                }
+            }, receiveValue: {
                 self.showMap($0)
-            }, onFailure: {
-                debugPrint("Failed to get map data with error - \($0)")
             })
-            .disposed(by: disposeBag)
     }
     
     private func showMap(_ mapData: MapData) {

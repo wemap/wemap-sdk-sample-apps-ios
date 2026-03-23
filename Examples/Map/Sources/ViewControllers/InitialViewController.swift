@@ -6,8 +6,7 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
+import Combine
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -27,8 +26,11 @@ final class InitialViewController: UIViewController {
     @IBOutlet var onlineSwitch: UISwitch!
     @IBOutlet var onlineLabel: UILabel!
     @IBOutlet var loadMapButton: UIButton!
-    
-    private let disposeBag = DisposeBag()
+    @IBOutlet var envLabel: UILabel!
+    @IBOutlet var envSwitch: UISwitch!
+
+    private let locationSourceTitles = LocationSourceType.allCases.map(\.name)
+    private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Packdata Properties
 
@@ -39,15 +41,10 @@ final class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        onlineSwitch
-            .rx.isOn
-            .subscribe(onNext: { [unowned self] in
-                onlineLabel.text = $0 ? "Online" : "Offline"
-                packdataStackView.isHidden = $0
-                loadMapButton.isEnabled = $0 || packdata != nil
-            }).disposed(by: disposeBag)
-        
+
+        sourcePicker.dataSource = self
+        sourcePicker.delegate = self
+
         // uncomment if you want to use dev environment
 //        WemapCore.setEnvironment(.dev)
 //        WemapCore.setItinerariesEnvironment(.dev)
@@ -56,24 +53,19 @@ final class InitialViewController: UIViewController {
         view.addGestureRecognizer(tap)
         
         mapIDTextField.text = "\(Constants.mapID)"
-
-        let locationSourceTitles = LocationSourceType.allCases.map(\.name)
-        
-        Driver
-            .of(locationSourceTitles)
-            .drive(sourcePicker.rx.itemTitles) { _, element in element }
-            .disposed(by: disposeBag)
         
         // if you need to retrieve all points of interest for some map in advance
 //        ServiceFactory
 //            .getPointOfInterestService()
 //            .pointsOfInterestList(mapID: Constants.mapID)
-//            .subscribe(onSuccess: {
+//            .sink(receiveCompletion: {
+//                if case let .failure(error) = $0 {
+//                    debugPrint("failed to receive pois with error - \(error)")
+//                }
+//            }, receiveValue: {
 //                debugPrint("received pois - \($0)")
-//            }, onFailure: {
-//                debugPrint("failed to receive pois with error - \($0)")
 //            })
-//            .disposed(by: disposeBag)
+//            .store(in: &cancellables)
 
         packdata = loadPackdataIfAvailable()
         if let packdata {
@@ -83,6 +75,13 @@ final class InitialViewController: UIViewController {
             checkAndDownloadButton.setTitle("Download", for: .selected)
             checkAndDownloadButton.isSelected = true
         }
+    }
+
+    @IBAction func onlineSwitchToggle() {
+        let isSwitchOn = onlineSwitch.isOn
+        onlineLabel.text = isSwitchOn ? "Online" : "Offline"
+        packdataStackView.isHidden = isSwitchOn
+        loadMapButton.isEnabled = isSwitchOn || packdata != nil
     }
     
     @objc func dismissKeyboard() {
@@ -113,6 +112,14 @@ final class InitialViewController: UIViewController {
         }
     }
 
+    @IBAction func envSwitched() {
+        let env: Environment = envSwitch.isOn ? .prod : .dev
+        envLabel.text = envSwitch.isOn ? "Prod" : "Dev"
+        WemapCore.setEnvironment(env)
+        WemapCore.setItinerariesEnvironment(env)
+        mapIDTextField.text = "\(Constants.mapID)"
+    }
+
     // MARK: - Private
 
     private func showAlert(message: String) {
@@ -136,15 +143,17 @@ final class InitialViewController: UIViewController {
         }
 
         request
-            .subscribe(onSuccess: { [self] mapData in
+            .sink(receiveCompletion: { [self] in
+                if case let .failure(error) = $0 {
+                    ToastHelper.showToast(message: "Failed to load map with error - \(error)", onView: view)
+                }
+            }, receiveValue: { [self] mapData in
                 showMap(mapData)
-            }, onFailure: { [self] in
-                ToastHelper.showToast(message: "Failed to load map with error - \($0)", onView: view)
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 
-    private func getRemoteMapDataRequest() -> Single<MapData>? {
+    private func getRemoteMapDataRequest() -> AnyPublisher<MapData, Error>? {
         guard let id = getMapID() else {
             return nil
         }
@@ -166,7 +175,7 @@ final class InitialViewController: UIViewController {
 
     // MARK: - Packdata Methods
 
-    private func getLocalMapDataRequest() -> Single<MapData>? {
+    private func getLocalMapDataRequest() -> AnyPublisher<MapData, Error>? {
         guard let packdata else {
             return nil
         }
@@ -186,7 +195,13 @@ final class InitialViewController: UIViewController {
 
         packdataManager
             .downloadPackdata(mapID: id)
-            .subscribe(onSuccess: { [unowned self] packdata in
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
+                    let message = "Failed to download packdata with error: \(error)"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: 5)
+                    checkAndDownloadButton.isEnabled = true
+                }
+            }, receiveValue: { [unowned self] packdata in
 
                 guard storePackdata(packdata) else {
                     return
@@ -194,12 +209,8 @@ final class InitialViewController: UIViewController {
                 checkAndDownloadButton.isSelected = false
                 checkAndDownloadButton.setTitle("Downloaded (v\(packdata.version))", for: .normal)
                 loadMapButton.isEnabled = true
-
-            }, onFailure: { [unowned self] in
-                ToastHelper.showToast(message: "Failed to download packdata with error: \($0)", onView: view, hideDelay: 5)
-                checkAndDownloadButton.isEnabled = true
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 
     private func checkForUpdates() {
@@ -215,19 +226,21 @@ final class InitialViewController: UIViewController {
 
         packdataManager
             .isNewPackdataAvailable(mapID: id, eTag: etag)
-            .subscribe(onSuccess: { [unowned self] available in
+            .sink(receiveCompletion: { [unowned self] in
+                checkAndDownloadButton.isEnabled = true
+                if case let .failure(error) = $0 {
+                    let message = "Failed to check for packdata updates with error: \(error)"
+                    ToastHelper.showToast(message: message, onView: view)
+                }
+            }, receiveValue: { [unowned self] available in
                 checkAndDownloadButton.isSelected = available
                 let title = available ? "Download new packdata" : "Check for updates"
                 checkAndDownloadButton.setTitle(title, for: .normal)
                 if !available {
                     showAlert(message: "No new packdata available yet")
                 }
-            }, onFailure: { [unowned self] in
-                ToastHelper.showToast(message: "Failed to check for packdata updates with error: \($0)", onView: view)
-            }, onDisposed: { [unowned self] in
-                checkAndDownloadButton.isEnabled = true
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 
     private func loadPackdataIfAvailable() -> Packdata? {
@@ -277,5 +290,23 @@ final class InitialViewController: UIViewController {
             return nil
         }
         return etag
+    }
+}
+
+extension InitialViewController: UIPickerViewDataSource {
+
+    func numberOfComponents(in _: UIPickerView) -> Int {
+        1
+    }
+
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
+        locationSourceTitles.count
+    }
+}
+
+extension InitialViewController: UIPickerViewDelegate {
+
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
+        locationSourceTitles[row]
     }
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
-import RxSwift
 import WemapCoreSDK
 import WemapGeoARSDK
 import WemapPositioningSDKVPSARKit
+import UIKit
 
 final class VPSLSViewController: GeoARViewController {
     
@@ -43,17 +43,16 @@ final class VPSLSViewController: GeoARViewController {
         
         navigationManager
             .startNavigation(destination: selectedPOI.coordinate)
-            .subscribe(
-                onSuccess: { [unowned self] navigation in
-                    debugPrint("navigation started - \(navigation)")
-                    stopNavigationButton.isEnabled = true
-                },
-                onFailure: { [unowned self] error in
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
                     debugPrint("failed to start navigation with error - \(error)")
                     startNavigationButton.isEnabled = true
                 }
-            )
-            .disposed(by: disposeBag)
+            }, receiveValue: { [unowned self] navigation in
+                debugPrint("navigation started - \(navigation)")
+                stopNavigationButton.isEnabled = true
+            })
+            .store(in: &cancellables)
     }
     
     @IBAction func stopNavigation() {

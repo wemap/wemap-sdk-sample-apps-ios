@@ -21,7 +21,7 @@
                             <tableViewSection headerTitle="Wemap AR SDK Samples" id="NS6-MU-spz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="FtX-3j-ILn" detailTextLabel="RPj-wV-DAb" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="9gf-oO-VdO">
-                                        <rect key="frame" x="0.0" y="50" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="127" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gf-oO-VdO" id="rvO-V6-Jkp">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -48,7 +48,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="CAG-aN-Daf" detailTextLabel="o3M-qi-JE8" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="HEg-Bf-M63">
-                                        <rect key="frame" x="0.0" y="141" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="218" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HEg-Bf-M63" id="gpl-8w-8SP">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -75,7 +75,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="IPW-we-eND" detailTextLabel="WgP-um-hIX" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="a6y-o5-uAd">
-                                        <rect key="frame" x="0.0" y="232" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="309" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6y-o5-uAd" id="rod-MO-CSX">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -354,7 +354,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1Ee-hU-inJ"/>
+        <segue reference="00Y-Kt-Bzq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="secondaryLabelColor">

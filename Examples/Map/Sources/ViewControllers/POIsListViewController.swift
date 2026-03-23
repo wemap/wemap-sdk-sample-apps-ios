@@ -6,8 +6,7 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
+import Combine
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -16,19 +15,35 @@ enum SortingType {
     case distance, time
 }
 
+enum Section {
+    case main
+}
+
 final class POIsListViewController: UITableViewController {
     
     unowned var poiManager: MapPointOfInterestManaging!
     
     var userCoordinate: Coordinate!
     var sortingType = SortingType.distance
-    
-    private let disposeBag = DisposeBag()
-    
+
+    private var cancellable: AnyCancellable?
+
     private lazy var poisWithInfo: [PointOfInterestWithInfo] = poiManager
         .getPOIs()
-        .map { PointOfInterestWithInfo($0, nil) }
-    
+        .map { .init(poi: $0, info: nil) }
+
+    private lazy var dataSource = UITableViewDiffableDataSource<Section, PointOfInterestWithInfo>(
+        tableView: tableView
+    ) { tableView, indexPath, poiWithInfo in
+        let poi = poiWithInfo.poi
+        let info = poiWithInfo.info
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = poi.name
+        cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\naddress - \(poi.address ?? "missing")\n"
+            + "distance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
+        return cell
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,21 +55,19 @@ final class POIsListViewController: UITableViewController {
             poiManager.sortPOIsByDuration(origin: userCoordinate)
         }
         
-        sort.asDriver(onErrorJustReturn: poisWithInfo)
-            .startWith(poisWithInfo)
-            .do(onNext: { [unowned self] in
+        cancellable = sort
+            .replaceError(with: poisWithInfo)
+            .prepend(poisWithInfo)
+            .handleEvents(receiveOutput: { [unowned self] in
                 poisWithInfo = $0
             })
-            .drive(tableView.rx.items) { tableView, _, poiWithInfo in
-                let poi = poiWithInfo.poi
-                let info = poiWithInfo.info
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-                cell.textLabel?.text = poi.name
-                cell.detailTextLabel?.text = "id - \(poi.id)\nlevel - \(poi.coordinate.levels.first ?? -1)\naddress - \(poi.address ?? "missing")\n"
-                    + "distance - \(info?.distance ?? .greatestFiniteMagnitude)\nduration - \(info?.duration ?? .greatestFiniteMagnitude)"
-                return cell
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
+                var snapshot = NSDiffableDataSourceSnapshot<Section, PointOfInterestWithInfo>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(items)
+                self?.dataSource.apply(snapshot, animatingDifferences: true)
             }
-            .disposed(by: disposeBag)
     }
     
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {

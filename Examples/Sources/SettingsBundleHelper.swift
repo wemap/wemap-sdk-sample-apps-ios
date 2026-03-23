@@ -1,6 +1,6 @@
 //
 //  SettingsBundleHelper.swift
-//  MapExample
+//  Examples
 //
 //  Created by Evgenii Khrushchev on 24/01/2023.
 //  Copyright © 2023 Wemap SAS. All rights reserved.
@@ -12,9 +12,7 @@ import WemapCoreSDK
 private enum GlobalPreferencesKey: String {
     case appVersion,
          buildNumber,
-         coreVersion,
-         alamofireVersion,
-         rxSwiftVersion
+         coreVersion
 }
 
 enum SettingsBundleHelper {
@@ -28,9 +26,7 @@ enum SettingsBundleHelper {
         let commonKeysAndValues: [GlobalPreferencesKey: Any] = [
             .appVersion: Bundle.main.version,
             .buildNumber: Bundle.main.build,
-            .coreVersion: Bundle.core.version,
-            .alamofireVersion: Bundle.alamofire.version,
-            .rxSwiftVersion: Bundle.rx.version
+            .coreVersion: Bundle.core.version
         ]
 
         let dict = Dictionary(uniqueKeysWithValues: commonKeysAndValues.map { ($0.rawValue, $1) })

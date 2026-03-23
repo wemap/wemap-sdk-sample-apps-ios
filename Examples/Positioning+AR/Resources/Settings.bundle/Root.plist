@@ -62,26 +62,6 @@
 			<key>DefaultValue</key>
 			<string>Unknown</string>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>Alamofire</string>
-			<key>Key</key>
-			<string>alamofireVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>RxSwift</string>
-			<key>Key</key>
-			<string>rxSwiftVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
 	</array>
 </dict>
 </plist>

@@ -6,12 +6,10 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
+import Combine
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
-import WemapPositioningSDKPolestar
 import WemapPositioningSDKVPSARKit
 
 final class InitialViewController: UIViewController {
@@ -19,51 +17,51 @@ final class InitialViewController: UIViewController {
     @IBOutlet var mapIDTextField: UITextField!
     @IBOutlet var sourcePicker: UIPickerView!
     @IBOutlet var loadMapButton: UIButton!
-    
-    private let disposeBag = DisposeBag()
-    
+
+    private let locationSourceTitles = LocationSourceType.allCases.map(\.name)
+
+    private var cancellables: Set<AnyCancellable> = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        sourcePicker.delegate = self
+        sourcePicker.dataSource = self
+
+        // Enable elapsed time prefix for testing
+        Logger.elapsedTimePrefixEnabled = true
 
         // uncomment if you want to use dev environment
 //        WemapCore.setEnvironment(.dev)
 //        WemapCore.setItinerariesEnvironment(.dev)
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+
         mapIDTextField.text = "\(Constants.mapID)"
-        
-        let locationSourceTitles = LocationSourceType.allCases.map(\.name)
-        
-        Driver
-            .of(locationSourceTitles)
-            .drive(sourcePicker.rx.itemTitles) { _, element in element }
-            .disposed(by: disposeBag)
     }
-    
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+
     @IBAction func showMap() {
-        
+
         let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
-        
+
         let isAvailable = switch locationSourceType {
         case .simulator: SimulatorLocationSource.isAvailable
-        case .polestar, .polestarEmulator: PolestarLocationSource.isAvailable
         case .vps: VPSARKitLocationSource.isAvailable
         case .systemDefault, .none: true
         }
-        
+
         guard isAvailable else {
             return showUnavailableAlert()
         }
-        
+
         loadMap()
     }
-    
+
     private func showUnavailableAlert(message: String = "Desired location source is unavailable on this device") {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(.init(title: "Cancel", style: .cancel))
@@ -79,18 +77,19 @@ final class InitialViewController: UIViewController {
 
         WemapMap.shared
             .getMapData(mapID: id, token: Constants.token)
-            .subscribe(onSuccess: {
-                self.showMap($0)
-            }, onFailure: { [unowned self] in
-                ToastHelper.showToast(message: "Failed to get style URL with error - \($0)", onView: view)
-            }, onDisposed: { [unowned self] in
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
+                    ToastHelper.showToast(message: "Failed to get style URL with error - \(error)", onView: view)
+                }
                 loadMapButton.isEnabled = true
+            }, receiveValue: {
+                self.showMap($0)
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
-    
+
     private func showMap(_ mapData: MapData) {
-        
+
         SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
 
         let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
@@ -115,5 +114,23 @@ final class InitialViewController: UIViewController {
         }
 
         show(vc, sender: nil)
+    }
+}
+
+extension InitialViewController: UIPickerViewDataSource {
+
+    func numberOfComponents(in _: UIPickerView) -> Int {
+        1
+    }
+
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
+        locationSourceTitles.count
+    }
+}
+
+extension InitialViewController: UIPickerViewDelegate {
+
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
+        locationSourceTitles[row]
     }
 }

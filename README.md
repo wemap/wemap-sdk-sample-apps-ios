@@ -4,34 +4,17 @@
 
 ## Requirements
 
-* Xcode 14+
-* Swift 5+
-* Gems - using Bundler and Gemfile or manually
-  * cocoapods
-  * cocoapods-s3-download
+* iOS 13 or newer
+* Xcode 26.0 or newer
+* Swift 5.9 or newer
 
 ## Installation
 
 * download repository
 
-* install necessary gems using Bundler and Gemfile or manually
+* open `Examples.xcodeproj`
 
-  ``` shell
-  bundle install
-  ```
-
-* run in console in project folder
-
-  ``` shell
-  AWS_ACCESS_KEY_ID=*** \
-  AWS_SECRET_ACCESS_KEY=*** \
-  AWS_REGION=*** \
-  bundle exec pod install --repo-update
-  ```
-
-* open `WemapExamples.xcworkspace`
-
-* modify `mapID`, `token` and optionally `polestarApiKey`, `vpsEndpoint` [here in Constants](./Examples/Sources/Constants.swift)
+* modify `mapID` and `token` [here in Constants](./Examples/Sources/Constants.swift)
 
 * build and run desired example app scheme
 

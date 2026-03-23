@@ -1,0 +1,33 @@
+{
+  "originHash" : "a1bb043d4b5076bffe04f4f2a22419142c1b63dfb177a0fbf18cec91017c21a0",
+  "pins" : [
+    {
+      "identity" : "maplibre-gl-native-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maplibre/maplibre-gl-native-distribution.git",
+      "state" : {
+        "revision" : "4cbd3f5f25583627006e60c5fcdaf5339813118c",
+        "version" : "6.23.0"
+      }
+    },
+    {
+      "identity" : "turf-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/turf-swift.git",
+      "state" : {
+        "revision" : "bf840e6b9529d105687840fe2c9dcd74197d46d1",
+        "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "wemap-sdk-ios-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wemap/wemap-sdk-ios-distribution",
+      "state" : {
+        "revision" : "868eb2fe24337f8c09602d8df5824be65643b1eb",
+        "version" : "0.28.0"
+      }
+    }
+  ],
+  "version" : 3
+}

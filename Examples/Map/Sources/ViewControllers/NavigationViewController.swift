@@ -7,61 +7,61 @@
 //
 
 import MapLibre
-import RxSwift
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
 
 final class NavigationViewController: MapViewController {
-    
+
     typealias Delay = UIConstants.Delay
     typealias Inset = UIConstants.Inset
-    
+
     @IBOutlet var startNavigationButton: UIButton!
     @IBOutlet var stopNavigationButton: UIButton!
     @IBOutlet var startNavigationFromUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var removeUserCreatedAnnotationsButton: UIButton!
     @IBOutlet var navigationInfo: UILabel!
     @IBOutlet var wheelchairSwitch: UISwitch!
-    
+
     private var userCreatedAnnotations: [MLNAnnotation] {
         map.annotations?
             .filter { $0.title == "user-created" } ?? []
     }
-    
+
     private var simulator: SimulatorLocationSource? {
         map.userLocationManager.locationSource as? SimulatorLocationSource
     }
-    
+
     private var navigationManager: MapNavigationManaging {
         map.navigationManager
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         createLongPressGestureRecognizer()
         updateUI()
     }
-    
+
     override func lateInit() {
         super.lateInit()
-        
+
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         map.itineraryManager
             .searchRuleNames(graphId: mapData.extras?.graphId ?? "")
-            .subscribe(onSuccess: {
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0 {
+                    Logger.e("Failed to get rule names with error - \(error)")
+                }
+            }, receiveValue: {
                 Logger.v("Available rule names - \($0)")
-            }, onFailure: {
-                Logger.e("Failed to get rule names with error - \($0)")
-            })
-            .disposed(by: disposeBag)
+            }).store(in: &cancellables)
 
         let message = """
             Create 1 or 2 annotations by long press on the map to be able to start navigation.
@@ -69,16 +69,16 @@ final class NavigationViewController: MapViewController {
         """
         ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
     }
-    
+
     @IBAction func closeTouched() {
         dismiss(animated: true)
     }
-    
+
     private func createLongPressGestureRecognizer() {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
         map.addGestureRecognizer(longPress)
     }
-    
+
     @objc private func longPressGesture(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .ended else {
             return
@@ -93,28 +93,28 @@ final class NavigationViewController: MapViewController {
         point.title = "user-created"
         point.subtitle = getCurrentLevel(for: coord)
         map.addAnnotation(point)
-        
+
         map.setCenter(coord, zoomLevel: 18, edgePadding: .init(top: 0, left: 0, bottom: 200, right: 0))
-        
+
         updateUI()
     }
-    
+
     private func getCurrentLevel(for coordinate: CLLocationCoordinate2D) -> String {
         guard let building = focusedBuilding else {
             debugPrint("Failed to retrieve focused building. Considering this annotation as outdoor")
             return String()
         }
-        
+
         return building.boundingBox.contains(coordinate) ? String(building.activeLevel.id) : String()
     }
-    
+
     @IBAction func startNavigationFromUserLocation() {
         let to = userCreatedAnnotations.first!
         let destination = Coordinate(coordinate2D: to.coordinate, level: Float(to.subtitle!!)!)
-        
+
         startNavigation(origin: nil, destination: destination)
     }
-    
+
     @IBAction func stopNavigation() {
         let result = navigationManager.stopNavigation()
         switch result {
@@ -126,26 +126,26 @@ final class NavigationViewController: MapViewController {
             ToastHelper.showToast(message: "Failed to stop navigation with error - \(error)", onView: view, hideDelay: Delay.long)
         }
     }
-    
+
     @IBAction func startNavigationFromUserCreatedAnnotations() {
-        
+
         let from = userCreatedAnnotations[0]
         let to = userCreatedAnnotations[1]
-        
+
         let fromLevels = getLevelFromAnnotation(from)
         let toLevels = getLevelFromAnnotation(to)
-        
+
         let origin = Coordinate(coordinate2D: from.coordinate, levels: fromLevels)
         let destination = Coordinate(coordinate2D: to.coordinate, levels: toLevels)
-        
+
         startNavigation(origin: origin, destination: destination)
     }
-    
+
     @IBAction func removeUserCreatedAnnotations() {
         map.removeAnnotations(userCreatedAnnotations)
         updateUI()
     }
-    
+
     private func startNavigation(origin: Coordinate?, destination: Coordinate) {
         disableStartButtons()
 
@@ -156,13 +156,8 @@ final class NavigationViewController: MapViewController {
                 origin: origin, destination: destination, options: globalNavigationOptions,
                 searchRules: rules, itineraryOptions: globalItineraryOptions
             )
-            .subscribe(
-                onSuccess: { [unowned self] navigation in
-                    simulator?.setItinerary(navigation.itinerary)
-                    stopNavigationButton.isEnabled = true
-                    map.userTrackingMode = .followWithHeading
-                },
-                onFailure: { [unowned self] error in
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
                     stopNavigationButton.isEnabled = false
                     updateUI()
                     ToastHelper.showToast(
@@ -170,20 +165,25 @@ final class NavigationViewController: MapViewController {
                         onView: view, hideDelay: Delay.long
                     )
                 }
-            ).disposed(by: disposeBag)
+            }, receiveValue: { [unowned self] navigation in
+                simulator?.setItinerary(navigation.itinerary)
+                stopNavigationButton.isEnabled = true
+                map.userTrackingMode = .followWithHeading
+            })
+            .store(in: &cancellables)
     }
-    
+
     private func updateUI() {
         startNavigationButton.isEnabled = userCreatedAnnotations.count == 1 && !stopNavigationButton.isEnabled
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = userCreatedAnnotations.count == 2 && !stopNavigationButton.isEnabled
         removeUserCreatedAnnotationsButton.isEnabled = !userCreatedAnnotations.isEmpty
     }
-    
+
     private func disableStartButtons() {
         startNavigationButton.isEnabled = false
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
     }
-    
+
     private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
         guard let subtitle = annotation.subtitle! else {
             return []
@@ -193,46 +193,46 @@ final class NavigationViewController: MapViewController {
 }
 
 extension NavigationViewController: PointOfInterestManagerDelegate {
-    
+
     func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
         ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short)
     }
 }
 
 extension NavigationViewController: NavigationManagerDelegate {
-    
+
     func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
         navigationInfo.isHidden = false
         let nextStep = info.nextStep?.getNavigationInstructions().instructions ?? "no"
         navigationInfo.text = info.shortDescription + "\nNext - \(nextStep)"
     }
-    
+
     func navigationManager(_: NavigationManager, didStartNavigation navigation: Navigation) {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
-        
+
         for step in navigation.itinerary.legs.flatMap(\.steps) {
             let instructions = step.getNavigationInstructions()
             debugPrint(instructions)
         }
     }
-    
+
     func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
         updateUI()
     }
-    
+
     func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
         ToastHelper.showToast(message: "Navigation manager didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
-    
+
     func navigationManager(_: NavigationManager, didFailWithError error: Error) {
         ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
     }
-    
+
     func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
         ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }

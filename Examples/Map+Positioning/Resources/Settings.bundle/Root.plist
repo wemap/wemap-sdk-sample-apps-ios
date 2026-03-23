@@ -46,26 +46,6 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>Alamofire</string>
-			<key>Key</key>
-			<string>alamofireVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>RxSwift</string>
-			<key>Key</key>
-			<string>rxSwiftVersion</string>
-			<key>DefaultValue</key>
-			<string>Unknown</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
 			<string>MapSDK</string>
 			<key>Key</key>
 			<string>mapVersion</string>
@@ -152,11 +132,11 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Stale state timeout in milliseconds</string>
+			<string>Stale state timeout in seconds</string>
 			<key>Key</key>
-			<string>staleTimeoutMilliseconds</string>
+			<string>staleStateTimeout</string>
 			<key>DefaultValue</key>
-			<string>5000</string>
+			<string>5</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
@@ -197,6 +177,66 @@
 			<string>None</string>
 			<key>AutocorrectionType</key>
 			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Background scan time interval</string>
+			<key>FooterText</key>
+			<string>Time interval in seconds after which a new background scan will be scheduled. Default is 30 seconds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Time interval</string>
+			<key>Key</key>
+			<string>backgroundScanTimeInterval</string>
+			<key>DefaultValue</key>
+			<string>30</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Degraded positioning distance threshold</string>
+			<key>FooterText</key>
+			<string>Distance traveled in meters at which the degraded positioning state will be triggered if the scan has not been performed. Default is 75 meters</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Distance threshold</string>
+			<key>Key</key>
+			<string>degradedDistanceThreshold</string>
+			<key>DefaultValue</key>
+			<string>75</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Not positioning distance threshold</string>
+			<key>FooterText</key>
+			<string>Distance traveled in meters at which the not positioning state will be triggered if the scan has not been performed. Default is 150 meters</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Distance threshold</string>
+			<key>Key</key>
+			<string>notPositioningDistanceThreshold</string>
+			<key>DefaultValue</key>
+			<string>150</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
 		</dict>
 		<dict>
 			<key>Type</key>

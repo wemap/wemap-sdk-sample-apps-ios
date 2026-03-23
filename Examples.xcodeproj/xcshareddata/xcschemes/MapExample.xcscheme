@@ -39,28 +39,6 @@
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D250C9EC28D3177000DBFF5D"
-               BuildableName = "ExamplesTests.xctest"
-               BlueprintName = "ExamplesTests"
-               ReferencedContainer = "container:Examples.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D250C9F628D3177000DBFF5D"
-               BuildableName = "ExamplesUITests.xctest"
-               BlueprintName = "ExamplesUITests"
-               ReferencedContainer = "container:Examples.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -6,9 +6,10 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
-import RxSwift
+import Combine
 import WemapCoreSDK
 import WemapGeoARSDK
+import UIKit
 
 class GeoARViewController: UIViewController, GeoARViewDelegate {
     
@@ -16,8 +17,8 @@ class GeoARViewController: UIViewController, GeoARViewDelegate {
         didSet { arView.mapData = mapData }
     }
     
-    let disposeBag = DisposeBag()
-    
+    var cancellables: Set<AnyCancellable> = []
+
     var arView: GeoARView {
         view as! GeoARView // swiftlint:disable:this force_cast
     }

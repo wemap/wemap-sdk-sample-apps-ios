@@ -173,7 +173,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="none"/>
                                 <connections>
-                                    <action selector="userTrackingModeButtonTouched" destination="nxR-az-56C" eventType="touchUpInside" id="HOh-AY-hll"/>
+                                    <action selector="userTrackingModeButtonTouched" destination="nxR-az-56C" eventType="touchUpInside" id="zvN-fX-JTi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -205,7 +205,7 @@
                         <outlet property="startNavigationButton" destination="YXv-ra-19v" id="sWA-H6-rZa"/>
                         <outlet property="startNavigationFromUserCreatedAnnotationsButton" destination="064-LV-oDD" id="BJ6-f3-Rgh"/>
                         <outlet property="stopNavigationButton" destination="dqj-uc-lln" id="7Ym-7E-bZS"/>
-                        <outlet property="userTrackingModeButton" destination="g9T-mX-MjI" id="w16-Ef-lAY"/>
+                        <outlet property="userTrackingModeButton" destination="g9T-mX-MjI" id="BgH-QQ-YXq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFx-Td-eEW" sceneMemberID="firstResponder"/>
@@ -457,7 +457,7 @@
                                                     <action selector="cameraButtonTouched" destination="PO8-Y8-e5O" eventType="touchUpInside" id="JNw-FM-SpW"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-Pu-Vyl">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-Pu-Vyl">
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="48" id="1ia-Yg-e1F"/>
@@ -585,7 +585,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.55294117647058827" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

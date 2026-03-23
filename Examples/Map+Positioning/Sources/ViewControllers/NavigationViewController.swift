@@ -8,7 +8,6 @@
 
 import ARKit
 import MapLibre
-import RxSwift
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -140,32 +139,8 @@ final class NavigationViewController: MapViewController {
         let fromLevels = getLevelFromAnnotation(from)
         let toLevels = getLevelFromAnnotation(to)
 
-        let origin, destination: Coordinate
-        if locationSourceType != .polestarEmulator {
-            origin = .init(coordinate2D: from.coordinate, levels: fromLevels)
-            destination = .init(coordinate2D: to.coordinate, levels: toLevels)
-        } else {
-            // for testing you can comment out and uncomment placemarks in nao.kml file and corresponding origin/destination below
-            // Default path
-//            origin = .init(coordinate2D: .init(latitude: 48.84487592, longitude: 2.37362684), level: -1)
-//            destination = .init(coordinate2D: .init(latitude: 48.84428454, longitude: 2.37390447), level: 0)
-
-            // Path at less than 3 meters from network
-            origin = .init(coordinate2D: .init(latitude: 48.84458308799957, longitude: 2.3731548097070134), level: 0)
-            destination = .init(coordinate2D: .init(latitude: 48.84511200990592, longitude: 2.3738383127780676), level: 0)
-
-            // Path at less than 3 meters from network and route recalculation
-//            origin = .init(coordinate2D: .init(latitude: 48.84458308799957, longitude: 2.3731548097070134), level: 0)
-//            destination = .init(coordinate2D: .init(latitude: 48.84511200990592, longitude: 2.3738383127780676), level: 0)
-
-            // Path from level -1 to 0 and route recalculation
-//            origin = .init(coordinate2D: .init(latitude: 48.84445563, longitude: 2.37319782), level: -1)
-//            destination = .init(coordinate2D: .init(latitude: 48.84502948, longitude: 2.37451864), level: 0)
-
-            // Path indoor to outdoor
-//            origin = .init(coordinate2D: .init(latitude: 48.84482873, longitude: 2.37378956), level: 0)
-//            destination = .init(coordinate2D: .init(latitude: 48.8455159, longitude: 2.37305333))
-        }
+        let origin = Coordinate(coordinate2D: from.coordinate, levels: fromLevels)
+        let destination = Coordinate(coordinate2D: to.coordinate, levels: toLevels)
 
         startNavigation(origin: origin, destination: destination)
     }
@@ -184,14 +159,15 @@ final class NavigationViewController: MapViewController {
         var nextModeRaw = map.userTrackingMode.rawValue + 1
         nextModeRaw = nextModeRaw < 3 ? nextModeRaw : 0
 
-        map.setUserTrackingMode(.init(rawValue: nextModeRaw)!, animated: true, completionHandler: nil)
+        map.userTrackingMode = MLNUserTrackingMode(rawValue: nextModeRaw)!
 
-        let title = switch map.userTrackingMode {
-        case .none: "no tracking"
+        let title: String = switch map.userTrackingMode {
+        case .none: "none"
         case .follow: "follow"
         case .followWithHeading: "heading"
         default: fatalError()
         }
+
         userTrackingModeButton.setTitle(title, for: .normal)
     }
 
@@ -200,18 +176,16 @@ final class NavigationViewController: MapViewController {
 
         navigationManager
             .startNavigation(origin: origin, destination: destination)
-            .subscribe(
-                onSuccess: { [unowned self] navigation in
-                    simulator?.setItinerary(navigation.itinerary)
-                    stopNavigationButton.isEnabled = true
-                },
-                onFailure: { [unowned self] error in
-                    ToastHelper.showToast(
-                        message: "Failed to start navigation from user position to - \(destination) with error - \(error)",
-                        onView: view, hideDelay: Delay.long
-                    )
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
+                    let text = "Failed to start navigation from user position to - \(destination) with error - \(error)"
+                    ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.long)
                 }
-            ).disposed(by: disposeBag)
+            }, receiveValue: { [unowned self] navigation in
+                simulator?.setItinerary(navigation.itinerary)
+                stopNavigationButton.isEnabled = true
+            })
+            .store(in: &cancellables)
     }
 
     private func updateUI() {

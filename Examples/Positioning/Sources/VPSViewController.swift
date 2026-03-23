@@ -1,13 +1,13 @@
 //
 //  VPSViewController.swift
-//  Examples
+//  PosExample
 //
 //  Created by Evgenii Khrushchev on 15/09/2022.
 //  Copyright © 2022 Wemap SAS. All rights reserved.
 //
 
+import Combine
 import RealityKit
-import RxSwift
 import UIKit
 import WemapCoreSDK
 import WemapPositioningSDKVPSARKit
@@ -37,8 +37,8 @@ final class VPSViewController: UIViewController {
     private weak var currentToast: UIView?
     private var rescanRequested = false
     
-    private let disposeBag = DisposeBag()
-    
+    private var cancellable: AnyCancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -141,15 +141,16 @@ final class VPSViewController: UIViewController {
         let origin = Coordinate(latitude: 48.88007462, longitude: 2.35591097, level: 0)
         let destination = Coordinate(latitude: 48.88141308, longitude: 2.35747255, level: -2)
         
-        ServiceFactory
+        cancellable = ServiceFactory
             .getItineraryProvider()
             .itineraries(origin: origin, destination: destination, mapId: mapData!.id)
-            .subscribe(onSuccess: { itineraries in
+            .sink(receiveCompletion: {
+                if case let .failure(error) = $0 {
+                    debugPrint("Failed to calculate itineraries with error: \(error)")
+                }
+            }, receiveValue: { itineraries in
                 self.vpsLocationSource.itinerary = itineraries.first
-            }, onFailure: { error in
-                debugPrint("Failed to calculate itineraries with error: \(error)")
             })
-            .disposed(by: disposeBag)
     }
     
     private func hardcodedItinerary() -> Itinerary {

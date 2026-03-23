@@ -6,8 +6,8 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
+import Combine
 import MapLibre
-import RxSwift
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -30,7 +30,7 @@ final class POIsViewController: MapViewController {
     
     private var hiddenPOI: PointOfInterest?
     private var simulatedUserPosition: MLNAnnotation?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createLongPressGestureRecognizer()
@@ -41,26 +41,24 @@ final class POIsViewController: MapViewController {
         
         pointOfInterestManager.delegate = self
         
-        userSelectionSwitch.rx.isOn
-            .subscribe(onNext: { [unowned self] isOn in
-                pointOfInterestManager.isUserSelectionEnabled = isOn
-            })
-            .disposed(by: disposeBag)
-        
         map.userLocationManager
-            .rx.coordinate
-            .take(1)
-            .subscribe(onNext: { [unowned self] in
+            .coordinatePublisher
+            .prefix(1)
+            .sink { [unowned self] in
                 enableSortButtons()
                 navigationInfoLabel.text = $0.shortDescription
-            })
-            .disposed(by: disposeBag)
+            }
+            .store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let text = "If you use simulator, long tap at any place on the map to simulate user location. After you'll be able to sort POIs by time/distance"
         ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.short)
+    }
+
+    @IBAction func userSelectionSwitchToggle() {
+        pointOfInterestManager.isUserSelectionEnabled = userSelectionSwitch.isOn
     }
     
     @IBAction func closeTouched() {

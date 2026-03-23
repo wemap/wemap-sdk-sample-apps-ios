@@ -6,30 +6,37 @@
 //  Copyright © 2025 Wemap SAS. All rights reserved.
 //
 
-import RxSwift
+import Combine
+import UIKit
 
 enum AlertFactory {
     
     static func presentSimpleAlert(
         message: String, errorMessage: String,
         positiveText: String = "Ok", negativeText: String = "Cancel", on vc: UIViewController
-    ) -> Single<Void> {
-        .create(subscribe: { observer in
+    ) -> AnyPublisher<Void, Error> {
+        Deferred {
+            let subject = PassthroughSubject<Void, Error>()
+
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             let okAction = UIAlertAction(title: positiveText, style: .default) { _ in
-                observer(.success(()))
+                subject.send(())
+                subject.send(completion: .finished)
             }
             let cancelAction = UIAlertAction(title: negativeText, style: .cancel) { _ in
-                observer(.failure(NSError(domain: errorMessage, code: 0)))
+                subject.send(completion: .failure(NSError(domain: errorMessage, code: 0)))
             }
             for action in [okAction, cancelAction] {
                 alert.addAction(action)
             }
             vc.present(alert, animated: true)
-            return Disposables.create { [weak alert] in
-                alert?.dismiss(animated: true)
-            }
-        })
+
+            return subject
+                .handleEvents(receiveCancel: { [weak alert] in
+                    alert?.dismiss(animated: true)
+                })
+        }
+        .eraseToAnyPublisher()
     }
 
     static func presentInfoAlert(message: String, buttonText: String = "Ok", on vc: UIViewController) {

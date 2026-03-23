@@ -2,7 +2,52 @@
 
 ---
 
-## [0.27.0]
+## [0.28.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.0)
+
+### Breaking changes
+
+* SDKs: due to RxSwift -> Combine migration all the RxSwift types were replaced by Combine alternatives
+* Pos(VPS)
+  * Removed deprecated `VPSARKitLocationSource.checkVPSAvailability`. Use `VPSARKitLocationSource.isVPSAvailable` instead.
+
+### Added
+
+* SDKs: Add support for SPM
+* Core: Return POI.externalData as generic data
+
+### Changed
+
+* All: replace RxSwift by Combine
+
+### Fixed
+
+* SDKs: show/hide POIs works unstable
+* Core(Offline): very long execution of sortPOIs by time or distance method
+
+### Removed
+
+* SDKs: remove Alamofire
+* Map: remove Zip dependency
+* SDKs: remove PositioningSDK(Polestar)
+
+### Dependencies
+
+* Core
+  * Removed Alamofire
+  * Removed RxSwift
+  * Removed RxCocoa
+  * Removed RxRelay
+* Map
+  * Removed Zip
+* Removed Pos(Polestar)
+  * Removed NAOSDKFramework
+
+### Compatibility
+
+* Xcode 26.3
+* Swift 6.2.4 (effective 5.10)
+
+## [0.27.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.27.0)
 
 ### Breaking changes
 
@@ -63,7 +108,7 @@
 * Xcode 26.2
 * Swift 6.2.3 (effective 5.10)
 
-## [0.26.4]
+## [0.26.4](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.26.4)
 
 ### Added
 
@@ -74,7 +119,7 @@
 * Xcode 26.2
 * Swift 6.2.3 (effective 5.10)
 
-## [0.26.3]
+## [0.26.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.26.3)
 
 ### Added
 
@@ -86,7 +131,7 @@
 * Xcode 26.1.1
 * Swift 6.2.1 (effective 5.10)
 
-## [0.26.0]
+## [0.26.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.26.0)
 
 ### Breaking changes
 
@@ -125,7 +170,7 @@
 * Xcode 26.0.1
 * Swift 6.2 (effective 5.10)
 
-## [0.25.0]
+## [0.25.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.25.0)
 
 ### Added
 
@@ -136,7 +181,7 @@
 * Xcode 16.4
 * Swift 6.1.2 (effective 5.10)
 
-## [0.24.2]
+## [0.24.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.24.2)
 
 ### Behavioral changes
 
@@ -156,7 +201,7 @@
 * Xcode 16.4
 * Swift 6.1.2 (effective 5.10)
 
-## [0.24.1]
+## [0.24.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.24.1)
 
 ### Fixed
 
@@ -174,7 +219,7 @@
 * Xcode 16.4
 * Swift 6.1.2 (effective 5.10)
 
-## [0.24.0]
+## [0.24.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.24.0)
 
 ### Added
 
@@ -192,7 +237,7 @@
 * Xcode 16.4
 * Swift 6.1.2 (effective 5.10)
 
-## [0.23.0]
+## [0.23.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.23.0)
 
 ### Added
 
@@ -222,14 +267,14 @@
 * Xcode 16.3
 * Swift 6.1 (effective 5.10)
 
-## [0.22.4]
+## [0.22.4](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.22.4)
 
 ### Compatibility
 
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.22.3]
+## [0.22.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.22.3)
 
 ### Fixed
 
@@ -240,7 +285,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.22.2]
+## [0.22.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.22.2)
 
 ### Changed
 
@@ -265,7 +310,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.22.0]
+## [0.22.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.22.0)
 
 ### Added
 
@@ -282,7 +327,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.21.0]
+## [0.21.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.21.0)
 
 ### Added
 
@@ -309,7 +354,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.20.3]
+## [0.20.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.20.3)
 
 ### Fixed
 
@@ -327,7 +372,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.20.2]
+## [0.20.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.20.2)
 
 ### Changed
 
@@ -350,7 +395,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.20.1]
+## [0.20.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.20.1)
 
 ### Fixed
 
@@ -372,7 +417,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.20.0]
+## [0.20.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.20.0)
 
 ### Added
 
@@ -398,7 +443,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.19.2]
+## [0.19.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.19.2)
 
 ### Added
 
@@ -423,7 +468,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.19.1]
+## [0.19.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.19.1)
 
 ### Added
 
@@ -444,7 +489,7 @@
 * Xcode 16.2
 * Swift 6 (effective 5.10)
 
-## [0.19.0]
+## [0.19.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.19.0)
 
 ### Breaking changes
 
@@ -473,7 +518,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.18.2]
+## [0.18.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.18.2)
 
 ### Fixed
 
@@ -492,7 +537,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.18.1]
+## [0.18.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.18.1)
 
 ### Fixed
 
@@ -508,7 +553,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.18.0]
+## [0.18.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.18.0)
 
 ### Breaking changes
 
@@ -617,7 +662,7 @@
 * Xcode 16.0
 * Swift 6 (effective 5.10)
 
-## [0.17.0]
+## [0.17.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.17.0)
 
 ### Breaking changes
 
@@ -647,7 +692,7 @@
 * Xcode 15.4
 * Swift 5.10
 
-## [0.16.1]
+## [0.16.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.16.1)
 
 ### Fixed
 
@@ -658,7 +703,7 @@
 * Xcode 15.4
 * Swift 5.10
 
-## [0.16.0]
+## [0.16.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.16.0)
 
 ### Breaking changes
 
@@ -679,7 +724,7 @@
 * Xcode 15.4
 * Swift 5.10
 
-## [0.15.9]
+## [0.15.9](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.9)
 
 ### Fixed
 
@@ -695,7 +740,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.15.8]
+## [0.15.8](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.8)
 
 ### Added
 
@@ -711,7 +756,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.15.7]
+## [0.15.7](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.7)
 
 ### Fixed
 
@@ -722,7 +767,7 @@
 * Xcode 16.1
 * Swift 6 (effective 5.10)
 
-## [0.15.6]
+## [0.15.6](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.6)
 
 ### Fixed
 
@@ -734,7 +779,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.5]
+## [0.15.5](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.5)
 
 ### Fixed
 
@@ -745,7 +790,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.4]
+## [0.15.4](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.4)
 
 ### Fixed
 
@@ -757,7 +802,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.3]
+## [0.15.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.3)
 
 ### Fixed
 
@@ -768,7 +813,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.2]
+## [0.15.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.2)
 
 ### Fixed
 
@@ -784,7 +829,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.1]
+## [0.15.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.1)
 
 ### Fixed
 
@@ -803,7 +848,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.15.0]
+## [0.15.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.15.0)
 
 ### Breaking changes
 
@@ -836,13 +881,13 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.14.4]
+## [0.14.4](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.14.4)
 
 ### Fixed
 
 * CoreSDK: handle sorting by graph distance/duration error
 
-## [0.14.3]
+## [0.14.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.14.3)
 
 ### Fixed
 
@@ -857,7 +902,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.14.2]
+## [0.14.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.14.2)
 
 ### Fixed
 
@@ -868,7 +913,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.14.1]
+## [0.14.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.14.1)
 
 ### Fixed
 
@@ -879,7 +924,7 @@
 * Xcode 15.3
 * Swift 5.10
 
-## [0.14.0]
+## [0.14.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.14.0)
 
 ### Breaking changes
 
@@ -903,7 +948,7 @@
 * Xcode 15.2
 * Swift 5.9
 
-## [0.13.0]
+## [0.13.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.13.0)
 
 ### Breaking changes
 
@@ -966,7 +1011,7 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * MapLibre 5.13.0 -> 6.1.1
 * NAOSwiftProvider 1.2.2 -> 1.3.0
 
-## [0.12.0]
+## [0.12.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.12.0)
 
 ### Breaking changes
 
@@ -1008,7 +1053,7 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * Turf 2.7.0 -> 2.8.0
 * NAOSDK 4.11.13.1 -> 4.11.14
 
-## [0.11.0]
+## [0.11.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.11.0)
 
 ### Breaking changes
 
@@ -1034,7 +1079,7 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * PosSDK: "Scan Required" state of VPSARKit location source is never reached
 * PosSDK: VPS orientation is wrong
 
-## [0.10.0]
+## [0.10.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.10.0)
 
 ### Added
 
@@ -1051,7 +1096,7 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 
 * Alamofire 5.8.0 -> 5.8.1
 
-## [0.9.0]
+## [0.9.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.9.0)
 
 ### Added
 
@@ -1081,7 +1126,7 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * Alamofire 5.7.1 -> 5.8.0
 * RxSwift 6.5.0 -> 6.6.0
 
-## [0.8.0]
+## [0.8.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.8.0)
 
 ### Breaking changes
 
@@ -1118,13 +1163,13 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 * MapSDK: Navigation info is wrong when itinerary contains indoor and outdoor parts
 * MapSDK: click on the PoI symbol (shape) does not select the PoI
 
-## [0.7.2]
+## [0.7.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.7.2)
 
 ### Fixed
 
 * CoreSDK: fix pointOfInterestManager.getPOIs()
 
-## [0.7.1]
+## [0.7.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.7.1)
 
 ### Fixed
 

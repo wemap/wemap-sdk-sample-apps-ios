@@ -7,10 +7,10 @@
 //
 
 import CoreLocation
-import RxSwift
 import WemapCoreSDK
 import WemapGeoARSDK
 import WemapPositioningSDKGPS
+import UIKit
 
 final class GenericLSViewController: GeoARViewController {
 
@@ -46,15 +46,15 @@ final class GenericLSViewController: GeoARViewController {
         if let simulator {
             simulator.setCoordinates([Coordinate(coordinate2D: mapData.center)], sample: false)
         } else {
-            toast = ToastHelper.showToast(message: "Searching for you location...", onView: view, hideDelay: .greatestFiniteMagnitude)
+            toast = ToastHelper.showToast(message: "Searching for you location...", onView: view, hideDelay: .infinity)
             locationManager
-                .rx.coordinate
-                .take(1)
-                .subscribe(onNext: { [unowned self] _ in
+                .coordinatePublisher
+                .prefix(1)
+                .sink { [unowned self] _ in
                     toast?.removeFromSuperview()
                     toast = nil
-                })
-                .disposed(by: disposeBag)
+                }
+                .store(in: &cancellables)
         }
     }
     
@@ -69,17 +69,16 @@ final class GenericLSViewController: GeoARViewController {
         
         navigationManager
             .startNavigation(destination: selectedPOI.coordinate)
-            .subscribe(
-                onSuccess: { [unowned self] navigation in
-                    simulator?.setItinerary(navigation.itinerary)
-                    updateNavButtons()
-                },
-                onFailure: { [unowned self] in
-                    ToastHelper.showToast(message: "Failed to start navigation with error - \($0)", onView: view)
+            .sink(receiveCompletion: { [unowned self] in
+                if case let .failure(error) = $0 {
+                    ToastHelper.showToast(message: "Failed to start navigation with error - \(error)", onView: view)
                     updateNavButtons()
                 }
-            )
-            .disposed(by: disposeBag)
+            }, receiveValue: { [unowned self] navigation in
+                simulator?.setItinerary(navigation.itinerary)
+                updateNavButtons()
+            })
+            .store(in: &cancellables)
     }
     
     @IBAction func stopNavigation() {

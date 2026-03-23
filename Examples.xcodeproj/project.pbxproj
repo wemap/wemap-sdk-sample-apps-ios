@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03A5C356E77E2B3C4863B6AA /* Pods_MapExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D92F8C1B347D9BDEF0B06 /* Pods_MapExample.framework */; };
-		2F448A61717267D65A800D80 /* Pods_PositioningExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A91FAE0B601BB599DFBCB2 /* Pods_PositioningExample.framework */; };
-		40E1E0F7557D138A31C627B9 /* Pods_Positioning_ARExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205F6496828A9C7D98B1C94 /* Pods_Positioning_ARExample.framework */; };
-		73E53E342B751AD43B05D06E /* Pods_Map_PositioningExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4215F99124276AA498DFA2C5 /* Pods_Map_PositioningExample.framework */; };
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
-		D217CAFF2CFF3C7B008F0A53 /* nao.kml in Resources */ = {isa = PBXBuildFile; fileRef = D217CAFE2CFF3C7B008F0A53 /* nao.kml */; };
 		D21B0EBE2E0594360006044F /* VPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EBD2E0594250006044F /* VPSViewController.swift */; };
 		D21B0EC02E05956D0006044F /* VerticalSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */; };
 		D21B0EC22E05956D0006044F /* VerticalSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */; };
@@ -86,6 +81,13 @@
 		D2D865002DDB896D005D1704 /* SamplesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D864FF2DDB8963005D1704 /* SamplesTableViewController.swift */; };
 		D2D90E962B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
 		D2D90E972B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
+		D2E69B522F713DD300FB6758 /* WemapGeoARSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B512F713DD300FB6758 /* WemapGeoARSDK */; };
+		D2E69B542F713DD300FB6758 /* WemapMapSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B532F713DD300FB6758 /* WemapMapSDK */; };
+		D2E69B562F713DD300FB6758 /* WemapPositioningSDKGPS in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B552F713DD300FB6758 /* WemapPositioningSDKGPS */; };
+		D2E69B582F713DD300FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B572F713DD300FB6758 /* WemapPositioningSDKVPSARKit */; };
+		D2E69B5A2F713E0300FB6758 /* WemapMapSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B592F713E0300FB6758 /* WemapMapSDK */; };
+		D2E69B5C2F713E0300FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B5B2F713E0300FB6758 /* WemapPositioningSDKVPSARKit */; };
+		D2E69B5E2F713E2C00FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2E69B5D2F713E2C00FB6758 /* WemapPositioningSDKVPSARKit */; };
 		D2F8E1712C46C2220063C9A7 /* GlobalItineraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8E1702C46C2220063C9A7 /* GlobalItineraryOptions.swift */; };
 		D2F8E1722C46C2220063C9A7 /* GlobalItineraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8E1702C46C2220063C9A7 /* GlobalItineraryOptions.swift */; };
 		D2FD569A29801EBB003F508D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2FD569929801EBB003F508D /* Settings.bundle */; };
@@ -101,17 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03D5B1AA09CEDC7464C0F52F /* Pods-PositioningExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositioningExample.release.xcconfig"; path = "Target Support Files/Pods-PositioningExample/Pods-PositioningExample.release.xcconfig"; sourceTree = "<group>"; };
-		2205F6496828A9C7D98B1C94 /* Pods_Positioning_ARExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Positioning_ARExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		41A91FAE0B601BB599DFBCB2 /* Pods_PositioningExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PositioningExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4215F99124276AA498DFA2C5 /* Pods_Map_PositioningExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_PositioningExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7060E9ACB27909630A3CB68E /* Pods-Map+PositioningExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map+PositioningExample.release.xcconfig"; path = "Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample.release.xcconfig"; sourceTree = "<group>"; };
-		7A1D92F8C1B347D9BDEF0B06 /* Pods_MapExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B8784E80106439FBFCB48D8 /* Pods-Positioning+ARExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Positioning+ARExample.debug.xcconfig"; path = "Target Support Files/Pods-Positioning+ARExample/Pods-Positioning+ARExample.debug.xcconfig"; sourceTree = "<group>"; };
-		C6ED0D56142AA8FA7211FE04 /* Pods-MapExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExample.release.xcconfig"; path = "Target Support Files/Pods-MapExample/Pods-MapExample.release.xcconfig"; sourceTree = "<group>"; };
-		C8D0613C308FF0767CDB0BEF /* Pods-Positioning+ARExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Positioning+ARExample.release.xcconfig"; path = "Target Support Files/Pods-Positioning+ARExample/Pods-Positioning+ARExample.release.xcconfig"; sourceTree = "<group>"; };
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D217CAFE2CFF3C7B008F0A53 /* nao.kml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = nao.kml; sourceTree = "<group>"; };
 		D21B0EBD2E0594250006044F /* VPSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPSViewController.swift; sourceTree = "<group>"; };
 		D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSegmentedControl.swift; sourceTree = "<group>"; };
 		D21B0EC52E05A2100006044F /* LevelSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSwitch.swift; sourceTree = "<group>"; };
@@ -164,6 +156,8 @@
 		D2DFCB832D146FA900ACC6AF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D2DFCB842D146FBE00ACC6AF /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D2DFCB852D146FCE00ACC6AF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D2E69B5F2F713EE600FB6758 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		D2E69B602F713EE600FB6758 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D2F8E1702C46C2220063C9A7 /* GlobalItineraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalItineraryOptions.swift; sourceTree = "<group>"; };
 		D2FD569929801EBB003F508D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D2FD569B29801ECE003F508D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -175,9 +169,6 @@
 		D2FD56BF298048F1003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FD56C1298049CF003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FECD5329D32EA80071F999 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		DAB18412BBEC1BD5A2637853 /* Pods-PositioningExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositioningExample.debug.xcconfig"; path = "Target Support Files/Pods-PositioningExample/Pods-PositioningExample.debug.xcconfig"; sourceTree = "<group>"; };
-		F274E20A8CE6C3C173454446 /* Pods-Map+PositioningExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map+PositioningExample.debug.xcconfig"; path = "Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample.debug.xcconfig"; sourceTree = "<group>"; };
-		FD5B7CC2BF4F8B18297CC9CF /* Pods-MapExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExample.debug.xcconfig"; path = "Target Support Files/Pods-MapExample/Pods-MapExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03A5C356E77E2B3C4863B6AA /* Pods_MapExample.framework in Frameworks */,
+				D2E69B542F713DD300FB6758 /* WemapMapSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73E53E342B751AD43B05D06E /* Pods_Map_PositioningExample.framework in Frameworks */,
+				D2E69B5C2F713E0300FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */,
+				D2E69B5A2F713E0300FB6758 /* WemapMapSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F448A61717267D65A800D80 /* Pods_PositioningExample.framework in Frameworks */,
+				D2E69B5E2F713E2C00FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,28 +201,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E1E0F7557D138A31C627B9 /* Pods_Positioning_ARExample.framework in Frameworks */,
+				D2E69B582F713DD300FB6758 /* WemapPositioningSDKVPSARKit in Frameworks */,
+				D2E69B522F713DD300FB6758 /* WemapGeoARSDK in Frameworks */,
+				D2E69B562F713DD300FB6758 /* WemapPositioningSDKGPS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A39A9A66980694E4AE7EBE3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F274E20A8CE6C3C173454446 /* Pods-Map+PositioningExample.debug.xcconfig */,
-				7060E9ACB27909630A3CB68E /* Pods-Map+PositioningExample.release.xcconfig */,
-				FD5B7CC2BF4F8B18297CC9CF /* Pods-MapExample.debug.xcconfig */,
-				C6ED0D56142AA8FA7211FE04 /* Pods-MapExample.release.xcconfig */,
-				7B8784E80106439FBFCB48D8 /* Pods-Positioning+ARExample.debug.xcconfig */,
-				C8D0613C308FF0767CDB0BEF /* Pods-Positioning+ARExample.release.xcconfig */,
-				DAB18412BBEC1BD5A2637853 /* Pods-PositioningExample.debug.xcconfig */,
-				03D5B1AA09CEDC7464C0F52F /* Pods-PositioningExample.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		D2315E792C07185200BAF1CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,10 +224,11 @@
 		D250C9CE28D3176F00DBFF5D = {
 			isa = PBXGroup;
 			children = (
+				D2E69B5F2F713EE600FB6758 /* CHANGELOG.md */,
+				D2E69B602F713EE600FB6758 /* README.md */,
 				D250C9D928D3176F00DBFF5D /* Examples */,
-				D250CA8F28D35BDB00DBFF5D /* Frameworks */,
 				D250C9D828D3176F00DBFF5D /* Products */,
-				5A39A9A66980694E4AE7EBE3 /* Pods */,
+				D2DDACC52F6D5A6000DE7AE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -323,17 +303,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D250CA8F28D35BDB00DBFF5D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				41A91FAE0B601BB599DFBCB2 /* Pods_PositioningExample.framework */,
-				2205F6496828A9C7D98B1C94 /* Pods_Positioning_ARExample.framework */,
-				4215F99124276AA498DFA2C5 /* Pods_Map_PositioningExample.framework */,
-				7A1D92F8C1B347D9BDEF0B06 /* Pods_MapExample.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		D25992DD2C359D5E0041F9FE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +357,6 @@
 			isa = PBXGroup;
 			children = (
 				D2FD569B29801ECE003F508D /* Settings.bundle */,
-				D217CAFE2CFF3C7B008F0A53 /* nao.kml */,
 				D2A6254128F6AB0000274721 /* Assets.xcassets */,
 				D2A6254228F6AB0000274721 /* Main.storyboard */,
 			);
@@ -438,6 +406,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		D2DDACC52F6D5A6000DE7AE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2FD569D29801EDA003F508D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,11 +450,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D250CA0128D3177000DBFF5D /* Build configuration list for PBXNativeTarget "MapExample" */;
 			buildPhases = (
-				CF08D79DDD138043AEBCFCF2 /* [CP] Check Pods Manifest.lock */,
 				D250C9D328D3176F00DBFF5D /* Sources */,
 				D250C9D428D3176F00DBFF5D /* Frameworks */,
 				D250C9D528D3176F00DBFF5D /* Resources */,
-				F208A40B331C486E97836D23 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -494,11 +467,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D250CA4128D31EF100DBFF5D /* Build configuration list for PBXNativeTarget "Map+PositioningExample" */;
 			buildPhases = (
-				22997362107AB82C315BAFC3 /* [CP] Check Pods Manifest.lock */,
 				D250CA3028D31EF100DBFF5D /* Sources */,
 				D250CA3B28D31EF100DBFF5D /* Frameworks */,
 				D250CA3C28D31EF100DBFF5D /* Resources */,
-				C2777639205216A8EC9EA3E9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -513,11 +484,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D250CA6D28D31EF700DBFF5D /* Build configuration list for PBXNativeTarget "PositioningExample" */;
 			buildPhases = (
-				1F34B292D3D1961A0493CE8B /* [CP] Check Pods Manifest.lock */,
 				D250CA5C28D31EF700DBFF5D /* Sources */,
 				D250CA6728D31EF700DBFF5D /* Frameworks */,
 				D250CA6828D31EF700DBFF5D /* Resources */,
-				C573346A5577B809F40CF787 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -532,11 +501,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D250CA8328D31EFD00DBFF5D /* Build configuration list for PBXNativeTarget "Positioning+ARExample" */;
 			buildPhases = (
-				E0DF7D76DD59E104719C14F2 /* [CP] Check Pods Manifest.lock */,
 				D250CA7228D31EFD00DBFF5D /* Sources */,
 				D250CA7D28D31EFD00DBFF5D /* Frameworks */,
 				D250CA7E28D31EFD00DBFF5D /* Resources */,
-				5C3C99BB3CAB545C23C3E656 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -579,6 +546,9 @@
 				es,
 			);
 			mainGroup = D250C9CE28D3176F00DBFF5D;
+			packageReferences = (
+				D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */,
+			);
 			productRefGroup = D250C9D828D3176F00DBFF5D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -612,7 +582,6 @@
 				D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */,
 				D2A6254428F6AB0000274721 /* Assets.xcassets in Resources */,
 				D2FD569C29801ECE003F508D /* Settings.bundle in Resources */,
-				D217CAFF2CFF3C7B008F0A53 /* nao.kml in Resources */,
 				D250CA4028D31EF100DBFF5D /* LaunchScreen.storyboard in Resources */,
 				D2A6254528F6AB0000274721 /* Main.storyboard in Resources */,
 				D22612AC2DCDF0890053B250 /* geoJsonItinerary.json in Resources */,
@@ -645,165 +614,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1F34B292D3D1961A0493CE8B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PositioningExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		22997362107AB82C315BAFC3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Map+PositioningExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C3C99BB3CAB545C23C3E656 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Positioning+ARExample/Pods-Positioning+ARExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Positioning+ARExample/Pods-Positioning+ARExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Positioning+ARExample/Pods-Positioning+ARExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2777639205216A8EC9EA3E9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map+PositioningExample/Pods-Map+PositioningExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C573346A5577B809F40CF787 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PositioningExample/Pods-PositioningExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PositioningExample/Pods-PositioningExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PositioningExample/Pods-PositioningExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CF08D79DDD138043AEBCFCF2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MapExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E0DF7D76DD59E104719C14F2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Positioning+ARExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F208A40B331C486E97836D23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapExample/Pods-MapExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D250C9D328D3176F00DBFF5D /* Sources */ = {
@@ -1004,7 +814,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.27.0;
+				MARKETING_VERSION = 0.28.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1063,7 +873,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.27.0;
+				MARKETING_VERSION = 0.28.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1076,7 +886,6 @@
 		};
 		D250CA0228D3177000DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD5B7CC2BF4F8B18297CC9CF /* Pods-MapExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1106,7 +915,6 @@
 		};
 		D250CA0328D3177000DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6ED0D56142AA8FA7211FE04 /* Pods-MapExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1138,7 +946,6 @@
 		};
 		D250CA4228D31EF100DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F274E20A8CE6C3C173454446 /* Pods-Map+PositioningExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1169,7 +976,6 @@
 		};
 		D250CA4328D31EF100DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7060E9ACB27909630A3CB68E /* Pods-Map+PositioningExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1202,7 +1008,6 @@
 		};
 		D250CA6E28D31EF700DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAB18412BBEC1BD5A2637853 /* Pods-PositioningExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1232,7 +1037,6 @@
 		};
 		D250CA6F28D31EF700DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03D5B1AA09CEDC7464C0F52F /* Pods-PositioningExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1264,7 +1068,6 @@
 		};
 		D250CA8428D31EFD00DBFF5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B8784E80106439FBFCB48D8 /* Pods-Positioning+ARExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1293,7 +1096,6 @@
 		};
 		D250CA8528D31EFD00DBFF5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C8D0613C308FF0767CDB0BEF /* Pods-Positioning+ARExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1371,6 +1173,55 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wemap/wemap-sdk-ios-distribution";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.28.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D2E69B512F713DD300FB6758 /* WemapGeoARSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapGeoARSDK;
+		};
+		D2E69B532F713DD300FB6758 /* WemapMapSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapMapSDK;
+		};
+		D2E69B552F713DD300FB6758 /* WemapPositioningSDKGPS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapPositioningSDKGPS;
+		};
+		D2E69B572F713DD300FB6758 /* WemapPositioningSDKVPSARKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapPositioningSDKVPSARKit;
+		};
+		D2E69B592F713E0300FB6758 /* WemapMapSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapMapSDK;
+		};
+		D2E69B5B2F713E0300FB6758 /* WemapPositioningSDKVPSARKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapPositioningSDKVPSARKit;
+		};
+		D2E69B5D2F713E2C00FB6758 /* WemapPositioningSDKVPSARKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E69B502F713DD300FB6758 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
+			productName = WemapPositioningSDKVPSARKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D250C9CF28D3176F00DBFF5D /* Project object */;
 }
