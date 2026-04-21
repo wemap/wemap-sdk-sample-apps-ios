@@ -6,7 +6,7 @@
 
 * iOS 13 or newer
 * Xcode 26.0 or newer
-* Swift 5.9 or newer
+* Swift 5.10 or newer
 
 ## Installation
 

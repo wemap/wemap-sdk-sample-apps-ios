@@ -2,6 +2,24 @@
 
 ---
 
+## [0.28.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.1)
+
+### Fixed
+
+* Map(Offline): failure on packdata downloading
+* Map: delegate forwarding doesn’t work for didChangeUserTrackingModeAnimated
+* GeoAR: occasional data race on some phones
+
+### Dependencies
+
+* Map
+  * MapLibre 6.23.0 -> 6.24.0
+
+### Compatibility
+
+* Xcode 26.4.1
+* Swift 6.3.1 (effective 5.10)
+
 ## [0.28.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.0)
 
 ### Breaking changes

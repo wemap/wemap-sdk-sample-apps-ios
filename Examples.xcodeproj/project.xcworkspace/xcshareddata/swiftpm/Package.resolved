@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wemap/wemap-sdk-ios-distribution",
       "state" : {
-        "revision" : "868eb2fe24337f8c09602d8df5824be65643b1eb",
-        "version" : "0.28.0"
+        "revision" : "e7922626f2d620ebe5e22997b9c6fc46a6887220",
+        "version" : "0.28.1"
       }
     }
   ],
