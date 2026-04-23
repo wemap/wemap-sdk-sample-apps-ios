@@ -65,6 +65,23 @@
 * Xcode 26.3
 * Swift 6.2.4 (effective 5.10)
 
+## [0.27.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.27.1)
+
+### Fixed
+
+* Map(Offline): failure on packdata downloading
+* GeoAR: occasional data race on some phones
+
+### Dependencies
+
+* Core
+  * Alamofire 5.11.1 -> 5.11.2
+
+### Compatibility
+
+* Xcode 26.2
+* Swift 6.2.3 (effective 5.10)
+
 ## [0.27.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.27.0)
 
 ### Breaking changes
