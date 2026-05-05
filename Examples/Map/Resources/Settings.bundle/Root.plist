@@ -66,7 +66,39 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Preferences</string>
+			<string>App Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Simulator deviation range</string>
+			<key>FooterText</key>
+			<string>Simulator deviation range in degrees. This range is used to simulate random user deviation when following the itinerary. Set 0 if you want to disable it. Default value is 20 degrees</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Deviation range</string>
+			<key>Key</key>
+			<string>simulatorDeviationRange</string>
+			<key>DefaultValue</key>
+			<string>20</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>SDK Preferences</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -77,6 +109,24 @@
 			<string>switchLevelsAutomaticallyOnUserMovements</string>
 			<key>DefaultValue</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Stale state timeout in seconds</string>
+			<key>Key</key>
+			<string>staleStateTimeout</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
 		</dict>
 		<dict>
 			<key>Type</key>

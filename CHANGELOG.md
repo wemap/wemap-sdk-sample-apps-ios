@@ -2,6 +2,24 @@
 
 ---
 
+## [0.28.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.2)
+
+### Fixed
+
+* Pos(VPS): Conveyor detected multiple times in a row
+* Core: map matching failed and recalculated itinerary
+* Core: handle unknown Step.kind with generic instruction
+
+### Dependencies
+
+* Map
+  * MapLibre 6.24.0 -> 6.25.0
+  
+### Compatibility
+
+* Xcode 26.4.1
+* Swift 6.3.1 (effective 5.10)
+
 ## [0.28.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.1)
 
 ### Fixed

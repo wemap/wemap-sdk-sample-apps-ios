@@ -11,15 +11,18 @@ import WemapCoreSDK
 import WemapMapSDK
 
 enum PreferencesKey: String {
-    // versions
+    /// versions
     case mapVersion,
          mapLibreVersion,
+         // App constants
+         simulatorDeviationRange,
          // Core constants
          itineraryRecalculationEnabled,
          userLocationProjectionOnItineraryEnabled,
          userLocationProjectionOnGraphEnabled,
          // Map constants
          switchLevelsAutomaticallyOnUserMovements,
+         staleStateTimeout,
          // Global navigation options
          arrivedDistanceThreshold,
          userPositionThreshold,
@@ -27,21 +30,27 @@ enum PreferencesKey: String {
 }
 
 func customKeysAndValues() -> [String: Any] {
-    
+
+    CommonAppConstants.simulatorDeviationRange = UserDefaults
+        .double(forKey: .simulatorDeviationRange, defaultValue: CommonAppConstants.simulatorDeviationRange)
+
     // Core
     CoreConstants.itineraryRecalculationEnabled = UserDefaults
         .bool(forKey: .itineraryRecalculationEnabled, defaultValue: CoreConstants.itineraryRecalculationEnabled)
-    
+
     CoreConstants.userLocationProjectionOnItineraryEnabled = UserDefaults
         .bool(forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: CoreConstants.userLocationProjectionOnItineraryEnabled)
-    
+
     CoreConstants.userLocationProjectionOnGraphEnabled = UserDefaults
         .bool(forKey: .userLocationProjectionOnGraphEnabled, defaultValue: CoreConstants.userLocationProjectionOnGraphEnabled)
-    
+
     // Map
     MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
         .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
     
+    MapConstants.staleStateTimeout = UserDefaults
+        .double(forKey: .staleStateTimeout, defaultValue: MapConstants.staleStateTimeout)
+
     // Versions
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,

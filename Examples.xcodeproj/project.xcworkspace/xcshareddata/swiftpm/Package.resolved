@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maplibre/maplibre-gl-native-distribution.git",
       "state" : {
-        "revision" : "4cbd3f5f25583627006e60c5fcdaf5339813118c",
-        "version" : "6.23.0"
+        "revision" : "e0ee2c11a2859e22d3f0dd29705c18169bdafa7b",
+        "version" : "6.25.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wemap/wemap-sdk-ios-distribution",
       "state" : {
-        "revision" : "e7922626f2d620ebe5e22997b9c6fc46a6887220",
-        "version" : "0.28.1"
+        "revision" : "e62e15a389b5704400a1ad4cee5060ddcd27ffcd",
+        "version" : "0.28.2"
       }
     }
   ],

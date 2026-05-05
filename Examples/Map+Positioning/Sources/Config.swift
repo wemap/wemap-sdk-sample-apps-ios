@@ -25,7 +25,6 @@ enum PreferencesKey: String {
          userLocationProjectionOnGraphEnabled,
          // Map constants
          switchLevelsAutomaticallyOnUserMovements,
-         staleTimeoutMilliseconds,
          staleStateTimeout,
          // VPS constants
          slowConnectionSeconds,

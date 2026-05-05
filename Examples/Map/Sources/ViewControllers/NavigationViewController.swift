@@ -48,10 +48,6 @@ final class NavigationViewController: MapViewController {
 
         navigationManager.delegate = self
         pointOfInterestManager.delegate = self
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         map.itineraryManager
             .searchRuleNames(graphId: mapData.extras?.graphId ?? "")
@@ -62,6 +58,10 @@ final class NavigationViewController: MapViewController {
             }, receiveValue: {
                 Logger.v("Available rule names - \($0)")
             }).store(in: &cancellables)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         let message = """
             Create 1 or 2 annotations by long press on the map to be able to start navigation.

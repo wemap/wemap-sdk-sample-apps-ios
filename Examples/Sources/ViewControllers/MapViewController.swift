@@ -86,12 +86,18 @@ class MapViewController: UIViewController, MapViewDelegate {
         levelSwitch.bind(buildingManager: buildingManager)
         // camera bounds can be specified even if they don't exist in MapData
 //        map.cameraBounds = maxBounds
+        let rangeBound = CommonAppConstants.simulatorDeviationRange
+        let simulationOptions: SimulationOptions = if rangeBound == 0 {
+            .init()
+        } else {
+            .init(deviationRange: -rangeBound/2 ... rangeBound/2)
+        }
 
         if locationManager.locationSource == nil {
 
             let source: LocationSource?
             switch locationSourceType {
-            case .simulator: source = SimulatorLocationSource(mapData: mapData, options: .init(deviationRange: -20.0 ... 20.0))
+            case .simulator: source = SimulatorLocationSource(mapData: mapData, options: simulationOptions)
 #if canImport(WemapPositioningSDKVPSARKit)
             case .vps: source = VPSARKitLocationSource(mapData: mapData)
 #endif

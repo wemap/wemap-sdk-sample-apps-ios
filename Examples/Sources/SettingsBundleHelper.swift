@@ -33,3 +33,7 @@ enum SettingsBundleHelper {
         defaults.setValuesForKeys(dict)
     }
 }
+
+enum CommonAppConstants {
+    static var simulatorDeviationRange: Double = 20
+}
