@@ -104,6 +104,8 @@
 
 ### Breaking changes
 
+* Pos(VPS)
+  * Added background scan to improve general system stability. For more info please check our [VPS best practices guide][vps-best-practices]
 * Core
   * Removed `Step.Extras` struct.
   * Removed `LevelChange` struct. All related properties are now available in `Step` struct.
@@ -132,7 +134,8 @@
 * SampleApp(Map+Pos[VPS]): add haptic feedback on successful scan (success) and on positioning lost (error), also add it on background scan success when state is degraded
 * Pos(VPS): expose raw camera tracking state from ARKit
 * Pos(VPS): Force a re-scan if user moves away itinerary
-* Pos(VPS): add background scan to improve general system stability. It will be started based on different conditions like:
+* Pos(VPS): add background scan to improve general system stability. Please check our [VPS best practices guide][vps-best-practices].
+  Background scan will be started based on different conditions like:
   * distance traveled
   * time passed since last successful VPS scan
   * quality of relative positioning
@@ -1274,3 +1277,4 @@ Use `PointOfInterestManagerDelegate.pointOfInterestManager(_: PointOfInterestMan
 [2]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC20checkVPSAvailability2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbGSo22CLLocationCoordinate2DV_tF
 [3]: https://developers.getwemap.com/ios-native-sdk/Classes/VPSARKitLocationSource#/s:27WemapPositioningSDKVPSARKit22VPSARKitLocationSourceC14isVPSAvailable2at7RxSwift17PrimitiveSequenceVyAF11SingleTraitOSbG0A7CoreSDK10CoordinateC_tF
 [4]: https://developers.getwemap.com/ios-native-sdk/Structs/ItinerarySearchOptions#/s:12WemapCoreSDK22ItinerarySearchOptionsV12isWheelchairSbvp
+[vps-best-practices]: https://developers.getwemap.com/docs/guides/vps-best-practices
