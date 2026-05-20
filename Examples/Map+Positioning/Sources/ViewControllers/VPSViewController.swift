@@ -263,7 +263,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         // use this if you want to hide blue dot completely instead of having last known position visible.
         // blue dot becomes gray be default when tracking is lost
 //        mapView.showsUserLocation = false
-
+        
         mapView.setUserTrackingMode(.none, animated: true, completionHandler: nil)
         haptic?.notificationOccurred(.error)
         if locationManager.lastCoordinate != nil {

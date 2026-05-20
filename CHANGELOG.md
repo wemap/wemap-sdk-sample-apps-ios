@@ -2,6 +2,35 @@
 
 ---
 
+## [0.29.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.0)
+
+### Added
+
+* Map: allow overriding (i) button + add a new CustomCredits sample
+* GeoAR: add ability to disable navigation arrows
+* PosSDK(VPS): split inclination angle constant in two (background/foreground) for VPS scan
+
+### Changed
+
+* Map: make MapView class open to allow subclassing
+* Pos(VPS): Foreground scan minimum inclination angle changed from 80 to 65 degrees by default
+
+### Fixed
+
+* Map(Offline): sometimes ItineraryManager.getItineraries won't emit value (no success, no failure)
+* GeoAR: UI freeze on long itinerary generation
+* Pos(VPS): VPS scan doesn't work when camera view was created in landscape
+
+### Dependencies
+
+* Map
+  * MapLibre 6.25.0 -> 6.26.0
+
+### Compatibility
+
+* Xcode 26.5
+* Swift 6.3.2 (effective 5.10)
+
 ## [0.28.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.2)
 
 ### Fixed

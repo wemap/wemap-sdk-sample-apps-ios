@@ -28,7 +28,11 @@ enum PreferencesKey: String {
          staleStateTimeout,
          // VPS constants
          slowConnectionSeconds,
+         minInclinationAngle,
+         backgroundScanMinInclinationAngle,
          backgroundScanTimeInterval,
+         backgroundScanDistanceThreshold,
+         // StateManager
          degradedDistanceThreshold,
          notPositioningDistanceThreshold,
          // Global navigation options
@@ -74,8 +78,19 @@ func customKeysAndValues() -> [String: Any] {
     VPSARKitConstants.slowConnectionSeconds = UserDefaults
         .int(forKey: .slowConnectionSeconds, defaultValue: VPSARKitConstants.slowConnectionSeconds)
 
+    VPSARKitConstants.minInclinationAngle = UserDefaults
+        .double(forKey: .minInclinationAngle, defaultValue: VPSARKitConstants.minInclinationAngle)
+
+    VPSControllerConstants.backgroundScanMinInclinationAngle = UserDefaults
+        .double(forKey: .backgroundScanMinInclinationAngle, defaultValue: VPSControllerConstants.backgroundScanMinInclinationAngle)
+
     VPSControllerConstants.backgroundScanTimeInterval = UserDefaults
         .double(forKey: .backgroundScanTimeInterval, defaultValue: VPSControllerConstants.backgroundScanTimeInterval)
+
+    VPSControllerConstants.backgroundScanDistanceThreshold = UserDefaults
+        .double(forKey: .backgroundScanDistanceThreshold, defaultValue: VPSControllerConstants.backgroundScanDistanceThreshold)
+
+    // MARK: - VPS - StateManager
 
     StateManagerConstants.degradedDistanceThreshold = UserDefaults
         .double(forKey: .degradedDistanceThreshold, defaultValue: StateManagerConstants.degradedDistanceThreshold)

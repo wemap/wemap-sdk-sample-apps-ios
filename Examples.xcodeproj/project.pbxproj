@@ -53,6 +53,9 @@
 		D277D2592E09757800054C3B /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277D2572E09752900054C3B /* AlertFactory.swift */; };
 		D277D25A2E09757800054C3B /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277D2572E09752900054C3B /* AlertFactory.swift */; };
 		D278A3DB2D663A7D006440A6 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
+		D29243FA2FBDAF96009447BD /* NavigationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29243F82FBDAF96009447BD /* NavigationMapView.swift */; };
+		D29243FB2FBDAF96009447BD /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29243F62FBDAF96009447BD /* CreditsViewController.swift */; };
+		D29243FC2FBDAF96009447BD /* CustomCreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29243F72FBDAF96009447BD /* CustomCreditsViewController.swift */; };
 		D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
 		D2A55FE629801A3700402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
 		D2A55FE829801A3900402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
@@ -128,6 +131,9 @@
 		D273E3162AA0DE5E00114854 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		D273E3252AA0EDDC00114854 /* LocationSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSourceType.swift; sourceTree = "<group>"; };
 		D277D2572E09752900054C3B /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
+		D29243F62FBDAF96009447BD /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		D29243F72FBDAF96009447BD /* CustomCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCreditsViewController.swift; sourceTree = "<group>"; };
+		D29243F82FBDAF96009447BD /* NavigationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMapView.swift; sourceTree = "<group>"; };
 		D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		D2A6252F28F6AA3C00274721 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A6253128F6AA3D00274721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -323,6 +329,16 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		D29243F92FBDAF96009447BD /* CustomCredits */ = {
+			isa = PBXGroup;
+			children = (
+				D29243F62FBDAF96009447BD /* CreditsViewController.swift */,
+				D29243F72FBDAF96009447BD /* CustomCreditsViewController.swift */,
+				D29243F82FBDAF96009447BD /* NavigationMapView.swift */,
+			);
+			path = CustomCredits;
+			sourceTree = "<group>";
+		};
 		D2A55FDD297FE2F100402286 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +418,7 @@
 				D2C649362B62ABE500C7C5ED /* POIsListViewController.swift */,
 				D2D62C4D29E6F7450000463E /* POIsViewController.swift */,
 				D2D62C4C29E6F7450000463E /* SamplesTableViewController.swift */,
+				D29243F92FBDAF96009447BD /* CustomCredits */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -624,6 +641,9 @@
 				D26AB63F2B30534F00408BF8 /* UIConstants.swift in Sources */,
 				D2D90E962B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */,
 				D25992D42C35941B0041F9FE /* GlobalNavigationOptions.swift in Sources */,
+				D29243FA2FBDAF96009447BD /* NavigationMapView.swift in Sources */,
+				D29243FB2FBDAF96009447BD /* CreditsViewController.swift in Sources */,
+				D29243FC2FBDAF96009447BD /* CustomCreditsViewController.swift in Sources */,
 				D2F8E1712C46C2220063C9A7 /* GlobalItineraryOptions.swift in Sources */,
 				D21B0EC22E05956D0006044F /* VerticalSegmentedControl.swift in Sources */,
 				D273E3262AA0EDDC00114854 /* LocationSourceType.swift in Sources */,
@@ -814,7 +834,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.28.2;
+				MARKETING_VERSION = 0.29.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -873,7 +893,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.28.2;
+				MARKETING_VERSION = 0.29.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1180,7 +1200,7 @@
 			repositoryURL = "https://github.com/wemap/wemap-sdk-ios-distribution";
 			requirement = {
 				kind = exactVersion;
-				version = 0.28.2;
+				version = 0.29.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

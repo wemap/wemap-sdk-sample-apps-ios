@@ -22,8 +22,11 @@ class SamplesTableViewController: UITableViewController {
             fatalError("You have to successfully retrieve style URL first")
         }
         
-        let map = segue.destination as! MapViewController // swiftlint:disable:this force_cast
-        map.mapData = mapData
-        map.locationSourceType = locationSourceType
+        if let map = segue.destination as? MapViewController {
+            map.mapData = mapData
+            map.locationSourceType = locationSourceType
+        } else if let vc = segue.destination as? CustomCreditsViewController {
+            vc.mapData = mapData
+        }
     }
 }

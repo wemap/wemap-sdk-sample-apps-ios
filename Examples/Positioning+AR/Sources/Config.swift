@@ -13,11 +13,15 @@ import WemapPositioningSDKVPSARKit
 
 enum PreferencesKey: String {
     case positioningVersion,
-         geoARVersion
+         geoARVersion,
+         navigationVisibilityDistance
 }
 
 func customKeysAndValues() -> [String: Any] {
-    
+
+    ARConstants.navigationVisibilityDistance = UserDefaults
+        .double(forKey: .navigationVisibilityDistance, defaultValue: ARConstants.navigationVisibilityDistance)
+
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .positioningVersion: Bundle.positioningVPSARKit.version,
         .geoARVersion: Bundle.geoAR.version

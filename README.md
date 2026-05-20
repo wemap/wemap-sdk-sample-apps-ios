@@ -21,10 +21,10 @@
 ## Examples
 
 * Map
-
-  * Levels - shows how to set custom indoor location provider and switch between levels
-  * Points of interests - shows how to perform selection of POIs on the map
-  * Navigation - shows how to start navigation to some user-created annotation
+  * Levels - Shows how to set custom indoor location provider and switch between levels
+  * Points of interests - Shows how to hide/show and select/unselect POIs
+  * Navigation - Shows how to start navigation to user-created annotation
+  * Custom credits - Shows how to override default credits action sheet and setup accessibility
 
 * Map+Positioning. Shows how to connect different Location Sources to `WemapMapSDK`.
 

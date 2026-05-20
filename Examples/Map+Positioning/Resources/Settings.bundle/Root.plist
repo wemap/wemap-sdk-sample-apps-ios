@@ -182,6 +182,46 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Foreground scan minimum inclination angle</string>
+			<key>FooterText</key>
+			<string>The minimum angle of the phone in degrees allowed for sending an image during a foreground (user-initiated) scan. 0 - the phone is turned face down, 90 - in portrait mode. Default is 65 degrees</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Minimum inclination angle</string>
+			<key>Key</key>
+			<string>minInclinationAngle</string>
+			<key>DefaultValue</key>
+			<string>65</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Background scan minimum inclination angle</string>
+			<key>FooterText</key>
+			<string>The minimum angle of the phone in degrees allowed for sending an image during a background scan. Stricter than the foreground threshold to reduce noise. 0 - the phone is turned face down, 90 - in portrait mode. Default is 75 degrees</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Minimum inclination angle</string>
+			<key>Key</key>
+			<string>backgroundScanMinInclinationAngle</string>
+			<key>DefaultValue</key>
+			<string>75</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Background scan time interval</string>
 			<key>FooterText</key>
 			<string>Time interval in seconds after which a new background scan will be scheduled. Default is 30 seconds</string>
@@ -195,6 +235,26 @@
 			<string>backgroundScanTimeInterval</string>
 			<key>DefaultValue</key>
 			<string>30</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Background scan distance threshold</string>
+			<key>FooterText</key>
+			<string>The threshold value of the distance in meters that is used to determine the reliability of the VPS BE result. If the distance exceeds the threshold value, a new background scan will be scheduled to re-check the result. Default is 15 meters</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Distance threshold</string>
+			<key>Key</key>
+			<string>backgroundScanDistanceThreshold</string>
+			<key>DefaultValue</key>
+			<string>15</string>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>

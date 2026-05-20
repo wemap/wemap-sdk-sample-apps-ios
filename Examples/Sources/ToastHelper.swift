@@ -16,6 +16,7 @@ enum ToastHelper {
         onView view: UIView,
         hideDelay: TimeInterval = 2,
         bottomInset: CGFloat = -100,
+        fadeDuration: TimeInterval = 1,
         onDismiss: (() -> Void)? = nil
     ) -> UILabel {
         
@@ -40,7 +41,7 @@ enum ToastHelper {
             toastLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -(view.safeAreaInsets.left + view.safeAreaInsets.right + 60))
         ])
         
-        UIView.animate(withDuration: 1, delay: hideDelay, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: fadeDuration, delay: hideDelay, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: { _ in
             toastLabel.removeFromSuperview()
