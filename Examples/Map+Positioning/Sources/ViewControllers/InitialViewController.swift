@@ -18,8 +18,7 @@ final class InitialViewController: UIViewController {
     @IBOutlet var sourcePicker: UIPickerView!
     @IBOutlet var loadMapButton: UIButton!
 
-    private let locationSourceTitles = LocationSourceType.allCases.map(\.name)
-
+    private let pickerSources: [LocationSourceType] = LocationSourceType.allCases
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -47,12 +46,12 @@ final class InitialViewController: UIViewController {
 
     @IBAction func showMap() {
 
-        let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+        let locationSourceType = pickerSources[sourcePicker.selectedRow(inComponent: 0)]
 
         let isAvailable = switch locationSourceType {
         case .simulator: SimulatorLocationSource.isAvailable
         case .vps: VPSARKitLocationSource.isAvailable
-        case .systemDefault, .none: true
+        case .systemDefault, .gps: true
         }
 
         guard isAvailable else {
@@ -92,7 +91,7 @@ final class InitialViewController: UIViewController {
 
         SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
 
-        let locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
+        let locationSourceType = pickerSources[sourcePicker.selectedRow(inComponent: 0)]
 
         if locationSourceType == .vps, mapData.extras?.vpsEndpoint == nil {
             ToastHelper.showToast(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", onView: view)
@@ -100,12 +99,13 @@ final class InitialViewController: UIViewController {
         }
 
         let vc: UIViewController
-        if locationSourceType == .vps {
+        switch locationSourceType {
+        case .vps:
             // swiftlint:disable:next force_cast
             let vpsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
             vpsVC.mapData = mapData
             vc = vpsVC
-        } else {
+        default:
             // swiftlint:disable:next force_cast
             let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
             navVC.mapData = mapData
@@ -124,13 +124,13 @@ extension InitialViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
-        locationSourceTitles.count
+        pickerSources.count
     }
 }
 
 extension InitialViewController: UIPickerViewDelegate {
 
     func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
-        locationSourceTitles[row]
+        pickerSources[row].name
     }
 }

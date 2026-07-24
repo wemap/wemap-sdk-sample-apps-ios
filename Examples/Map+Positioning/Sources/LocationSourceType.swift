@@ -10,13 +10,15 @@ enum LocationSourceType: Int, CaseIterable {
     
     case vps,
          simulator,
-         systemDefault
+         systemDefault,
+         gps
 
     var name: String {
         switch self {
         case .vps: "VPS"
         case .simulator: "Simulator"
         case .systemDefault: "System Default"
+        case .gps: "GPS"
         }
     }
 }

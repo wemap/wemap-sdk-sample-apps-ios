@@ -2,6 +2,18 @@
 
 ---
 
+## [0.29.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.1)
+
+### Fixed
+
+* Map: Map may center on 0,0 after multiple MapView instantiations
+* Pos(VPS): occasional crash on conveyor with extrapolated positions
+
+### Compatibility
+
+* Xcode 26.5
+* Swift 6.3.2 (effective 5.10)
+
 ## [0.29.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.0)
 
 ### Added
