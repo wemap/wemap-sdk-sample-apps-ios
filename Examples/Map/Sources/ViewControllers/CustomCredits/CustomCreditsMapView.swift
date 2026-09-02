@@ -1,5 +1,5 @@
 //
-//  NavigationMapView.swift
+//  CustomCreditsMapView.swift
 //  MapExample
 //
 //  Created by Evgenii Khrushchev on 07/05/2026.
@@ -9,7 +9,7 @@
 import UIKit
 import WemapMapSDK
 
-final class NavigationMapView: MapView {
+final class CustomCreditsMapView: MapView {
 
     override func showAttribution(_ sender: Any) {
         if let lp = sender as? UILongPressGestureRecognizer, lp.state != .began { return }

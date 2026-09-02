@@ -19,9 +19,9 @@ final class CreditsViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Informations sur la carte de la gare"
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: .systemFont(ofSize: 20, weight: .semibold))
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = .secondaryLabel
+        label.textColor = .label
         label.numberOfLines = 0
         label.textAlignment = .center
         label.accessibilityTraits = .header
@@ -31,7 +31,8 @@ final class CreditsViewController: UIViewController {
     private lazy var creditsLabel: UILabel = {
         let label = UILabel()
         let version = Bundle.map.version
-        label.text = "Cette carte a été créée par notre partenaire Wemap grâce aux données d'Open StreetMap. Version actuelle : \(version)."
+        let credits = "Cette carte a été créée par notre partenaire Wemap grâce aux données d'Open StreetMap."
+        label.text = "\(credits) Version actuelle : \(version)."
         label.font = Self.cardFont
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
@@ -52,7 +53,7 @@ final class CreditsViewController: UIViewController {
         action: #selector(osmTapped)
     )
 
-    // MARK: - Cancel card
+    // MARK: - Close button
 
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -65,6 +66,20 @@ final class CreditsViewController: UIViewController {
         button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         return button
     }()
+
+    // MARK: - Card
+
+    private lazy var card = makeCard(arrangedSubviews: [
+        makePadded(titleLabel),
+        makeDivider(),
+        makePadded(creditsLabel),
+        makeDivider(),
+        wemapButton,
+        makeDivider(),
+        osmButton,
+        makeDivider(),
+        closeButton
+    ])
 
     // MARK: - Lifecycle
 
@@ -81,7 +96,9 @@ final class CreditsViewController: UIViewController {
     private func setupSheetPresentation() {
         guard #available(iOS 15.0, *), let sheet = sheetPresentationController else { return }
         if #available(iOS 16.0, *) {
-            sheet.detents = [.custom { _ in 380 }, .large()]
+            sheet.detents = [.custom { [weak self] context in
+                self?.preferredSheetHeight(within: context.maximumDetentValue)
+            }, .large()]
         } else {
             sheet.detents = [.medium(), .large()]
         }
@@ -90,30 +107,13 @@ final class CreditsViewController: UIViewController {
     }
 
     private func setupLayout() {
-        // Main content card
-        let mainCard = makeCard(arrangedSubviews: [
-            titleLabel,
-            makeDivider(),
-            creditsLabel,
-            makeDivider(),
-            wemapButton,
-            makeDivider(),
-            osmButton
-        ])
-
-        // Cancel card
-        let cancelCard = makeCard(arrangedSubviews: [closeButton])
-
-        let outerStack = UIStackView(arrangedSubviews: [mainCard, cancelCard])
-        outerStack.axis = .vertical
-        outerStack.spacing = 8
-        outerStack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(outerStack)
+        card.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(card)
 
         NSLayoutConstraint.activate([
-            outerStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            outerStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            outerStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
+            card.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            card.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            card.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
         ])
     }
 
@@ -134,6 +134,28 @@ final class CreditsViewController: UIViewController {
             stack.bottomAnchor.constraint(equalTo: card.bottomAnchor)
         ])
         return card
+    }
+
+    /// Sized to the card rather than to a constant, so that the sheet neither clips its content nor leaves a
+    /// gap under it when the text grows with Dynamic Type. Returning nil lets the detent fall back to medium.
+    private func preferredSheetHeight(within maximum: CGFloat) -> CGFloat? {
+        guard view.bounds.width > 0 else {
+            return nil
+        }
+        let target = CGSize(width: view.bounds.width - 16, height: UIView.layoutFittingCompressedSize.height)
+        let height = card.systemLayoutSizeFitting(
+            target,
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+        return min(height.height + 32, maximum)
+    }
+
+    private func makePadded(_ view: UIView) -> UIView {
+        let container = UIStackView(arrangedSubviews: [view])
+        container.isLayoutMarginsRelativeArrangement = true
+        container.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        return container
     }
 
     private func makeDivider() -> UIView {

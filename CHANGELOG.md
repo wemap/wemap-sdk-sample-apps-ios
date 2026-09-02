@@ -2,6 +2,10 @@
 
 ---
 
+### Changed
+
+* Map: CustomCredits sample customizes the size, border and position of the (i) button, and styles its own controls to match
+
 ## [0.29.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.1)
 
 ### Fixed
