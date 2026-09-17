@@ -2,9 +2,21 @@
 
 ---
 
+## [0.29.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.2)
+
 ### Changed
 
 * Map: CustomCredits sample customizes the size, border and position of the (i) button, and styles its own controls to match
+* Samples: adopt the UIScene life cycle, required by apps built with the iOS 27 SDK
+
+### Fixed
+
+* Pos(VPS): crash during a VPS scan on iPhone 11 and iPhone SE (2nd generation) running iOS 27
+
+### Compatibility
+
+* Xcode 26.6
+* Swift 6.3.3 (effective 5.10)
 
 ## [0.29.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.1)
 

@@ -102,6 +102,10 @@
 		D2FD56B62980341A003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56B52980341A003F508D /* Config.swift */; };
 		D2FD56C0298048F1003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56BF298048F1003F508D /* Config.swift */; };
 		D2FD56C2298049CF003F508D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD56C1298049CF003F508D /* Config.swift */; };
+		D2FE00012F00000000000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE00002F00000000000000 /* SceneDelegate.swift */; };
+		D2FE00022F00000000000002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE00002F00000000000000 /* SceneDelegate.swift */; };
+		D2FE00032F00000000000003 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE00002F00000000000000 /* SceneDelegate.swift */; };
+		D2FE00042F00000000000004 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE00002F00000000000000 /* SceneDelegate.swift */; };
 		D2FECD5429D32EA80071F999 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECD5329D32EA80071F999 /* InitialViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +178,7 @@
 		D2FD56B52980341A003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FD56BF298048F1003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2FD56C1298049CF003F508D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D2FE00002F00000000000000 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D2FECD5329D32EA80071F999 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +404,7 @@
 				D2F8E1702C46C2220063C9A7 /* GlobalItineraryOptions.swift */,
 				D25992D32C35941B0041F9FE /* GlobalNavigationOptions.swift */,
 				D22612AD2DCE2AF60053B250 /* ItineraryLoader.swift */,
+				D2FE00002F00000000000000 /* SceneDelegate.swift */,
 				D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */,
 				D2A6255328F6C08400274721 /* ToastHelper.swift */,
 				D26AB63E2B30534F00408BF8 /* UIConstants.swift */,
@@ -637,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2FE00012F00000000000001 /* SceneDelegate.swift in Sources */,
 				D2D62C4F29E6F7450000463E /* NavigationViewController.swift in Sources */,
 				D26AB63F2B30534F00408BF8 /* UIConstants.swift in Sources */,
 				D2D90E962B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */,
@@ -668,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2FE00022F00000000000002 /* SceneDelegate.swift in Sources */,
 				D22612B12DCE2AFB0053B250 /* ItineraryLoader.swift in Sources */,
 				D277D25A2E09757800054C3B /* AlertFactory.swift in Sources */,
 				D2CF427D2AA5DFCD004EB2C1 /* CameraViewController.swift in Sources */,
@@ -695,6 +703,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2FE00032F00000000000003 /* SceneDelegate.swift in Sources */,
 				D278A3DB2D663A7D006440A6 /* UserDefaults+Additions.swift in Sources */,
 				D2A55FE829801A3900402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6255128F6AEB900274721 /* AppDelegate.swift in Sources */,
@@ -711,6 +720,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2FE00042F00000000000004 /* SceneDelegate.swift in Sources */,
 				D23C797D2EB26C1C004085CB /* AlertFactory.swift in Sources */,
 				D2A55FE929801A3900402286 /* SettingsBundleHelper.swift in Sources */,
 				D2D864FE2DDB8874005D1704 /* InitialViewController.swift in Sources */,
@@ -834,7 +844,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.29.1;
+				MARKETING_VERSION = 0.29.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -893,7 +903,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.29.1;
+				MARKETING_VERSION = 0.29.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -918,7 +928,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,7 +957,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -979,7 +987,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1010,7 +1017,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1040,7 +1046,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used for PositioningSDK";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1070,7 +1075,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used for PositioningSDK";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1100,7 +1104,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1129,7 +1132,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used to track user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1200,7 +1202,7 @@
 			repositoryURL = "https://github.com/wemap/wemap-sdk-ios-distribution";
 			requirement = {
 				kind = exactVersion;
-				version = 0.29.1;
+				version = 0.29.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
