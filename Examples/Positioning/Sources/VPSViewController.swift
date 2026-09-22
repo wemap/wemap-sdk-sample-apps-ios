@@ -6,7 +6,6 @@
 //  Copyright © 2022 Wemap SAS. All rights reserved.
 //
 
-import Combine
 import RealityKit
 import UIKit
 import WemapCoreSDK
@@ -14,8 +13,8 @@ import WemapPositioningSDKVPSARKit
 
 final class VPSViewController: UIViewController {
     
-    var mapData: MapData!
-    
+    var session: CoreSession!
+
     @IBOutlet var mapPlaceholder: UIView!
     
     @IBOutlet var debugTextState: UILabel!
@@ -33,45 +32,104 @@ final class VPSViewController: UIViewController {
     
     private var arView: ARView!
     private var vpsLocationSource: VPSARKitLocationSource!
-    
+
     private weak var currentToast: UIView?
     private var rescanRequested = false
-    
-    private var cancellable: AnyCancellable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         arView = ARView(frame: view.frame)
         arView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(arView, at: 0)
-        
-        setupLocationSource()
-        
-        // workaround needed to avoid automatic stopping of the session due to iOS 18 changes when using ARView
-        // in this particular example it's not necessary because we keep ARView running, but if you present it and dismiss you have to override session onDismiss
-        // Explanation:
-        // before if you set your custom session, you have to start and stop it manually.
-        // Now even if it's a custom session - it will be automatically stopped when view is hidden.
-        // And it's not even possible to set nil to reset the session. So here we set new session just to remove control from our own one.
-        // ARSession does not report any changes in state or errors when it happens, that's why we consider this behaviour as a bug.
-        // so you can't differentiate this behaviour is tracking lost or a bug. because last reported state is normal, but position is not updated
-        // https://github.com/wemap/wemap-sdk-sample-apps-ios/blob/99dcdd56230782b7c87e290fc38dba4eecabe300/Examples/Map%2BPositioning/Sources/ViewControllers/CameraViewController.swift#L73-L85
-        arView.session = vpsLocationSource.session
+
+        do {
+            try setupLocationSource()
+            // workaround needed to avoid automatic stopping of the session due to iOS 18 changes when using ARView
+            // in this particular example it's not necessary because we keep ARView running, but if you present it and dismiss you have to override session onDismiss
+            // Explanation:
+            // before if you set your custom session, you have to start and stop it manually.
+            // Now even if it's a custom session - it will be automatically stopped when view is hidden.
+            // And it's not even possible to set nil to reset the session. So here we set new session just to remove control from our own one.
+            // ARSession does not report any changes in state or errors when it happens, that's why we consider this behaviour as a bug.
+            // so you can't differentiate this behaviour is tracking lost or a bug. because last reported state is normal, but position is not updated
+            // https://github.com/wemap/wemap-sdk-sample-apps-ios/blob/99dcdd56230782b7c87e290fc38dba4eecabe300/Examples/Map%2BPositioning/Sources/ViewControllers/CameraViewController.swift#L73-L85
+            arView.session = vpsLocationSource.session
+        } catch {
+            ToastHelper.showToast(message: "Failed to initialize VPS: \(error)", onView: view)
+        }
     }
-    
-    private func setupLocationSource() {
-        vpsLocationSource = VPSARKitLocationSource(mapData: mapData)
-        vpsLocationSource.delegate = self
-        vpsLocationSource.vpsDelegate = self
-        
+
+    private func setupLocationSource() throws {
+        vpsLocationSource = try VPSARKitLocationSource(session: session)
+
         vpsLocationSource.start()
-        
+
         debugTextState.text = "\(vpsLocationSource.state)"
         debugTextScanStatus.text = "\(vpsLocationSource.scanStatus)"
+
+        let states = vpsLocationSource.states
+        Task { [weak self] in
+            for await state in states {
+                guard let self else {
+                    return
+                }
+                handleStateChange(state)
+            }
+        }
+
+        let scanStatuses = vpsLocationSource.scanStatuses
+        Task { [weak self] in
+            for await status in scanStatuses {
+                guard let self else {
+                    return
+                }
+                handleScanStatusChange(status)
+            }
+        }
+
+        let backgroundScanStatuses = vpsLocationSource.backgroundScanStatuses
+        Task {
+            for await status in backgroundScanStatuses {
+                print("Background scan status: \(status)")
+            }
+        }
+
+        let coordinates = vpsLocationSource.coordinates
+        Task { [weak self] in
+            for await coordinate in coordinates {
+                guard let self else {
+                    return
+                }
+                let text = String(format: "lat: %.6f, lng: %.6f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
+                debugTextCoordinate.text = text
+            }
+        }
+
+        let attitudes = vpsLocationSource.attitudes
+        Task { [weak self] in
+            for await attitude in attitudes {
+                guard let self else {
+                    return
+                }
+                let q = attitude.quaternion.vector
+                debugTextAttitude.text = String(format: "w: %.2f, x: %.2f, y: %.2f, z: %.2f", q.w, q.x, q.y, q.z)
+                debugTextHeading.text = String(format: "%.2f", attitude.headingDegrees)
+            }
+        }
+
+        let errors = vpsLocationSource.errors
+        Task { [weak self] in
+            for await error in errors {
+                guard let self else {
+                    return
+                }
+                showError(message: "LS: \(error)")
+            }
+        }
     }
     
-    // MARK: UI
+    // MARK: - UI
     
     @IBAction func startScan() {
         vpsLocationSource.startScan()
@@ -97,9 +155,11 @@ final class VPSViewController: UIViewController {
         // Let consider levels mapping (level 0 => 0m, -1 => level -3.5m, level -2 => -7m) // From Wemap BO
         // We want to set position to the end of escalators at level -1
         let locationAfterEscalators = Coordinate(latitude: 48.88018539374073, longitude: 2.3567438682277952, altitude: -3.5)
-        let locationUpdated = vpsLocationSource.forceUpdatePosition(coordinate: locationAfterEscalators)
-        if !locationUpdated {
-            Logger.e("Failed to force user position.")
+        Task {
+            let locationUpdated = await vpsLocationSource.forceUpdatePosition(coordinate: locationAfterEscalators)
+            if !locationUpdated {
+                print("Failed to force user position.")
+            }
         }
     }
     
@@ -114,7 +174,7 @@ final class VPSViewController: UIViewController {
         mapPlaceholder.isHidden = false
         scanButtons.isHidden = true
         if itinerarySourceSwitch.isOn {
-            vpsLocationSource.itinerary = hardcodedItinerary() // ItineraryLoader.loadFromGeoJSON()
+            vpsLocationSource.itinerary = hardcodedItinerary().toItinerary() // ItineraryLoader.loadFromGeoJSON()
         } else {
             calculateItinerary()
         }
@@ -140,21 +200,22 @@ final class VPSViewController: UIViewController {
         
         let origin = Coordinate(latitude: 48.88007462, longitude: 2.35591097, level: 0)
         let destination = Coordinate(latitude: 48.88141308, longitude: 2.35747255, level: -2)
-        
-        cancellable = ServiceFactory
-            .getItineraryProvider()
-            .itineraries(origin: origin, destination: destination, mapId: mapData!.id)
-            .sink(receiveCompletion: {
-                if case let .failure(error) = $0 {
-                    debugPrint("Failed to calculate itineraries with error: \(error)")
-                }
-            }, receiveValue: { itineraries in
-                self.vpsLocationSource.itinerary = itineraries.first
-            })
+
+        let itineraryProvider = session.itineraryProvider
+        Task {
+            do {
+                let itineraries = try await itineraryProvider.itineraries(origin: origin, destination: destination)
+                vpsLocationSource.itinerary = itineraries.first
+            } catch is CancellationError {
+                return
+            } catch {
+                print("Failed to calculate itineraries with error: \(error)")
+            }
+        }
     }
     
-    private func hardcodedItinerary() -> Itinerary {
-        
+    private func hardcodedItinerary() -> GeoJsonItinerary { // swiftlint:disable:this function_body_length
+
         let origin = Coordinate(latitude: 48.88007462, longitude: 2.35591097, level: 0)
         let destination = Coordinate(latitude: 48.88141308, longitude: 2.35747255, level: -2)
         
@@ -172,7 +233,7 @@ final class VPSViewController: UIViewController {
         let coordinatesFrom0ToMinus1 = [
             [2.35657153, 48.88013655],
             [2.3567008, 48.8801748]
-        ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: [-1, 0]) }
+        ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: -1 ... 0) }
 
         let legSegmentsFrom0ToMinus1 = LegSegment.fromCoordinates(
             coordinatesFrom0ToMinus1, levelDifference: -1, stepKind: .escalator, stepDirection: .down
@@ -196,7 +257,7 @@ final class VPSViewController: UIViewController {
         let coordinatesFromMinus1ToMinus2 = [
             [2.357253, 48.88061996],
             [2.35727559, 48.88066565]
-        ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: [-2, -1]) }
+        ].map { Coordinate(latitude: $0[1], longitude: $0[0], levels: -2 ... -1) }
 
         let legSegmentsFromMinus1ToMinus2 = LegSegment.fromCoordinates(
             coordinatesFromMinus1ToMinus2, levelDifference: -1, stepKind: .escalator, stepDirection: .down
@@ -222,60 +283,41 @@ final class VPSViewController: UIViewController {
         return .init(origin: origin, destination: destination, segments: segments)
     }
     
-    deinit {
+    isolated deinit {
         vpsLocationSource.stop()
     }
 }
 
-// MARK: Delegates
+// MARK: - VPS event handlers
 
-extension VPSViewController: LocationSourceDelegate {
-    
-    func locationSource(_: any LocationSource, didUpdateCoordinate coordinate: Coordinate) {
-        debugTextCoordinate.text = String(format: "lat: %.6f, lng: %.6f, lvl: \(coordinate.levels)", coordinate.latitude, coordinate.longitude)
-    }
-    
-    func locationSource(_: any LocationSource, didUpdateAttitude attitude: Attitude) {
-        let q = attitude.quaternion.vector
-        debugTextAttitude.text = String(format: "w: %.2f, x: %.2f, y: %.2f, z: %.2f", q.w, q.x, q.y, q.z)
-        debugTextHeading.text = String(format: "%.2f", attitude.headingDegrees)
-    }
-    
-    func locationSource(_: any LocationSource, didFailWithError error: any Error) {
-        showError(message: "LS: \(error)")
-    }
-}
+private extension VPSViewController {
 
-extension VPSViewController: VPSARKitLocationSourceDelegate {
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
+    func handleStateChange(_ state: VPSARKitLocationSource.State) {
         debugTextState.text = "\(state)"
-        
+
         // if rescan requested - don't update UI on state changes. UI will be updated on scan status change
         guard !rescanRequested else {
             return
         }
-        
+
         switch state {
         case .accuratePositioning, .degradedPositioning:
             showMapPlaceholder()
         case .notPositioning:
             showCamera()
+        @unknown default:
+            fatalError()
         }
     }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
+
+    func handleScanStatusChange(_ status: VPSARKitLocationSource.ScanStatus) {
         debugTextScanStatus.text = "\(status)"
         updateScanButtons(status: status)
-        
+
         // rescan successful, reset rescanRequested and update UI
         if status == .stopped, vpsLocationSource.state.isAccurate {
             rescanRequested = false
             showMapPlaceholder()
         }
-    }
-
-    func locationSource(_: VPSARKitLocationSource, didChangeBackgroundScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        debugPrint("Background scan status: \(status)")
     }
 }

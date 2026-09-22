@@ -80,6 +80,32 @@
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Points of interest loading timeout</string>
+			<key>FooterText</key>
+			<string>The maximum time in seconds allowed for loading points of interest. Default is 10 seconds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Loading timeout in seconds</string>
+			<key>Key</key>
+			<string>pointsOfInterestLoadingTimeoutSeconds</string>
+			<key>DefaultValue</key>
+			<string>10</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
 	</array>
 </dict>
 </plist>

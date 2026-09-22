@@ -94,7 +94,9 @@ final class CreditsViewController: UIViewController {
     // MARK: - Private
 
     private func setupSheetPresentation() {
-        guard #available(iOS 15.0, *), let sheet = sheetPresentationController else { return }
+        guard let sheet = sheetPresentationController else {
+            return
+        }
         if #available(iOS 16.0, *) {
             sheet.detents = [.custom { [weak self] context in
                 self?.preferredSheetHeight(within: context.maximumDetentValue)
@@ -136,8 +138,10 @@ final class CreditsViewController: UIViewController {
         return card
     }
 
-    /// Sized to the card rather than to a constant, so that the sheet neither clips its content nor leaves a
-    /// gap under it when the text grows with Dynamic Type. Returning nil lets the detent fall back to medium.
+    /**
+     Sized to the card rather than to a constant, so that the sheet neither clips its content nor leaves a
+     gap under it when the text grows with Dynamic Type. Returning nil lets the detent fall back to medium.
+     */
     private func preferredSheetHeight(within maximum: CGFloat) -> CGFloat? {
         guard view.bounds.width > 0 else {
             return nil

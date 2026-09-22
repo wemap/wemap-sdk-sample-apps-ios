@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mXm-ti-uu4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mXm-ti-uu4">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                             <tableViewSection headerTitle="Wemap AR SDK Samples" id="NS6-MU-spz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="FtX-3j-ILn" detailTextLabel="RPj-wV-DAb" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="9gf-oO-VdO">
-                                        <rect key="frame" x="0.0" y="127" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gf-oO-VdO" id="rvO-V6-Jkp">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -48,7 +48,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="CAG-aN-Daf" detailTextLabel="o3M-qi-JE8" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="HEg-Bf-M63">
-                                        <rect key="frame" x="0.0" y="218" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="141" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HEg-Bf-M63" id="gpl-8w-8SP">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -75,7 +75,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="IPW-we-eND" detailTextLabel="WgP-um-hIX" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="a6y-o5-uAd">
-                                        <rect key="frame" x="0.0" y="309" width="390" height="91"/>
+                                        <rect key="frame" x="0.0" y="232" width="390" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6y-o5-uAd" id="rod-MO-CSX">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
@@ -100,6 +100,30 @@
                                         <connections>
                                             <segue destination="cGy-4U-jWy" kind="show" identifier="GPS" id="00Y-Kt-Bzq"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="geoARSwiftUICell" textLabel="Sw1-Ar-vc3" detailTextLabel="Sw1-Ar-vc4" rowHeight="91" style="IBUITableViewCellStyleSubtitle" id="Sw1-Ar-vc1">
+                                        <rect key="frame" x="0.0" y="323" width="390" height="91"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sw1-Ar-vc1" id="Sw1-Ar-vc2">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="91"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="AR in SwiftUI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sw1-Ar-vc3">
+                                                    <rect key="frame" x="16" y="14.999999999999998" width="160.66666666666666" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="The AR view, its bindings and its events in one SwiftUI screen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sw1-Ar-vc4">
+                                                    <rect key="frame" x="16" y="38.333333333333329" width="330" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -315,7 +339,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Load Map"/>
                                 <connections>
-                                    <action selector="checkAvailability" destination="mXm-ti-uu4" eventType="touchUpInside" id="vGy-wY-Ozr"/>
+                                    <action selector="loadMapTapped" destination="mXm-ti-uu4" eventType="touchUpInside" id="vGy-wY-Ozr"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bMh-Sc-pS4" userLabel="Map Id Stack View">
@@ -345,6 +369,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadMapButton" destination="Gxd-i3-MVQ" id="H7g-0g-n0Y"/>
                         <outlet property="mapIDTextField" destination="jbQ-mf-xXb" id="Y0n-ar-mr2"/>
                     </connections>
                 </viewController>

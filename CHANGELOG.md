@@ -1,8 +1,70 @@
 # Change Log
 
+This log covers the **sample apps**. The SDKs they use have their own change history, published with each
+SDK release — see the [WemapSDKs releases][sdk-releases], linked from every section below that has one.
+Sections older than 0.28.0 predate that repository and carry no link.
+
+[sdk-releases]: https://github.com/wemap/wemap-sdk-ios-distribution/releases
+
 ---
 
+## [1.0.0-beta.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/1.0.0-beta.1)
+
+SDK changes in this release: [WemapSDKs 1.0.0-beta.1](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/1.0.0-beta.1)
+
+**1.0 is a breaking release.** Every sample in this repository is rewritten against the new API and is
+the worked example for each change below. See [Upgrading to 1.0](README.md#upgrading-to-10).
+
+### Breaking changes
+
+* SDKs: static singletons replaced by per-instance sessions — `WemapCore.shared`, `WemapMap.shared` and
+  `WemapMap.getMapData(mapID:token:)` are gone; every view and location source takes a `CoreSession` or
+  `MapSession`, created by an `async throws` init and shared across a screen's map, AR view and location
+  source
+* SDKs: global mutable constants replaced by immutable configs — `CoreConstants`, `MapConstants`,
+  `ARConstants` and `VPSARKitConstants` are gone; each sample builds a value-type config at creation time
+* SDKs: every manager and location-source delegate replaced by an `AsyncStream` — `MapViewDelegate`,
+  `GeoARViewDelegate` and `VPSARKitLocationSourceDelegate` are gone, and views report loading through
+  `LoadPhase`
+* SDKs: `Combine` is gone from the public API — every `AnyPublisher`-returning call is now `async` and/or
+  `throws`
+* SDKs: Swift 6 language mode — public types are `Sendable` and the view and manager surfaces are
+  `@MainActor`, so a call from a non-isolated context no longer compiles implicitly
+* SDKs: `Coordinate` is an immutable struct around `CLLocationCoordinate2D`, levels are a `Levels` value,
+  and `Level` moved from the Core SDK to the Map SDK
+* SDKs: map metadata is read from the session rather than from `MapData`
+* GeoAR: no SceneKit type is part of the public API — `GeoARView` is a `UIView`, and `GeoARView.camera`,
+  `GeoARView.geoScene`, `GeoARView.rootNode`, `GeoCamera`, `GeoEntity` and `GeoNode` are gone
+* Core: a directions request the server rejects throws `DirectionsServiceError.requestFailed(code:reason:)`,
+  and `noItinerariesFound` carries the reason the server reported
+* Samples: minimum iOS 15.0, and Xcode 26.0 / Swift 6.2 to build
+
+### Added
+
+* Map/GeoAR: native SwiftUI support — the map and the AR view can be used directly from SwiftUI
+* Sample(Map): new `Map in SwiftUI` sample — the map, its bindings and its events in one SwiftUI screen
+* Core: `isVPSEnabled` reports whether VPS is available for a given map
+* Map: `UserLocationManager.locationState` and `locationStates` report whether the position the map shows
+  is still current
+* Map/GeoAR: initial POI loading reports errors and times out instead of hanging
+* SDKs: every public error type reports its message through `localizedDescription`
+* SDKs: a string missing from one language falls back to English instead of showing its key
+
+### Changed
+
+* Sample(Map): the Custom credits sample customizes the size, border and position of the credits button
+* Samples: every sample's description is rewritten, and the per-sample `Close` buttons are gone where the
+  navigation bar already offers a way back
+
+### Compatibility
+
+* iOS 15.0 or newer
+* Xcode 26.0 or newer
+* Swift 6.2 or newer
+
 ## [0.29.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.2)
+
+SDK changes in this release: [WemapSDKs 0.29.2](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.29.2)
 
 ### Changed
 
@@ -20,6 +82,8 @@
 
 ## [0.29.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.1)
 
+SDK changes in this release: [WemapSDKs 0.29.1](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.29.1)
+
 ### Fixed
 
 * Map: Map may center on 0,0 after multiple MapView instantiations
@@ -31,6 +95,8 @@
 * Swift 6.3.2 (effective 5.10)
 
 ## [0.29.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.0)
+
+SDK changes in this release: [WemapSDKs 0.29.0](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.29.0)
 
 ### Added
 
@@ -61,6 +127,8 @@
 
 ## [0.28.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.2)
 
+SDK changes in this release: [WemapSDKs 0.28.2](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.28.2)
+
 ### Fixed
 
 * Pos(VPS): Conveyor detected multiple times in a row
@@ -79,6 +147,8 @@
 
 ## [0.28.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.1)
 
+SDK changes in this release: [WemapSDKs 0.28.1](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.28.1)
+
 ### Fixed
 
 * Map(Offline): failure on packdata downloading
@@ -96,6 +166,8 @@
 * Swift 6.3.1 (effective 5.10)
 
 ## [0.28.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.28.0)
+
+SDK changes in this release: [WemapSDKs 0.28.0](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.28.0)
 
 ### Breaking changes
 

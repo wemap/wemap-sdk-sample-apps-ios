@@ -7,10 +7,10 @@
 //
 
 import CoreLocation
+import UIKit
 import WemapCoreSDK
 import WemapGeoARSDK
 import WemapPositioningSDKGPS
-import UIKit
 
 final class GenericLSViewController: GeoARViewController {
 
@@ -31,30 +31,52 @@ final class GenericLSViewController: GeoARViewController {
 
     private var direction: CLLocationDirection = -90
     private var toast: UIView?
+    private var observationTasks: [Task<Void, Never>] = []
 
-    override func geoARViewLoaded(_: GeoARView, mapData: MapData) {
+    override func geoARLoaded() {
 
-        navigationManager.delegate = self
-        pointOfInterestManager.delegate = self
+        let selectionUpdates = pointOfInterestManager.selectionUpdates
+        let navigationEvents = navigationManager.navigationEvents
+        observationTasks = [
+            Task { [weak self] in
+                for await _ in selectionUpdates {
+                    guard let self else {
+                        return
+                    }
+                    updateNavButtons()
+                }
+            },
+            Task { [weak self] in
+                for await event in navigationEvents {
+                    guard let self else {
+                        return
+                    }
+                    guard case .stopped = event else {
+                        continue
+                    }
+                    updateNavButtons()
+                    simulator?.reset()
+                }
+            }
+        ]
 
         locationManager.locationSource = switch locationSourceId {
-        case 0: SimulatorLocationSource(mapData: mapData, options: .init(altitude: 1.6))
-        case 1: GPSLocationSource(mapData: mapData)
+        case 0: SimulatorLocationSource(session: arView.session, options: .init(altitude: 1.6))
+        case 1: GPSLocationSource(session: arView.session)
         default: fatalError("Unsupported location source")
         }
 
         if let simulator {
-            simulator.setCoordinates([Coordinate(coordinate2D: mapData.center)], sample: false)
+            simulator.setCoordinates([Coordinate(coordinate2D: session.mapCenter)], sample: false)
         } else {
             toast = ToastHelper.showToast(message: "Searching for you location...", onView: view, hideDelay: .infinity)
-            locationManager
-                .coordinatePublisher
-                .prefix(1)
-                .sink { [unowned self] _ in
-                    toast?.removeFromSuperview()
-                    toast = nil
-                }
-                .store(in: &cancellables)
+            let stream = locationManager.coordinates
+            Task {
+                var iterator = stream.makeAsyncIterator()
+                _ = await iterator.next()
+                toast?.removeFromSuperview()
+                toast = nil
+            }
         }
     }
     
@@ -66,19 +88,17 @@ final class GenericLSViewController: GeoARViewController {
         }
         
         startNavigationButton.isEnabled = false
-        
-        navigationManager
-            .startNavigation(destination: selectedPOI.coordinate)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: "Failed to start navigation with error - \(error)", onView: view)
-                    updateNavButtons()
-                }
-            }, receiveValue: { [unowned self] navigation in
+
+        Task {
+            do {
+                let navigation = try await navigationManager.startNavigation(destination: selectedPOI.coordinate)
                 simulator?.setItinerary(navigation.itinerary)
                 updateNavButtons()
-            })
-            .store(in: &cancellables)
+            } catch {
+                ToastHelper.showToast(message: "Failed to start navigation with error - \(error)", onView: view)
+                updateNavButtons()
+            }
+        }
     }
     
     @IBAction func stopNavigation() {
@@ -149,6 +169,12 @@ final class GenericLSViewController: GeoARViewController {
         dismiss(animated: true)
     }
 
+    deinit {
+        for task in observationTasks {
+            task.cancel()
+        }
+    }
+
     private func generatePOI() -> PointOfInterest? {
 
         guard let userCoordinate = locationManager.lastCoordinate else {
@@ -170,24 +196,5 @@ final class GenericLSViewController: GeoARViewController {
         let hasActiveNavigation = navigationManager.hasActiveNavigation
         startNavigationButton.isEnabled = selectedPOI != nil && !hasActiveNavigation
         stopNavigationButton.isEnabled = hasActiveNavigation
-    }
-}
-
-extension GenericLSViewController: NavigationManagerDelegate {
-
-    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
-        updateNavButtons()
-        simulator?.reset()
-    }
-}
-
-extension GenericLSViewController: PointOfInterestManagerDelegate {
-
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
-        updateNavButtons()
-    }
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
-        updateNavButtons()
     }
 }

@@ -6,9 +6,7 @@
 //  Copyright © 2026 Wemap SAS. All rights reserved.
 //
 
-import MapLibre
 import UIKit
-import WemapCoreSDK
 import WemapMapSDK
 
 final class CustomCreditsViewController: UIViewController {
@@ -16,38 +14,45 @@ final class CustomCreditsViewController: UIViewController {
     private static let buttonSide: CGFloat = 44
     private static let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
 
-    var mapData: MapData!
+    var session: MapSession!
 
     private var mapView: MapView!
-
-    private lazy var closeButton = makeOverlayButton(systemName: "xmark", accessibilityLabel: "Fermer")
+    private var loadTask: Task<Void, Never>?
 
     private lazy var dummyButton = makeOverlayButton(systemName: "plus", accessibilityLabel: "Bouton d'exemple")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Custom credits"
 
-        view.addSubview(closeButton)
         view.addSubview(dummyButton)
-        closeButton.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
 
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
-            closeButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             dummyButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             dummyButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
         ])
 
-        createMapView(mapData: mapData)
+        createMapView()
     }
 
-    private func createMapView(mapData: MapData) {
-        mapView = CustomCreditsMapView(frame: view.bounds)
+    deinit {
+        loadTask?.cancel()
+    }
+
+    private func createMapView() {
+        mapView = CustomCreditsMapView(frame: view.bounds, session: session, config: makeMapViewConfig())
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.mapDelegate = self
-        mapView.mapData = mapData
         view.insertSubview(mapView, at: 0)
+
+        loadTask = Task { [weak self] in
+            do {
+                _ = try await self?.mapView.awaitLoaded()
+                self?.lateInit()
+            } catch {
+                print("Failed to load map view with error - \(error)")
+            }
+        }
     }
 
     private func lateInit() {
@@ -58,14 +63,15 @@ final class CustomCreditsViewController: UIViewController {
         mapView.compassViewPosition = .bottomRight
 
         view.accessibilityElements = [
-            closeButton,
             dummyButton,
             mapView.attributionButton
         ]
     }
 
-    /// Size, border and placement of the credits button are yours to change. Its visibility is not - the
-    /// attribution has to stay on screen and tappable.
+    /**
+     Size, border and placement of the credits button are yours to change. Its visibility is not - the
+     attribution has to stay on screen and tappable.
+     */
     private func customizeAttributionButton() {
 
         let button = mapView.attributionButton
@@ -99,8 +105,10 @@ final class CustomCreditsViewController: UIViewController {
         mapView.layoutIfNeeded()
     }
 
-    /// Every overlay control on this screen goes through this, the credits button owned by MapLibre included,
-    /// so that they read as one set.
+    /**
+     Every overlay control on this screen goes through this, the credits button owned by MapLibre included,
+     so that they read as one set.
+     */
     private func makeOverlayButton(systemName: String, accessibilityLabel: String) -> UIButton {
 
         let button = UIButton(type: .system)
@@ -126,16 +134,5 @@ final class CustomCreditsViewController: UIViewController {
         // A CGColor is resolved once - refresh it on a trait change if you support light and dark appearance.
         button.layer.borderColor = UIColor.separator.cgColor
         button.layer.masksToBounds = true
-    }
-
-    @objc func closeButtonTouched() {
-        dismiss(animated: true)
-    }
-}
-
-extension CustomCreditsViewController: MapViewDelegate {
-
-    func mapViewLoaded(_: MapView, style _: MLNStyle, data _: MapData) {
-        lateInit()
     }
 }

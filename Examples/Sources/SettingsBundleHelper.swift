@@ -35,5 +35,5 @@ enum SettingsBundleHelper {
 }
 
 enum CommonAppConstants {
-    static var simulatorDeviationRange: Double = 20
+    nonisolated(unsafe) static var simulatorDeviationRange: Double = 20
 }

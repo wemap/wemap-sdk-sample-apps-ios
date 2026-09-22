@@ -11,6 +11,10 @@ import UIKit
 import WemapCoreSDK
 import WemapMapSDK
 
+/**
+ Navigating between points the user drops on the map: long-press to place one or two annotations, then
+ navigate from the user's position or between the two.
+ */
 final class NavigationViewController: MapViewController {
 
     typealias Delay = UIConstants.Delay
@@ -36,8 +40,11 @@ final class NavigationViewController: MapViewController {
         map.navigationManager
     }
 
+    private var observationTasks: [Task<Void, Never>] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Navigation"
 
         createLongPressGestureRecognizer()
         updateUI()
@@ -46,18 +53,56 @@ final class NavigationViewController: MapViewController {
     override func lateInit() {
         super.lateInit()
 
-        navigationManager.delegate = self
-        pointOfInterestManager.delegate = self
-
-        map.itineraryManager
-            .searchRuleNames(graphId: mapData.extras?.graphId ?? "")
-            .sink(receiveCompletion: {
-                if case let .failure(error) = $0 {
-                    Logger.e("Failed to get rule names with error - \(error)")
+        let selectionUpdates = pointOfInterestManager.selectionUpdates
+        let navigationEvents = navigationManager.navigationEvents
+        let navigationInfoUpdates = navigationManager.navigationInfoUpdates
+        let navigationErrors = navigationManager.errors
+        observationTasks = [
+            Task { [weak self] in
+                for await update in selectionUpdates {
+                    guard let self else {
+                        return
+                    }
+                    let message = "POI(s) selected with id(s) - \(update.selected.map(\.id))"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
                 }
-            }, receiveValue: {
-                Logger.v("Available rule names - \($0)")
-            }).store(in: &cancellables)
+            },
+            Task { [weak self] in
+                for await event in navigationEvents {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationEvent(event)
+                }
+            },
+            Task { [weak self] in
+                for await info in navigationInfoUpdates {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationInfo(info)
+                }
+            },
+            Task { [weak self] in
+                for await error in navigationErrors {
+                    guard let self else {
+                        return
+                    }
+                    let message = "Navigation failed with error - \(error)"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
+                }
+            }
+        ]
+
+        let itineraryManager = map.itineraryManager
+        Task {
+            do {
+                let ruleNames = try await itineraryManager.searchRuleNames()
+                print("Available rule names - \(ruleNames)")
+            } catch {
+                print("Failed to get rule names with error - \(error)")
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -70,8 +115,12 @@ final class NavigationViewController: MapViewController {
         ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
     }
 
-    @IBAction func closeTouched() {
-        dismiss(animated: true)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        for task in observationTasks {
+            task.cancel()
+        }
+        observationTasks.removeAll()
     }
 
     private func createLongPressGestureRecognizer() {
@@ -101,7 +150,7 @@ final class NavigationViewController: MapViewController {
 
     private func getCurrentLevel(for coordinate: CLLocationCoordinate2D) -> String {
         guard let building = focusedBuilding else {
-            debugPrint("Failed to retrieve focused building. Considering this annotation as outdoor")
+            print("Failed to retrieve focused building. Considering this annotation as outdoor")
             return String()
         }
 
@@ -151,26 +200,23 @@ final class NavigationViewController: MapViewController {
 
         let rules: ItinerarySearchRules = wheelchairSwitch.isOn ? .wheelchair : .init()
 
-        navigationManager
-            .startNavigation(
-                origin: origin, destination: destination, options: globalNavigationOptions,
-                searchRules: rules, itineraryOptions: globalItineraryOptions
-            )
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    stopNavigationButton.isEnabled = false
-                    updateUI()
-                    ToastHelper.showToast(
-                        message: "Failed to start navigation from user position to - \(destination) with error - \(error)",
-                        onView: view, hideDelay: Delay.long
-                    )
-                }
-            }, receiveValue: { [unowned self] navigation in
+        Task {
+            do {
+                let navigation = try await navigationManager.startNavigation(
+                    origin: origin, destination: destination, options: globalNavigationOptions,
+                    searchRules: rules, itineraryOptions: globalItineraryOptions
+                )
                 simulator?.setItinerary(navigation.itinerary)
                 stopNavigationButton.isEnabled = true
-                map.userTrackingMode = .followWithHeading
-            })
-            .store(in: &cancellables)
+            } catch {
+                stopNavigationButton.isEnabled = false
+                updateUI()
+                ToastHelper.showToast(
+                    message: "Failed to start navigation from user position to - \(destination) with error - \(error)",
+                    onView: view, hideDelay: Delay.long
+                )
+            }
+        }
     }
 
     private func updateUI() {
@@ -184,56 +230,56 @@ final class NavigationViewController: MapViewController {
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
     }
 
-    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
-        guard let subtitle = annotation.subtitle! else {
-            return []
+    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> Levels {
+        guard let subtitle = annotation.subtitle!, !subtitle.isEmpty, let level = Float(subtitle) else {
+            return .outdoor
         }
-        return subtitle.isEmpty ? [] : [Float(subtitle)!]
+        return .single(level)
     }
 }
 
-extension NavigationViewController: PointOfInterestManagerDelegate {
+private extension NavigationViewController {
 
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
-        ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short)
-    }
-}
-
-extension NavigationViewController: NavigationManagerDelegate {
-
-    func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
+    func handleNavigationInfo(_ info: NavigationInfo) {
         navigationInfo.isHidden = false
         let nextStep = info.nextStep?.getNavigationInstructions().instructions ?? "no"
-        navigationInfo.text = info.shortDescription + "\nNext - \(nextStep)"
+        navigationInfo.text = info.compactDescription + "\nNext - \(nextStep)"
     }
 
-    func navigationManager(_: NavigationManager, didStartNavigation navigation: Navigation) {
+    func handleNavigationEvent(_ event: NavigationEvent) {
+        switch event {
+        case let .started(navigation): handleNavigationStarted(navigation)
+        case .stopped: handleNavigationStopped()
+        case .arrived: handleArrivalAtDestination()
+        case let .recalculated(navigation): handleNavigationRecalculated(navigation)
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    func handleNavigationStarted(_ navigation: Navigation) {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
 
         for step in navigation.itinerary.legs.flatMap(\.steps) {
             let instructions = step.getNavigationInstructions()
-            debugPrint(instructions)
+            print(instructions)
         }
     }
 
-    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
+    func handleNavigationStopped() {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
         updateUI()
     }
 
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
+    func handleArrivalAtDestination() {
         ToastHelper.showToast(message: "Navigation manager didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
 
-    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
-        ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
-    }
-
-    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+    func handleNavigationRecalculated(_ navigation: Navigation) {
         ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }

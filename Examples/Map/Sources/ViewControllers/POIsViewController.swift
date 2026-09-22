@@ -6,7 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Combine
 import MapLibre
 import UIKit
 import WemapCoreSDK
@@ -30,30 +29,52 @@ final class POIsViewController: MapViewController {
     
     private var hiddenPOI: PointOfInterest?
     private var simulatedUserPosition: MLNAnnotation?
+    private var observationTasks: [Task<Void, Never>] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Points of interest"
         createLongPressGestureRecognizer()
     }
-    
+
     override func lateInit() {
         super.lateInit()
-        
-        pointOfInterestManager.delegate = self
-        
-        map.userLocationManager
-            .coordinatePublisher
-            .prefix(1)
-            .sink { [unowned self] in
+
+        let touchedPOIs = pointOfInterestManager.touchedPOIs
+        let locationManager = map.userLocationManager
+        let coordinates = locationManager.coordinates
+        observationTasks = [
+            Task { [weak self] in
+                for await poi in touchedPOIs {
+                    guard let self else {
+                        return
+                    }
+                    ToastHelper.showToast(message: "didTouchPointOfInterest - \(poi)", onView: view, hideDelay: Delay.short)
+                }
+            },
+            Task { [weak self] in
+                var iterator = coordinates.makeAsyncIterator()
+                guard let firstCoordinate = await iterator.next(), let self else {
+                    return
+                }
                 enableSortButtons()
-                navigationInfoLabel.text = $0.shortDescription
+                navigationInfoLabel.text = firstCoordinate.compactDescription
             }
-            .store(in: &cancellables)
+        ]
     }
-    
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        for task in observationTasks {
+            task.cancel()
+        }
+        observationTasks.removeAll()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let text = "If you use simulator, long tap at any place on the map to simulate user location. After you'll be able to sort POIs by time/distance"
+        let text = "If you use simulator, long tap at any place on the map to simulate user location. " +
+            "After you'll be able to sort POIs by time/distance"
         ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.short)
     }
 
@@ -61,14 +82,10 @@ final class POIsViewController: MapViewController {
         pointOfInterestManager.isUserSelectionEnabled = userSelectionSwitch.isOn
     }
     
-    @IBAction func closeTouched() {
-        dismiss(animated: true)
-    }
-    
     @IBAction func toggleSelection() {
         var newModeRaw = pointOfInterestManager.selectionMode.rawValue + 1
-        newModeRaw = newModeRaw < PointOfInterestManager.SelectionMode.allCases.count ? newModeRaw : 0
-        let newMode = PointOfInterestManager.SelectionMode(rawValue: newModeRaw)!
+        newModeRaw = newModeRaw < PointOfInterestSelectionMode.allCases.count ? newModeRaw : 0
+        let newMode = PointOfInterestSelectionMode(rawValue: newModeRaw)!
         
         pointOfInterestManager.selectionMode = newMode
         toggleSelectionButton.setTitle("Selection: \(newMode.description)", for: .normal)
@@ -89,7 +106,8 @@ final class POIsViewController: MapViewController {
     
     @IBAction func showHiddenPOI() {
         guard let hiddenPOI else {
-            fatalError("Hidden POI is nil")
+            ToastHelper.showToast(message: "Hidden POI is nil", onView: view)
+            return
         }
         
         ToastHelper.showToast(message: "Showing POI - \(hiddenPOI.name)", onView: view)
@@ -103,8 +121,9 @@ final class POIsViewController: MapViewController {
     }
     
     @IBAction func hideRandomPOI() {
-        guard let randomPOI = pointOfInterestManager.getPOIs().randomElement() else {
-            fatalError("Random POI is nil")
+        guard let randomPOI = pointOfInterestManager.getAllPOIs().randomElement() else {
+            ToastHelper.showToast(message: "Random POI is nil", onView: view)
+            return
         }
         
         ToastHelper.showToast(message: "Hiding POI - \(randomPOI.name)", onView: view)
@@ -166,29 +185,41 @@ final class POIsViewController: MapViewController {
         let coord = map.convert(gesture.location(in: map), toCoordinateFrom: map)
         let point = MLNPointAnnotation()
         point.coordinate = coord
-        point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
+        point.subtitle = getCurrentLevel(for: coord)
         map.addAnnotation(point)
         simulatedUserPosition = point
         enableSortButtons()
     }
-    
-    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
+
+    private func getCurrentLevel(for coordinate: CLLocationCoordinate2D) -> String {
         guard let building = focusedBuilding else {
-            debugPrint("Failed to rerieve focused building. Can't check if annotation is indoor or outdoor")
-            return []
+            print("Failed to retrieve focused building. Considering this annotation as outdoor")
+            return String()
         }
-        
-        return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
+
+        return building.boundingBox.contains(coordinate) ? String(building.activeLevel.id) : String()
     }
-    
-    override func mapView(_: MapView, didTouchAtPoint _: CGPoint) {
+
+    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> Levels {
+        guard let subtitle = annotation.subtitle!, !subtitle.isEmpty, let level = Float(subtitle) else {
+            return .outdoor
+        }
+        return .single(level)
+    }
+
+    override func mapTouched(at _: CGPoint) {
         if pointOfInterestManager.selectionMode.isSingle {
             _ = pointOfInterestManager.unselectPOI()
         } else {
             _ = pointOfInterestManager.unselectAllPOIs()
         }
     }
-    
+
+    override func mapLoadingFailed(error: any Error) {
+        let message = "Failed to load map with error - \(error)"
+        ToastHelper.showToast(message: message, onView: view, bottomInset: UIConstants.Inset.top)
+    }
+
     private func updateShowHidePOIButtons() {
         let hiddenPOIExists = hiddenPOI != nil
         showHiddenPOIButton.isEnabled = hiddenPOIExists
@@ -196,6 +227,14 @@ final class POIsViewController: MapViewController {
     }
     
     // MARK: - Navigation
+
+    override func shouldPerformSegue(withIdentifier _: String, sender _: Any?) -> Bool {
+        guard !pointOfInterestManager.getAllPOIs().isEmpty else {
+            ToastHelper.showToast(message: "This map has no POIs. So nothing to sort by distance or time", onView: view)
+            return false
+        }
+        return true
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! POIsListViewController // swiftlint:disable:this force_cast
@@ -207,14 +246,5 @@ final class POIsViewController: MapViewController {
         } else {
             vc.sortingType = .time
         }
-    }
-}
-
-// MARK: - PointOfInterestManagerDelegate
-
-extension POIsViewController: PointOfInterestManagerDelegate {
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didTouchPointOfInterest poi: PointOfInterest) {
-        ToastHelper.showToast(message: "didTouchPointOfInterest - \(poi)", onView: view, hideDelay: Delay.short)
     }
 }

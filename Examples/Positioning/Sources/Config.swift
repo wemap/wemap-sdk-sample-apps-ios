@@ -17,18 +17,21 @@ enum PreferencesKey: String {
          userLocationProjectionOnGraphEnabled
 }
 
-func customKeysAndValues() -> [String: Any] {
-    
-    // Core
-    CoreConstants.userLocationProjectionOnItineraryEnabled = UserDefaults
-        .bool(forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: CoreConstants.userLocationProjectionOnItineraryEnabled)
-    
-    CoreConstants.userLocationProjectionOnGraphEnabled = UserDefaults
-        .bool(forKey: .userLocationProjectionOnGraphEnabled, defaultValue: CoreConstants.userLocationProjectionOnGraphEnabled)
-    
+func makeSessionConfig() -> SessionConfig {
+    .init(
+        userLocationProjectionOnItineraryEnabled: UserDefaults.bool(
+            forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: true
+        ),
+        userLocationProjectionOnGraphEnabled: UserDefaults.bool(
+            forKey: .userLocationProjectionOnGraphEnabled, defaultValue: false
+        )
+    )
+}
+
+func sdkVersions() -> [String: Any] {
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .positioningVersion: Bundle.positioningVPSARKit.version
     ]
-    
+
     return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
 }

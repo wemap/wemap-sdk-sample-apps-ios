@@ -8,7 +8,6 @@
 // swiftlint:disable file_length
 
 import ARKit
-import Combine
 import MapLibre
 import RealityKit
 import UIKit
@@ -17,14 +16,13 @@ import WemapMapSDK
 import WemapPositioningSDKVPSARKit
 
 // swiftlint:disable:next type_body_length
-final class VPSViewController:
-UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, NavigationManagerDelegate, VPSARKitLocationSourceDelegate, MapViewDelegate {
-    
+final class VPSViewController: UIViewController {
+
     typealias Delay = UIConstants.Delay
     typealias Inset = UIConstants.Inset
     
-    var mapData: MapData!
-    
+    var session: MapSession!
+
     @IBOutlet var localizeButton: UIButton!
     @IBOutlet var cameraButton: UIButton!
     @IBOutlet var degradedStateIcon: UIImageView!
@@ -42,31 +40,20 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     @IBOutlet var navigationView: UIView!
     @IBOutlet var navigationInfo: UILabel!
     
-    private var pointOfInterestManager: MapPointOfInterestManaging {
-        mapView.pointOfInterestManager
-    }
+    private var pointOfInterestManager: MapPointOfInterestManaging { mapView.pointOfInterestManager }
+    private var navigationManager: MapNavigationManaging { mapView.navigationManager }
+    private var itineraryManager: ItineraryManager { mapView.itineraryManager }
+    private var locationManager: UserLocationManager { mapView.userLocationManager }
 
-    private var navigationManager: MapNavigationManaging {
-        mapView.navigationManager
-    }
+    private var drawnItinerary: Itinerary? { itineraryManager.drawnItineraries.first }
 
-    private var itineraryManager: ItineraryManager {
-        mapView.itineraryManager
-    }
-
-    private var locationManager: UserLocationManager {
-        mapView.userLocationManager
-    }
-    
-    private var currentItinerary: Itinerary? {
-        itineraryManager.itineraries.first
-    }
-    
     private let levelSwitch = LevelSwitch()
 
     private var arView: ARView?
-    private var scanningTimer: AnyCancellable?
-    private var cancellables: Set<AnyCancellable> = []
+    private var scanningTimerTask: Task<Void, Never>?
+    private var observationTasks: [Task<Void, Never>] = []
+    /** Separate from `observationTasks`, which `mapLoaded()` reassigns */
+    private var mapTasks: [Task<Void, Never>] = []
 
     private weak var errorCameraToast: UILabel?
     private weak var vpsErrorCameraToast: UILabel?
@@ -82,36 +69,144 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mapView.mapDelegate = self
-        mapView.mapData = mapData
-        
+
+        mapView.configure(with: session, config: makeMapViewConfig())
+        observeMap()
+
+        // Out of the way of this screen's own bottom-trailing button stack. MapLibre defaults the
+        // attribution to the bottom-trailing corner, and the SDK deliberately leaves it there.
         mapView.attributionButtonPosition = .bottomLeft
         
         cameraButton.layer.cornerRadius = 12
         localizeButton.layer.cornerRadius = 12
         
+        // hidden until a building is focused — `bind` unhides it
+        levelSwitch.isHidden = true
+        levelSwitch.accessibilityIdentifier = "levelsControlId"
+
         mapView.addSubview(levelSwitch)
         NSLayoutConstraint.activate([
             levelSwitch.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
-            levelSwitch.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -8)
+            levelSwitch.trailingAnchor.constraint(
+                equalTo: mapView.trailingAnchor, constant: -UIConstants.Inset.overlay
+            )
         ])
-        
+
         updateLocateMeButtonIcon()
     }
-    
-    func mapViewLoaded(_ mapView: MapView, style _: MLNStyle, data _: MapData) {
+
+    private func mapLoaded() {
 
         localizeButton.isEnabled = true
         mapView.mapLibreDelegate = self
         
         levelSwitch.bind(buildingManager: mapView.buildingManager)
+
+        let selectionUpdates = pointOfInterestManager.selectionUpdates
+        let locationErrors = locationManager.errors
+        let locationUpdates = locationManager.coordinates
+        observationTasks = [
+            Task { [weak self] in
+                for await update in selectionUpdates {
+                    guard let self else {
+                        return
+                    }
+                    if !update.unselected.isEmpty {
+                        dismissPOI()
+                    }
+                    for poi in update.selected {
+                        renderPOI(poi)
+                    }
+                }
+            },
+            Task { [weak self] in
+                for await error in locationErrors {
+                    guard let self else {
+                        return
+                    }
+                    handleLocationError(error)
+                }
+            },
+            Task { [weak self] in
+                var iterator = locationUpdates.makeAsyncIterator()
+                guard await iterator.next() != nil, let self else {
+                    return
+                }
+                enableFollowIfNotAlreadyEnabled()
+            }
+        ]
         
-        locationManager.delegate = self
-        navigationManager.delegate = self
-        pointOfInterestManager.delegate = self
+        subscribeOnNavigationEvents()
     }
-    
+
+    private func observeMap() {
+        let touchedPoints = mapView.touchedPoints
+        mapTasks = [
+            Task { [weak self] in
+                do {
+                    _ = try await self?.mapView.awaitLoaded()
+                    self?.mapLoaded()
+                } catch {
+                    print("Failed to load map view with error - \(error)")
+                }
+            },
+            Task { [weak self] in
+                for await _ in touchedPoints {
+                    guard let self else {
+                        return
+                    }
+                    mapTouched()
+                }
+            }
+        ]
+    }
+
+    private func mapTouched() {
+        // unselect POI only if there is no itinerary preview or active navigation
+        if !navigationManager.hasActiveNavigation, drawnItinerary == nil {
+            _ = pointOfInterestManager.unselectPOI()
+        }
+    }
+
+    private func subscribeOnNavigationEvents() {
+        let navigationEvents = navigationManager.navigationEvents
+        let navigationInfoUpdates = navigationManager.navigationInfoUpdates
+        let navigationErrors = navigationManager.errors
+
+        observationTasks.append(contentsOf: [
+            Task { [weak self] in
+                for await event in navigationEvents {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationEvent(event)
+                }
+            },
+            Task { [weak self] in
+                for await info in navigationInfoUpdates {
+                    guard let self else {
+                        return
+                    }
+                    updateNavInfo(info)
+                }
+            },
+            Task { [weak self] in
+                for await error in navigationErrors {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationError(error)
+                }
+            }
+        ])
+    }
+
+    deinit {
+        for task in observationTasks + mapTasks {
+            task.cancel()
+        }
+    }
+
     @IBAction func closeTouched() {
         dismiss(animated: true)
     }
@@ -136,21 +231,19 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
                 let message = "\(impreciseMessage).\n\nThis alert will be shown only once. If you decide to scan later - click on camera button. " +
                     "We recommend you to scan again when you see warning icon on camera button"
                 
-                AlertFactory
-                    .presentSimpleAlert(
-                        message: message, errorMessage: "You decided to scan later",
-                        positiveText: "Scan now", negativeText: "Scan later", on: self
-                    )
-                    .sink(receiveCompletion: { [unowned self] in
-                        if case .failure = $0 {
-                            toggleNextUserTrackingMode()
-                            ToastHelper.showToast(message: "When you'll be ready to scan again - click on camera button", onView: view)
-                        }
-                    }, receiveValue: { [unowned self] in
+                Task {
+                    do {
+                        try await AlertFactory.presentSimpleAlert(
+                            message: message, errorMessage: "You decided to scan later",
+                            positiveText: "Scan now", negativeText: "Scan later", on: self
+                        )
                         startScan()
                         enableFollowIfNotAlreadyEnabled()
-                    })
-                    .store(in: &cancellables)
+                    } catch {
+                        toggleNextUserTrackingMode()
+                        ToastHelper.showToast(message: "When you'll be ready to scan again - click on camera button", onView: view)
+                    }
+                }
             }
         default: locateUser()
         }
@@ -181,44 +274,80 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     private func locateUser(message: String? = nil) {
         let message = message ?? "In order to be localized we will use your camera"
-        checkLocationSource(message: message)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: (error as NSError).domain, onView: view, hideDelay: Delay.short)
-                }
-            }, receiveValue: { [unowned self] in
+        Task {
+            do {
+                try await checkLocationSource(message: message)
                 startScan()
-                enableFollowIfNotAlreadyEnabled()
-            })
-            .store(in: &cancellables)
-    }
-    
-    private func checkLocationSource(message: String) -> AnyPublisher<Void, Error> {
-        checkPermissions()
-            .flatMap { [unowned self] in
-                askForScan(message: message)
-            }.flatMap { [unowned self] in
-                createAndStartLocationSource()
+            } catch {
+                ToastHelper.showToast(message: (error as NSError).domain, onView: view, hideDelay: Delay.short)
             }
-            .eraseToAnyPublisher()
+        }
     }
-    
-    private func createAndStartLocationSource() -> AnyPublisher<Void, Error> {
+
+    private func checkLocationSource(message: String) async throws {
+        try await checkPermissions()
+        try await askForScan(message: message)
+        try createAndStartLocationSource()
+    }
+
+    private func createAndStartLocationSource() throws {
         if locationManager.locationSource is VPSARKitLocationSource {
             vpsLocationSource.start()
-            return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
+            return
         }
-        
-        vpsLocationSource = VPSARKitLocationSource(mapData: mapData)
-        guard vpsLocationSource != nil else {
-            return Fail(error: NSError(domain: "Failed to create VPS location source", code: 0) as Error)
-                .eraseToAnyPublisher()
-        }
-        vpsLocationSource.vpsDelegate = self
+
+        vpsLocationSource = try VPSARKitLocationSource(session: session, config: makeVPSConfig())
+        observeVPS(vpsLocationSource)
         locationManager.locationSource = vpsLocationSource
         vpsLocationSource.start()
         mapView.showsUserHeadingIndicator = true
-        return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
+    }
+
+    private func observeVPS(_ source: VPSARKitLocationSource) {
+        let states = source.states.dropFirst() // it replays current state on subsribe but we don't need it
+        let scanStatuses = source.scanStatuses
+        let backgroundScanStatuses = source.backgroundScanStatuses
+        let userLocalizationUpdates = source.userLocalizationUpdates
+        let cameraTrackingStates = source.cameraTrackingStates
+        observationTasks += [
+            Task { [weak self] in
+                for await state in states {
+                    guard let self else {
+                        return
+                    }
+                    handleStateChange(state)
+                }
+            },
+            Task { [weak self] in
+                for await status in scanStatuses {
+                    guard let self else {
+                        return
+                    }
+                    handleScanStatusChange(status)
+                }
+            },
+            Task { [weak self] in
+                for await status in backgroundScanStatuses {
+                    guard let self else {
+                        return
+                    }
+                    handleBackgroundScanStatusChange(status)
+                }
+            },
+            Task { [weak self] in
+                for await update in userLocalizationUpdates {
+                    guard let self else {
+                        return
+                    }
+                    handleUserLocalization(update)
+                }
+            },
+            Task {
+                for await camera in cameraTrackingStates {
+                    print("Tracking state - \(camera.trackingState)")
+                }
+            }
+        ]
     }
     
     private func startScan() {
@@ -236,7 +365,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     
     @IBAction func closeCameraTouched() {
         vpsLocationSource.stopScan()
-        scanningTimer?.cancel()
+        scanningTimerTask?.cancel()
+        scanningTimerTask = nil
         cameraOverlay.isHidden = true
         arView?.session = ARSession() // workaround to avoid ARView automatically stop ARSession
         arView?.removeFromSuperview()
@@ -254,9 +384,10 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         localizeButton.setImage(.init(systemName: iconName), for: .normal)
     }
     
-    private func askForScan(message: String) -> AnyPublisher<Void, Error> {
-        AlertFactory
-            .presentSimpleAlert(message: message, errorMessage: "User refused to open camera", positiveText: "Open camera", on: self)
+    private func askForScan(message: String) async throws {
+        try await AlertFactory.presentSimpleAlert(
+            message: message, errorMessage: "User refused to open camera", positiveText: "Open camera", on: self
+        )
     }
     
     private func positioningLost(reason: VPSARKitLocationSource.State.NotPositioningReason) {
@@ -271,9 +402,9 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         }
     }
     
-    func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
+    private func handleLocationError(_ error: Error) {
         if cameraOverlay.isHidden {
-            return debugPrint("LocationManager failed with error - \(error)")
+            return print("LocationManager failed with error - \(error)")
         }
         if let vpsError = error as? VPSARKitLocationSourceError, case .slowConnectionDetected = vpsError {
             let message = "This is taking longer than expected. It looks like your internet connection is slow or unstable"
@@ -285,8 +416,8 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         errorCameraToast = ToastHelper.showToast(message: "\(error)", onView: cameraOverlay, hideDelay: 1)
     }
 
-    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
-        debugPrint("VPS state changed - \(state)")
+    private func handleStateChange(_ state: VPSARKitLocationSource.State) {
+        print("VPS state changed - \(state)")
         showBackgroundScanHintIfNeeded()
 
         cameraButton.isHidden = state.isLost
@@ -301,32 +432,30 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             positioningLost(reason: reason)
         }
     }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        debugPrint("Scan status changed - \(status)")
+
+    private func handleScanStatusChange(_ status: VPSARKitLocationSource.ScanStatus) {
+        print("Scan status changed - \(status)")
         switch status {
         case .started:
             showCameraView(session: vpsLocationSource.session)
             createScanningTimer()
         case .stopped:
             closeCameraTouched()
+        @unknown default:
+            fatalError()
         }
     }
 
-    func locationSource(_: VPSARKitLocationSource, didChangeBackgroundScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        debugPrint("Background scan status changed - \(status)")
+    private func handleBackgroundScanStatusChange(_ status: VPSARKitLocationSource.ScanStatus) {
+        print("Background scan status changed - \(status)")
         showBackgroundScanHintIfNeeded()
     }
 
-    func locationSource(_: VPSARKitLocationSource, didLocalizeUserAtCoordinate _: Coordinate, attitude _: Attitude, backgroundScan: Bool) {
-        guard !backgroundScan || vpsLocationSource.state.isDegraded else {
+    private func handleUserLocalization(_ update: UserLocalizationUpdate) {
+        guard !update.backgroundScan || vpsLocationSource.state.isDegraded else {
             return
         }
         haptic?.notificationOccurred(.success)
-    }
-
-    func locationSource(_: VPSARKitLocationSource, cameraDidChangeTrackingState camera: ARCamera) {
-        debugPrint("Tracking state - \(camera.trackingState)")
     }
 
     private func showBackgroundScanHintIfNeeded() {
@@ -344,28 +473,28 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     }
 
     private func createScanningTimer() {
-        scanningTimer = Timer
-            .publish(every: 20, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                self?.askToContinue()
+        scanningTimerTask?.cancel()
+        scanningTimerTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: 20_000_000_000)
+                await askToContinue()
+            } catch {
+                // no-op
             }
+        }
     }
-    
-    private func askToContinue() {
-        scanningTimer = AlertFactory
-            .presentSimpleAlert(
+
+    private func askToContinue() async {
+        do {
+            try await AlertFactory.presentSimpleAlert(
                 message: "We cannot localize you. Do you want to continue to try?", errorMessage: "You decided to get back to the map",
                 positiveText: "Continue", negativeText: "Back to map", on: self
             )
-            .sink(receiveCompletion: { [unowned self] in
-                if case .failure = $0 {
-                    closeCameraTouched()
-                    ToastHelper.showToast(message: "Failed to localize you in reasonable time. Try again later", onView: view, hideDelay: Delay.long)
-                }
-            }, receiveValue: { [unowned self] in
-                createScanningTimer()
-            })
+            createScanningTimer()
+        } catch {
+            closeCameraTouched()
+            ToastHelper.showToast(message: "Failed to localize you in reasonable time. Try again later", onView: view, hideDelay: Delay.long)
+        }
     }
 
     // MARK: - POIs
@@ -383,20 +512,12 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
         hideAllStatesUI()
     }
     
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
-        renderPOI(poi)
-    }
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
-        dismissPOI()
-    }
-    
     // MARK: - Itineraries
     
     @IBAction func computeItinerariesToPOI() {
         
         guard let selectedPOI = pointOfInterestManager.getSelectedPOI() else {
-            return Logger.e("Can't compute itineraries, there is no selected POI")
+            return print("Can't compute itineraries, there is no selected POI")
         }
         
         if let origin = locationManager.lastCoordinate {
@@ -404,49 +525,56 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             return
         }
         
-        checkLocationSource(message: "We need to know your location to compute the best route. We will use your camera to localize you")
-            .handleEvents(receiveOutput: { [unowned self] in
+        Task {
+            do {
+                try await checkLocationSource(message: "We need to know your location to compute the best route. We will use your camera to localize you")
                 startScan()
-            })
-            .flatMap { [unowned self] in
-                locationManager
-                    .coordinatePublisher
-                    .prefix(1)
-                    .setFailureType(to: Error.self)
-                    .timeout(.seconds(20), scheduler: DispatchQueue.main, customError: { WemapError.timeout })
+            } catch {
+                ToastHelper.showToast(message: (error as NSError).domain, onView: view, hideDelay: Delay.short)
+                return
             }
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    let message = if error is WemapError {
-                        "It took too long to localize you. Please try again"
-                    } else {
-                        (error as NSError).domain
-                    }
-                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
+
+            let firstCoordinate: Coordinate
+            let stream = locationManager.coordinates
+            do {
+                firstCoordinate = try await withTimeout(20) {
+                    var iterator = stream.makeAsyncIterator()
+                    return await iterator.next()!
                 }
-            }, receiveValue: { [unowned self] userLocation in
-                calculateAndDrawItinerary(from: userLocation, to: selectedPOI.coordinate)
-            })
-            .store(in: &cancellables)
+            } catch {
+                let message = if error is WemapError {
+                    "It took too long to localize you. Please try again"
+                } else {
+                    (error as NSError).domain
+                }
+                ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
+                return
+            }
+
+            calculateAndDrawItinerary(from: firstCoordinate, to: selectedPOI.coordinate)
+        }
     }
     
     private func calculateAndDrawItinerary(from: Coordinate, to: Coordinate) {
         let searchRules: ItinerarySearchRules = AppConstants.useWheelchair ? .wheelchair : .init()
-        itineraryManager
-            .getItineraries(origin: from, destination: to, searchRules: searchRules)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: "Failed to compute itineraries with error - \(error)", onView: view)
-                }
-            }, receiveValue: { [unowned self] itineraries in
+
+        Task {
+            do {
+                let itineraries = try await itineraryManager
+                    .computeItineraries(origin: from, destination: to, searchRules: searchRules)
+
                 renderItinerary(itineraries.first!)
-            })
-            .store(in: &cancellables)
+            } catch is CancellationError {
+                return
+            } catch {
+                ToastHelper.showToast(message: "Failed to compute itineraries with error - \(error)", onView: view)
+            }
+        }
     }
     
     private func renderItinerary(_ itinerary: Itinerary) {
-        
-        guard itineraryManager.addItinerary(itinerary).inserted else {
+
+        guard itineraryManager.addItinerary(itinerary) else {
             ToastHelper.showToast(message: "Failed to add itinerary", onView: view)
             return
         }
@@ -463,7 +591,7 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     }
     
     @IBAction func closeItineraryTouched() {
-        guard itineraryManager.removeItinerary(currentItinerary!) != nil else {
+        guard itineraryManager.removeItinerary(drawnItinerary!) else {
             ToastHelper.showToast(message: "Failed to remove itinerary", onView: view)
             return
         }
@@ -479,24 +607,23 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     // MARK: - Navigation
     
     @IBAction func startNavigationTouched() {
-        navigationManager
-            .startNavigation(currentItinerary!, options: globalNavigationOptions)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: "Failed to start navigation with error - \(error)", onView: view)
-                }
-            }, receiveValue: { [unowned self] _ in
-                renderNavigation()
-            })
-            .store(in: &cancellables)
+        let options = ItineraryOptions(indoorLine: .init(color: .systemGreen))
+        Task {
+            do {
+                _ = try await navigationManager
+                    .startNavigation(drawnItinerary!, options: globalNavigationOptions, itineraryOptions: options)
+            } catch {
+                ToastHelper.showToast(message: "Failed to start navigation with error - \(error)", onView: view)
+            }
+        }
     }
     
     private func renderNavigation() {
+
         UIApplication.shared.isIdleTimerDisabled = true
         hideAllStatesUI()
         containerHeight.isActive = false
         navigationView.isHidden = false
-        mapView.userTrackingMode = .followWithHeading
         
         if let navInfo = navigationManager.getNavigationInfo() {
             updateNavInfo(navInfo)
@@ -512,32 +639,39 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
             ToastHelper.showToast(message: "Failed to stop navigation with error - \(error)", onView: view)
         }
     }
-    
-    func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
-        updateNavInfo(info)
+
+    private func handleNavigationEvent(_ event: NavigationEvent) {
+        switch event {
+        case let .stopped(navigation): handleNavigationStopped(navigation)
+        case .arrived: handleArrivalAtDestination()
+        case let .recalculated(navigation): handleNavigationRecalculated(navigation)
+        case .started: renderNavigation()
+        @unknown default:
+            fatalError()
+        }
     }
-    
-    func navigationManager(_: NavigationManager, didStopNavigation navigation: Navigation) {
+
+    private func handleNavigationStopped(_ navigation: Navigation) {
         renderItinerary(navigation.itinerary)
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
         UIApplication.shared.isIdleTimerDisabled = false
     }
-    
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
+
+    private func handleArrivalAtDestination() {
         ToastHelper.showToast(message: "Navigation didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
-    
-    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
+
+    private func handleNavigationError(_ error: Error) {
         ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
-        if let currentItinerary {
-            renderItinerary(currentItinerary)
+        if let drawnItinerary {
+            renderItinerary(drawnItinerary)
         }
     }
-    
-    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+
+    private func handleNavigationRecalculated(_ navigation: Navigation) {
         ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
-    
+
     // MARK: - Misc
     
     private func hideAllStatesUI() {
@@ -551,50 +685,42 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
     }
     
     // MARK: - Permissions
-    
-    private func checkPermissions() -> AnyPublisher<Void, Error> {
+
+    private func checkPermissions() async throws {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
+            return
         case .denied, .restricted:
-            AlertFactory.presentSimpleAlert(
+            try await AlertFactory.presentSimpleAlert(
                 message: "In order to be localized, we need to use your camera. Please go to app settings and accept camera permission",
                 errorMessage: "User denied to go to settings and accept camera permission", on: self
-            ).map { [unowned self] in
-                openAppSettings() // it will force app restart, so no need for the furter actions
-            }
-            .eraseToAnyPublisher()
+            )
+            openAppSettings() // it will force app restart, so no need for the further actions
         case .notDetermined:
-            showAlertAndRequestPermissions()
+            try await showAlertAndRequestPermissions()
         @unknown default:
-            showAlertAndRequestPermissions()
+            try await showAlertAndRequestPermissions()
         }
     }
-    
-    private func showAlertAndRequestPermissions() -> AnyPublisher<Void, Error> {
-        AlertFactory.presentSimpleAlert(
+
+    private func showAlertAndRequestPermissions() async throws {
+        try await AlertFactory.presentSimpleAlert(
             message: "In order to be localized, we will use your camera. Please accept following permissions",
             errorMessage: "User refused to review permissions", on: self
-        ).flatMap { [unowned self] in
-            requestPermissions()
-        }
-        .eraseToAnyPublisher()
+        )
+        try await requestPermissions()
     }
-    
-    private func requestPermissions() -> AnyPublisher<Void, Error> {
-        Deferred {
-            Future { promise in
-                AVCaptureDevice.requestAccess(for: .video) { granted in
-                    if !granted {
-                        promise(.failure(NSError(domain: "User denied camera permission", code: 0, userInfo: nil)))
-                    } else {
-                        promise(.success(()))
-                    }
+
+    private func requestPermissions() async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    continuation.resume()
+                } else {
+                    continuation.resume(throwing: NSError(domain: "User denied camera permission", code: 0))
                 }
             }
         }
-        .receive(on: DispatchQueue.main)
-        .eraseToAnyPublisher()
     }
     
     private func openAppSettings() {
@@ -608,17 +734,27 @@ UIViewController, PointOfInterestManagerDelegate, UserLocationManagerDelegate, N
 
 // MARK: - MLNMapViewDelegate
 
-extension VPSViewController: MLNMapViewDelegate {
+extension VPSViewController: @MainActor MLNMapViewDelegate {
     
     func mapView(_: MLNMapView, didChange _: MLNUserTrackingMode, animated _: Bool) {
         updateLocateMeButtonIcon()
     }
-    
-    func mapView(_: MapView, didTouchAtPoint _: CGPoint) {
-        // unselect POI only if there is no itinerary preview or active navigation
-        if !navigationManager.hasActiveNavigation, currentItinerary == nil {
-            _ = pointOfInterestManager.unselectPOI()
+}
+
+func withTimeout<T: Sendable>(
+    _ timeout: TimeInterval, operation: @escaping @Sendable () async throws -> T
+) async throws -> T {
+    try await withThrowingTaskGroup(of: T.self) { group in
+        group.addTask { try await operation() }
+        group.addTask {
+            try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
+            throw WemapError.timeout
         }
+        defer { group.cancelAll() }
+        guard let result = try await group.next() else {
+            throw WemapError.timeout
+        }
+        return result
     }
 }
 

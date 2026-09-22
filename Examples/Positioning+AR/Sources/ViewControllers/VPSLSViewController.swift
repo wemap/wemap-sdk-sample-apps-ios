@@ -6,10 +6,10 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
+import UIKit
 import WemapCoreSDK
 import WemapGeoARSDK
 import WemapPositioningSDKVPSARKit
-import UIKit
 
 final class VPSLSViewController: GeoARViewController {
     
@@ -24,35 +24,90 @@ final class VPSLSViewController: GeoARViewController {
     }
     
     private weak var currentVPSToast: UIView?
-    
-    override func geoARViewLoaded(_ arView: GeoARView, mapData: MapData) {
-        locationManager.locationSource = VPSARKitLocationSource(mapData: mapData)
-        vpsLocationSource.vpsDelegate = self
+
+    private var observationTasks: [Task<Void, Never>] = []
+
+    override func geoARLoaded() {
+        do {
+            locationManager.locationSource = try VPSARKitLocationSource(session: arView.session)
+        } catch {
+            print("Failed to create VPS location source: \(error)")
+            return
+        }
         handleStateChange(vpsLocationSource.state)
-        arView.pointOfInterestManager.delegate = self
-        arView.locationManager.delegate = self
-        arView.navigationManager.delegate = self
+
+        let selectionUpdates = arView.pointOfInterestManager.selectionUpdates
+        let navigationEvents = arView.navigationManager.navigationEvents
+        let states = vpsLocationSource.states
+        let scanStatuses = vpsLocationSource.scanStatuses
+        let locationErrors = arView.locationManager.errors
+        observationTasks = [
+            Task { [weak self] in
+                for await update in selectionUpdates {
+                    guard let self else {
+                        return
+                    }
+                    startNavigationButton.isEnabled = !update.allSelected.isEmpty
+                }
+            },
+            Task { [weak self] in
+                for await event in navigationEvents {
+                    guard let self else {
+                        return
+                    }
+                    guard case .stopped = event else {
+                        continue
+                    }
+                    updateNavigationButtons()
+                }
+            },
+            Task { [weak self] in
+                for await state in states {
+                    guard let self else {
+                        return
+                    }
+                    handleStateChange(state)
+                }
+            },
+            Task { [weak self] in
+                for await status in scanStatuses {
+                    guard let self else {
+                        return
+                    }
+                    handleScanStatusChange(status)
+                }
+            },
+            Task {
+                for await error in locationErrors {
+                    print("LocationManager failed with error - \(error)")
+                }
+            }
+        ]
+    }
+
+    deinit {
+        for task in observationTasks {
+            task.cancel()
+        }
     }
     
     @IBAction func startNavigation() {
         guard let selectedPOI = pointOfInterestManager.getSelectedPOI() else {
-            return debugPrint("Failed to start navigation because selected POI is nil")
+            return print("Failed to start navigation because selected POI is nil")
         }
         
         startNavigationButton.isEnabled = false
-        
-        navigationManager
-            .startNavigation(destination: selectedPOI.coordinate)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    debugPrint("failed to start navigation with error - \(error)")
-                    startNavigationButton.isEnabled = true
-                }
-            }, receiveValue: { [unowned self] navigation in
-                debugPrint("navigation started - \(navigation)")
+
+        Task {
+            do {
+                let navigation = try await navigationManager.startNavigation(destination: selectedPOI.coordinate)
+                print("navigation started - \(navigation)")
                 stopNavigationButton.isEnabled = true
-            })
-            .store(in: &cancellables)
+            } catch {
+                print("failed to start navigation with error - \(error)")
+                startNavigationButton.isEnabled = true
+            }
+        }
     }
     
     @IBAction func stopNavigation() {
@@ -60,7 +115,7 @@ final class VPSLSViewController: GeoARViewController {
         case .success:
             updateNavigationButtons()
         case let .failure(error):
-            debugPrint("failed to stop navigation with error - \(error)")
+            print("failed to stop navigation with error - \(error)")
             if let navError = error as? NavigationError, case .noActiveNavigation = navError {
                 updateNavigationButtons()
             }
@@ -80,11 +135,11 @@ final class VPSLSViewController: GeoARViewController {
     }
     
     private func handleStateChange(_ state: VPSARKitLocationSource.State) {
-        debugPrint("state - \(state)")
+        print("state - \(state)")
 
         switch state {
         case .notPositioning:
-            debugPrint("scan required")
+            print("scan required")
             startScanningButton.isEnabled = true
             currentVPSToast?.removeFromSuperview()
         case let .degradedPositioning(reason):
@@ -101,16 +156,12 @@ final class VPSLSViewController: GeoARViewController {
     }
 }
 
-extension VPSLSViewController: VPSARKitLocationSourceDelegate {
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
-        handleStateChange(state)
-    }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        
-        debugPrint("scan status - \(status)")
-        
+extension VPSLSViewController {
+
+    private func handleScanStatusChange(_ status: VPSARKitLocationSource.ScanStatus) {
+
+        print("scan status - \(status)")
+
         switch status {
         case .started:
             startScanningButton.isEnabled = false
@@ -118,37 +169,14 @@ extension VPSLSViewController: VPSARKitLocationSourceDelegate {
         case .stopped:
             startScanningButton.isEnabled = true
             stopScanningButton.isEnabled = false
+        @unknown default:
+            fatalError()
         }
         updateNavigationButtons()
     }
-    
+
     private func showVPSToast(message: String) {
         currentVPSToast?.removeFromSuperview()
         currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: .infinity)
-    }
-}
-
-extension VPSLSViewController: PointOfInterestManagerDelegate {
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest _: PointOfInterest) {
-        startNavigationButton.isEnabled = true
-    }
-    
-    func pointOfInterestManager(_: PointOfInterestManager, didUnselectPointOfInterest _: PointOfInterest) {
-        startNavigationButton.isEnabled = false
-    }
-}
-
-extension VPSLSViewController: ARLocationManagerDelegate {
-    
-    func locationManager(_: ARLocationManager, didFailWithError error: any Error) {
-        debugPrint("LocationManager failed with error - \(error)")
-    }
-}
-
-extension VPSLSViewController: NavigationManagerDelegate {
-    
-    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
-        updateNavigationButtons()
     }
 }

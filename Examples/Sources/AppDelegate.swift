@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
+        SettingsBundleHelper.applySettings(customKeysAndValues: sdkVersions())
         
         return true
     }

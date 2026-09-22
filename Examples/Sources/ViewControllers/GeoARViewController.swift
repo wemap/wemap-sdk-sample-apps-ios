@@ -6,18 +6,13 @@
 //  Copyright © 2024 Wemap SAS. All rights reserved.
 //
 
-import Combine
+import UIKit
 import WemapCoreSDK
 import WemapGeoARSDK
-import UIKit
 
-class GeoARViewController: UIViewController, GeoARViewDelegate {
+class GeoARViewController: UIViewController {
     
-    var mapData: MapData! {
-        didSet { arView.mapData = mapData }
-    }
-    
-    var cancellables: Set<AnyCancellable> = []
+    var session: CoreSession!
 
     var arView: GeoARView {
         view as! GeoARView // swiftlint:disable:this force_cast
@@ -35,12 +30,28 @@ class GeoARViewController: UIViewController, GeoARViewDelegate {
         arView.pointOfInterestManager
     }
 
+    private var loadTask: Task<Void, Never>?
+
+    deinit {
+        loadTask?.cancel()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        arView.viewDelegate = self
+
+        arView.configure(with: session, config: makeGeoARViewConfig())
+
+        loadTask = Task { [weak self] in
+            do {
+                _ = try await self?.arView.awaitLoaded()
+                self?.geoARLoaded()
+            } catch {
+                print("Failed to load the AR view with error - \(error)")
+            }
+        }
     }
-    
-    func geoARViewLoaded(_: GeoARView, mapData _: MapData) {
-        // no-op
+
+    func geoARLoaded() {
+        // for subclass overrides
     }
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Combine
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -30,42 +29,26 @@ final class InitialViewController: UIViewController {
     @IBOutlet var envSwitch: UISwitch!
 
     private let locationSourceTitles = LocationSourceType.allCases.map(\.name)
-    private var cancellables: Set<AnyCancellable> = []
+    private var environment: Environment = .prod
 
     // MARK: - Packdata Properties
 
-    private lazy var packdataManager: PackdataManaging = DependencyManager.getPackdataManager()
+    private var packdataService: PackdataServicing?
     private let fileManager: FileManager = .default
     private let userDefaults: UserDefaults = .standard
     private var packdata: Packdata?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Wemap Map SDK Example"
 
         sourcePicker.dataSource = self
         sourcePicker.delegate = self
-
-        // uncomment if you want to use dev environment
-//        WemapCore.setEnvironment(.dev)
-//        WemapCore.setItinerariesEnvironment(.dev)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         mapIDTextField.text = "\(Constants.mapID)"
-        
-        // if you need to retrieve all points of interest for some map in advance
-//        ServiceFactory
-//            .getPointOfInterestService()
-//            .pointsOfInterestList(mapID: Constants.mapID)
-//            .sink(receiveCompletion: {
-//                if case let .failure(error) = $0 {
-//                    debugPrint("failed to receive pois with error - \(error)")
-//                }
-//            }, receiveValue: {
-//                debugPrint("received pois - \($0)")
-//            })
-//            .store(in: &cancellables)
 
         packdata = loadPackdataIfAvailable()
         if let packdata {
@@ -113,11 +96,8 @@ final class InitialViewController: UIViewController {
     }
 
     @IBAction func envSwitched() {
-        let env: Environment = envSwitch.isOn ? .prod : .dev
+        environment = envSwitch.isOn ? .prod : .dev
         envLabel.text = envSwitch.isOn ? "Prod" : "Dev"
-        WemapCore.setEnvironment(env)
-        WemapCore.setItinerariesEnvironment(env)
-        mapIDTextField.text = "\(Constants.mapID)"
     }
 
     // MARK: - Private
@@ -137,54 +117,62 @@ final class InitialViewController: UIViewController {
     }
 
     private func loadMap() {
-        guard let request = onlineSwitch.isOn ? getRemoteMapDataRequest() : getLocalMapDataRequest() else {
-            ToastHelper.showToast(message: "Failed to create map data request", onView: view)
-            return
+        loadMapButton.isEnabled = false
+        Task {
+            defer { loadMapButton.isEnabled = true }
+            do {
+                let session = try await onlineSwitch.isOn ? loadOnlineMapSession() : loadOfflineMapSession()
+                showMap(session)
+            } catch is CancellationError {
+                return
+            } catch {
+                ToastHelper.showToast(message: "Failed to load map with error - \(error)", onView: view)
+            }
         }
-
-        request
-            .sink(receiveCompletion: { [self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: "Failed to load map with error - \(error)", onView: view)
-                }
-            }, receiveValue: { [self] mapData in
-                showMap(mapData)
-            })
-            .store(in: &cancellables)
     }
 
-    private func getRemoteMapDataRequest() -> AnyPublisher<MapData, Error>? {
+    private func loadOnlineMapSession() async throws -> MapSession {
         guard let id = getMapID() else {
-            return nil
+            ToastHelper.showToast(message: "Failed to get map ID", onView: view)
+            throw CancellationError()
         }
-
-        return WemapMap.shared.getMapData(mapID: id, token: Constants.token)
+        return try await .init(mapID: id, token: Constants.token, config: makeSessionConfig())
     }
 
-    private func showMap(_ mapData: MapData) {
-        
-        SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
-        
-        // swiftlint:disable:next force_cast
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController
-        vc.mapData = mapData
+    private func loadOfflineMapSession() async throws -> MapSession {
+        guard let packdata else {
+            ToastHelper.showToast(message: "Failed to get map ID", onView: view)
+            throw CancellationError()
+        }
+        let packdataURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent(packdata.fileName)
+        return try await .init(offlineZip: packdataURL, config: makeSessionConfig())
+    }
+
+    private func showMap(_ session: MapSession) {
+
+        SettingsBundleHelper.applySettings(customKeysAndValues: sdkVersions())
+
+        // if you need to retrieve all points of interest for some map in advance
+//        let pointOfInterestService = session.pointOfInterestService
+//        Task {
+//            do {
+//                let pois = try await pointOfInterestService.pointsOfInterest()
+//                print("received pois - \(pois)")
+//            } catch {
+//                print("failed to receive pois with error - \(error)")
+//            }
+//        }
+
+        let vc = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController // swiftlint:disable:this force_cast
+        vc.session = session
         vc.locationSourceType = LocationSourceType(rawValue: sourcePicker.selectedRow(inComponent: 0))
         
         show(vc, sender: nil)
     }
 
     // MARK: - Packdata Methods
-
-    private func getLocalMapDataRequest() -> AnyPublisher<MapData, Error>? {
-        guard let packdata else {
-            return nil
-        }
-
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let packdataURL = documentsURL.appendingPathComponent(packdata.fileName)
-
-        return packdataManager.loadMapData(fromZip: packdataURL)
-    }
 
     private func downloadNewPackdata() {
         guard let id = getMapID() else {
@@ -193,24 +181,22 @@ final class InitialViewController: UIViewController {
 
         checkAndDownloadButton.isEnabled = false
 
-        packdataManager
-            .downloadPackdata(mapID: id)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    let message = "Failed to download packdata with error: \(error)"
-                    ToastHelper.showToast(message: message, onView: view, hideDelay: 5)
-                    checkAndDownloadButton.isEnabled = true
-                }
-            }, receiveValue: { [unowned self] packdata in
-
+        let service = getPackdataService(mapID: id)
+        Task {
+            do {
+                let packdata = try await service.downloadPackdata()
                 guard storePackdata(packdata) else {
                     return
                 }
                 checkAndDownloadButton.isSelected = false
                 checkAndDownloadButton.setTitle("Downloaded (v\(packdata.version))", for: .normal)
                 loadMapButton.isEnabled = true
-            })
-            .store(in: &cancellables)
+            } catch {
+                let message = "Failed to download packdata with error: \(error)"
+                ToastHelper.showToast(message: message, onView: view, hideDelay: 5)
+                checkAndDownloadButton.isEnabled = true
+            }
+        }
     }
 
     private func checkForUpdates() {
@@ -224,23 +210,22 @@ final class InitialViewController: UIViewController {
 
         checkAndDownloadButton.isEnabled = false
 
-        packdataManager
-            .isNewPackdataAvailable(mapID: id, eTag: etag)
-            .sink(receiveCompletion: { [unowned self] in
-                checkAndDownloadButton.isEnabled = true
-                if case let .failure(error) = $0 {
-                    let message = "Failed to check for packdata updates with error: \(error)"
-                    ToastHelper.showToast(message: message, onView: view)
-                }
-            }, receiveValue: { [unowned self] available in
+        let service = getPackdataService(mapID: id)
+        Task {
+            defer { checkAndDownloadButton.isEnabled = true }
+            do {
+                let available = try await service.isNewPackdataAvailable(eTag: etag)
                 checkAndDownloadButton.isSelected = available
                 let title = available ? "Download new packdata" : "Check for updates"
                 checkAndDownloadButton.setTitle(title, for: .normal)
                 if !available {
                     showAlert(message: "No new packdata available yet")
                 }
-            })
-            .store(in: &cancellables)
+            } catch {
+                let message = "Failed to check for packdata updates with error: \(error)"
+                ToastHelper.showToast(message: message, onView: view)
+            }
+        }
     }
 
     private func loadPackdataIfAvailable() -> Packdata? {
@@ -290,6 +275,15 @@ final class InitialViewController: UIViewController {
             return nil
         }
         return etag
+    }
+
+    private func getPackdataService(mapID: Int) -> PackdataServicing {
+        if let packdataService {
+            return packdataService
+        }
+        let new = MapSession.createPackdataService(mapID: mapID, environment: environment)
+        packdataService = new
+        return new
     }
 }
 

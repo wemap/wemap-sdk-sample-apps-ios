@@ -14,18 +14,28 @@ import WemapPositioningSDKVPSARKit
 enum PreferencesKey: String {
     case positioningVersion,
          geoARVersion,
-         navigationVisibilityDistance
+         navigationVisibilityDistance,
+         // Core constants
+         pointsOfInterestLoadingTimeoutSeconds
 }
 
-func customKeysAndValues() -> [String: Any] {
+func makeSessionConfig() -> SessionConfig {
+    .init(pointsOfInterestLoadingTimeout: .seconds(UserDefaults.int(
+        forKey: .pointsOfInterestLoadingTimeoutSeconds, defaultValue: 10
+    )))
+}
 
-    ARConstants.navigationVisibilityDistance = UserDefaults
-        .double(forKey: .navigationVisibilityDistance, defaultValue: ARConstants.navigationVisibilityDistance)
+func makeGeoARViewConfig() -> GeoARViewConfig {
+    // Use nil when the value equals the default, so the map configuration can provide it instead.
+    let rawDistance = UserDefaults.double(forKey: .navigationVisibilityDistance, defaultValue: 10)
+    return .init(navigationVisibilityDistance: rawDistance == 10 ? nil : rawDistance)
+}
 
+func sdkVersions() -> [String: Any] {
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .positioningVersion: Bundle.positioningVPSARKit.version,
         .geoARVersion: Bundle.geoAR.version
     ]
-    
+
     return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
 }

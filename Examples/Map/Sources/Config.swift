@@ -11,7 +11,7 @@ import WemapCoreSDK
 import WemapMapSDK
 
 enum PreferencesKey: String {
-    /// versions
+    /** versions */
     case mapVersion,
          mapLibreVersion,
          // App constants
@@ -20,6 +20,7 @@ enum PreferencesKey: String {
          itineraryRecalculationEnabled,
          userLocationProjectionOnItineraryEnabled,
          userLocationProjectionOnGraphEnabled,
+         pointsOfInterestLoadingTimeoutSeconds,
          // Map constants
          switchLevelsAutomaticallyOnUserMovements,
          staleStateTimeout,
@@ -29,33 +30,41 @@ enum PreferencesKey: String {
          navigationRecalculationTimeInterval
 }
 
-func customKeysAndValues() -> [String: Any] {
+func makeSessionConfig() -> SessionConfig {
+    .init(
+        itineraryRecalculationEnabled: UserDefaults.bool(
+            forKey: .itineraryRecalculationEnabled, defaultValue: true
+        ),
+        userLocationProjectionOnItineraryEnabled: UserDefaults.bool(
+            forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: true
+        ),
+        userLocationProjectionOnGraphEnabled: UserDefaults.bool(
+            forKey: .userLocationProjectionOnGraphEnabled, defaultValue: false
+        ),
+        pointsOfInterestLoadingTimeout: .seconds(UserDefaults.int(
+            forKey: .pointsOfInterestLoadingTimeoutSeconds, defaultValue: 10
+        ))
+    )
+}
+
+func makeMapViewConfig() -> MapViewConfig {
+    .init(
+        switchLevelsAutomaticallyOnUserMovements: UserDefaults.bool(
+            forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: true
+        ),
+        staleStateTimeout: .seconds(UserDefaults.int(forKey: .staleStateTimeout, defaultValue: 5))
+    )
+}
+
+func sdkVersions() -> [String: Any] {
 
     CommonAppConstants.simulatorDeviationRange = UserDefaults
         .double(forKey: .simulatorDeviationRange, defaultValue: CommonAppConstants.simulatorDeviationRange)
 
-    // Core
-    CoreConstants.itineraryRecalculationEnabled = UserDefaults
-        .bool(forKey: .itineraryRecalculationEnabled, defaultValue: CoreConstants.itineraryRecalculationEnabled)
-
-    CoreConstants.userLocationProjectionOnItineraryEnabled = UserDefaults
-        .bool(forKey: .userLocationProjectionOnItineraryEnabled, defaultValue: CoreConstants.userLocationProjectionOnItineraryEnabled)
-
-    CoreConstants.userLocationProjectionOnGraphEnabled = UserDefaults
-        .bool(forKey: .userLocationProjectionOnGraphEnabled, defaultValue: CoreConstants.userLocationProjectionOnGraphEnabled)
-
-    // Map
-    MapConstants.switchLevelsAutomaticallyOnUserMovements = UserDefaults
-        .bool(forKey: .switchLevelsAutomaticallyOnUserMovements, defaultValue: MapConstants.switchLevelsAutomaticallyOnUserMovements)
-    
-    MapConstants.staleStateTimeout = UserDefaults
-        .double(forKey: .staleStateTimeout, defaultValue: MapConstants.staleStateTimeout)
-
-    // Versions
     let specificKeysAndValues: [PreferencesKey: Any] = [
         .mapVersion: Bundle.map.version,
         .mapLibreVersion: Bundle.mapLibre.version
     ]
-    
+
     return Dictionary(uniqueKeysWithValues: specificKeysAndValues.map { ($0.rawValue, $1) })
 }

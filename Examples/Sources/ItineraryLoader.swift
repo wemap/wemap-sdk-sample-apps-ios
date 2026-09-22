@@ -8,6 +8,7 @@
 
 import Foundation
 import WemapCoreSDK
+import WemapPositioningSDKVPSARKit
 
 enum ItineraryLoader {
     
@@ -17,7 +18,7 @@ enum ItineraryLoader {
             let geoJsonItinerary = try JSONDecoder().decode(GeoJsonItinerary.self, from: data)
             return geoJsonItinerary.toItinerary()
         } catch {
-            debugPrint("Failed to load geo itinerary from file with error - \(error)")
+            print("Failed to load geo itinerary from file with error - \(error)")
             return nil
         }
     }

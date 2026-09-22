@@ -9,33 +9,66 @@
 import ARKit
 import RealityKit
 import UIKit
-import WemapMapSDK
 import WemapPositioningSDKVPSARKit
 
 class CameraViewController: UIViewController {
 
     var session: ARSession!
     var vpsLocationSource: VPSARKitLocationSource!
-    var vpsDelegateDispatcher: VPSDelegateDispatcher!
-    var locationManagerDelegateDispatcher: LocationManagerDelegateDispatcher!
-    
+    var locationErrors: AsyncStream<Error>!
+
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var startScanButton: UIButton!
     @IBOutlet var stopScanButton: UIButton!
-    
+
     private var arView: ARView!
     private weak var currentToast: UIView?
-    
+
+    private var observationTasks: [Task<Void, Never>] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         arView = ARView(frame: view.frame)
         arView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(arView, at: 0)
         arView.session = session
-        
-        locationManagerDelegateDispatcher.secondary = self
-        vpsDelegateDispatcher.secondary = self
+
+        let states = vpsLocationSource.states
+        let scanStatuses = vpsLocationSource.scanStatuses
+        let locationErrors = locationErrors!
+        observationTasks = [
+            Task { [weak self] in
+                for await state in states {
+                    guard let self else {
+                        return
+                    }
+                    handleStateChange(state)
+                }
+            },
+            Task { [weak self] in
+                for await status in scanStatuses {
+                    guard let self else {
+                        return
+                    }
+                    handleScanStatusChange(status)
+                }
+            },
+            Task { [weak self] in
+                for await error in locationErrors {
+                    guard let self else {
+                        return
+                    }
+                    showToast(message: "Location Source failed with error - \(error)")
+                }
+            }
+        ]
+    }
+
+    deinit {
+        for task in observationTasks {
+            task.cancel()
+        }
     }
     
     @IBAction func startScan() {
@@ -69,11 +102,11 @@ class CameraViewController: UIViewController {
     }
 }
 
-extension CameraViewController: VPSARKitLocationSourceDelegate {
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeScanStatus status: VPSARKitLocationSource.ScanStatus) {
-        debugPrint("VPS scan status changed - \(status)")
-        
+private extension CameraViewController {
+
+    func handleScanStatusChange(_ status: VPSARKitLocationSource.ScanStatus) {
+        print("VPS scan status changed - \(status)")
+
         if status.isStarted {
             infoLabel.text = "VPS scanning started"
             startScanButton.isEnabled = false
@@ -87,11 +120,11 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
             }
         }
     }
-    
-    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
-        
-        debugPrint("VPS state changed - \(state)")
-        
+
+    func handleStateChange(_ state: VPSARKitLocationSource.State) {
+
+        print("VPS state changed - \(state)")
+
         switch state {
         case .notPositioning:
             showToast(message: "State is not positioning. Scan your environment")
@@ -100,12 +133,5 @@ extension CameraViewController: VPSARKitLocationSourceDelegate {
         default: // .accuratePositioning
             showToast(message: "State is accurate and you can close scanner.")
         }
-    }
-}
-
-extension CameraViewController: UserLocationManagerDelegate {
-    
-    func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
-        showToast(message: "Location Source failed with error - \(error)")
     }
 }

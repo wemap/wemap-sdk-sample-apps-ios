@@ -22,19 +22,26 @@ final class LevelsViewController: MapViewController {
     }
 
     private var uniqueLevels: Set<Float> = []
-
+    
     private var pois: Set<PointOfInterest> {
-        pointOfInterestManager.getPOIs()
+        pointOfInterestManager.getAllPOIs()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Levels"
     }
 
     override func lateInit() {
         super.lateInit()
-        uniqueLevels = Set(pois.compactMap(\.coordinate.levels.first))
+        uniqueLevels = Set(pois.compactMap(\.coordinate.levels.single))
         drawCircleAroundCenter()
     }
 
-    /// Draws a 100 meters radius circle outline around the current center of the map.
-    /// Only the circle border is visible - there is no fill, so the map underneath stays visible.
+    /**
+     Draws a 100 meters radius circle outline around the current center of the map.
+     Only the circle border is visible - there is no fill, so the map underneath stays visible.
+     */
     private func drawCircleAroundCenter() {
 
         guard let style = map.style else {
@@ -64,15 +71,11 @@ final class LevelsViewController: MapViewController {
         layer.lineJoin = NSExpression(forConstantValue: "round")
         style.addLayer(layer)
     }
-    
-    @IBAction func closeTouched() {
-        dismiss(animated: true)
-    }
-    
+
     @IBAction func firstTouched() {
         
         guard let minLevel = uniqueLevels.min() else {
-            return debugPrint("Failed to select POI on min level because there are no levels")
+            return print("Failed to select POI on min level because there are no levels")
         }
         
         selectPOI(atLevel: minLevel)
@@ -80,18 +83,18 @@ final class LevelsViewController: MapViewController {
     
     @IBAction func secondTouched() {
         guard let maxLevel = uniqueLevels.max() else {
-            return debugPrint("Failed to select POI on max level because there are no levels")
+            return print("Failed to select POI on max level because there are no levels")
         }
         
         selectPOI(atLevel: maxLevel)
     }
     
     private func selectPOI(atLevel level: Float) {
-        
-        guard let randomPOI = pois.filter({ LevelUtils.intersects($0.coordinate.levels, [level]) }).randomElement() else {
-            return debugPrint("Failed to get random POI at level \(level)")
+
+        guard let randomPOI = pois.filter({ $0.coordinate.levels == .single(level) }).randomElement() else {
+            return print("Failed to get random POI at level \(level)")
         }
-        
+
         pointOfInterestManager.selectPOI(randomPOI)
     }
 }

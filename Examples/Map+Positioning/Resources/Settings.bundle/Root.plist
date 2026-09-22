@@ -150,7 +150,151 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Points of interest loading timeout</string>
+			<key>FooterText</key>
+			<string>The maximum time in seconds allowed for loading points of interest. Default is 10 seconds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Loading timeout in seconds</string>
+			<key>Key</key>
+			<string>pointsOfInterestLoadingTimeoutSeconds</string>
+			<key>DefaultValue</key>
+			<string>10</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>VPS Preferences</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Horizontal accuracy for accurate positioning state</string>
+			<key>FooterText</key>
+			<string>Default accuracy in meters applied to coordinate returned by VPS when state is accurate</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Horizontal accuracy</string>
+			<key>Key</key>
+			<string>accurateStateAccuracy</string>
+			<key>DefaultValue</key>
+			<string>1</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Horizontal accuracy for degraded positioning state</string>
+			<key>FooterText</key>
+			<string>Default accuracy in meters applied to coordinate returned by VPS when state is degraded</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Horizontal accuracy</string>
+			<key>Key</key>
+			<string>degradedStateAccuracy</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Attitude accuracy</string>
+			<key>FooterText</key>
+			<string>Default accuracy in degrees applied to attitude returned by VPS</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Attitude accuracy</string>
+			<key>Key</key>
+			<string>attitudeAccuracy</string>
+			<key>DefaultValue</key>
+			<string>35</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>VPS Service</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Use JPG image for VPS</string>
+			<key>Key</key>
+			<string>useJPGImageForVPS</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>JPG image compression quality</string>
+			<key>Key</key>
+			<string>jpgImageCompressionQuality</string>
+			<key>DefaultValue</key>
+			<string>70</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>VPS Controller</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -217,6 +361,16 @@
 			<string>75</string>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Use grayscale image for VPS</string>
+			<key>Key</key>
+			<string>useGrayscaleImageForVPS</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -297,6 +451,134 @@
 			<string>150</string>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Camera image side</string>
+			<key>FooterText</key>
+			<string>The maximum size of the smaller side of the camera image sent to the server</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Camera image side</string>
+			<key>Key</key>
+			<string>cameraImageMaxSizeSmallerSide</string>
+			<key>DefaultValue</key>
+			<string>720</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Static position detector</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Window duration seconds</string>
+			<key>Key</key>
+			<string>staticPositionDetectorWindowDurationSeconds</string>
+			<key>DefaultValue</key>
+			<string>3</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Geofence radius meters</string>
+			<key>Key</key>
+			<string>staticPositionDetectorGeofenceRadiusMeters</string>
+			<key>DefaultValue</key>
+			<string>1</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Conveying detector</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Duration seconds</string>
+			<key>Key</key>
+			<string>conveyingDetectorDurationSeconds</string>
+			<key>DefaultValue</key>
+			<string>3</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Elevator buffer radius</string>
+			<key>Key</key>
+			<string>conveyingDetectorElevatorBufferRadius</string>
+			<key>DefaultValue</key>
+			<string>5</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Linear conveying buffer offset</string>
+			<key>Key</key>
+			<string>conveyingDetectorLinearConveyingBufferOffset</string>
+			<key>DefaultValue</key>
+			<string>2</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
 		</dict>
 		<dict>
 			<key>Type</key>

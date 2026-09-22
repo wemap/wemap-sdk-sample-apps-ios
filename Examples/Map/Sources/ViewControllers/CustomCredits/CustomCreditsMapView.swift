@@ -12,7 +12,9 @@ import WemapMapSDK
 final class CustomCreditsMapView: MapView {
 
     override func showAttribution(_ sender: Any) {
-        if let lp = sender as? UILongPressGestureRecognizer, lp.state != .began { return }
+        if let lp = sender as? UILongPressGestureRecognizer, lp.state != .began {
+            return
+        }
         var responder: UIResponder? = self
         while let r = responder {
             if let vc = r as? UIViewController {

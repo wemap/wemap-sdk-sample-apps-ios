@@ -6,7 +6,6 @@
 //  Copyright © 2023 Wemap SAS. All rights reserved.
 //
 
-import Combine
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
@@ -19,7 +18,9 @@ final class InitialViewController: UIViewController {
     @IBOutlet var loadMapButton: UIButton!
 
     private let pickerSources: [LocationSourceType] = LocationSourceType.allCases
-    private var cancellables: Set<AnyCancellable> = []
+    private var locationSourceType: LocationSourceType? {
+        .init(rawValue: sourcePicker.selectedRow(inComponent: 0))
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,6 @@ final class InitialViewController: UIViewController {
 
         // Enable elapsed time prefix for testing
         Logger.elapsedTimePrefixEnabled = true
-
-        // uncomment if you want to use dev environment
-//        WemapCore.setEnvironment(.dev)
-//        WemapCore.setItinerariesEnvironment(.dev)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -46,12 +43,10 @@ final class InitialViewController: UIViewController {
 
     @IBAction func showMap() {
 
-        let locationSourceType = pickerSources[sourcePicker.selectedRow(inComponent: 0)]
-
         let isAvailable = switch locationSourceType {
         case .simulator: SimulatorLocationSource.isAvailable
         case .vps: VPSARKitLocationSource.isAvailable
-        case .systemDefault, .gps: true
+        case .none, .systemDefault, .gps: true
         }
 
         guard isAvailable else {
@@ -72,29 +67,29 @@ final class InitialViewController: UIViewController {
             fatalError("Failed to get int ID from - \(String(describing: mapIDTextField.text))")
         }
 
-        loadMapButton.isEnabled = false
+        SettingsBundleHelper.applySettings(customKeysAndValues: sdkVersions())
 
-        WemapMap.shared
-            .getMapData(mapID: id, token: Constants.token)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    ToastHelper.showToast(message: "Failed to get style URL with error - \(error)", onView: view)
-                }
+        loadMapButton.isEnabled = false
+        Task {
+            defer {
                 loadMapButton.isEnabled = true
-            }, receiveValue: {
-                self.showMap($0)
-            })
-            .store(in: &cancellables)
+            }
+            do {
+                let session = try await MapSession(mapID: id, token: Constants.token, config: makeSessionConfig())
+                showMap(session: session)
+            } catch {
+                print("Failed to create session with error - \(error)")
+            }
+        }
     }
 
-    private func showMap(_ mapData: MapData) {
+    private func showMap(session: MapSession) {
 
-        SettingsBundleHelper.applySettings(customKeysAndValues: customKeysAndValues())
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let locationSourceType = pickerSources[sourcePicker.selectedRow(inComponent: 0)]
-
-        if locationSourceType == .vps, mapData.extras?.vpsEndpoint == nil {
-            ToastHelper.showToast(message: "This map(\(mapData.id)) is not compatible with VPS Location Source", onView: view)
+        let usesVPS = locationSourceType == .vps
+        if usesVPS, !session.isVPSEnabled {
+            ToastHelper.showToast(message: "This map(\(session.mapID)) is not compatible with VPS Location Source", onView: view)
             return
         }
 
@@ -102,17 +97,16 @@ final class InitialViewController: UIViewController {
         switch locationSourceType {
         case .vps:
             // swiftlint:disable:next force_cast
-            let vpsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
-            vpsVC.mapData = mapData
+            let vpsVC = storyboard.instantiateViewController(withIdentifier: "vpsVC") as! VPSViewController
+            vpsVC.session = session
             vc = vpsVC
         default:
             // swiftlint:disable:next force_cast
-            let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
-            navVC.mapData = mapData
+            let navVC = storyboard.instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
+            navVC.session = session
             navVC.locationSourceType = locationSourceType
             vc = navVC
         }
-
         show(vc, sender: nil)
     }
 }

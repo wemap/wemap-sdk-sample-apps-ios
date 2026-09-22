@@ -26,9 +26,6 @@ final class NavigationViewController: MapViewController {
     @IBOutlet var userTrackingModeButton: UIButton!
     @IBOutlet var localizeButton: UIButton!
 
-    private let vpsDelegateDispatcher = VPSDelegateDispatcher()
-    private let locationManagerDelegateDispatcher = LocationManagerDelegateDispatcher()
-
     private weak var currentVPSToast: UIView?
 
     private var userCreatedAnnotations: [MLNAnnotation] {
@@ -48,6 +45,8 @@ final class NavigationViewController: MapViewController {
         map.navigationManager
     }
 
+    private var observationTasks: [Task<Void, Never>] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createLongPressGestureRecognizer()
@@ -57,18 +56,75 @@ final class NavigationViewController: MapViewController {
     override func lateInit() {
         super.lateInit()
 
-        navigationManager.delegate = self
-        pointOfInterestManager.delegate = self
+        let selectionUpdates = pointOfInterestManager.selectionUpdates
+        let locationErrors = map.userLocationManager.errors
+        observationTasks = [
+            Task { [weak self] in
+                for await update in selectionUpdates {
+                    guard let self else {
+                        return
+                    }
+                    let message = "POI(s) selected with id(s) - \(update.selected.map(\.id))"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
+                }
+            },
+            Task {
+                for await error in locationErrors {
+                    print("LocationManager failed with error - \(error)")
+                }
+            }
+        ]
 
-        map.userLocationManager.delegate = locationManagerDelegateDispatcher
-        vpsLocationSource?.vpsDelegate = vpsDelegateDispatcher
-
-        locationManagerDelegateDispatcher.primary = self
-        vpsDelegateDispatcher.primary = self
-
-        if let state = vpsLocationSource?.state {
-            handleStateChange(state)
+        if let vpsLocationSource {
+            let states = vpsLocationSource.states
+            observationTasks.append(
+                Task { [weak self] in
+                    for await state in states {
+                        guard let self else {
+                            return
+                        }
+                        handleStateChange(state)
+                    }
+                }
+            )
+            handleStateChange(vpsLocationSource.state)
         }
+
+        subscribeToNavigationEvents()
+    }
+
+    private func subscribeToNavigationEvents() {
+        let navigationEvents = navigationManager.navigationEvents
+        let navigationInfoUpdates = navigationManager.navigationInfoUpdates
+        let navigationErrors = navigationManager.errors
+        
+        observationTasks.append(contentsOf: [
+            Task { [weak self] in
+                for await event in navigationEvents {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationEvent(event)
+                }
+            },
+            Task { [weak self] in
+                for await info in navigationInfoUpdates {
+                    guard let self else {
+                        return
+                    }
+                    handleNavigationInfo(info)
+                }
+            },
+            Task { [weak self] in
+                for await error in navigationErrors {
+                    guard let self else {
+                        return
+                    }
+                    let message = "Navigation failed with error - \(error)"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
+                }
+            }
+        ])
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -76,40 +132,28 @@ final class NavigationViewController: MapViewController {
 
         ToastHelper.showToast(
             message: "Create 1 or 2 annotations by long press on the map to be able to start navigation. " +
-            "1 annotation to start from user location. 2 annotations to start from custom location",
+                "1 annotation to start from user location. 2 annotations to start from custom location",
             onView: view, hideDelay: Delay.short
         )
     }
 
-    override func mapViewLoaded(_ mapView: MapView, style: MLNStyle, data: MapData) {
-        super.mapViewLoaded(mapView, style: style, data: data)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        for task in observationTasks {
+            task.cancel()
+        }
+        observationTasks.removeAll()
+    }
+
+    override func mapLoaded() {
+        super.mapLoaded()
         map.userTrackingMode = .follow
     }
 
+    // MARK: - Actions
+
     @IBAction func closeTouched() {
         dismiss(animated: true)
-    }
-
-    private func createLongPressGestureRecognizer() {
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
-        map.addGestureRecognizer(longPress)
-    }
-
-    @objc private func longPressGesture(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .ended else {
-            return
-        }
-        guard userCreatedAnnotations.count < 2 else {
-            ToastHelper.showToast(message: "You already created 2 annotations. Remove old ones to be able to add new", onView: view)
-            return
-        }
-        let coord = map.convert(gesture.location(in: map), toCoordinateFrom: map)
-        let point = MLNPointAnnotation()
-        point.coordinate = coord
-        point.title = "user-created"
-        point.subtitle = "\(focusedBuilding?.activeLevel.id ?? 0.0)"
-        map.addAnnotation(point)
-        updateUI()
     }
 
     @IBAction func startNavigationFromUserLocation() {
@@ -158,9 +202,45 @@ final class NavigationViewController: MapViewController {
 
         var nextModeRaw = map.userTrackingMode.rawValue + 1
         nextModeRaw = nextModeRaw < 3 ? nextModeRaw : 0
-
         map.userTrackingMode = MLNUserTrackingMode(rawValue: nextModeRaw)!
 
+        updateUserTrackingModeButtonTitle()
+    }
+
+    // MARK: - Private
+
+    private func createLongPressGestureRecognizer() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
+        map.addGestureRecognizer(longPress)
+    }
+
+    @objc private func longPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .ended else {
+            return
+        }
+        guard userCreatedAnnotations.count < 2 else {
+            ToastHelper.showToast(message: "You already created 2 annotations. Remove old ones to be able to add new", onView: view)
+            return
+        }
+        let coord = map.convert(gesture.location(in: map), toCoordinateFrom: map)
+        let point = MLNPointAnnotation()
+        point.coordinate = coord
+        point.title = "user-created"
+        point.subtitle = getCurrentLevel(for: coord)
+        map.addAnnotation(point)
+        updateUI()
+    }
+
+    private func getCurrentLevel(for coordinate: CLLocationCoordinate2D) -> String {
+        guard let building = focusedBuilding else {
+            print("Failed to retrieve focused building. Considering this annotation as outdoor")
+            return String()
+        }
+
+        return building.boundingBox.contains(coordinate) ? String(building.activeLevel.id) : String()
+    }
+
+    private func updateUserTrackingModeButtonTitle() {
         let title: String = switch map.userTrackingMode {
         case .none: "none"
         case .follow: "follow"
@@ -174,18 +254,16 @@ final class NavigationViewController: MapViewController {
     private func startNavigation(origin: Coordinate?, destination: Coordinate) {
         disableStartButtons()
 
-        navigationManager
-            .startNavigation(origin: origin, destination: destination)
-            .sink(receiveCompletion: { [unowned self] in
-                if case let .failure(error) = $0 {
-                    let text = "Failed to start navigation from user position to - \(destination) with error - \(error)"
-                    ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.long)
-                }
-            }, receiveValue: { [unowned self] navigation in
+        Task {
+            do {
+                let navigation = try await navigationManager.startNavigation(origin: origin, destination: destination)
                 simulator?.setItinerary(navigation.itinerary)
                 stopNavigationButton.isEnabled = true
-            })
-            .store(in: &cancellables)
+            } catch {
+                let text = "Failed to start navigation from user position to - \(destination) with error - \(error)"
+                ToastHelper.showToast(message: text, onView: view, hideDelay: Delay.long)
+            }
+        }
     }
 
     private func updateUI() {
@@ -199,13 +277,11 @@ final class NavigationViewController: MapViewController {
         startNavigationFromUserCreatedAnnotationsButton.isEnabled = false
     }
 
-    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> [Float] {
-        guard let building = focusedBuilding else {
-            debugPrint("Failed to retrieve focused building. Can't check if annotation is indoor or outdoor")
-            return []
+    private func getLevelFromAnnotation(_ annotation: MLNAnnotation) -> Levels {
+        guard let subtitle = annotation.subtitle!, !subtitle.isEmpty, let level = Float(subtitle) else {
+            return .outdoor
         }
-
-        return building.boundingBox.contains(annotation.coordinate) ? [Float(annotation.subtitle!!)!] : []
+        return .single(level)
     }
 
     private func showCamera(session: ARSession) {
@@ -213,18 +289,17 @@ final class NavigationViewController: MapViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cameraVC") as! CameraViewController
         vc.session = session
         vc.vpsLocationSource = vpsLocationSource!
-        vc.vpsDelegateDispatcher = vpsDelegateDispatcher
-        vc.locationManagerDelegateDispatcher = locationManagerDelegateDispatcher
+        vc.locationErrors = map.userLocationManager.errors
         present(vc, animated: true)
     }
 
     private func handleStateChange(_ state: VPSARKitLocationSource.State) {
-        debugPrint("VPS state changed - \(state)")
+        print("VPS state changed - \(state)")
 
         switch state {
         case .notPositioning:
             showVPSToast(message: "Scan is required. Please click on localize, scan your environment. "
-                         + "Camera will be closed automatically as soon as you're localized")
+                + "Camera will be closed automatically as soon as you're localized")
         case let .degradedPositioning(reason):
             showVPSToast(message: "Tracking is limited due to - \(reason)")
         default: // .accuratePositioning
@@ -238,56 +313,53 @@ final class NavigationViewController: MapViewController {
     }
 }
 
-extension NavigationViewController: PointOfInterestManagerDelegate {
+// MARK: - Navigation event handlers
 
-    func pointOfInterestManager(_: PointOfInterestManager, didSelectPointOfInterest poi: PointOfInterest) {
-        ToastHelper.showToast(message: "POI clicked with id - \(poi.id)", onView: view, hideDelay: Delay.short)
+private extension NavigationViewController {
+
+    func handleNavigationEvent(_ event: NavigationEvent) {
+        switch event {
+        case .started: handleNavigationStarted()
+        case .stopped: handleNavigationStopped()
+        case .arrived: handleArrivalAtDestination()
+        case let .recalculated(navigation): handleNavigationRecalculated(navigation)
+        @unknown default:
+            fatalError()
+        }
     }
-}
 
-extension NavigationViewController: NavigationManagerDelegate {
-
-    func navigationManager(_: NavigationManager, didUpdateNavigationInfo info: NavigationInfo) {
+    func handleNavigationInfo(_ info: NavigationInfo) {
         navigationInfo.isHidden = false
         navigationInfo.text = info.description
     }
 
-    func navigationManager(_: NavigationManager, didStartNavigation _: Navigation) {
+    func handleNavigationStarted() {
         navigationInfo.isHidden = false
         ToastHelper.showToast(message: "Navigation started", onView: view)
         stopNavigationButton.isEnabled = true
     }
 
-    func navigationManager(_: NavigationManager, didStopNavigation _: Navigation) {
+    func handleNavigationStopped() {
         navigationInfo.isHidden = true
         ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
         stopNavigationButton.isEnabled = false
         updateUI()
     }
 
-    func navigationManager(_: NavigationManager, didArriveAtDestination _: Navigation) {
+    func handleArrivalAtDestination() {
         ToastHelper.showToast(message: "Navigation didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
     }
 
-    func navigationManager(_: NavigationManager, didFailWithError error: Error) {
-        ToastHelper.showToast(message: "Navigation failed with error - \(error)", onView: view, hideDelay: Delay.short)
-    }
-
-    func navigationManager(_: NavigationManager, didRecalculateNavigation navigation: Navigation) {
+    func handleNavigationRecalculated(_ navigation: Navigation) {
         ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }
 
-extension NavigationViewController: VPSARKitLocationSourceDelegate {
+// MARK: - MLNMapViewDelegate
 
-    func locationSource(_: VPSARKitLocationSource, didChangeState state: VPSARKitLocationSource.State) {
-        handleStateChange(state)
-    }
-}
+extension NavigationViewController: @MainActor MLNMapViewDelegate {
 
-extension NavigationViewController: UserLocationManagerDelegate {
-
-    func locationManager(_: UserLocationManager, didFailWithError error: any Error) {
-        debugPrint("LocationManager failed with error - \(error)")
+    func mapView(_: MLNMapView, didChange _: MLNUserTrackingMode, animated _: Bool) {
+        updateUserTrackingModeButtonTitle()
     }
 }
