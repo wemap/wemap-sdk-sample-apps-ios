@@ -1,12 +1,43 @@
 # Change Log
 
-This log covers the **sample apps**. The SDKs they use have their own change history, published with each
-SDK release — see the [WemapSDKs releases][sdk-releases], linked from every section below that has one.
-Sections older than 0.28.0 predate that repository and carry no link.
+This log covers the **sample apps**, in the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
+From 2026.10.0 a release ships with a release of the map widgets and is named by date, with
+[CalVer](https://calver.org/) `YYYY.MM.MICRO`; its `Dependencies` names the [WemapSDKs][sdk-releases] and
+[Map widgets][widgets-releases] releases it is built with, where each SDK's own changes are. Earlier sections
+are named after the SDK release they shipped with; those older than 0.28.0 predate that repository and carry
+no link.
 
 [sdk-releases]: https://github.com/wemap/wemap-sdk-ios-distribution/releases
+[widgets-releases]: https://github.com/wemap/wemap-sdk-ios-widgets-distribution/releases
 
 ---
+
+## [2026.10.0](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/2026.10.0)
+
+### Added
+
+* Sample(Map): *Itinerary planner*, in UIKit and SwiftUI — plans a route with the map widgets' itinerary form,
+  previews it, then navigates it
+
+### Changed
+
+* Sample(Map), Sample(Map+Positioning): every map screen shows the map widgets' levels rail, which also marks the
+  level the user is on, in place of the samples' own
+
+### Fixed
+
+* Sample(Map+Positioning): *GPS* in the location source picker started no positioning at all
+* Sample(Map+Positioning): the *Navigation* screen ignored the map and navigation options of the Settings screen
+
+### Removed
+
+* Sample(Positioning): an unused GeoJSON itinerary loader and its file
+* Sample(Map): three unused image assets
+
+### Dependencies
+
+* [WemapSDKs 1.0.0-beta.1](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/1.0.0-beta.1), unchanged
+* [Map widgets 0.1.0](https://github.com/wemap/wemap-sdk-ios-widgets-distribution/releases/tag/0.1.0), new
 
 ## [1.0.0-beta.1](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/1.0.0-beta.1)
 

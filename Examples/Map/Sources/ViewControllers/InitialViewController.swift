@@ -153,17 +153,6 @@ final class InitialViewController: UIViewController {
 
         SettingsBundleHelper.applySettings(customKeysAndValues: sdkVersions())
 
-        // if you need to retrieve all points of interest for some map in advance
-//        let pointOfInterestService = session.pointOfInterestService
-//        Task {
-//            do {
-//                let pois = try await pointOfInterestService.pointsOfInterest()
-//                print("received pois - \(pois)")
-//            } catch {
-//                print("failed to receive pois with error - \(error)")
-//            }
-//        }
-
         let vc = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "samplesTVC") as! SamplesTableViewController // swiftlint:disable:this force_cast
         vc.session = session

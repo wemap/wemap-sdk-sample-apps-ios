@@ -9,6 +9,7 @@
 import MapLibre
 import WemapCoreSDK
 import WemapMapSDK
+import WemapMapWidgetsSDK
 #if VPSARKIT
 import WemapPositioningSDKVPSARKit
 #endif
@@ -44,7 +45,6 @@ class MapViewController: UIViewController {
 
     var lifecycleTasks: [Task<Void, Never>] = []
 
-    private lazy var levelSwitch = LevelSwitch()
     private var mapTasks: [Task<Void, Never>] = []
 
     deinit {
@@ -58,22 +58,6 @@ class MapViewController: UIViewController {
 
         map.configure(with: session, config: mapViewConfig)
         observeMap()
-
-        // to see coordinate returned by location source
-//        weak var previous: UIView?
-//        let coordinateStream = map.userLocationManager.coordinates
-//        let task = Task { [weak view] in
-//            for await coordinate in coordinateStream {
-//                guard let view else {
-//                    return
-//                }
-//                previous?.removeFromSuperview()
-//                previous = ToastHelper.showToast(
-//                    message: "Location: \(coordinate)", onView: view, hideDelay: 60, bottomInset: UIConstants.Inset.top
-//                )
-//            }
-//        }
-//        lifecycleTasks.append(task)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -85,7 +69,7 @@ class MapViewController: UIViewController {
     }
 
     func lateInit() {
-        installLevelsSwitcher()
+        installLevelsRail()
 
         guard locationManager.locationSource == nil else {
             return
@@ -131,28 +115,114 @@ class MapViewController: UIViewController {
     }
 
     /**
-     Installs the samples' own levels rail.
+     Observes the navigation manager the way every navigating sample shows it: a toast for each event and
+     error, the progress in `infoLabel`, and the steps printed when a navigation starts.
+
+     - Parameters:
+       - infoLabel: Shows the progress while a navigation runs; hidden otherwise.
+       - onNavigatingChange: Called with whether a navigation is running, after it starts or stops, so a screen
+         can update its buttons.
+     - Returns: The observation tasks, for the screen to cancel along with its own.
+     */
+    final func observeNavigation(
+        infoLabel: UILabel,
+        onNavigatingChange: @escaping @MainActor @Sendable (Bool) -> Void
+    ) -> [Task<Void, Never>] {
+        // `final` and the spelled-out `@Sendable` are load-bearing: left to inference, the closure type mangled
+        // differently in the subclasses' files than here, and every subclass failed to link.
+        let navigationManager = map.navigationManager
+        let navigationEvents = navigationManager.navigationEvents
+        let navigationInfoUpdates = navigationManager.navigationInfoUpdates
+        let navigationErrors = navigationManager.errors
+        return [
+            Task { [weak self, weak infoLabel] in
+                for await event in navigationEvents {
+                    guard let self, let infoLabel else {
+                        return
+                    }
+                    handleNavigationEvent(event, infoLabel: infoLabel, onNavigatingChange: onNavigatingChange)
+                }
+            },
+            Task { [weak infoLabel] in
+                for await info in navigationInfoUpdates {
+                    guard let infoLabel else {
+                        return
+                    }
+                    infoLabel.isHidden = false
+                    let nextStep = info.nextStep?.getNavigationInstructions().instructions ?? "no"
+                    infoLabel.text = info.compactDescription + "\nNext - \(nextStep)"
+                }
+            },
+            Task { [weak self] in
+                for await error in navigationErrors {
+                    guard let self else {
+                        return
+                    }
+                    let message = "Navigation failed with error - \(error)"
+                    ToastHelper.showToast(message: message, onView: view, hideDelay: UIConstants.Delay.short)
+                }
+            }
+        ]
+    }
+
+    /** Prints the names of the search rules the map offers, which is what `ItinerarySearchRules` takes. */
+    final func printSearchRuleNames() {
+        let itineraryManager = map.itineraryManager
+        Task {
+            do {
+                let ruleNames = try await itineraryManager.searchRuleNames()
+                print("Available rule names - \(ruleNames)")
+            } catch {
+                print("Failed to get rule names with error - \(error)")
+            }
+        }
+    }
+
+    /**
+     Installs the SDK's levels rail, which mirrors the building manager, hides itself while no building is
+     focused and sizes itself; all that is left here is where it sits.
 
      Called from `lateInit()`, not `viewDidLoad()`: it needs `buildingManager`, which does not exist until the
-     map has loaded.
-
-     A seam a sample can override to install a rail of its own, rather than something each screen builds:
-     five controllers across three apps subclass this one, so anything installed here lands on every one
-     of them.
+     map has loaded. Nothing keeps a reference — `attach(to:in:alignment:)` makes the rail a child of this
+     controller, and `children` is what owns it.
      */
-    func installLevelsSwitcher() {
+    private func installLevelsRail() {
 
-        // hidden until a building is focused — `bind` unhides it, and there is nothing to switch before then
-        levelSwitch.isHidden = true
-        levelSwitch.accessibilityIdentifier = "levelsControlId"
+        let rail = LevelsSwitcherController(buildingManager: buildingManager, userLocationManager: locationManager)
+        rail.view.accessibilityIdentifier = "levelsControlId"
+        // The alignment overload places it where the SwiftUI modifier does — the theme's edge spacing in from
+        // the map's safe area — so no sample has to name that number.
+        rail.attach(to: self, in: map, alignment: .trailing)
+    }
 
-        map.addSubview(levelSwitch)
-        NSLayoutConstraint.activate([
-            levelSwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            levelSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.Inset.overlay)
-        ])
-
-        levelSwitch.bind(buildingManager: buildingManager)
+    private final func handleNavigationEvent(
+        _ event: NavigationEvent,
+        infoLabel: UILabel,
+        onNavigatingChange: @MainActor @Sendable (Bool) -> Void
+    ) {
+        switch event {
+        case let .started(navigation):
+            infoLabel.isHidden = false
+            ToastHelper.showToast(message: "Navigation started", onView: view)
+            onNavigatingChange(true)
+            for step in navigation.itinerary.legs.flatMap(\.steps) {
+                print(step.getNavigationInstructions())
+            }
+        case .stopped:
+            infoLabel.isHidden = true
+            ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: UIConstants.Delay.short)
+            onNavigatingChange(false)
+        case .arrived:
+            ToastHelper.showToast(
+                message: "Arrived at destination", onView: view,
+                hideDelay: UIConstants.Delay.short, bottomInset: UIConstants.Inset.mid
+            )
+        case let .recalculated(navigation):
+            let message = "Navigation recalculated - \(navigation)"
+            ToastHelper.showToast(message: message, onView: view, hideDelay: UIConstants.Delay.short)
+        @unknown default:
+            fatalError()
+        }
     }
 
     private func observeMap() {

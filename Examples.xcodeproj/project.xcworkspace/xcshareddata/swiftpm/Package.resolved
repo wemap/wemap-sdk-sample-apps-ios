@@ -1,5 +1,5 @@
 {
-  "originHash" : "a1bb043d4b5076bffe04f4f2a22419142c1b63dfb177a0fbf18cec91017c21a0",
+  "originHash" : "51522089b6844177b2a54702dc41846774a5a4e31bbddbc5f67e7faea3719e63",
   "pins" : [
     {
       "identity" : "maplibre-gl-native-distribution",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "c4b4f1aec8adec2ac39bac20138feb9f423d0afd",
         "version" : "1.0.0-beta.1"
+      }
+    },
+    {
+      "identity" : "wemap-sdk-ios-widgets-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wemap/wemap-sdk-ios-widgets-distribution",
+      "state" : {
+        "revision" : "b274615be46c0efd2170af4d6c68aa39fadf69b4",
+        "version" : "0.1.0"
       }
     }
   ],

@@ -34,7 +34,7 @@ worked example of the migration. The three changes you will meet first:
   each app's `Config.swift` builds a value-type config at session or view creation time.
 
 The full guide, ordered so each step leaves your project compiling, ships with the SDK's API reference.
-See the [Wemap SDKs for iOS documentation](https://developers.getwemap.com/docs/ios-native/getting-started)
+See the [Wemap SDKs for iOS documentation](https://developers.getwemap.com/docs/ios-native/1.x/getting-started)
 and the [release notes](https://github.com/wemap/wemap-sdk-ios-distribution/releases).
 
 ## Examples

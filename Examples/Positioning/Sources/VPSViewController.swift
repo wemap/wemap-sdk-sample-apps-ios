@@ -174,7 +174,7 @@ final class VPSViewController: UIViewController {
         mapPlaceholder.isHidden = false
         scanButtons.isHidden = true
         if itinerarySourceSwitch.isOn {
-            vpsLocationSource.itinerary = hardcodedItinerary().toItinerary() // ItineraryLoader.loadFromGeoJSON()
+            vpsLocationSource.itinerary = hardcodedItinerary().toItinerary()
         } else {
             calculateItinerary()
         }

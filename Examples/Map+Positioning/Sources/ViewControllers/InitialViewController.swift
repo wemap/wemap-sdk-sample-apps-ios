@@ -105,6 +105,7 @@ final class InitialViewController: UIViewController {
             let navVC = storyboard.instantiateViewController(withIdentifier: "navigationVC") as! NavigationViewController
             navVC.session = session
             navVC.locationSourceType = locationSourceType
+            navVC.mapViewConfig = makeMapViewConfig()
             vc = navVC
         }
         show(vc, sender: nil)

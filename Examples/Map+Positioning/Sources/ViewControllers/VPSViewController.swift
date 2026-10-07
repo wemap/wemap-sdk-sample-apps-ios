@@ -13,6 +13,7 @@ import RealityKit
 import UIKit
 import WemapCoreSDK
 import WemapMapSDK
+import WemapMapWidgetsSDK
 import WemapPositioningSDKVPSARKit
 
 // swiftlint:disable:next type_body_length
@@ -47,8 +48,6 @@ final class VPSViewController: UIViewController {
 
     private var drawnItinerary: Itinerary? { itineraryManager.drawnItineraries.first }
 
-    private let levelSwitch = LevelSwitch()
-
     private var arView: ARView?
     private var scanningTimerTask: Task<Void, Never>?
     private var observationTasks: [Task<Void, Never>] = []
@@ -79,18 +78,6 @@ final class VPSViewController: UIViewController {
         
         cameraButton.layer.cornerRadius = 12
         localizeButton.layer.cornerRadius = 12
-        
-        // hidden until a building is focused — `bind` unhides it
-        levelSwitch.isHidden = true
-        levelSwitch.accessibilityIdentifier = "levelsControlId"
-
-        mapView.addSubview(levelSwitch)
-        NSLayoutConstraint.activate([
-            levelSwitch.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
-            levelSwitch.trailingAnchor.constraint(
-                equalTo: mapView.trailingAnchor, constant: -UIConstants.Inset.overlay
-            )
-        ])
 
         updateLocateMeButtonIcon()
     }
@@ -100,7 +87,12 @@ final class VPSViewController: UIViewController {
         localizeButton.isEnabled = true
         mapView.mapLibreDelegate = self
         
-        levelSwitch.bind(buildingManager: mapView.buildingManager)
+        // Installed once the map has loaded: the rail needs the building manager, which does not exist before.
+        let rail = LevelsSwitcherController(
+            buildingManager: mapView.buildingManager, userLocationManager: mapView.userLocationManager
+        )
+        rail.view.accessibilityIdentifier = "levelsControlId"
+        rail.attach(to: self, in: mapView, alignment: .trailing)
 
         let selectionUpdates = pointOfInterestManager.selectionUpdates
         let locationErrors = locationManager.errors

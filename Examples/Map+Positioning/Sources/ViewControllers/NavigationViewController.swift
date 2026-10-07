@@ -16,7 +16,6 @@ import WemapPositioningSDKVPSARKit
 final class NavigationViewController: MapViewController {
 
     typealias Delay = UIConstants.Delay
-    typealias Inset = UIConstants.Inset
 
     @IBOutlet var startNavigationButton: UIButton!
     @IBOutlet var stopNavigationButton: UIButton!
@@ -90,41 +89,10 @@ final class NavigationViewController: MapViewController {
             handleStateChange(vpsLocationSource.state)
         }
 
-        subscribeToNavigationEvents()
-    }
-
-    private func subscribeToNavigationEvents() {
-        let navigationEvents = navigationManager.navigationEvents
-        let navigationInfoUpdates = navigationManager.navigationInfoUpdates
-        let navigationErrors = navigationManager.errors
-        
-        observationTasks.append(contentsOf: [
-            Task { [weak self] in
-                for await event in navigationEvents {
-                    guard let self else {
-                        return
-                    }
-                    handleNavigationEvent(event)
-                }
-            },
-            Task { [weak self] in
-                for await info in navigationInfoUpdates {
-                    guard let self else {
-                        return
-                    }
-                    handleNavigationInfo(info)
-                }
-            },
-            Task { [weak self] in
-                for await error in navigationErrors {
-                    guard let self else {
-                        return
-                    }
-                    let message = "Navigation failed with error - \(error)"
-                    ToastHelper.showToast(message: message, onView: view, hideDelay: Delay.short)
-                }
-            }
-        ])
+        observationTasks += observeNavigation(infoLabel: navigationInfo) { [weak self] isNavigating in
+            self?.stopNavigationButton.isEnabled = isNavigating
+            self?.updateUI()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -256,7 +224,10 @@ final class NavigationViewController: MapViewController {
 
         Task {
             do {
-                let navigation = try await navigationManager.startNavigation(origin: origin, destination: destination)
+                let navigation = try await navigationManager.startNavigation(
+                    origin: origin, destination: destination, options: globalNavigationOptions,
+                    itineraryOptions: globalItineraryOptions
+                )
                 simulator?.setItinerary(navigation.itinerary)
                 stopNavigationButton.isEnabled = true
             } catch {
@@ -310,48 +281,6 @@ final class NavigationViewController: MapViewController {
     private func showVPSToast(message: String) {
         currentVPSToast?.removeFromSuperview()
         currentVPSToast = ToastHelper.showToast(message: message, onView: view, hideDelay: 20, bottomInset: -200)
-    }
-}
-
-// MARK: - Navigation event handlers
-
-private extension NavigationViewController {
-
-    func handleNavigationEvent(_ event: NavigationEvent) {
-        switch event {
-        case .started: handleNavigationStarted()
-        case .stopped: handleNavigationStopped()
-        case .arrived: handleArrivalAtDestination()
-        case let .recalculated(navigation): handleNavigationRecalculated(navigation)
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func handleNavigationInfo(_ info: NavigationInfo) {
-        navigationInfo.isHidden = false
-        navigationInfo.text = info.description
-    }
-
-    func handleNavigationStarted() {
-        navigationInfo.isHidden = false
-        ToastHelper.showToast(message: "Navigation started", onView: view)
-        stopNavigationButton.isEnabled = true
-    }
-
-    func handleNavigationStopped() {
-        navigationInfo.isHidden = true
-        ToastHelper.showToast(message: "Navigation stopped", onView: view, hideDelay: Delay.short)
-        stopNavigationButton.isEnabled = false
-        updateUI()
-    }
-
-    func handleArrivalAtDestination() {
-        ToastHelper.showToast(message: "Navigation didArriveAtDestination", onView: view, hideDelay: Delay.short, bottomInset: Inset.mid)
-    }
-
-    func handleNavigationRecalculated(_ navigation: Navigation) {
-        ToastHelper.showToast(message: "Navigation recalculated - \(navigation)", onView: view, hideDelay: Delay.short)
     }
 }
 

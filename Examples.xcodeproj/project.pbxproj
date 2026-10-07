@@ -8,16 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D208E10729C312C0007CCC8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
-		D21B0EC02E05956D0006044F /* VerticalSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */; };
-		D21B0EC12E05956D0006044F /* VerticalSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */; };
-		D21B0EC62E05A2190006044F /* LevelSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EC52E05A2100006044F /* LevelSwitch.swift */; };
-		D21B0EC82E05A2190006044F /* LevelSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B0EC52E05A2100006044F /* LevelSwitch.swift */; };
 		D21BA7242D390C6B00A1C95D /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
-		D22612AA2DCDF0890053B250 /* geoJsonItinerary.json in Resources */ = {isa = PBXBuildFile; fileRef = D22612A92DCDF0890053B250 /* geoJsonItinerary.json */; };
-		D22612AE2DCE2AFB0053B250 /* ItineraryLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22612AD2DCE2AF60053B250 /* ItineraryLoader.swift */; };
 		D22EC7482A79017A007BC4DE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
 		D2315E6F2C0717C600BAF1CB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208E10629C312C0007CCC8A /* Constants.swift */; };
-		D2315E702C0717E700BAF1CB /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
 		D250CA2B28D31E4D00DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
 		D250CA2C28D31E4D00DBFF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */; };
 		D250CA3F28D31EF100DBFF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D250CA2528D31E4D00DBFF5D /* Assets.xcassets */; };
@@ -37,7 +30,6 @@
 		D26AB6402B30534F00408BF8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26AB63E2B30534F00408BF8 /* UIConstants.swift */; };
 		D273E3202AA0DF1D00114854 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EC7472A79017A007BC4DE /* MapViewController.swift */; };
 		D273E3212AA0E3B200114854 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6255328F6C08400274721 /* ToastHelper.swift */; };
-		D277D2592E09757800054C3B /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277D2572E09752900054C3B /* AlertFactory.swift */; };
 		D277D25A2E09757800054C3B /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277D2572E09752900054C3B /* AlertFactory.swift */; };
 		D278A3DB2D663A7D006440A6 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
 		D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */; };
@@ -57,6 +49,8 @@
 		D2A8B2C72F5B377D0034D9E1 /* WemapPositioningSDKVPSARKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2A8B2C62F5B377D0034D9E1 /* WemapPositioningSDKVPSARKit */; };
 		D2A8B2C92F5B37850034D9E1 /* WemapPositioningSDKVPSARKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2A8B2C82F5B37850034D9E1 /* WemapPositioningSDKVPSARKit */; };
 		D2A8B2D12F5B380000DBFF5D /* WemapPositioningSDKGPS in Frameworks */ = {isa = PBXBuildFile; productRef = D2A8B2D02F5B380000DBFF5D /* WemapPositioningSDKGPS */; };
+		D2A8B2E12F5B39000034D9E1 /* WemapMapWidgetsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D2A8B2E02F5B39000034D9E1 /* WemapMapWidgetsSDK */; };
+		D2A8B2E32F5B39000034D9E1 /* WemapMapWidgetsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D2A8B2E22F5B39000034D9E1 /* WemapMapWidgetsSDK */; };
 		D2D90E962B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
 		D2D90E972B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D90E952B05292900DC7BF9 /* UserDefaults+Additions.swift */; };
 		D2E4BA3E2E9670AE00B9247D /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277D2572E09752900054C3B /* AlertFactory.swift */; };
@@ -70,10 +64,6 @@
 
 /* Begin PBXFileReference section */
 		D208E10629C312C0007CCC8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSegmentedControl.swift; sourceTree = "<group>"; };
-		D21B0EC52E05A2100006044F /* LevelSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSwitch.swift; sourceTree = "<group>"; };
-		D22612A92DCDF0890053B250 /* geoJsonItinerary.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoJsonItinerary.json; sourceTree = "<group>"; };
-		D22612AD2DCE2AF60053B250 /* ItineraryLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryLoader.swift; sourceTree = "<group>"; };
 		D22EC7472A79017A007BC4DE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D245969D30616DDE005526AD /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D245969E30616DDE005526AD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -116,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A8B2B72F5B372C0034D9E1 /* WemapMapSDK in Frameworks */,
+				D2A8B2E12F5B39000034D9E1 /* WemapMapWidgetsSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +117,7 @@
 				D2A8B2BB2F5B372C0034D9E1 /* WemapPositioningSDKVPSARKit in Frameworks */,
 				D2A8B2D12F5B380000DBFF5D /* WemapPositioningSDKGPS in Frameworks */,
 				D2A8B2BF2F5B37580034D9E1 /* WemapMapSDK in Frameworks */,
+				D2A8B2E32F5B39000034D9E1 /* WemapMapWidgetsSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +180,6 @@
 		D250CA2428D31E4D00DBFF5D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D22612A92DCDF0890053B250 /* geoJsonItinerary.json */,
 				D250CA2A28D31E4D00DBFF5D /* Info.plist */,
 				D250CA2528D31E4D00DBFF5D /* Assets.xcassets */,
 				D250CA2628D31E4D00DBFF5D /* LaunchScreen.storyboard */,
@@ -221,9 +212,6 @@
 				D208E10629C312C0007CCC8A /* Constants.swift */,
 				D2F8E1702C46C2220063C9A7 /* GlobalItineraryOptions.swift */,
 				D25992D32C35941B0041F9FE /* GlobalNavigationOptions.swift */,
-				D22612AD2DCE2AF60053B250 /* ItineraryLoader.swift */,
-				D21B0EC52E05A2100006044F /* LevelSwitch.swift */,
-				D21B0EBF2E0595600006044F /* VerticalSegmentedControl.swift */,
 				D2A55FE0297FE32600402286 /* SettingsBundleHelper.swift */,
 				D2A6255328F6C08400274721 /* ToastHelper.swift */,
 				D26AB63E2B30534F00408BF8 /* UIConstants.swift */,
@@ -350,6 +338,7 @@
 			mainGroup = D250C9CE28D3176F00DBFF5D;
 			packageReferences = (
 				D2FD6F462F71A40D002F11B6 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */,
+				D2A8B2E42F5B39000034D9E1 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-widgets-distribution" */,
 			);
 			productRefGroup = D250C9D828D3176F00DBFF5D /* Products */;
 			projectDirPath = "";
@@ -387,7 +376,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D250CA6B28D31EF700DBFF5D /* Assets.xcassets in Resources */,
-				D22612AA2DCDF0890053B250 /* geoJsonItinerary.json in Resources */,
 				D250CA6C28D31EF700DBFF5D /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,13 +396,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D21B0EC62E05A2190006044F /* LevelSwitch.swift in Sources */,
-				D21B0EC02E05956D0006044F /* VerticalSegmentedControl.swift in Sources */,
 				D26AB63F2B30534F00408BF8 /* UIConstants.swift in Sources */,
 				D2D90E962B05292900DC7BF9 /* UserDefaults+Additions.swift in Sources */,
 				D25992D42C35941B0041F9FE /* GlobalNavigationOptions.swift in Sources */,
 				D2F8E1712C46C2220063C9A7 /* GlobalItineraryOptions.swift in Sources */,
-				D277D2592E09757800054C3B /* AlertFactory.swift in Sources */,
 				D2A55FE1297FE32600402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6254E28F6AEB900274721 /* AppDelegate.swift in Sources */,
 				D2FE00052F00000000000005 /* SceneDelegate.swift in Sources */,
@@ -428,8 +413,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D21B0EC82E05A2190006044F /* LevelSwitch.swift in Sources */,
-				D21B0EC12E05956D0006044F /* VerticalSegmentedControl.swift in Sources */,
 				D277D25A2E09757800054C3B /* AlertFactory.swift in Sources */,
 				D2A55FE629801A3700402286 /* SettingsBundleHelper.swift in Sources */,
 				D2A6254F28F6AEB900274721 /* AppDelegate.swift in Sources */,
@@ -453,7 +436,6 @@
 				D2A6255128F6AEB900274721 /* AppDelegate.swift in Sources */,
 				D2FE00072F00000000000007 /* SceneDelegate.swift in Sources */,
 				D21BA7242D390C6B00A1C95D /* ToastHelper.swift in Sources */,
-				D22612AE2DCE2AFB0053B250 /* ItineraryLoader.swift in Sources */,
 				D267EF732D381723004AE5B6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +449,6 @@
 				D2A6255228F6AEB900274721 /* AppDelegate.swift in Sources */,
 				D2FE00062F00000000000006 /* SceneDelegate.swift in Sources */,
 				D256A37D2A93C6CB00798FB7 /* ToastHelper.swift in Sources */,
-				D2315E702C0717E700BAF1CB /* UIConstants.swift in Sources */,
 				D2E4BA3E2E9670AE00B9247D /* AlertFactory.swift in Sources */,
 				D2315E6F2C0717C600BAF1CB /* Constants.swift in Sources */,
 				D25992D22C358F1E0041F9FE /* UserDefaults+Additions.swift in Sources */,
@@ -550,7 +531,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2026.10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -612,7 +593,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 2026.10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -703,7 +684,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning.debug;
 				PRODUCT_NAME = "Map+Pos";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG VPSARKIT $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG VPSARKIT GPS $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -733,7 +714,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.getwemap.example.map.positioning;
 				PRODUCT_NAME = "Map+Pos";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.getwemap.example.map.positioning";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "VPSARKIT $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "VPSARKIT GPS $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -908,12 +889,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D2A8B2E42F5B39000034D9E1 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-widgets-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wemap/wemap-sdk-ios-widgets-distribution";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
+			};
+		};
 		D2FD6F462F71A40D002F11B6 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wemap/wemap-sdk-ios-distribution";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.0-beta.1;
+				version = "1.0.0-beta.1";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -958,6 +947,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2FD6F462F71A40D002F11B6 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-distribution" */;
 			productName = WemapPositioningSDKGPS;
+		};
+		D2A8B2E02F5B39000034D9E1 /* WemapMapWidgetsSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2A8B2E42F5B39000034D9E1 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-widgets-distribution" */;
+			productName = WemapMapWidgetsSDK;
+		};
+		D2A8B2E22F5B39000034D9E1 /* WemapMapWidgetsSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2A8B2E42F5B39000034D9E1 /* XCRemoteSwiftPackageReference "wemap-sdk-ios-widgets-distribution" */;
+			productName = WemapMapWidgetsSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

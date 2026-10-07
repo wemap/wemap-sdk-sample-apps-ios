@@ -21,10 +21,14 @@ class SamplesTableViewController: UITableViewController {
      navigation controller in this storyboard is for.
      */
     private enum RowSample: String, CaseIterable {
+        case itineraryPlannerUIKit = "itineraryPlannerUIKitCell"
+        case itineraryPlanner = "itineraryPlannerCell"
         case map = "mapSwiftUICell"
 
         var title: String {
             switch self {
+            case .itineraryPlannerUIKit: "Itinerary planner"
+            case .itineraryPlanner: "Itinerary planner (SwiftUI)"
             case .map: "Map in SwiftUI"
             }
         }
@@ -63,8 +67,10 @@ class SamplesTableViewController: UITableViewController {
     }
 
     /**
-     The SwiftUI screen is handed the session, the same as a segue's destination — the map id is the one
-     entered on the first screen.
+     The SwiftUI screens are handed the session, the same as a segue's destination — the map id is the one
+     entered on the first screen. They get no `locationSourceType`: the planner's subject is having no
+     location source at all. The UIKit planner is an ordinary `MapViewController` and is handed the same
+     three things `prepare(for:sender:)` hands a segue's destination.
 
      Pushed, so the navigation bar's back button dismisses them and they need no close button of their own —
      the same as every sample reached by a `show` segue from this table.
@@ -79,9 +85,32 @@ class SamplesTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let controller: UIViewController = switch sample {
+        case .itineraryPlannerUIKit: makeItineraryPlanner()
+        case .itineraryPlanner: UIHostingController(rootView: ItineraryPlannerScreen(session: session))
         case .map: UIHostingController(rootView: MapSwiftUIScreen(session: session))
         }
         controller.title = sample.title
         show(controller, sender: nil)
+    }
+
+    /**
+     The UIKit planner has a storyboard of its own, `ItineraryPlanner.storyboard`, rather than a scene in
+     `Main.storyboard`.
+     */
+    private func makeItineraryPlanner() -> UIViewController {
+
+        guard let session else {
+            fatalError("You have to successfully create MapSession first")
+        }
+
+        let storyboard = UIStoryboard(name: "ItineraryPlanner", bundle: nil)
+        guard let controller = storyboard.instantiateInitialViewController() as? ItineraryPlannerViewController else {
+            fatalError("ItineraryPlanner.storyboard must have an ItineraryPlannerViewController as its initial scene")
+        }
+
+        controller.session = session
+        controller.locationSourceType = locationSourceType
+        controller.mapViewConfig = makeMapViewConfig()
+        return controller
     }
 }
