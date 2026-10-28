@@ -93,6 +93,19 @@ the worked example for each change below. See [Upgrading to 1.0](README.md#upgra
 * Xcode 26.0 or newer
 * Swift 6.2 or newer
 
+## [0.29.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.3)
+
+SDK changes in this release: [WemapSDKs 0.29.3](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.29.3)
+
+### Fixed
+
+* Map: after a level switch, the user location indicator now shows at once whether the user is on the displayed level, instead of up to a second later
+
+### Compatibility
+
+* Xcode 26.6
+* Swift 6.3.3 (effective 5.10)
+
 ## [0.29.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.2)
 
 SDK changes in this release: [WemapSDKs 0.29.2](https://github.com/wemap/wemap-sdk-ios-distribution/releases/tag/0.29.2)
