@@ -2,6 +2,17 @@
 
 ---
 
+## [0.29.3](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.3)
+
+### Fixed
+
+* Map: after a level switch, the user location indicator now shows at once whether the user is on the displayed level, instead of up to a second later
+
+### Compatibility
+
+* Xcode 26.6
+* Swift 6.3.3 (effective 5.10)
+
 ## [0.29.2](https://github.com/wemap/wemap-sdk-sample-apps-ios/releases/tag/0.29.2)
 
 ### Changed
